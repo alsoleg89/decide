@@ -1,0 +1,13 @@
+{
+  "question": "Assign this news article to its main news-desk topic using its title and description.",
+  "criteria": {
+    "world": "General, national or international news: politics, diplomacy, conflict, society or major events.",
+    "sports": "Sports: competitions, athletes, teams, matches and sporting results.",
+    "business": "Business and economics: companies, markets, trade, finance and economic policy.",
+    "science_technology": "Science and technology: research, discoveries, computing, telecommunications and new technology."
+  },
+  "source": {"kind": "jsonl", "paths": ["items.jsonl"]},
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

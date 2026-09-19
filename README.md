@@ -39,7 +39,12 @@ At threshold 0.8, 204 issues needed review; 46 of the 296 accepted labels disagr
 with repository labels. Use the [quality/cost report](benchmarks/vscode-500/README.md)
 to choose your own tradeoff. Jev inference cost excludes the agent's review cost.
 
-Also tested: [2,000 log lines and 300 files](benchmarks/README.md), 57 automated
+A second real-data run on [400 AG News articles](benchmarks/ag-news-400/README.md)
+saved **74.8% of JSON including all review records**, with 31 wrong labels among
+348 accepted decisions (8.9%). These two datasets show why savings and errors
+must be measured together.
+
+Also tested: [2,000 log lines and 300 files](benchmarks/README.md), 61 automated
 tests, and 97% core coverage including branches.
 
 ## Install
@@ -182,6 +187,22 @@ sed -n '21,40p' /path/to/review.jsonl
 
 This tool classifies; it never runs commands, deletes files, or applies decisions.
 
+### Tune for bytes saved, not a review quota
+
+Run the offline evaluator on a labeled sample, adding the original inputs:
+
+```sh
+uv run --locked python evaluate.py --labels labels.jsonl --results results.jsonl --inputs items.jsonl
+```
+
+The threshold sweep shows accepted-label errors and how much input JSON stays
+out of review. A few long records can dominate context, so item counts alone
+are insufficient. This input-only metric excludes response metadata; use
+[`benchmark_real.py`](benchmarks/README.md#benchmark-your-own-labeled-data) for
+an actual call's savings including its summary and all full review records.
+Choose a threshold on calibration data, then check it on a separate sample.
+Neither a confidence score nor an in-sample sweep guarantees future accuracy.
+
 ## Settings and limits
 
 | Setting | Default | Meaning |
@@ -225,7 +246,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 57 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 61 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

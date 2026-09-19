@@ -59,7 +59,9 @@ uv run --locked python evaluate.py \
   --threshold 0.8
 ```
 
-The command prints a threshold sweep. Add `--max-accepted-error-rate` to enforce
+The command prints a threshold sweep. If you have the original inputs, add
+`--inputs issues.jsonl` to compare input bytes kept out of review at each threshold
+as well as item counts; the stored report includes these measurements. Add `--max-accepted-error-rate` to enforce
 your own error budget, and optionally `--max-review-fraction` if review capacity
 is constrained. A failed limit exits **1**. No fixed review target is imposed.
 With neither limit specified, `limits_met` is `null`. Empty or mismatched

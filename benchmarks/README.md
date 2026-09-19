@@ -2,7 +2,9 @@
 
 Start with the [500 real VS Code issues](vscode-500/README.md): estimated Jev
 inference cost $0.0203 and 49.3% less JSON even when reading every review record,
-with the classification disagreements reported alongside the savings.
+with the classification disagreements reported alongside the savings. A fresh
+project sample of [400 AG News articles](ag-news-400/README.md) saved 74.8%
+including review, with 8.9% accepted-label errors.
 
 The log/file runs below are **synthetic integration benchmarks**, not representative accuracy
 evaluations. They test the actual batching, routing, error accounting and compact
@@ -49,6 +51,31 @@ rates. Set `DECIDE_MODEL` to a pinned model for reproducibility. Reports identif
 whether the endpoint was `live` or `mock`, and name models returned by the provider.
 Temporary input files and raw decisions are cleaned up; `--output` retains only
 the aggregate report. The script exits with a nonzero code if any item failed.
+
+## Benchmark your own labeled data
+
+`benchmark_real.py` runs the actual MCP server as a stdio subprocess. Unlike the
+synthetic script, it always calls the paid Jev endpoint. Prepare three files:
+
+- Input JSONL: `{"id":"ticket-1","content":"..."}` in the source directory.
+- Label JSONL: `{"id":"ticket-1","expected":"bug"}` for every input ID.
+- Rubric JSON: the `decide` tool arguments, including a JSONL `source` and criteria.
+
+```sh
+uv run --locked python benchmark_real.py \
+  --root /absolute/path/to/data --rubric rubric.json --labels labels.jsonl \
+  --output report.json
+```
+
+Labels are checked locally and never sent to Jev. The key comes from
+`TYPESAFE_API_KEY` or a hidden prompt. The report records hashes, provider usage,
+classification quality, the initial JSON reduction and the reduction including
+**every full review record**. Full decisions remain at the reported `results_path`.
+
+For offline threshold comparisons, add `--inputs items.jsonl` to `evaluate.py`.
+`input_bytes_kept_out_of_review_fraction` weights records by their serialized
+UTF-8 size; it is **input-only**, not the full-review metric. Use both the errors
+and bytes to choose a useful threshold, then evaluate it on separate data.
 
 ## What the numbers mean
 

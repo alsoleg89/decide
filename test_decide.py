@@ -719,7 +719,70 @@ class BenchmarkTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(math.isfinite(values["items_per_second"]))
 
 
+class RealBenchmarkTests(unittest.IsolatedAsyncioTestCase):
+    async def test_invalid_reference_data_is_rejected_before_credentials_or_paid_calls(self):
+        import benchmark_real
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "items.jsonl").write_text('{"id":"a","content":"hello"}\n')
+            rubric = root / "rubric.json"
+            rubric.write_text(json.dumps({"question": "Keep?", "criteria": CRITERIA,
+                                         "source": {"kind": "jsonl", "paths": ["items.jsonl"]}}))
+            labels = root / "labels.jsonl"
+            for rows in [[{"id": "missing", "expected": "keep"}], [{"id": "a", "expected": "typo"}]]:
+                labels.write_text("\n".join(json.dumps(row) for row in rows))
+                with patch.object(benchmark_real, "Client") as client, patch.object(benchmark_real.getpass, "getpass") as prompt:
+                    with self.assertRaises(ValueError):
+                        await benchmark_real.run(root, rubric, labels)
+                    client.assert_not_called()
+                    prompt.assert_not_called()
+
+
 class EvaluationTests(unittest.TestCase):
+    def test_review_bytes_weight_long_unicode_items_and_forced_review(self):
+        from evaluate import risk_coverage
+        inputs = {"small": {"content": "ok"}, "large": {"content": "😀" * 1000}}
+        records = {"small": {"choice": "yes", "confidence": 1},
+                   "large": {"choice": "yes", "confidence": 0.4}}
+        labels = {key: {"expected": "yes"} for key in records}
+        measured = risk_coverage(records, labels, 0.8, inputs)
+        self.assertEqual(measured["review_fraction"], 0.5)
+        self.assertLess(measured["input_bytes_kept_out_of_review_fraction"], 0.01)
+        self.assertEqual(measured["review_input_jsonl_bytes"],
+                         len(app.encode({"id": "large", "content": inputs["large"]["content"]}).encode()) + 1)
+        self.assertEqual(risk_coverage(records, labels, 0, inputs)["review_input_jsonl_bytes"], 0)
+        records["large"]["reason"] = "review_label"
+        self.assertEqual(risk_coverage(records, labels, 0, inputs)["review_input_jsonl_bytes"],
+                         measured["review_input_jsonl_bytes"])
+
+    def test_input_byte_accounting_rejects_missing_records_or_content(self):
+        from evaluate import risk_coverage
+        records = {"a": {"choice": "yes", "confidence": 1}}
+        labels = {"a": {"expected": "yes"}}
+        for inputs in [{}, {"a": {}}, {"a": {"content": "ok"}, "b": {"content": "extra"}},
+                       {"a": {"content": math.nan}}]:
+            with self.subTest(inputs=inputs), self.assertRaises(ValueError):
+                risk_coverage(records, labels, 0.8, inputs)
+
+    def test_cli_reports_byte_sweep_without_imposing_review_quota(self):
+        import evaluate
+        import io
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for name, row in {"labels": {"id": "a", "expected": "yes"},
+                              "results": {"id": "a", "choice": "no", "confidence": 0.6},
+                              "inputs": {"id": "a", "content": "example"}}.items():
+                (root / name).write_text(json.dumps(row))
+            arguments = ["evaluate.py", "--labels", str(root / "labels"),
+                         "--results", str(root / "results"), "--inputs", str(root / "inputs")]
+            with patch.object(sys, "argv", arguments), patch("sys.stdout", new_callable=io.StringIO) as output:
+                evaluate.main()
+            report = json.loads(output.getvalue())
+            self.assertIsNone(report["limits_met"])
+            self.assertEqual(report["input_bytes_kept_out_of_review_fraction"], 0)
+            self.assertEqual(report["threshold_sweep"][0]["input_bytes_kept_out_of_review_fraction"], 1)
+            self.assertEqual(report["threshold_sweep"][0]["accepted_errors"], 1)
+
     def test_exact_five_percent_review_meets_boundary(self):
         from evaluate import risk_coverage
         records = {str(i): {"choice": "yes", "confidence": 0 if i == 0 else 1} for i in range(20)}

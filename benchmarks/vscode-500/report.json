@@ -164,7 +164,10 @@
         "235091",
         "235087",
         "235082"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 0,
+      "input_bytes_kept_out_of_review_fraction": 1.0
     },
     {
       "threshold": 0.5,
@@ -271,7 +274,10 @@
         "235104",
         "235091",
         "235082"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 122826,
+      "input_bytes_kept_out_of_review_fraction": 0.8033553791251807
     },
     {
       "threshold": 0.8,
@@ -329,7 +335,10 @@
         "235131",
         "228126",
         "235091"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 247997,
+      "input_bytes_kept_out_of_review_fraction": 0.6029564095298019
     },
     {
       "threshold": 0.9,
@@ -373,7 +382,10 @@
         "235145",
         "235139",
         "228126"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 302161,
+      "input_bytes_kept_out_of_review_fraction": 0.5162397595936018
     },
     {
       "threshold": 0.95,
@@ -409,7 +421,10 @@
         "235145",
         "235139",
         "228126"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 356738,
+      "input_bytes_kept_out_of_review_fraction": 0.4288618960021389
     },
     {
       "threshold": 0.99,
@@ -433,7 +448,10 @@
         "235151",
         "235147",
         "228126"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 447237,
+      "input_bytes_kept_out_of_review_fraction": 0.2839728534170977
     },
     {
       "threshold": 1,
@@ -449,7 +467,10 @@
         "235118",
         "231664",
         "228126"
-      ]
+      ],
+      "input_jsonl_bytes": 624609,
+      "review_input_jsonl_bytes": 512815,
+      "input_bytes_kept_out_of_review_fraction": 0.17898237137153003
     }
   ],
   "context_measurement": {
@@ -471,5 +492,6 @@
     "source": "https://docs.typesafe.ai/models",
     "checked_on": "2026-09-19",
     "excludes": "Orchestrator processing and review; estimate, not invoice"
-  }
+  },
+  "threshold_byte_measurement": "Input-only UTF-8 {id,content} JSONL bytes kept out of review, excluding rubric, summary and decision metadata; not end-to-end savings."
 }

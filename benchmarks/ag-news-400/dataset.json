@@ -1,0 +1,9 @@
+{
+  "dataset": "AG News, test split, 100 examples per class",
+  "seed": 20260919,
+  "source_url": "https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/555590db4219b1243abb1918effd6a7425a2d75f/data/ag_news_csv/test.csv",
+  "source_sha256": "521465c2428ed7f02f8d6db6ffdd4b5447c1c701962353eb2c40d548c3c85699",
+  "input_jsonl_sha256": "42332aca169d91bef4506654768a835890f06d06158d4be9886b601c9d300158",
+  "items": 400,
+  "selection": "random.Random(seed); sample 100 zero-based indices per class in class order, then shuffle; IDs store one-based CSV row numbers"
+}
