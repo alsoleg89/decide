@@ -704,5 +704,55 @@ class BenchmarkTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(math.isfinite(values["items_per_second"]))
 
 
+class EvaluationTests(unittest.TestCase):
+    def test_exact_five_percent_review_meets_boundary(self):
+        from evaluate import risk_coverage
+        records = {str(i): {"choice": "yes", "confidence": 0 if i == 0 else 1} for i in range(20)}
+        labels = {key: {"expected": "yes"} for key in records}
+        result = risk_coverage(records, labels, 0.8)
+        self.assertEqual(result["review_fraction"], 0.05)
+        self.assertEqual(result["accepted_error_rate"], 0)
+
+    def test_wrong_but_confident_predictions_stay_errors_at_every_threshold(self):
+        from evaluate import risk_coverage
+        records = {"wrong": {"choice": "bug", "confidence": 1.0},
+                   "uncertain": {"choice": "question", "confidence": 0.4}}
+        labels = {key: {"expected": "question"} for key in records}
+        result = risk_coverage(records, labels, 0.8)
+        self.assertEqual((result["accepted"], result["review"], result["accepted_errors"]), (1, 1, 1))
+        self.assertEqual(result["accepted_error_rate"], 1)
+        self.assertEqual(risk_coverage(records, labels, 1)["accepted_error_ids"], ["wrong"])
+
+    def test_failed_and_forced_review_items_are_never_accepted(self):
+        from evaluate import risk_coverage
+        records = {"failed": {"error": "timeout"},
+                   "urgent": {"choice": "urgent", "confidence": 1, "reason": "review_label"}}
+        labels = {key: {"expected": "urgent"} for key in records}
+        result = risk_coverage(records, labels, 0)
+        self.assertEqual((result["accepted"], result["review"], result["failed"]), (0, 2, 1))
+        self.assertIsNone(result["accepted_error_rate"])
+
+    def test_incomplete_labels_or_predictions_cannot_inflate_accuracy(self):
+        from evaluate import risk_coverage
+        for records, labels in [({}, {}), ({"a": {}}, {}),
+                                ({"a": {"choice": "yes", "confidence": 1}}, {"a": {}})]:
+            with self.subTest(records=records), self.assertRaises(ValueError):
+                risk_coverage(records, labels, 0.8)
+
+    def test_invalid_numbers_are_rejected(self):
+        from evaluate import risk_coverage
+        for confidence in [True, "0.9", math.nan, math.inf, -0.1, 1.1]:
+            with self.subTest(confidence=confidence), self.assertRaises(ValueError):
+                risk_coverage({"a": {"choice": "yes", "confidence": confidence}}, {"a": {"expected": "yes"}}, 0.8)
+
+    def test_duplicate_ids_are_rejected(self):
+        from evaluate import unique_rows
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "labels.jsonl"
+            path.write_text('{"id":"a","expected":"yes"}\n{"id":"a","expected":"no"}')
+            with self.assertRaisesRegex(ValueError, "Duplicate"):
+                unique_rows(path)
+
+
 if __name__ == "__main__":
     unittest.main()

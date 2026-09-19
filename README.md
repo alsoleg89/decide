@@ -7,8 +7,12 @@ Point it at 2,000 log lines or 300 source files, define the labels, and review
 only the uncertain cases. Raw inputs go directly from disk to Jev; confident
 decisions stay in a local JSONL file.
 
-**50 automated tests · 97% coverage including branches · live checks on 2,000
+**56 automated tests · 97% core coverage including branches · live checks on 2,000
 log lines and 300 files.** [Reproduce the measurements](benchmarks/README.md).
+
+**Real-data check:** on 500 labeled VS Code issues, threshold 0.8 sent 40.8%
+to review and left 46 disagreements among 296 accepted decisions. The "review
+only 5%" target is **not established**. [Results and quality checks](benchmarks/vscode-500/README.md).
 
 ```text
 Claude / Codex: question + criteria + source paths
@@ -202,7 +206,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 50 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 56 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

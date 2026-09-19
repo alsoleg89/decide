@@ -1,0 +1,16 @@
+{
+  "question": "Predict the final VS Code issue-tracker triage disposition from the initial submission. Use only the supplied title and body.",
+  "context": "A question/support disposition includes reports that should be redirected to support or discussion because the text does not establish a VS Code product defect, even when the author calls it a bug.",
+  "criteria": {
+    "bug": "An existing VS Code behavior appears broken, incorrect, crashing, or regressed. Not usage help, configuration support, external-code problems, or a request for new behavior.",
+    "feature": "The author requests a new capability or a deliberate change to VS Code behavior. Not a failure of existing behavior or a request for help using existing functionality.",
+    "question": "Usage, configuration, troubleshooting, or support/discussion that should be redirected from the issue tracker. Not a sufficiently described VS Code product defect or clear product enhancement."
+  },
+  "confidence_threshold": 0.8,
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "issues.jsonl"
+    ]
+  }
+}
