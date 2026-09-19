@@ -451,5 +451,25 @@
         "228126"
       ]
     }
-  ]
+  ],
+  "context_measurement": {
+    "inline_input_bytes": 625577,
+    "source_call_and_result_bytes": 21710,
+    "context_bytes_reduction": 0.9652960386970748,
+    "all_review_records_bytes": 295598,
+    "context_bytes_reduction_with_all_reviews": 0.4927754696863855,
+    "confidence_threshold": 0.8,
+    "review_count": 204,
+    "source_call_result_and_all_reviews_bytes": 317308,
+    "method": "UTF-8 compact JSON via decide.encode; inline baseline includes rubric/settings and all original inputs, replacing source with items. Full-review bytes include every review record plus one newline, even already-previewed records. Excludes MCP framing, host duplication and agent reasoning; not billed tokens."
+  },
+  "estimated_inference_cost_usd": 0.020301792000000003,
+  "pricing": {
+    "model": "Jev 1.13.0",
+    "input_usd_per_million_tokens": 0.042,
+    "output_usd_per_million_tokens": 0,
+    "source": "https://docs.typesafe.ai/models",
+    "checked_on": "2026-09-19",
+    "excludes": "Orchestrator processing and review; estimate, not invoice"
+  }
 }

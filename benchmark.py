@@ -36,11 +36,13 @@ FILES = [
 ]
 
 
-def metrics(result, records, gold, inline_bytes, call_bytes):
+def metrics(result, records, gold, inline_bytes, call_bytes, review_records=None):
     labeled = [row for row in records if gold[row["id"]] is not None]
     accepted = [row for row in labeled if row["status"] == "accepted"]
     correct = lambda rows: sum(row.get("choice") == gold[row["id"]] for row in rows)
     returned_bytes = len(app.encode(result).encode())
+    review_bytes = (sum(len(app.encode(row).encode()) + 1 for row in review_records)
+                    if review_records is not None else None)
     return {
         "items": result["total"], "completed": result["completed"],
         "accepted": result["accepted"], "review_count": result["review_count"],
@@ -58,6 +60,10 @@ def metrics(result, records, gold, inline_bytes, call_bytes):
         "inline_input_bytes": inline_bytes,
         "source_call_and_result_bytes": call_bytes + returned_bytes,
         "context_bytes_reduction": 1 - (call_bytes + returned_bytes) / inline_bytes,
+        "all_review_records_bytes": review_bytes,
+        "context_bytes_reduction_with_all_reviews": (
+            1 - (call_bytes + returned_bytes + review_bytes) / inline_bytes
+            if review_bytes is not None else None),
     }
 
 
@@ -113,13 +119,17 @@ async def run(kind, count, live, concurrency, threshold):
                 if call.is_error:
                     raise RuntimeError(str(call.content))
                 result = call.structured_content
-        records = [json.loads(line) for line in Path(result["results_path"]).read_text().splitlines()]
-        return {"schema_version": 1, "mode": "live" if live else "mock",
+        records = [json.loads(line) for line in Path(result["results_path"]).read_text(encoding="utf-8").splitlines()]
+        reviews = [json.loads(line) for line in Path(result["review_path"]).read_text(encoding="utf-8").splitlines()]
+        inline_arguments = {**arguments, "items": inputs}
+        del inline_arguments["source"]
+        return {"schema_version": 2, "mode": "live" if live else "mock",
                 "kind": kind, "created_at": datetime.now(timezone.utc).isoformat(),
                 "concurrency": concurrency, "confidence_threshold": threshold,
                 "dataset": "Deterministic synthetic templates; not representative real-world accuracy",
-                "measurement": "Serialized JSON bytes, not tokens; excludes MCP framing and host-specific duplication",
-                **metrics(result, records, gold, len(app.encode({"items": inputs}).encode()), len(app.encode(arguments).encode()))}
+                "measurement": "Serialized JSON bytes, not tokens; full-review metric counts every review row including already-previewed rows; excludes MCP framing and host-specific duplication",
+                **metrics(result, records, gold, len(app.encode(inline_arguments).encode()),
+                          len(app.encode(arguments).encode()), reviews)}
 
 
 def main():

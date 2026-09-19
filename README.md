@@ -1,31 +1,46 @@
 # decide
 
-**Your orchestrator is expensive. Your classifier doesn't have to be.**
+**Thousands of decisions. A fraction of the context.**
 
-One MCP tool for bulk decisions with [TypeSafe Jev](https://docs.typesafe.ai/introduction).
-Point it at 2,000 log lines or 300 source files, define the labels, and review
-only the uncertain cases. Raw inputs go directly from disk to Jev; confident
-decisions stay in a local JSONL file.
+Your agent sets the rules. [Jev](https://docs.typesafe.ai/introduction) handles
+the bulk classification. Your agent receives a compact summary and the cases
+that need a closer look.
 
-**56 automated tests · 97% core coverage including branches · live checks on 2,000
-log lines and 300 files.** [Reproduce the measurements](benchmarks/README.md).
-
-**Real-data check:** on 500 labeled VS Code issues, threshold 0.8 sent 40.8%
-to review and left 46 disagreements among 296 accepted decisions. The "review
-only 5%" target is **not established**. [Results and quality checks](benchmarks/vscode-500/README.md).
+One MCP tool for Claude and Codex. Pass paths to logs, files or records directly;
+`decide` reads them from disk and sends them to Jev. Full results stay on disk,
+ready for scripts and downstream tools.
 
 ```text
 Claude / Codex: question + criteria + source paths
                          ↓
 decide → Jev, bounded concurrency → results.jsonl
                          ↓
-           counts + uncertain cases → orchestrator
+           compact summary + review queue → agent
 ```
 
-“95% handled for ten cents” is a target, not a measured guarantee. The review
-rate depends on your data, rubric and threshold. Cost depends on billed tokens,
-retries and your TypeSafe plan. This tool reports provider token usage; it does
-not invent a dollar estimate or force the review queue down to 5%.
+**Save as much context as your task allows.** Choose the confidence threshold
+that fits your error tolerance. Easy batches need little review; ambiguous
+batches need more. The review rate is an outcome, never a fixed quota.
+
+## Measured on real data
+
+500 labeled VS Code issues, processed through the actual MCP server:
+
+| Measurement | Observed result |
+| --- | ---: |
+| Jev inference cost, estimated from published pricing | **$0.0203** |
+| Processing time | **39.5 seconds** |
+| Initial request + response JSON reduction | **96.5%** |
+| JSON reduction including reading the entire review queue | **49.3%** |
+
+These are measurements of JSON bytes, not billed agent tokens. The full-review
+comparison conservatively counts even the records already included in the preview.
+At threshold 0.8, 204 issues needed review; 46 of the 296 accepted labels disagreed
+with repository labels. Use the [quality/cost report](benchmarks/vscode-500/README.md)
+to choose your own tradeoff. Jev inference cost excludes the agent's review cost.
+
+Also tested: [2,000 log lines and 300 files](benchmarks/README.md), 57 automated
+tests, and 97% core coverage including branches.
 
 ## Install
 
@@ -153,6 +168,10 @@ input order. If interrupted, finished rows remain on disk; absent `summary.json`
 means the run did not finish. There is no automatic resume or cache: calling the
 tool again sends the inputs again and can incur charges.
 
+For the smallest initial response, set `review_limit: 0`: the agent receives
+counts and artifact paths, then reads only the records needed for its next step.
+This changes the preview, not which decisions require review.
+
 Read `review.jsonl` in small slices when `review_omitted` is nonzero. Process
 `results.jsonl` with a script instead of dumping all decisions into agent context:
 
@@ -206,7 +225,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 56 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 57 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,
@@ -225,4 +244,4 @@ log entries through Jev 1.13.0 in 2.386 seconds. Seven were accepted, two escala
 for low confidence, and three escalated by the `urgent` label override. Zero final
 errors; two requests needed a retry. Successful responses reported 4,761 input
 and 507 output tokens. This is an integration check, not an accuracy benchmark
-or proof of the ten-cent target.
+or a measurement of total agent cost.

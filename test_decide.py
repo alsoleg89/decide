@@ -667,12 +667,27 @@ class ProviderTests(unittest.IsolatedAsyncioTestCase):
 
 
 class BenchmarkTests(unittest.IsolatedAsyncioTestCase):
+    async def test_context_savings_include_full_review_reads(self):
+        import benchmark
+        result = {"total": 1, "completed": 1, "accepted": 0, "review_count": 1, "review_fraction": 1,
+                  "failed": 0, "elapsed_seconds": 1, "requests_made": 1, "retries": 0, "usage": {}}
+        records = [{"id": "a", "status": "review", "choice": "yes"}]
+        reviews = [{**records[0], "content": "😀" * 300}]
+        values = benchmark.metrics(result, records, {"a": "yes"}, 1000, 100, reviews)
+        self.assertEqual(values["all_review_records_bytes"], len(app.encode(reviews[0]).encode()) + 1)
+        self.assertLess(values["context_bytes_reduction_with_all_reviews"], values["context_bytes_reduction"])
+        self.assertLess(values["context_bytes_reduction_with_all_reviews"], 0)
+        self.assertIsNone(benchmark.metrics(result, records, {"a": "yes"}, 1000, 100)["context_bytes_reduction_with_all_reviews"])
+
     async def test_offline_benchmark_never_uses_real_credentials(self):
         import benchmark
         original_key = os.environ.get("TYPESAFE_API_KEY")
         for kind in ["lines", "files"]:
             with self.subTest(kind=kind):
                 result = await benchmark.run(kind, 30, False, 4, 0.8)
+                self.assertEqual(result["schema_version"], 2)
+                self.assertIsNotNone(result["context_bytes_reduction_with_all_reviews"])
+                self.assertEqual(result["all_review_records_bytes"] == 0, kind == "files")
                 self.assertEqual(result["mode"], "mock")
                 self.assertEqual(result["models"], {"mock-not-jev": 30})
                 self.assertEqual(result["failed"], 0)

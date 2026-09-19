@@ -1,6 +1,10 @@
-# Reproduce the benchmarks
+# Measure context savings and decision quality
 
-These are **synthetic integration benchmarks**, not representative accuracy
+Start with the [500 real VS Code issues](vscode-500/README.md): estimated Jev
+inference cost $0.0203 and 49.3% less JSON even when reading every review record,
+with the classification disagreements reported alongside the savings.
+
+The log/file runs below are **synthetic integration benchmarks**, not representative accuracy
 evaluations. They test the actual batching, routing, error accounting and compact
 result contract. The live runs use Jev; offline runs replace only the HTTP endpoint.
 
@@ -19,7 +23,7 @@ Jev 1.13.0, 2026-09-19, concurrency 4, confidence threshold 0.8:
 | Provider output tokens | 98,400 | 13,500 |
 | Inline input JSON | 209,304 bytes | 43,901 bytes |
 | Source call + compact result | 8,536 bytes | 1,086 bytes |
-| Reduction in JSON bytes | 95.92% | 97.53% |
+| Initial reduction in JSON bytes | 95.92% | 97.53% |
 
 Full machine-readable reports: [logs](live-lines-2000.json),
 [files](live-files-300.json). Token counts are provider-reported usage; there is
@@ -60,15 +64,23 @@ large repositories, adversarial inputs or unfamiliar taxonomies.
 `accepted_unlabeled_items` separately exposes accepted inputs without ground truth.
 A subset with no labels reports `null`, never a fabricated 100%.
 
-The context comparison measures serialized **JSON bytes**, not model tokens. It
-compares passing all inline items with passing paths plus the compact structured
-result. It excludes MCP framing, host-specific text/structured-output duplication,
-tool schema overhead, and later reads of omitted reviews. If the orchestrator
-reads every omitted review, include those reads in your own end-to-end measurement.
+Context comparisons measure serialized **JSON bytes**, not model tokens. New
+reports (`schema_version: 2`) compare the full inline call, including the rubric,
+with the path-based call plus the compact result. They also report
+`all_review_records_bytes` and `context_bytes_reduction_with_all_reviews`, which
+include reading every full review row, even rows already previewed. Savings can
+be negative when the review overhead exceeds the inline input.
+
+The recorded synthetic live reports above use version 1: their baseline includes
+only inline items and their reduction covers only the initial call and result.
+They have no full-review measurement and should not be read as end-to-end savings.
+All versions exclude MCP framing, host-specific text/structured-output duplication,
+tool schema overhead and the agent's reasoning.
 The scripts use the in-process MCP client; the test suite separately verifies a
 real stdio subprocess. Elapsed time covers provider processing and result writes,
 not package startup or initial source loading.
 
 Before selecting a production threshold, evaluate a representative held-out,
 labeled dataset, including wrong-but-confident cases. These two runs demonstrate
-integration and scale, not the aspirational 95% automation or ten-cent budget.
+integration and scale. Optimize context savings subject to your quality needs;
+there is no fixed percentage of cases that must be reviewed.
