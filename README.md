@@ -1,0 +1,210 @@
+# decide
+
+**Your orchestrator is expensive. Your classifier doesn't have to be.**
+
+One MCP tool for bulk decisions with [TypeSafe Jev](https://docs.typesafe.ai/introduction).
+Point it at 2,000 log lines or 300 source files, define the labels, and review
+only the uncertain cases. Raw inputs go directly from disk to Jev; confident
+decisions stay in a local JSONL file.
+
+```text
+Claude / Codex: question + criteria + source paths
+                         ↓
+decide → Jev, bounded concurrency → results.jsonl
+                         ↓
+           counts + uncertain cases → orchestrator
+```
+
+“95% handled for ten cents” is a target, not a measured guarantee. The review
+rate depends on your data, rubric and threshold. Cost depends on billed tokens,
+retries and your TypeSafe plan. This tool reports provider token usage; it does
+not invent a dollar estimate or force the review queue down to 5%.
+
+## Install
+
+Python 3.11+ and [uv](https://docs.astral.sh/uv/) are required for these commands.
+
+```sh
+git clone https://github.com/alsoleg89/decide.git
+cd decide
+uv sync --locked
+```
+
+Get a key from the [TypeSafe console](https://console.typesafe.ai). Configure
+`TYPESAFE_API_KEY` in the server's environment, not in tool arguments or source
+control. `DECIDE_ROOT` is the directory containing the data to classify; it can
+be different from the directory where this package is installed.
+
+### Codex
+
+Add to your Codex `config.toml`, replacing both absolute paths:
+
+```toml
+[mcp_servers.decide]
+command = "uv"
+args = ["run", "--locked", "--directory", "/absolute/path/to/decide", "decide-mcp"]
+env_vars = ["TYPESAFE_API_KEY"]
+startup_timeout_sec = 30
+tool_timeout_sec = 1800
+
+[mcp_servers.decide.env]
+DECIDE_ROOT = "/absolute/path/to/your/project"
+```
+
+The key must be present in the environment of the Codex process. See
+[Codex MCP configuration](https://developers.openai.com/codex/mcp).
+Large batches can exceed the default tool timeout; split the source or increase
+the host's timeout to suit your batch size and API latency.
+
+### Claude Code / Claude Desktop
+
+Use this `mcpServers` entry in Claude Code's project `.mcp.json` or your Claude
+Desktop configuration. Replace the paths and key locally:
+
+```json
+{
+  "mcpServers": {
+    "decide": {
+      "command": "uv",
+      "args": ["run", "--locked", "--directory", "/absolute/path/to/decide", "decide-mcp"],
+      "env": {
+        "TYPESAFE_API_KEY": "YOUR_KEY",
+        "DECIDE_ROOT": "/absolute/path/to/your/project"
+      }
+    }
+  }
+}
+```
+
+Keep configurations containing a real key out of Git. Restart the client after
+configuration. See [Claude Code MCP](https://code.claude.com/docs/en/mcp).
+
+## Use
+
+Ask your agent:
+
+> Use decide to classify logs/app.log into normal, investigate, and urgent.
+> Pass the path directly; don't read the log into your context first.
+> Always bring urgent cases to me, and review anything below 0.8 confidence.
+
+The agent calls the single tool `decide`:
+
+```json
+{
+  "question": "Which operational category best fits this log entry?",
+  "criteria": {
+    "normal": "Routine successful operation with no intervention needed",
+    "investigate": "A warning or failure that needs investigation",
+    "urgent": "An outage, data loss, or immediate service interruption"
+  },
+  "source": {"kind": "lines", "paths": ["logs/app.log"]},
+  "confidence_threshold": 0.8,
+  "review_labels": ["urgent"]
+}
+```
+
+Use exactly one input mode:
+
+| Input | Example | One decision per |
+| --- | --- | --- |
+| Log lines | `"source": {"kind":"lines","paths":["logs/app.log"]}` | Nonblank line; ID includes path and original line number |
+| Files | `"source": {"kind":"files","paths":["src/**/*.py"]}` | Entire UTF-8 file; ID is its relative path |
+| JSONL | `"source": {"kind":"jsonl","paths":["tickets.jsonl"]}` | Record with unique `id` and `content` fields |
+| Inline | `"items": [{"id":"t-1","content":"Login fails"}]` | Item; content can be any JSON value |
+
+JSONL example:
+
+```jsonl
+{"id":"t-1","content":{"title":"Login fails","body":"A 500 response after submitting credentials"}}
+{"id":"t-2","content":{"title":"Dark mode","body":"Please add a dark theme"}}
+```
+
+For multiline stack traces, group each event into a JSONL record first. `lines`
+intentionally treats each line independently. `context` adds shared domain
+guidance to each item; it is sent and billed on every request.
+
+### What comes back
+
+The tool returns:
+
+- `total`, `completed`, `accepted`, `accepted_by_label`, `review_count`,
+  `review_fraction`, `failed`, and `review_reasons`.
+- `review`: at most 20 previews by default, also bounded to about 20 KB in total.
+  Each preview contains an ID, proposed label, confidence, probabilities, reason
+  and up to 1,000 characters of serialized content. A preview is not the full input.
+- `results_path`: every decision, including errors, with its original ID and index.
+- `review_path`: **all** cases requiring review, with their full original content.
+- `review_omitted`: cases in the review file that were not included in the preview.
+- `usage`: token counts from validated successful responses. `complete: false`
+  means failures or retries prevented complete accounting. `requests_made` and
+  `retries` show the request overhead. This is not an invoice or spending limit.
+
+Outputs live in `DECIDE_ROOT/.decide/<run-id>/`. Each run also stores
+`request.json` (rubric/settings) and `summary.json`. JSONL rows are appended and
+flushed as requests finish; their order is completion order, and `index` restores
+input order. If interrupted, finished rows remain on disk; absent `summary.json`
+means the run did not finish. There is no automatic resume or cache: calling the
+tool again sends the inputs again and can incur charges.
+
+Read `review.jsonl` in small slices when `review_omitted` is nonzero. Process
+`results.jsonl` with a script instead of dumping all decisions into agent context:
+
+```sh
+jq -c 'select(.status == "accepted") | {id, choice}' /path/to/results.jsonl
+sed -n '21,40p' /path/to/review.jsonl
+```
+
+This tool classifies; it never runs commands, deletes files, or applies decisions.
+
+## Settings and limits
+
+| Setting | Default | Meaning |
+| --- | --- | --- |
+| `TYPESAFE_API_KEY` (environment) | Required | TypeSafe authentication |
+| `DECIDE_ROOT` (environment) | Process working directory | Allowed input/output directory |
+| `DECIDE_MODEL` (environment) | `jev-latest` | Use a pinned Jev model for repeatability |
+| `confidence_threshold` (tool) | `0.8` | Review when Jev confidence is **below** this value |
+| `review_labels` (tool) | `[]` | Always review these labels, regardless of confidence |
+| `concurrency` (tool) | `4` | Concurrent requests per invocation, 1–16 |
+| `review_limit` (tool) | `20` | Preview count, 0–100; never drops records from the review file |
+
+Jev's [`confidence`](https://docs.typesafe.ai/confidence) describes the shape of
+the probability distribution. It is not `max(probabilities)` and a threshold of
+0.8 does not promise 80% accuracy. Validate on labeled data and sample accepted
+decisions before relying on a threshold. Add an `other` label to incomplete
+taxonomies, and include it in `review_labels` when it should always escalate.
+
+Up to 10,000 items and 32 MB of serialized input per call. Items over 128 KB of
+serialized content are escalated without sending a truncated version to Jev.
+Inputs must be regular UTF-8 files within `DECIDE_ROOT`; parent traversal and
+symlinks escaping the root are rejected. File globs skip dotfiles, hidden
+directories, `node_modules`, `vendor`, and `__pycache__`. These exclusions are
+not a secret scanner or a `.gitignore` implementation: scope your paths to data
+you intend to send to TypeSafe. Logs and JSONL paths are explicit.
+
+HTTP 408, 429, 5xx and transport failures get up to three attempts with bounded
+backoff. Permanent failures, invalid probability distributions and malformed
+responses go to review. Authentication failure stops new requests for the rest
+of the batch. Error response bodies are not exposed. Provider requests use the
+[TypeSafe API contract](https://docs.typesafe.ai/api) and do not follow redirects.
+
+## Development
+
+```sh
+uv sync --locked
+uv run --locked python -m unittest -v
+uv build
+```
+
+Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
+endpoint. They cover 2,000 log lines, 300 files, threshold routing, forced review,
+input validation, path boundaries, partial API failures, retries, authentication
+failure and full local artifacts. The synthetic 95%/5% test verifies routing,
+not Jev's real-world classification accuracy.
+
+Live smoke check on 2026-09-19: the installed stdio command processed 12 synthetic
+log entries through Jev 1.13.0 in 2.386 seconds. Seven were accepted, two escalated
+for low confidence, and three escalated by the `urgent` label override. Zero final
+errors; two requests needed a retry. Successful responses reported 4,761 input
+and 507 output tokens. This is an integration check, not an accuracy benchmark
+or proof of the ten-cent target.

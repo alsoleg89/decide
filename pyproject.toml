@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "decide-mcp"
+version = "0.1.0"
+description = "Bulk decisions with Jev. Only uncertain cases enter your agent's context."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["mcp>=2.2,<3", "httpx2>=2.13,<3", "pydantic>=2.12,<3"]
+
+[project.scripts]
+decide-mcp = "decide:main"
+
+[tool.setuptools]
+py-modules = ["decide"]
