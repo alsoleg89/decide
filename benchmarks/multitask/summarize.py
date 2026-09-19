@@ -74,6 +74,9 @@ text=['# decide: 10-task evaluation', '',
       f'There were **{failed} rejected provider responses**; their missing usage makes the cost a lower bound. '
       'Jev 1.13.0, 2026-09-19, concurrency 4. Each task used one rubric fixed before inference; '
       'no prompt tuning, few-shot examples or model fine-tuning.', '',
+      '[Threshold-selection validation](threshold-validation/README.md) adds 60 retrospective '
+      'checks using separate calibration and holdout partitions of these same decisions. '
+      'It shows why selecting a threshold from observed errors alone can miss the chosen error budget.', '',
       '## Decision quality', '',
       'Accuracy counts failed provider responses as incorrect. Accepted errors are wrong labels among '
       'the decisions the tool would accept at confidence ≥0.8. The local Naive Bayes baseline uses '

@@ -46,6 +46,13 @@ accepted 430 of 500 decisions with 3 observed errors (0.7%), while still saving
 85.0% of JSON. On short ambiguous tweets, confident errors remained common.
 Use labeled samples to choose a tradeoff, then verify it on separate data.
 
+[Threshold selection on a separate split](benchmarks/multitask/threshold-validation/README.md)
+adds 60 retrospective policy checks. With a 5% accepted-error budget, simple
+selection exceeded the budget on 4 of 9 tasks that accepted any holdout records.
+Selection using an upper error bound accepted records on only 3 tasks; all three
+stayed below 5% on holdout. No task had enough evidence for the bounded 1% target.
+These reuse the recorded decisions and do not establish a production guarantee.
+
 Known successful usage for the ten live runs cost **at least $0.1489** at
 [published Jev pricing](https://docs.typesafe.ai/models); 35 rejected responses
 had incomplete usage accounting. Agent review and reasoning costs are excluded.

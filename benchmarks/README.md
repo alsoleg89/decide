@@ -5,6 +5,10 @@ accuracy, errors among accepted results, trained local baselines, costs and 70
 threshold comparisons. It includes both useful and poor results, and quantifies
 how compact review records improve context savings.
 
+Then read the [threshold-selection validation](multitask/threshold-validation/README.md):
+60 retrospective checks separate threshold selection from scoring and show
+when an observed error rate fails to transfer to the held-out partition.
+
 Earlier exploratory runs: [500 VS Code issues](vscode-500/README.md) and
 [400 AG News articles](ag-news-400/README.md).
 
