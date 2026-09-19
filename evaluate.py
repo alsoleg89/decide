@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def unique_rows(path):
-    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rows = [json.loads(line) for line in path.read_text(encoding="utf-8").split("\n") if line.strip()]
     if not rows or any(not isinstance(row, dict) or not isinstance(row.get("id"), str) for row in rows):
         raise ValueError("Expected nonempty JSONL records with string IDs")
     by_id = {row["id"]: row for row in rows}

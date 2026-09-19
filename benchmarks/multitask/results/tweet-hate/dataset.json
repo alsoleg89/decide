@@ -1,0 +1,46 @@
+{
+  "name": "tweet-hate",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 2970,
+  "baseline_train_items": 8966,
+  "class_counts": {
+    "hate": 215,
+    "non_hate": 285
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "tweet-hate-train-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/train_text.txt",
+      "sha256": "6572bb3a42143128a5dfa99af8debeb0668e637c34b2d1e3140dac47316fe2c2",
+      "bytes": 1133852
+    },
+    "tweet-hate-train-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/train_labels.txt",
+      "sha256": "4e8fde025a453a25c94632794254131dedeac4e57228ad64157c41571cc88f71",
+      "bytes": 18000
+    },
+    "tweet-hate-test-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/test_text.txt",
+      "sha256": "bc4762876a8dd8baa55c3cd7b03108e3231a5d691e80b8b1ef97c5be31b9da9a",
+      "bytes": 399242
+    },
+    "tweet-hate-test-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/test_labels.txt",
+      "sha256": "c14adca6b3627616a835c5ccea8a1cceb0235cd79417257f093eb0e16a69c62f",
+      "bytes": 5940
+    },
+    "tweet-hate-mapping.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/mapping.txt",
+      "sha256": "3fc75504ffae64ddc82e13afb5790af7798cd3167d7d35790abe78b39b991896",
+      "bytes": 17
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "048bfcd0d3b06d8245421f5aae20dc34a922eca6ab8f14530b86a51d0242dfa0",
+    "labels.jsonl": "9a2e6cb7050b52d2cdf8b5f47b6f4485ffdfb132445c2ca547f8474859902002",
+    "train.jsonl": "f858331dafb8fd9fec476bd18aa915f2f23154aeb7e421254b9581a542e480d6",
+    "rubric.json": "0d3d25326f96d65afdc2b3a4619267a8b5fb856f1b27527a4bcdf192246a023a"
+  },
+  "notes": ""
+}

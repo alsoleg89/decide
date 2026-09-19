@@ -1,0 +1,26 @@
+{
+  "name": "sms-spam",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 500,
+  "baseline_train_items": 4954,
+  "class_counts": {
+    "spam": 65,
+    "ham": 435
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "sms.zip": {
+      "url": "https://archive.ics.uci.edu/static/public/228/sms%2Bspam%2Bcollection.zip",
+      "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+      "bytes": 203415
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "0e03169428b6dd154a70006e4e37584dc09a122986b3f6127e6abaacf66f5204",
+    "labels.jsonl": "60ecf906ebc7be46f1bac51e5567bb0eded24fb19e670978e75dc44be2a6572d",
+    "train.jsonl": "32de9a94ccae55892a8ed9842b701ac57922026945a45c93c78e8fcd8f604d69",
+    "rubric.json": "acb324f11edb6301f347cf86b4ccd6436dd4f5fc574a1fec84be7fa6e509d2dd"
+  },
+  "notes": "Seeded 500-row holdout because the source has no official split; exact duplicate test texts removed from baseline training."
+}

@@ -1,0 +1,16 @@
+{
+  "question": "Is this SMS message unsolicited spam or a legitimate personal message?",
+  "criteria": {
+    "ham": "Legitimate personal or expected communication, not unsolicited spam.",
+    "spam": "Unsolicited promotional, scam, prize, premium-rate or other spam message."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

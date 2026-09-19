@@ -1,0 +1,18 @@
+{
+  "question": "Which of these four emotions best describes the emotion expressed in this tweet?",
+  "criteria": {
+    "anger": "Anger, irritation, frustration or rage.",
+    "joy": "Joy, happiness, pleasure or excitement.",
+    "optimism": "Optimism, hope or confidence about a positive future.",
+    "sadness": "Sadness, grief, disappointment or sorrow."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

@@ -24,28 +24,33 @@ batches need more. The review rate is an outcome, never a fixed quota.
 
 ## Measured on real data
 
-500 labeled VS Code issues, processed through the actual MCP server:
+**5,570 real records across 10 tasks**, with a fixed rubric per task and no
+labeled examples sent to Jev. [Full results and reproduction](benchmarks/multitask/README.md).
 
-| Measurement | Observed result |
-| --- | ---: |
-| Jev inference cost, estimated from published pricing | **$0.0203** |
-| Processing time | **39.5 seconds** |
-| Initial request + response JSON reduction | **96.5%** |
-| JSON reduction including reading the entire review queue | **49.3%** |
+| Task | Items | Accuracy | Errors among accepted | Full-review JSON saved |
+| --- | ---: | ---: | ---: | ---: |
+| Movie reviews | 500 | 96.2% | 10 / 479 (2.1%) | 95.0% |
+| SMS spam | 500 | 98.0% | 2 / 461 (0.4%) | 88.4% |
+| Banking support, 77 intents | 770 | 77.1% | 69 / 596 (11.6%) | 70.0% |
+| Tweet sentiment | 500 | 64.0% | 69 / 294 (23.5%) | 58.0% |
 
-These are measurements of JSON bytes, not billed agent tokens. The full-review
-comparison conservatively counts even the records already included in the preview.
-At threshold 0.8, 204 issues needed review; 46 of the 296 accepted labels disagreed
-with repository labels. Use the [quality/cost report](benchmarks/vscode-500/README.md)
-to choose your own tradeoff. Jev inference cost excludes the agent's review cost.
+At threshold 0.8. Savings include reading every full review input, measured by
+replaying the recorded decisions through the compact MCP output format. These
+are JSON bytes, not billed agent tokens. Accuracy counts failed responses as
+incorrect; accepted-error rates exclude reviewed records. The full report
+includes six more tasks, macro-F1, confusion matrices, trained local baselines,
+costs and threshold sweeps.
 
-A second real-data run on [400 AG News articles](benchmarks/ag-news-400/README.md)
-saved **74.8% of JSON including all review records**, with 31 wrong labels among
-348 accepted decisions (8.9%). These two datasets show why savings and errors
-must be measured together.
+The useful threshold depends on the task. On movie reviews, threshold 0.99
+accepted 430 of 500 decisions with 3 observed errors (0.7%), while still saving
+85.0% of JSON. On short ambiguous tweets, confident errors remained common.
+Use labeled samples to choose a tradeoff, then verify it on separate data.
 
-Also tested: [2,000 log lines and 300 files](benchmarks/README.md), 61 automated
-tests, and 97% core coverage including branches.
+Known successful usage for the ten live runs cost **at least $0.1489** at
+[published Jev pricing](https://docs.typesafe.ai/models); 35 rejected responses
+had incomplete usage accounting. Agent review and reasoning costs are excluded.
+The [earlier VS Code issue evaluation](benchmarks/vscode-500/README.md) and
+[synthetic log/file scale checks](benchmarks/README.md) remain available.
 
 ## Install
 
@@ -156,11 +161,13 @@ The tool returns:
 
 - `total`, `completed`, `accepted`, `accepted_by_label`, `review_count`,
   `review_fraction`, `failed`, and `review_reasons`.
-- `review`: at most 20 previews by default, also bounded to about 20 KB in total.
-  Each preview contains an ID, proposed label, confidence, probabilities, reason
+- `review`: empty by default. Set `review_limit` to opt into previews, bounded
+  to about 20 KB in total. Each preview contains an ID, proposed label, confidence, probabilities, reason
   and up to 1,000 characters of serialized content. A preview is not the full input.
 - `results_path`: every decision, including errors, with its original ID and index.
-- `review_path`: **all** cases requiring review, with their full original content.
+- `review_path`: **all** cases requiring review as `{id, content}`, with full
+  original content. Probabilities, reasons and usage stay in `results_path`; join
+  by ID when you need the audit details.
 - `review_omitted`: cases in the review file that were not included in the preview.
 - `usage`: token counts from validated successful responses. `complete: false`
   means failures or retries prevented complete accounting. `requests_made` and
@@ -173,16 +180,18 @@ input order. If interrupted, finished rows remain on disk; absent `summary.json`
 means the run did not finish. There is no automatic resume or cache: calling the
 tool again sends the inputs again and can incur charges.
 
-For the smallest initial response, set `review_limit: 0`: the agent receives
-counts and artifact paths, then reads only the records needed for its next step.
-This changes the preview, not which decisions require review.
+The default `review_limit: 0` returns counts and artifact paths, so the agent
+reads only the records needed for its next step. Use `review_limit: 20` if
+previews help triage. This changes the preview, not which decisions require review.
 
-Read `review.jsonl` in small slices when `review_omitted` is nonzero. Process
+Read `review.jsonl` in small slices **starting at line 1**. Previews are truncated
+and may not form a prefix of the file; their count is not a safe offset. Track
+which IDs you have actually reviewed. Process
 `results.jsonl` with a script instead of dumping all decisions into agent context:
 
 ```sh
 jq -c 'select(.status == "accepted") | {id, choice}' /path/to/results.jsonl
-sed -n '21,40p' /path/to/review.jsonl
+sed -n '1,20p' /path/to/review.jsonl
 ```
 
 This tool classifies; it never runs commands, deletes files, or applies decisions.
@@ -213,7 +222,7 @@ Neither a confidence score nor an in-sample sweep guarantees future accuracy.
 | `confidence_threshold` (tool) | `0.8` | Review when Jev confidence is **below** this value |
 | `review_labels` (tool) | `[]` | Always review these labels, regardless of confidence |
 | `concurrency` (tool) | `4` | Concurrent requests per invocation, 1–16 |
-| `review_limit` (tool) | `20` | Preview count, 0–100; never drops records from the review file |
+| `review_limit` (tool) | `0` | Preview count, 0–100; never drops records from the review file |
 
 Jev's [`confidence`](https://docs.typesafe.ai/confidence) describes the shape of
 the probability distribution. It is not `max(probabilities)` and a threshold of
@@ -246,7 +255,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 61 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 242 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

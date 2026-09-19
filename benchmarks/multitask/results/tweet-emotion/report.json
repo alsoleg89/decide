@@ -1,0 +1,1045 @@
+{
+  "schema_version": 2,
+  "mode": "live",
+  "transport": "MCP stdio subprocess",
+  "created_at": "2026-09-19T20:16:05.094739+00:00",
+  "input_jsonl_sha256": "b7cb18b4fe399a48fca93adbe8f9b4a484c12f4ba8b85055d16a3de23a0af04a",
+  "rubric_sha256": "608381b2e3805a8e70c0390d922455b0170038354503b1ac1cf836c2bddf3a14",
+  "rubric": {
+    "question": "Which of these four emotions best describes the emotion expressed in this tweet?",
+    "criteria": {
+      "anger": "Anger, irritation, frustration or rage.",
+      "joy": "Joy, happiness, pleasure or excitement.",
+      "optimism": "Optimism, hope or confidence about a positive future.",
+      "sadness": "Sadness, grief, disappointment or sorrow."
+    },
+    "source": {
+      "kind": "jsonl",
+      "paths": [
+        "items.jsonl"
+      ]
+    },
+    "confidence_threshold": 0.8,
+    "review_limit": 0,
+    "concurrency": 4
+  },
+  "measurement": "UTF-8 JSON bytes, not billed tokens. Full-review metric includes every full review row, even already-previewed rows. Excludes MCP framing, host duplication and agent reasoning.",
+  "items": 500,
+  "completed": 500,
+  "accepted": 384,
+  "review_count": 116,
+  "review_fraction": 0.232,
+  "failed": 1,
+  "elapsed_seconds": 41.509,
+  "items_per_second": 12.05,
+  "requests_made": 500,
+  "retries": 0,
+  "models": {
+    "jev-1.13.0": 499,
+    "unavailable": 1
+  },
+  "provider_usage": {
+    "input_tokens": 222284,
+    "output_tokens": 24148,
+    "complete": false
+  },
+  "labeled_items": 500,
+  "correct_labeled_items": 418,
+  "label_accuracy": 0.836,
+  "accepted_labeled_items": 384,
+  "accepted_label_accuracy": 0.9166666666666666,
+  "accepted_unlabeled_items": 0,
+  "inline_input_bytes": 66017,
+  "source_call_and_result_bytes": 1126,
+  "context_bytes_reduction": 0.9829437872063257,
+  "all_review_records_bytes": 43712,
+  "context_bytes_reduction_with_all_reviews": 0.32081130617871156,
+  "threshold_sweep": [
+    {
+      "threshold": 0,
+      "total": 500,
+      "accepted": 499,
+      "review": 1,
+      "failed": 1,
+      "review_fraction": 0.002,
+      "accepted_errors": 81,
+      "accepted_error_rate": 0.1623246492985972,
+      "accepted_error_ids": [
+        "emotion:test:711",
+        "emotion:test:385",
+        "emotion:test:71",
+        "emotion:test:1089",
+        "emotion:test:158",
+        "emotion:test:369",
+        "emotion:test:175",
+        "emotion:test:1070",
+        "emotion:test:555",
+        "emotion:test:1170",
+        "emotion:test:787",
+        "emotion:test:1136",
+        "emotion:test:564",
+        "emotion:test:1277",
+        "emotion:test:1354",
+        "emotion:test:214",
+        "emotion:test:638",
+        "emotion:test:866",
+        "emotion:test:936",
+        "emotion:test:534",
+        "emotion:test:1299",
+        "emotion:test:634",
+        "emotion:test:765",
+        "emotion:test:171",
+        "emotion:test:221",
+        "emotion:test:848",
+        "emotion:test:205",
+        "emotion:test:397",
+        "emotion:test:1212",
+        "emotion:test:1218",
+        "emotion:test:1041",
+        "emotion:test:744",
+        "emotion:test:925",
+        "emotion:test:608",
+        "emotion:test:454",
+        "emotion:test:1224",
+        "emotion:test:1399",
+        "emotion:test:1166",
+        "emotion:test:802",
+        "emotion:test:1154",
+        "emotion:test:865",
+        "emotion:test:1245",
+        "emotion:test:13",
+        "emotion:test:456",
+        "emotion:test:1192",
+        "emotion:test:692",
+        "emotion:test:1231",
+        "emotion:test:78",
+        "emotion:test:1363",
+        "emotion:test:1280",
+        "emotion:test:968",
+        "emotion:test:41",
+        "emotion:test:1202",
+        "emotion:test:65",
+        "emotion:test:905",
+        "emotion:test:487",
+        "emotion:test:808",
+        "emotion:test:553",
+        "emotion:test:58",
+        "emotion:test:310",
+        "emotion:test:942",
+        "emotion:test:1292",
+        "emotion:test:1042",
+        "emotion:test:210",
+        "emotion:test:1233",
+        "emotion:test:163",
+        "emotion:test:463",
+        "emotion:test:452",
+        "emotion:test:990",
+        "emotion:test:142",
+        "emotion:test:764",
+        "emotion:test:518",
+        "emotion:test:544",
+        "emotion:test:894",
+        "emotion:test:535",
+        "emotion:test:331",
+        "emotion:test:672",
+        "emotion:test:862",
+        "emotion:test:701",
+        "emotion:test:212",
+        "emotion:test:632"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 143,
+      "input_bytes_kept_out_of_review_fraction": 0.9978207863456263,
+      "accepted_error_95ci": [
+        0.13257107424295342,
+        0.1972375680468836
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "total": 500,
+      "accepted": 458,
+      "review": 42,
+      "failed": 1,
+      "review_fraction": 0.084,
+      "accepted_errors": 59,
+      "accepted_error_rate": 0.12882096069868995,
+      "accepted_error_ids": [
+        "emotion:test:711",
+        "emotion:test:71",
+        "emotion:test:369",
+        "emotion:test:175",
+        "emotion:test:1070",
+        "emotion:test:555",
+        "emotion:test:1170",
+        "emotion:test:787",
+        "emotion:test:1136",
+        "emotion:test:564",
+        "emotion:test:1354",
+        "emotion:test:214",
+        "emotion:test:866",
+        "emotion:test:936",
+        "emotion:test:534",
+        "emotion:test:1299",
+        "emotion:test:634",
+        "emotion:test:171",
+        "emotion:test:221",
+        "emotion:test:848",
+        "emotion:test:205",
+        "emotion:test:397",
+        "emotion:test:1218",
+        "emotion:test:744",
+        "emotion:test:925",
+        "emotion:test:608",
+        "emotion:test:454",
+        "emotion:test:1224",
+        "emotion:test:1399",
+        "emotion:test:802",
+        "emotion:test:1154",
+        "emotion:test:865",
+        "emotion:test:1245",
+        "emotion:test:13",
+        "emotion:test:1192",
+        "emotion:test:692",
+        "emotion:test:78",
+        "emotion:test:1363",
+        "emotion:test:1280",
+        "emotion:test:41",
+        "emotion:test:1202",
+        "emotion:test:65",
+        "emotion:test:487",
+        "emotion:test:808",
+        "emotion:test:553",
+        "emotion:test:310",
+        "emotion:test:942",
+        "emotion:test:1042",
+        "emotion:test:463",
+        "emotion:test:990",
+        "emotion:test:764",
+        "emotion:test:518",
+        "emotion:test:544",
+        "emotion:test:894",
+        "emotion:test:535",
+        "emotion:test:331",
+        "emotion:test:672",
+        "emotion:test:701",
+        "emotion:test:632"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 5542,
+      "input_bytes_kept_out_of_review_fraction": 0.9155440414507772,
+      "accepted_error_95ci": [
+        0.10120009302381638,
+        0.16261654035469114
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "total": 500,
+      "accepted": 384,
+      "review": 116,
+      "failed": 1,
+      "review_fraction": 0.232,
+      "accepted_errors": 32,
+      "accepted_error_rate": 0.08333333333333333,
+      "accepted_error_ids": [
+        "emotion:test:711",
+        "emotion:test:71",
+        "emotion:test:1070",
+        "emotion:test:1170",
+        "emotion:test:1354",
+        "emotion:test:866",
+        "emotion:test:936",
+        "emotion:test:534",
+        "emotion:test:221",
+        "emotion:test:848",
+        "emotion:test:205",
+        "emotion:test:397",
+        "emotion:test:1218",
+        "emotion:test:454",
+        "emotion:test:1224",
+        "emotion:test:1399",
+        "emotion:test:802",
+        "emotion:test:13",
+        "emotion:test:78",
+        "emotion:test:1363",
+        "emotion:test:41",
+        "emotion:test:808",
+        "emotion:test:553",
+        "emotion:test:310",
+        "emotion:test:942",
+        "emotion:test:463",
+        "emotion:test:990",
+        "emotion:test:518",
+        "emotion:test:544",
+        "emotion:test:535",
+        "emotion:test:672",
+        "emotion:test:632"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 15425,
+      "input_bytes_kept_out_of_review_fraction": 0.7649344711978056,
+      "accepted_error_95ci": [
+        0.05964587778385243,
+        0.11527471741754507
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "total": 500,
+      "accepted": 345,
+      "review": 155,
+      "failed": 1,
+      "review_fraction": 0.31,
+      "accepted_errors": 24,
+      "accepted_error_rate": 0.06956521739130435,
+      "accepted_error_ids": [
+        "emotion:test:711",
+        "emotion:test:1070",
+        "emotion:test:1170",
+        "emotion:test:1354",
+        "emotion:test:866",
+        "emotion:test:936",
+        "emotion:test:534",
+        "emotion:test:205",
+        "emotion:test:397",
+        "emotion:test:1218",
+        "emotion:test:454",
+        "emotion:test:1224",
+        "emotion:test:1399",
+        "emotion:test:802",
+        "emotion:test:13",
+        "emotion:test:78",
+        "emotion:test:1363",
+        "emotion:test:41",
+        "emotion:test:808",
+        "emotion:test:553",
+        "emotion:test:942",
+        "emotion:test:463",
+        "emotion:test:518",
+        "emotion:test:544"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 20177,
+      "input_bytes_kept_out_of_review_fraction": 0.6925175251447729,
+      "accepted_error_95ci": [
+        0.04719002430562866,
+        0.10142034728251687
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 309,
+      "review": 191,
+      "failed": 1,
+      "review_fraction": 0.382,
+      "accepted_errors": 15,
+      "accepted_error_rate": 0.04854368932038835,
+      "accepted_error_ids": [
+        "emotion:test:1070",
+        "emotion:test:1354",
+        "emotion:test:866",
+        "emotion:test:936",
+        "emotion:test:205",
+        "emotion:test:397",
+        "emotion:test:1399",
+        "emotion:test:802",
+        "emotion:test:13",
+        "emotion:test:78",
+        "emotion:test:1363",
+        "emotion:test:41",
+        "emotion:test:808",
+        "emotion:test:553",
+        "emotion:test:518"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 24940,
+      "input_bytes_kept_out_of_review_fraction": 0.6199329472721731,
+      "accepted_error_95ci": [
+        0.029635749778752624,
+        0.07853871964184436
+      ]
+    },
+    {
+      "threshold": 0.99,
+      "total": 500,
+      "accepted": 249,
+      "review": 251,
+      "failed": 1,
+      "review_fraction": 0.502,
+      "accepted_errors": 6,
+      "accepted_error_rate": 0.024096385542168676,
+      "accepted_error_ids": [
+        "emotion:test:1070",
+        "emotion:test:1354",
+        "emotion:test:205",
+        "emotion:test:1363",
+        "emotion:test:808",
+        "emotion:test:518"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 32865,
+      "input_bytes_kept_out_of_review_fraction": 0.499161840902164,
+      "accepted_error_95ci": [
+        0.011089318476222108,
+        0.0515644049067311
+      ]
+    },
+    {
+      "threshold": 1,
+      "total": 500,
+      "accepted": 199,
+      "review": 301,
+      "failed": 1,
+      "review_fraction": 0.602,
+      "accepted_errors": 2,
+      "accepted_error_rate": 0.010050251256281407,
+      "accepted_error_ids": [
+        "emotion:test:808",
+        "emotion:test:518"
+      ],
+      "input_jsonl_bytes": 65620,
+      "review_input_jsonl_bytes": 39400,
+      "input_bytes_kept_out_of_review_fraction": 0.39957330082291986,
+      "accepted_error_95ci": [
+        0.002760482210699307,
+        0.03589758535736006
+      ]
+    }
+  ],
+  "quality": {
+    "accuracy": 0.836,
+    "macro_f1": 0.7983140823750225,
+    "per_class": {
+      "anger": {
+        "support": 184,
+        "precision": 0.8181818181818182,
+        "recall": 0.8804347826086957,
+        "f1": 0.8481675392670157
+      },
+      "joy": {
+        "support": 133,
+        "precision": 0.8633093525179856,
+        "recall": 0.9022556390977443,
+        "f1": 0.8823529411764705
+      },
+      "optimism": {
+        "support": 46,
+        "precision": 0.7352941176470589,
+        "recall": 0.5434782608695652,
+        "f1": 0.625
+      },
+      "sadness": {
+        "support": 137,
+        "precision": 0.8671875,
+        "recall": 0.8102189781021898,
+        "f1": 0.8377358490566038
+      }
+    },
+    "confusion": {
+      "anger": {
+        "anger": 162,
+        "sadness": 9,
+        "joy": 9,
+        "optimism": 3,
+        "__failed__": 1
+      },
+      "joy": {
+        "joy": 120,
+        "sadness": 4,
+        "anger": 8,
+        "optimism": 1
+      },
+      "optimism": {
+        "optimism": 25,
+        "sadness": 4,
+        "joy": 7,
+        "anger": 10
+      },
+      "sadness": {
+        "sadness": 111,
+        "optimism": 5,
+        "anger": 18,
+        "joy": 3
+      }
+    }
+  },
+  "baselines": {
+    "majority_label": "anger",
+    "majority": {
+      "accuracy": 0.368,
+      "macro_f1": 0.1345029239766082,
+      "per_class": {
+        "anger": {
+          "support": 184,
+          "precision": 0.368,
+          "recall": 1.0,
+          "f1": 0.5380116959064328
+        },
+        "joy": {
+          "support": 133,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        },
+        "optimism": {
+          "support": 46,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        },
+        "sadness": {
+          "support": 137,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        }
+      },
+      "confusion": {
+        "anger": {
+          "anger": 184
+        },
+        "joy": {
+          "anger": 133
+        },
+        "optimism": {
+          "anger": 46
+        },
+        "sadness": {
+          "anger": 137
+        }
+      }
+    },
+    "naive_bayes": {
+      "accuracy": 0.65,
+      "macro_f1": 0.5545717243830451,
+      "per_class": {
+        "anger": {
+          "support": 184,
+          "precision": 0.5718954248366013,
+          "recall": 0.9510869565217391,
+          "f1": 0.7142857142857143
+        },
+        "joy": {
+          "support": 133,
+          "precision": 0.8769230769230769,
+          "recall": 0.42857142857142855,
+          "f1": 0.5757575757575757
+        },
+        "optimism": {
+          "support": 46,
+          "precision": 1.0,
+          "recall": 0.15217391304347827,
+          "f1": 0.2641509433962264
+        },
+        "sadness": {
+          "support": 137,
+          "precision": 0.7049180327868853,
+          "recall": 0.6277372262773723,
+          "f1": 0.6640926640926641
+        }
+      },
+      "confusion": {
+        "anger": {
+          "anger": 175,
+          "sadness": 6,
+          "joy": 3
+        },
+        "joy": {
+          "joy": 57,
+          "anger": 55,
+          "sadness": 21
+        },
+        "optimism": {
+          "optimism": 7,
+          "anger": 28,
+          "sadness": 9,
+          "joy": 2
+        },
+        "sadness": {
+          "sadness": 86,
+          "anger": 48,
+          "joy": 3
+        }
+      }
+    },
+    "train_items": 3257,
+    "vocabulary_size": 8328,
+    "train_seconds": 0.007,
+    "predict_seconds": 0.004,
+    "definition": "Multinomial Naive Bayes; Laplace alpha=1; lowercase Unicode word tokens of length >=2; raw counts, no tuning. Training examples are never sent to Jev."
+  },
+  "observed_error_by_confidence_bin": [
+    {
+      "low": 0,
+      "high_exclusive": 0.5,
+      "exact_one": false,
+      "items": 41,
+      "errors": 22,
+      "error_rate": 0.5365853658536586
+    },
+    {
+      "low": 0.5,
+      "high_exclusive": 0.8,
+      "exact_one": false,
+      "items": 74,
+      "errors": 27,
+      "error_rate": 0.36486486486486486
+    },
+    {
+      "low": 0.8,
+      "high_exclusive": 0.9,
+      "exact_one": false,
+      "items": 39,
+      "errors": 8,
+      "error_rate": 0.20512820512820512
+    },
+    {
+      "low": 0.9,
+      "high_exclusive": 0.95,
+      "exact_one": false,
+      "items": 36,
+      "errors": 9,
+      "error_rate": 0.25
+    },
+    {
+      "low": 0.95,
+      "high_exclusive": 0.99,
+      "exact_one": false,
+      "items": 60,
+      "errors": 9,
+      "error_rate": 0.15
+    },
+    {
+      "low": 0.99,
+      "high_exclusive": 1.0,
+      "exact_one": false,
+      "items": 50,
+      "errors": 4,
+      "error_rate": 0.08
+    },
+    {
+      "low": 1.0,
+      "high_exclusive": 1.0,
+      "exact_one": true,
+      "items": 199,
+      "errors": 2,
+      "error_rate": 0.010050251256281407
+    }
+  ],
+  "estimated_jev_cost_usd": 0.009335928,
+  "cost_accounting_complete": false,
+  "pricing_source": "https://docs.typesafe.ai/models",
+  "pricing_note": "Jev 1.13.0: $0.042/M input tokens, free output. Estimate excludes agent review and reasoning. When cost_accounting_complete is false, known successful usage is only a lower bound.",
+  "dataset": {
+    "name": "tweet-emotion",
+    "seed": 20260920,
+    "sample_items": 500,
+    "test_pool_items": 1421,
+    "baseline_train_items": 3257,
+    "class_counts": {
+      "joy": 133,
+      "sadness": 137,
+      "anger": 184,
+      "optimism": 46
+    },
+    "selection": "uniform sample of 500 rows",
+    "sources": {
+      "tweet-emotion-train-text.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/train_text.txt",
+        "sha256": "2c62f67aeb3eac1aea0e5a9c3d0f4bc337992581f3f858061786a1fb4d79d95e",
+        "bytes": 306630
+      },
+      "tweet-emotion-train-labels.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/train_labels.txt",
+        "sha256": "987e767d8679e18abdf7de37a6d2bcd0a40a296ddd704e8d515cf0e3033c8d9c",
+        "bytes": 6514
+      },
+      "tweet-emotion-test-text.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/test_text.txt",
+        "sha256": "7e1070f5d3e3fcece5bc73680bff9981e90d8f7b2f1009bfe7a01d059d1c6091",
+        "bytes": 132523
+      },
+      "tweet-emotion-test-labels.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/test_labels.txt",
+        "sha256": "245072348c711961785be6d395997f97cf7fcda3effeae7805664171dc75f913",
+        "bytes": 2842
+      },
+      "tweet-emotion-mapping.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/mapping.txt",
+        "sha256": "656dea85d149716af96206ca19bec0d94e9dc6de3f5079f5c7c2a241ec76cadb",
+        "bytes": 34
+      }
+    },
+    "files_sha256": {
+      "items.jsonl": "b7cb18b4fe399a48fca93adbe8f9b4a484c12f4ba8b85055d16a3de23a0af04a",
+      "labels.jsonl": "d1c9848d36f215ee9dd1169e5367270c9e01eba94f362507287914ac35801040",
+      "train.jsonl": "0734a47efea5e1ec133de0f50d4a6768ef4797b030c239bf662d6f858a3e07e2",
+      "rubric.json": "608381b2e3805a8e70c0390d922455b0170038354503b1ac1cf836c2bddf3a14"
+    },
+    "notes": ""
+  },
+  "predictions_file": "predictions.jsonl",
+  "server_source_sha256": "3aef19f9fb6b33b429879d7023bea13e84706f39d95ec293560dcb92fc3c9eb6",
+  "quality_on_valid_responses": 0.8376753507014028,
+  "compact_review_replay": {
+    "mode": "Recorded-response replay through MCP; no new Jev inference",
+    "paid_requests": 0,
+    "server_source_sha256": "de929514b15257050a9617ee5a96ea00e502a45fbdd0e5ca9faa9119bebef817",
+    "decisions_and_default_routing_identical": true,
+    "threshold": 0.8,
+    "accepted": 384,
+    "review": 116,
+    "accepted_errors": 32,
+    "accepted_error_rate": 0.08333333333333333,
+    "measured_summary": {
+      "total": 500,
+      "completed": 500,
+      "accepted": 384,
+      "accepted_by_label": {
+        "joy": 109,
+        "sadness": 104,
+        "anger": 155,
+        "optimism": 16
+      },
+      "review_count": 116,
+      "failed": 1,
+      "review_reasons": {
+        "low_confidence": 115,
+        "invalid_provider_response": 1
+      },
+      "review_fraction": 0.232,
+      "confidence_threshold": 0.8,
+      "model_requested": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 222284,
+        "output_tokens": 24148,
+        "complete": false
+      },
+      "requests_made": 500,
+      "retries": 0,
+      "elapsed_seconds": 0.004,
+      "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-zb6wl9_9/.decide/2e33091fd89d4ec0b5afd30950a12701/results.jsonl",
+      "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-zb6wl9_9/.decide/2e33091fd89d4ec0b5afd30950a12701/review.jsonl",
+      "review": [],
+      "review_omitted": 116
+    },
+    "inline_input_bytes": 66017,
+    "source_call_and_result_bytes": 1197,
+    "all_review_records_bytes": 15425,
+    "context_bytes_reduction": 0.9818683066482876,
+    "context_bytes_reduction_with_all_reviews": 0.7482163685111411,
+    "thresholds": [
+      {
+        "threshold": 0,
+        "accepted": 499,
+        "review": 1,
+        "accepted_errors": 81,
+        "accepted_error_rate": 0.1623246492985972,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 499,
+          "accepted_by_label": {
+            "joy": 139,
+            "sadness": 128,
+            "anger": 198,
+            "optimism": 34
+          },
+          "review_count": 1,
+          "failed": 1,
+          "review_reasons": {
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.002,
+          "confidence_threshold": 0.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-wbllm3qv/.decide/e64521e9a37f49738f96886b5634780d/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-wbllm3qv/.decide/e64521e9a37f49738f96886b5634780d/review.jsonl",
+          "review": [],
+          "review_omitted": 1
+        },
+        "inline_input_bytes": 66015,
+        "source_call_and_result_bytes": 1170,
+        "all_review_records_bytes": 143,
+        "context_bytes_reduction": 0.9822767552828903,
+        "context_bytes_reduction_with_all_reviews": 0.9801105809285768
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 458,
+        "review": 42,
+        "accepted_errors": 59,
+        "accepted_error_rate": 0.12882096069868995,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 458,
+          "accepted_by_label": {
+            "joy": 130,
+            "sadness": 119,
+            "anger": 181,
+            "optimism": 28
+          },
+          "review_count": 42,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 41,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.084,
+          "confidence_threshold": 0.5,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-vyt0_j6a/.decide/c7adace167cb4bcd8a59e22be42f1cab/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-vyt0_j6a/.decide/c7adace167cb4bcd8a59e22be42f1cab/review.jsonl",
+          "review": [],
+          "review_omitted": 42
+        },
+        "inline_input_bytes": 66017,
+        "source_call_and_result_bytes": 1194,
+        "all_review_records_bytes": 5542,
+        "context_bytes_reduction": 0.9819137494887681,
+        "context_bytes_reduction_with_all_reviews": 0.8979656755078238
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 384,
+        "review": 116,
+        "accepted_errors": 32,
+        "accepted_error_rate": 0.08333333333333333,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 384,
+          "accepted_by_label": {
+            "joy": 109,
+            "sadness": 104,
+            "anger": 155,
+            "optimism": 16
+          },
+          "review_count": 116,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 115,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.232,
+          "confidence_threshold": 0.8,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-zb6wl9_9/.decide/2e33091fd89d4ec0b5afd30950a12701/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-zb6wl9_9/.decide/2e33091fd89d4ec0b5afd30950a12701/review.jsonl",
+          "review": [],
+          "review_omitted": 116
+        },
+        "inline_input_bytes": 66017,
+        "source_call_and_result_bytes": 1197,
+        "all_review_records_bytes": 15425,
+        "context_bytes_reduction": 0.9818683066482876,
+        "context_bytes_reduction_with_all_reviews": 0.7482163685111411
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 345,
+        "review": 155,
+        "accepted_errors": 24,
+        "accepted_error_rate": 0.06956521739130435,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 345,
+          "accepted_by_label": {
+            "joy": 96,
+            "sadness": 92,
+            "anger": 144,
+            "optimism": 13
+          },
+          "review_count": 155,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 154,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.31,
+          "confidence_threshold": 0.9,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-7fxn30wj/.decide/dcddd8101af54d33bc0bcc8cfc4a99e1/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-7fxn30wj/.decide/dcddd8101af54d33bc0bcc8cfc4a99e1/review.jsonl",
+          "review": [],
+          "review_omitted": 155
+        },
+        "inline_input_bytes": 66017,
+        "source_call_and_result_bytes": 1194,
+        "all_review_records_bytes": 20177,
+        "context_bytes_reduction": 0.9819137494887681,
+        "context_bytes_reduction_with_all_reviews": 0.6762803520305376
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 309,
+        "review": 191,
+        "accepted_errors": 15,
+        "accepted_error_rate": 0.04854368932038835,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 309,
+          "accepted_by_label": {
+            "joy": 78,
+            "sadness": 85,
+            "anger": 134,
+            "optimism": 12
+          },
+          "review_count": 191,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 190,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.382,
+          "confidence_threshold": 0.95,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-t9wsw8xw/.decide/4aa589b2ada74bf4b2574dc62019815e/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-t9wsw8xw/.decide/4aa589b2ada74bf4b2574dc62019815e/review.jsonl",
+          "review": [],
+          "review_omitted": 191
+        },
+        "inline_input_bytes": 66018,
+        "source_call_and_result_bytes": 1197,
+        "all_review_records_bytes": 24940,
+        "context_bytes_reduction": 0.9818685812960102,
+        "context_bytes_reduction_with_all_reviews": 0.6040928231694387
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 249,
+        "review": 251,
+        "accepted_errors": 6,
+        "accepted_error_rate": 0.024096385542168676,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 249,
+          "accepted_by_label": {
+            "joy": 60,
+            "sadness": 68,
+            "anger": 113,
+            "optimism": 8
+          },
+          "review_count": 251,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 250,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.502,
+          "confidence_threshold": 0.99,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-drkmkvmk/.decide/36d81d8c1e71469c9375bce27e3b89f5/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-drkmkvmk/.decide/36d81d8c1e71469c9375bce27e3b89f5/review.jsonl",
+          "review": [],
+          "review_omitted": 251
+        },
+        "inline_input_bytes": 66018,
+        "source_call_and_result_bytes": 1196,
+        "all_review_records_bytes": 32865,
+        "context_bytes_reduction": 0.9818837286800569,
+        "context_bytes_reduction_with_all_reviews": 0.48406495198279254
+      },
+      {
+        "threshold": 1,
+        "accepted": 199,
+        "review": 301,
+        "accepted_errors": 2,
+        "accepted_error_rate": 0.010050251256281407,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 199,
+          "accepted_by_label": {
+            "joy": 49,
+            "sadness": 54,
+            "anger": 90,
+            "optimism": 6
+          },
+          "review_count": 301,
+          "failed": 1,
+          "review_reasons": {
+            "low_confidence": 300,
+            "invalid_provider_response": 1
+          },
+          "review_fraction": 0.602,
+          "confidence_threshold": 1.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 222284,
+            "output_tokens": 24148,
+            "complete": false
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yn4btsv7/.decide/fa77618256bc415397fd95db2b122b56/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yn4btsv7/.decide/fa77618256bc415397fd95db2b122b56/review.jsonl",
+          "review": [],
+          "review_omitted": 301
+        },
+        "inline_input_bytes": 66015,
+        "source_call_and_result_bytes": 1191,
+        "all_review_records_bytes": 39400,
+        "context_bytes_reduction": 0.9819586457623267,
+        "context_bytes_reduction_with_all_reviews": 0.385124592895554
+      }
+    ]
+  },
+  "live_response_file": "live-response.json",
+  "measurement_path_note": "Response paths identify the original local benchmark artifacts; archived response objects are retained for byte-accounting verification, not as portable live paths."
+}

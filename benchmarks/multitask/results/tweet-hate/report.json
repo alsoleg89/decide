@@ -1,0 +1,1051 @@
+{
+  "schema_version": 2,
+  "mode": "live",
+  "transport": "MCP stdio subprocess",
+  "created_at": "2026-09-19T20:18:05.246889+00:00",
+  "input_jsonl_sha256": "048bfcd0d3b06d8245421f5aae20dc34a922eca6ab8f14530b86a51d0242dfa0",
+  "rubric_sha256": "0d3d25326f96d65afdc2b3a4619267a8b5fb856f1b27527a4bcdf192246a023a",
+  "rubric": {
+    "question": "Does this tweet express hate speech targeting women or immigrants?",
+    "criteria": {
+      "non_hate": "Does not express hatred, dehumanization, exclusion or violence targeting women or immigrants as a group.",
+      "hate": "Expresses hatred, dehumanization, exclusion or violence targeting women or immigrants as a group."
+    },
+    "source": {
+      "kind": "jsonl",
+      "paths": [
+        "items.jsonl"
+      ]
+    },
+    "confidence_threshold": 0.8,
+    "review_limit": 0,
+    "concurrency": 4
+  },
+  "measurement": "UTF-8 JSON bytes, not billed tokens. Full-review metric includes every full review row, even already-previewed rows. Excludes MCP framing, host duplication and agent reasoning.",
+  "items": 500,
+  "completed": 500,
+  "accepted": 251,
+  "review_count": 249,
+  "review_fraction": 0.498,
+  "failed": 0,
+  "elapsed_seconds": 39.377,
+  "items_per_second": 12.7,
+  "requests_made": 500,
+  "retries": 0,
+  "models": {
+    "jev-1.13.0": 500
+  },
+  "provider_usage": {
+    "input_tokens": 219793,
+    "output_tokens": 17078,
+    "complete": true
+  },
+  "labeled_items": 500,
+  "correct_labeled_items": 348,
+  "label_accuracy": 0.696,
+  "accepted_labeled_items": 251,
+  "accepted_label_accuracy": 0.8406374501992032,
+  "accepted_unlabeled_items": 0,
+  "inline_input_bytes": 86512,
+  "source_call_and_result_bytes": 1057,
+  "context_bytes_reduction": 0.9877820417976697,
+  "all_review_records_bytes": 94309,
+  "context_bytes_reduction_with_all_reviews": -0.10234418346587759,
+  "threshold_sweep": [
+    {
+      "threshold": 0,
+      "total": 500,
+      "accepted": 500,
+      "review": 0,
+      "failed": 0,
+      "review_fraction": 0.0,
+      "accepted_errors": 152,
+      "accepted_error_rate": 0.304,
+      "accepted_error_ids": [
+        "hate:test:2591",
+        "hate:test:1680",
+        "hate:test:524",
+        "hate:test:1855",
+        "hate:test:282",
+        "hate:test:758",
+        "hate:test:2295",
+        "hate:test:902",
+        "hate:test:1323",
+        "hate:test:2048",
+        "hate:test:2143",
+        "hate:test:936",
+        "hate:test:1716",
+        "hate:test:2540",
+        "hate:test:889",
+        "hate:test:1463",
+        "hate:test:1818",
+        "hate:test:2310",
+        "hate:test:2771",
+        "hate:test:316",
+        "hate:test:349",
+        "hate:test:1101",
+        "hate:test:304",
+        "hate:test:1783",
+        "hate:test:2339",
+        "hate:test:2806",
+        "hate:test:833",
+        "hate:test:1961",
+        "hate:test:2920",
+        "hate:test:191",
+        "hate:test:1992",
+        "hate:test:2553",
+        "hate:test:1500",
+        "hate:test:2265",
+        "hate:test:1872",
+        "hate:test:736",
+        "hate:test:57",
+        "hate:test:254",
+        "hate:test:1320",
+        "hate:test:318",
+        "hate:test:2748",
+        "hate:test:2650",
+        "hate:test:340",
+        "hate:test:2502",
+        "hate:test:1169",
+        "hate:test:923",
+        "hate:test:1385",
+        "hate:test:1596",
+        "hate:test:1799",
+        "hate:test:2458",
+        "hate:test:2150",
+        "hate:test:2196",
+        "hate:test:1253",
+        "hate:test:2664",
+        "hate:test:2507",
+        "hate:test:795",
+        "hate:test:2030",
+        "hate:test:2423",
+        "hate:test:269",
+        "hate:test:1034",
+        "hate:test:2170",
+        "hate:test:157",
+        "hate:test:256",
+        "hate:test:990",
+        "hate:test:159",
+        "hate:test:837",
+        "hate:test:275",
+        "hate:test:649",
+        "hate:test:1480",
+        "hate:test:2699",
+        "hate:test:2097",
+        "hate:test:984",
+        "hate:test:1793",
+        "hate:test:2262",
+        "hate:test:1173",
+        "hate:test:216",
+        "hate:test:1243",
+        "hate:test:1861",
+        "hate:test:1873",
+        "hate:test:1549",
+        "hate:test:416",
+        "hate:test:2331",
+        "hate:test:2308",
+        "hate:test:1931",
+        "hate:test:637",
+        "hate:test:1729",
+        "hate:test:126",
+        "hate:test:1974",
+        "hate:test:514",
+        "hate:test:288",
+        "hate:test:690",
+        "hate:test:2299",
+        "hate:test:2307",
+        "hate:test:912",
+        "hate:test:279",
+        "hate:test:717",
+        "hate:test:555",
+        "hate:test:1292",
+        "hate:test:860",
+        "hate:test:759",
+        "hate:test:2703",
+        "hate:test:1212",
+        "hate:test:579",
+        "hate:test:806",
+        "hate:test:2282",
+        "hate:test:2761",
+        "hate:test:1773",
+        "hate:test:2146",
+        "hate:test:2236",
+        "hate:test:1127",
+        "hate:test:2964",
+        "hate:test:2817",
+        "hate:test:1936",
+        "hate:test:82",
+        "hate:test:186",
+        "hate:test:1686",
+        "hate:test:2131",
+        "hate:test:2899",
+        "hate:test:1409",
+        "hate:test:1577",
+        "hate:test:2534",
+        "hate:test:508",
+        "hate:test:2593",
+        "hate:test:2678",
+        "hate:test:2434",
+        "hate:test:1215",
+        "hate:test:1013",
+        "hate:test:477",
+        "hate:test:617",
+        "hate:test:2297",
+        "hate:test:2613",
+        "hate:test:2640",
+        "hate:test:1009",
+        "hate:test:2559",
+        "hate:test:1423",
+        "hate:test:1171",
+        "hate:test:930",
+        "hate:test:1787",
+        "hate:test:935",
+        "hate:test:993",
+        "hate:test:138",
+        "hate:test:1742",
+        "hate:test:149",
+        "hate:test:1468",
+        "hate:test:527",
+        "hate:test:1923",
+        "hate:test:2071",
+        "hate:test:1473",
+        "hate:test:765",
+        "hate:test:1452",
+        "hate:test:1019",
+        "hate:test:2968"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 0,
+      "input_bytes_kept_out_of_review_fraction": 1.0,
+      "accepted_error_95ci": [
+        0.26530206305726467,
+        0.34568667840366385
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "total": 500,
+      "accepted": 354,
+      "review": 146,
+      "failed": 0,
+      "review_fraction": 0.292,
+      "accepted_errors": 89,
+      "accepted_error_rate": 0.2514124293785311,
+      "accepted_error_ids": [
+        "hate:test:2591",
+        "hate:test:1680",
+        "hate:test:1855",
+        "hate:test:282",
+        "hate:test:2295",
+        "hate:test:902",
+        "hate:test:1323",
+        "hate:test:936",
+        "hate:test:1716",
+        "hate:test:1463",
+        "hate:test:2310",
+        "hate:test:2771",
+        "hate:test:316",
+        "hate:test:349",
+        "hate:test:1101",
+        "hate:test:304",
+        "hate:test:1783",
+        "hate:test:833",
+        "hate:test:2920",
+        "hate:test:191",
+        "hate:test:736",
+        "hate:test:57",
+        "hate:test:254",
+        "hate:test:1320",
+        "hate:test:318",
+        "hate:test:2748",
+        "hate:test:923",
+        "hate:test:1596",
+        "hate:test:2458",
+        "hate:test:2150",
+        "hate:test:1253",
+        "hate:test:2507",
+        "hate:test:795",
+        "hate:test:2030",
+        "hate:test:2423",
+        "hate:test:269",
+        "hate:test:1034",
+        "hate:test:2170",
+        "hate:test:157",
+        "hate:test:159",
+        "hate:test:837",
+        "hate:test:649",
+        "hate:test:2097",
+        "hate:test:984",
+        "hate:test:216",
+        "hate:test:1861",
+        "hate:test:1873",
+        "hate:test:1549",
+        "hate:test:2331",
+        "hate:test:2308",
+        "hate:test:1931",
+        "hate:test:1729",
+        "hate:test:126",
+        "hate:test:288",
+        "hate:test:690",
+        "hate:test:912",
+        "hate:test:279",
+        "hate:test:717",
+        "hate:test:555",
+        "hate:test:1292",
+        "hate:test:860",
+        "hate:test:759",
+        "hate:test:579",
+        "hate:test:2282",
+        "hate:test:2761",
+        "hate:test:2146",
+        "hate:test:1127",
+        "hate:test:2817",
+        "hate:test:1936",
+        "hate:test:186",
+        "hate:test:2899",
+        "hate:test:1577",
+        "hate:test:2534",
+        "hate:test:508",
+        "hate:test:1215",
+        "hate:test:1013",
+        "hate:test:1009",
+        "hate:test:2559",
+        "hate:test:1423",
+        "hate:test:1171",
+        "hate:test:930",
+        "hate:test:1787",
+        "hate:test:935",
+        "hate:test:138",
+        "hate:test:149",
+        "hate:test:1468",
+        "hate:test:1923",
+        "hate:test:1473",
+        "hate:test:1019"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 22433,
+      "input_bytes_kept_out_of_review_fraction": 0.7395237044691895,
+      "accepted_error_95ci": [
+        0.20905315861384838,
+        0.2991089180219128
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "total": 500,
+      "accepted": 251,
+      "review": 249,
+      "failed": 0,
+      "review_fraction": 0.498,
+      "accepted_errors": 40,
+      "accepted_error_rate": 0.1593625498007968,
+      "accepted_error_ids": [
+        "hate:test:1680",
+        "hate:test:1855",
+        "hate:test:2295",
+        "hate:test:902",
+        "hate:test:1323",
+        "hate:test:936",
+        "hate:test:1716",
+        "hate:test:1463",
+        "hate:test:1783",
+        "hate:test:191",
+        "hate:test:736",
+        "hate:test:1596",
+        "hate:test:2458",
+        "hate:test:2150",
+        "hate:test:1253",
+        "hate:test:2507",
+        "hate:test:2423",
+        "hate:test:269",
+        "hate:test:2170",
+        "hate:test:837",
+        "hate:test:984",
+        "hate:test:1861",
+        "hate:test:1931",
+        "hate:test:126",
+        "hate:test:912",
+        "hate:test:555",
+        "hate:test:1292",
+        "hate:test:860",
+        "hate:test:579",
+        "hate:test:2761",
+        "hate:test:1127",
+        "hate:test:1577",
+        "hate:test:2534",
+        "hate:test:508",
+        "hate:test:1009",
+        "hate:test:1423",
+        "hate:test:1171",
+        "hate:test:930",
+        "hate:test:1787",
+        "hate:test:1923"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 39553,
+      "input_bytes_kept_out_of_review_fraction": 0.5407382464614563,
+      "accepted_error_95ci": [
+        0.11926721446006597,
+        0.20972736596919136
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "total": 500,
+      "accepted": 198,
+      "review": 302,
+      "failed": 0,
+      "review_fraction": 0.604,
+      "accepted_errors": 26,
+      "accepted_error_rate": 0.13131313131313133,
+      "accepted_error_ids": [
+        "hate:test:1680",
+        "hate:test:1855",
+        "hate:test:902",
+        "hate:test:1323",
+        "hate:test:1716",
+        "hate:test:1463",
+        "hate:test:1783",
+        "hate:test:191",
+        "hate:test:2458",
+        "hate:test:2150",
+        "hate:test:269",
+        "hate:test:2170",
+        "hate:test:837",
+        "hate:test:984",
+        "hate:test:1931",
+        "hate:test:126",
+        "hate:test:912",
+        "hate:test:555",
+        "hate:test:579",
+        "hate:test:2761",
+        "hate:test:1127",
+        "hate:test:1577",
+        "hate:test:1009",
+        "hate:test:1171",
+        "hate:test:930",
+        "hate:test:1787"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 49031,
+      "input_bytes_kept_out_of_review_fraction": 0.43068634394993205,
+      "accepted_error_95ci": [
+        0.09121075480111494,
+        0.18544924927813072
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 148,
+      "review": 352,
+      "failed": 0,
+      "review_fraction": 0.704,
+      "accepted_errors": 15,
+      "accepted_error_rate": 0.10135135135135136,
+      "accepted_error_ids": [
+        "hate:test:902",
+        "hate:test:1323",
+        "hate:test:1783",
+        "hate:test:2458",
+        "hate:test:2150",
+        "hate:test:2170",
+        "hate:test:837",
+        "hate:test:984",
+        "hate:test:1931",
+        "hate:test:912",
+        "hate:test:555",
+        "hate:test:1127",
+        "hate:test:1577",
+        "hate:test:1009",
+        "hate:test:1787"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 58384,
+      "input_bytes_kept_out_of_review_fraction": 0.3220858539530671,
+      "accepted_error_95ci": [
+        0.0623863995307363,
+        0.16048724172330803
+      ]
+    },
+    {
+      "threshold": 0.99,
+      "total": 500,
+      "accepted": 85,
+      "review": 415,
+      "failed": 0,
+      "review_fraction": 0.83,
+      "accepted_errors": 6,
+      "accepted_error_rate": 0.07058823529411765,
+      "accepted_error_ids": [
+        "hate:test:2458",
+        "hate:test:1931",
+        "hate:test:912",
+        "hate:test:555",
+        "hate:test:1127",
+        "hate:test:1787"
+      ],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 70807,
+      "input_bytes_kept_out_of_review_fraction": 0.1778386725961706,
+      "accepted_error_95ci": [
+        0.03275096311266676,
+        0.14556059357469509
+      ]
+    },
+    {
+      "threshold": 1,
+      "total": 500,
+      "accepted": 44,
+      "review": 456,
+      "failed": 0,
+      "review_fraction": 0.912,
+      "accepted_errors": 0,
+      "accepted_error_rate": 0.0,
+      "accepted_error_ids": [],
+      "input_jsonl_bytes": 86123,
+      "review_input_jsonl_bytes": 78529,
+      "input_bytes_kept_out_of_review_fraction": 0.08817621309057976,
+      "accepted_error_95ci": [
+        0,
+        0.08029560375848066
+      ]
+    }
+  ],
+  "quality": {
+    "accuracy": 0.696,
+    "macro_f1": 0.6891920629467864,
+    "per_class": {
+      "non_hate": {
+        "support": 285,
+        "precision": 0.7301038062283737,
+        "recall": 0.7403508771929824,
+        "f1": 0.735191637630662
+      },
+      "hate": {
+        "support": 215,
+        "precision": 0.6492890995260664,
+        "recall": 0.6372093023255814,
+        "f1": 0.6431924882629108
+      }
+    },
+    "confusion": {
+      "non_hate": {
+        "non_hate": 211,
+        "hate": 74
+      },
+      "hate": {
+        "hate": 137,
+        "non_hate": 78
+      }
+    }
+  },
+  "baselines": {
+    "majority_label": "non_hate",
+    "majority": {
+      "accuracy": 0.57,
+      "macro_f1": 0.36305732484076436,
+      "per_class": {
+        "non_hate": {
+          "support": 285,
+          "precision": 0.57,
+          "recall": 1.0,
+          "f1": 0.7261146496815287
+        },
+        "hate": {
+          "support": 215,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        }
+      },
+      "confusion": {
+        "non_hate": {
+          "non_hate": 285
+        },
+        "hate": {
+          "non_hate": 215
+        }
+      }
+    },
+    "naive_bayes": {
+      "accuracy": 0.484,
+      "macro_f1": 0.414743031358885,
+      "per_class": {
+        "non_hate": {
+          "support": 285,
+          "precision": 0.813953488372093,
+          "recall": 0.12280701754385964,
+          "f1": 0.21341463414634143
+        },
+        "hate": {
+          "support": 215,
+          "precision": 0.45295404814004375,
+          "recall": 0.9627906976744186,
+          "f1": 0.6160714285714286
+        }
+      },
+      "confusion": {
+        "non_hate": {
+          "hate": 250,
+          "non_hate": 35
+        },
+        "hate": {
+          "non_hate": 8,
+          "hate": 207
+        }
+      }
+    },
+    "train_items": 8966,
+    "vocabulary_size": 16879,
+    "train_seconds": 0.024,
+    "predict_seconds": 0.004,
+    "definition": "Multinomial Naive Bayes; Laplace alpha=1; lowercase Unicode word tokens of length >=2; raw counts, no tuning. Training examples are never sent to Jev."
+  },
+  "observed_error_by_confidence_bin": [
+    {
+      "low": 0,
+      "high_exclusive": 0.5,
+      "exact_one": false,
+      "items": 146,
+      "errors": 63,
+      "error_rate": 0.4315068493150685
+    },
+    {
+      "low": 0.5,
+      "high_exclusive": 0.8,
+      "exact_one": false,
+      "items": 103,
+      "errors": 49,
+      "error_rate": 0.47572815533980584
+    },
+    {
+      "low": 0.8,
+      "high_exclusive": 0.9,
+      "exact_one": false,
+      "items": 53,
+      "errors": 14,
+      "error_rate": 0.2641509433962264
+    },
+    {
+      "low": 0.9,
+      "high_exclusive": 0.95,
+      "exact_one": false,
+      "items": 50,
+      "errors": 11,
+      "error_rate": 0.22
+    },
+    {
+      "low": 0.95,
+      "high_exclusive": 0.99,
+      "exact_one": false,
+      "items": 63,
+      "errors": 9,
+      "error_rate": 0.14285714285714285
+    },
+    {
+      "low": 0.99,
+      "high_exclusive": 1.0,
+      "exact_one": false,
+      "items": 41,
+      "errors": 6,
+      "error_rate": 0.14634146341463414
+    },
+    {
+      "low": 1.0,
+      "high_exclusive": 1.0,
+      "exact_one": true,
+      "items": 44,
+      "errors": 0,
+      "error_rate": 0.0
+    }
+  ],
+  "estimated_jev_cost_usd": 0.009231306,
+  "cost_accounting_complete": true,
+  "pricing_source": "https://docs.typesafe.ai/models",
+  "pricing_note": "Jev 1.13.0: $0.042/M input tokens, free output. Estimate excludes agent review and reasoning. When cost_accounting_complete is false, known successful usage is only a lower bound.",
+  "dataset": {
+    "name": "tweet-hate",
+    "seed": 20260920,
+    "sample_items": 500,
+    "test_pool_items": 2970,
+    "baseline_train_items": 8966,
+    "class_counts": {
+      "hate": 215,
+      "non_hate": 285
+    },
+    "selection": "uniform sample of 500 rows",
+    "sources": {
+      "tweet-hate-train-text.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/train_text.txt",
+        "sha256": "6572bb3a42143128a5dfa99af8debeb0668e637c34b2d1e3140dac47316fe2c2",
+        "bytes": 1133852
+      },
+      "tweet-hate-train-labels.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/train_labels.txt",
+        "sha256": "4e8fde025a453a25c94632794254131dedeac4e57228ad64157c41571cc88f71",
+        "bytes": 18000
+      },
+      "tweet-hate-test-text.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/test_text.txt",
+        "sha256": "bc4762876a8dd8baa55c3cd7b03108e3231a5d691e80b8b1ef97c5be31b9da9a",
+        "bytes": 399242
+      },
+      "tweet-hate-test-labels.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/test_labels.txt",
+        "sha256": "c14adca6b3627616a835c5ccea8a1cceb0235cd79417257f093eb0e16a69c62f",
+        "bytes": 5940
+      },
+      "tweet-hate-mapping.txt": {
+        "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/hate/mapping.txt",
+        "sha256": "3fc75504ffae64ddc82e13afb5790af7798cd3167d7d35790abe78b39b991896",
+        "bytes": 17
+      }
+    },
+    "files_sha256": {
+      "items.jsonl": "048bfcd0d3b06d8245421f5aae20dc34a922eca6ab8f14530b86a51d0242dfa0",
+      "labels.jsonl": "9a2e6cb7050b52d2cdf8b5f47b6f4485ffdfb132445c2ca547f8474859902002",
+      "train.jsonl": "f858331dafb8fd9fec476bd18aa915f2f23154aeb7e421254b9581a542e480d6",
+      "rubric.json": "0d3d25326f96d65afdc2b3a4619267a8b5fb856f1b27527a4bcdf192246a023a"
+    },
+    "notes": ""
+  },
+  "predictions_file": "predictions.jsonl",
+  "server_source_sha256": "3aef19f9fb6b33b429879d7023bea13e84706f39d95ec293560dcb92fc3c9eb6",
+  "quality_on_valid_responses": 0.696,
+  "compact_review_replay": {
+    "mode": "Recorded-response replay through MCP; no new Jev inference",
+    "paid_requests": 0,
+    "server_source_sha256": "de929514b15257050a9617ee5a96ea00e502a45fbdd0e5ca9faa9119bebef817",
+    "decisions_and_default_routing_identical": true,
+    "threshold": 0.8,
+    "accepted": 251,
+    "review": 249,
+    "accepted_errors": 40,
+    "accepted_error_rate": 0.1593625498007968,
+    "measured_summary": {
+      "total": 500,
+      "completed": 500,
+      "accepted": 251,
+      "accepted_by_label": {
+        "hate": 113,
+        "non_hate": 138
+      },
+      "review_count": 249,
+      "failed": 0,
+      "review_reasons": {
+        "low_confidence": 249
+      },
+      "review_fraction": 0.498,
+      "confidence_threshold": 0.8,
+      "model_requested": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 219793,
+        "output_tokens": 17078,
+        "complete": true
+      },
+      "requests_made": 500,
+      "retries": 0,
+      "elapsed_seconds": 0.004,
+      "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-9eaors7a/.decide/bec67846f49441d28e0df9a5da60e57d/results.jsonl",
+      "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-9eaors7a/.decide/bec67846f49441d28e0df9a5da60e57d/review.jsonl",
+      "review": [],
+      "review_omitted": 249
+    },
+    "inline_input_bytes": 86512,
+    "source_call_and_result_bytes": 1134,
+    "all_review_records_bytes": 39553,
+    "context_bytes_reduction": 0.9868919918624006,
+    "context_bytes_reduction_with_all_reviews": 0.5296953023857962,
+    "thresholds": [
+      {
+        "threshold": 0,
+        "accepted": 500,
+        "review": 0,
+        "accepted_errors": 152,
+        "accepted_error_rate": 0.304,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 500,
+          "accepted_by_label": {
+            "hate": 211,
+            "non_hate": 289
+          },
+          "review_count": 0,
+          "failed": 0,
+          "review_reasons": {},
+          "review_fraction": 0.0,
+          "confidence_threshold": 0.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-994ic6ez/.decide/eaaafc5369944a0d90bcfebc50a60fa3/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-994ic6ez/.decide/eaaafc5369944a0d90bcfebc50a60fa3/review.jsonl",
+          "review": [],
+          "review_omitted": 0
+        },
+        "inline_input_bytes": 86510,
+        "source_call_and_result_bytes": 1106,
+        "all_review_records_bytes": 0,
+        "context_bytes_reduction": 0.987215350826494,
+        "context_bytes_reduction_with_all_reviews": 0.987215350826494
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 354,
+        "review": 146,
+        "accepted_errors": 89,
+        "accepted_error_rate": 0.2514124293785311,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 354,
+          "accepted_by_label": {
+            "hate": 154,
+            "non_hate": 200
+          },
+          "review_count": 146,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 146
+          },
+          "review_fraction": 0.292,
+          "confidence_threshold": 0.5,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-3jc1b5gz/.decide/6c0d8030276c4befa47990c4d3c986a0/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-3jc1b5gz/.decide/6c0d8030276c4befa47990c4d3c986a0/review.jsonl",
+          "review": [],
+          "review_omitted": 146
+        },
+        "inline_input_bytes": 86512,
+        "source_call_and_result_bytes": 1134,
+        "all_review_records_bytes": 22433,
+        "context_bytes_reduction": 0.9868919918624006,
+        "context_bytes_reduction_with_all_reviews": 0.7275869243573145
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 251,
+        "review": 249,
+        "accepted_errors": 40,
+        "accepted_error_rate": 0.1593625498007968,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 251,
+          "accepted_by_label": {
+            "hate": 113,
+            "non_hate": 138
+          },
+          "review_count": 249,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 249
+          },
+          "review_fraction": 0.498,
+          "confidence_threshold": 0.8,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-9eaors7a/.decide/bec67846f49441d28e0df9a5da60e57d/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-9eaors7a/.decide/bec67846f49441d28e0df9a5da60e57d/review.jsonl",
+          "review": [],
+          "review_omitted": 249
+        },
+        "inline_input_bytes": 86512,
+        "source_call_and_result_bytes": 1134,
+        "all_review_records_bytes": 39553,
+        "context_bytes_reduction": 0.9868919918624006,
+        "context_bytes_reduction_with_all_reviews": 0.5296953023857962
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 198,
+        "review": 302,
+        "accepted_errors": 26,
+        "accepted_error_rate": 0.13131313131313133,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 198,
+          "accepted_by_label": {
+            "hate": 92,
+            "non_hate": 106
+          },
+          "review_count": 302,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 302
+          },
+          "review_fraction": 0.604,
+          "confidence_threshold": 0.9,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-kwpmrf17/.decide/91ea648fe45f4554b5be10ab2b8716b2/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-kwpmrf17/.decide/91ea648fe45f4554b5be10ab2b8716b2/review.jsonl",
+          "review": [],
+          "review_omitted": 302
+        },
+        "inline_input_bytes": 86512,
+        "source_call_and_result_bytes": 1133,
+        "all_review_records_bytes": 49031,
+        "context_bytes_reduction": 0.9869035509524691,
+        "context_bytes_reduction_with_all_reviews": 0.4201498058072869
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 148,
+        "review": 352,
+        "accepted_errors": 15,
+        "accepted_error_rate": 0.10135135135135136,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 148,
+          "accepted_by_label": {
+            "hate": 69,
+            "non_hate": 79
+          },
+          "review_count": 352,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 352
+          },
+          "review_fraction": 0.704,
+          "confidence_threshold": 0.95,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-antgxdrf/.decide/24753952eedc4748a1c8ab549f1f5f49/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-antgxdrf/.decide/24753952eedc4748a1c8ab549f1f5f49/review.jsonl",
+          "review": [],
+          "review_omitted": 352
+        },
+        "inline_input_bytes": 86513,
+        "source_call_and_result_bytes": 1134,
+        "all_review_records_bytes": 58384,
+        "context_bytes_reduction": 0.9868921433772959,
+        "context_bytes_reduction_with_all_reviews": 0.31203402956781057
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 85,
+        "review": 415,
+        "accepted_errors": 6,
+        "accepted_error_rate": 0.07058823529411765,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 85,
+          "accepted_by_label": {
+            "hate": 38,
+            "non_hate": 47
+          },
+          "review_count": 415,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 415
+          },
+          "review_fraction": 0.83,
+          "confidence_threshold": 0.99,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.004,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-u6870exl/.decide/5d1d48f9f0534e098b56ae245c93d7b0/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-u6870exl/.decide/5d1d48f9f0534e098b56ae245c93d7b0/review.jsonl",
+          "review": [],
+          "review_omitted": 415
+        },
+        "inline_input_bytes": 86513,
+        "source_call_and_result_bytes": 1132,
+        "all_review_records_bytes": 70807,
+        "context_bytes_reduction": 0.9869152612902107,
+        "context_bytes_reduction_with_all_reviews": 0.1684602314103083
+      },
+      {
+        "threshold": 1,
+        "accepted": 44,
+        "review": 456,
+        "accepted_errors": 0,
+        "accepted_error_rate": 0.0,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 44,
+          "accepted_by_label": {
+            "hate": 13,
+            "non_hate": 31
+          },
+          "review_count": 456,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 456
+          },
+          "review_fraction": 0.912,
+          "confidence_threshold": 1.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 219793,
+            "output_tokens": 17078,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.005,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-xb68cvml/.decide/51e17b0068474db9964db4ecab67b1ee/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-xb68cvml/.decide/51e17b0068474db9964db4ecab67b1ee/review.jsonl",
+          "review": [],
+          "review_omitted": 456
+        },
+        "inline_input_bytes": 86510,
+        "source_call_and_result_bytes": 1129,
+        "all_review_records_bytes": 78529,
+        "context_bytes_reduction": 0.9869494856086002,
+        "context_bytes_reduction_with_all_reviews": 0.07920471621777825
+      }
+    ]
+  },
+  "live_response_file": "live-response.json",
+  "measurement_path_note": "Response paths identify the original local benchmark artifacts; archived response objects are retained for byte-accounting verification, not as portable live paths."
+}

@@ -1,0 +1,26 @@
+{
+  "name": "imdb",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 25000,
+  "baseline_train_items": 24998,
+  "class_counts": {
+    "positive": 230,
+    "negative": 270
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "imdb.tar.gz": {
+      "url": "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+      "sha256": "c40f74a18d3b61f90feba1e17730e0d38e8b97c05fde7008942e91923d1658fe",
+      "bytes": 84125825
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "039a03e97feb8d140ba7e910215b78e26019077d25e54ae87f76aa2311d6102f",
+    "labels.jsonl": "cdae49d89d35671fafa5351c6e535f0956a9501d2d52c195b42ee5b0df02c9d3",
+    "train.jsonl": "ab11542874b1a2d9e03140a705ca342e9a42f54813a6bd01751385536b7f073a",
+    "rubric.json": "d906cd87467ad7ee91809c7ab32c1e63bd7999eb2b3a41987fcb5e1ece7dbaca"
+  },
+  "notes": "Official test split. Neutral IDs hide the original pos/neg directory and numeric movie rating."
+}

@@ -1,0 +1,17 @@
+{
+  "question": "What sentiment does the author express in this tweet?",
+  "criteria": {
+    "negative": "An unfavorable or negative opinion or feeling.",
+    "neutral": "Neutral, factual or neither clearly positive nor negative.",
+    "positive": "A favorable or positive opinion or feeling."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

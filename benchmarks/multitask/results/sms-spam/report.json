@@ -1,0 +1,723 @@
+{
+  "schema_version": 2,
+  "mode": "live",
+  "transport": "MCP stdio subprocess",
+  "created_at": "2026-09-19T20:21:09.726560+00:00",
+  "input_jsonl_sha256": "0e03169428b6dd154a70006e4e37584dc09a122986b3f6127e6abaacf66f5204",
+  "rubric_sha256": "acb324f11edb6301f347cf86b4ccd6436dd4f5fc574a1fec84be7fa6e509d2dd",
+  "rubric": {
+    "question": "Is this SMS message unsolicited spam or a legitimate personal message?",
+    "criteria": {
+      "ham": "Legitimate personal or expected communication, not unsolicited spam.",
+      "spam": "Unsolicited promotional, scam, prize, premium-rate or other spam message."
+    },
+    "source": {
+      "kind": "jsonl",
+      "paths": [
+        "items.jsonl"
+      ]
+    },
+    "confidence_threshold": 0.8,
+    "review_limit": 0,
+    "concurrency": 4
+  },
+  "measurement": "UTF-8 JSON bytes, not billed tokens. Full-review metric includes every full review row, even already-previewed rows. Excludes MCP framing, host duplication and agent reasoning.",
+  "items": 500,
+  "completed": 500,
+  "accepted": 461,
+  "review_count": 39,
+  "review_fraction": 0.078,
+  "failed": 0,
+  "elapsed_seconds": 41.076,
+  "items_per_second": 12.17,
+  "requests_made": 500,
+  "retries": 0,
+  "models": {
+    "jev-1.13.0": 500
+  },
+  "provider_usage": {
+    "input_tokens": 205216,
+    "output_tokens": 15500,
+    "complete": true
+  },
+  "labeled_items": 500,
+  "correct_labeled_items": 490,
+  "label_accuracy": 0.98,
+  "accepted_labeled_items": 461,
+  "accepted_label_accuracy": 0.9956616052060737,
+  "accepted_unlabeled_items": 0,
+  "inline_input_bytes": 54080,
+  "source_call_and_result_bytes": 983,
+  "context_bytes_reduction": 0.981823224852071,
+  "all_review_records_bytes": 13442,
+  "context_bytes_reduction_with_all_reviews": 0.7332655325443787,
+  "threshold_sweep": [
+    {
+      "threshold": 0,
+      "total": 500,
+      "accepted": 500,
+      "review": 0,
+      "failed": 0,
+      "review_fraction": 0.0,
+      "accepted_errors": 10,
+      "accepted_error_rate": 0.02,
+      "accepted_error_ids": [
+        "sms:471",
+        "sms:4766",
+        "sms:264",
+        "sms:2331",
+        "sms:4660",
+        "sms:1694",
+        "sms:1558",
+        "sms:3223",
+        "sms:2059",
+        "sms:2225"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 0,
+      "input_bytes_kept_out_of_review_fraction": 1.0,
+      "accepted_error_95ci": [
+        0.010899183596210813,
+        0.036420183246879345
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "total": 500,
+      "accepted": 480,
+      "review": 20,
+      "failed": 0,
+      "review_fraction": 0.04,
+      "accepted_errors": 4,
+      "accepted_error_rate": 0.008333333333333333,
+      "accepted_error_ids": [
+        "sms:2331",
+        "sms:4660",
+        "sms:1558",
+        "sms:2059"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 2922,
+      "input_bytes_kept_out_of_review_fraction": 0.9456392320285757,
+      "accepted_error_95ci": [
+        0.003245305949041889,
+        0.021228534820114747
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "total": 500,
+      "accepted": 461,
+      "review": 39,
+      "failed": 0,
+      "review_fraction": 0.078,
+      "accepted_errors": 2,
+      "accepted_error_rate": 0.004338394793926247,
+      "accepted_error_ids": [
+        "sms:2331",
+        "sms:4660"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 5186,
+      "input_bytes_kept_out_of_review_fraction": 0.9035198690281292,
+      "accepted_error_95ci": [
+        0.0011905516922689624,
+        0.01567855211053718
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "total": 500,
+      "accepted": 435,
+      "review": 65,
+      "failed": 0,
+      "review_fraction": 0.13,
+      "accepted_errors": 1,
+      "accepted_error_rate": 0.0022988505747126436,
+      "accepted_error_ids": [
+        "sms:2331"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 8200,
+      "input_bytes_kept_out_of_review_fraction": 0.8474475368358386,
+      "accepted_error_95ci": [
+        0.0004059189018776662,
+        0.012905172617123237
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 421,
+      "review": 79,
+      "failed": 0,
+      "review_fraction": 0.158,
+      "accepted_errors": 1,
+      "accepted_error_rate": 0.0023752969121140144,
+      "accepted_error_ids": [
+        "sms:2331"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 9973,
+      "input_bytes_kept_out_of_review_fraction": 0.8144627176663194,
+      "accepted_error_95ci": [
+        0.00041942135768787987,
+        0.013330316807954597
+      ]
+    },
+    {
+      "threshold": 0.99,
+      "total": 500,
+      "accepted": 378,
+      "review": 122,
+      "failed": 0,
+      "review_fraction": 0.244,
+      "accepted_errors": 1,
+      "accepted_error_rate": 0.0026455026455026454,
+      "accepted_error_ids": [
+        "sms:2331"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 14906,
+      "input_bytes_kept_out_of_review_fraction": 0.7226893883018306,
+      "accepted_error_95ci": [
+        0.0004671489213472161,
+        0.014830977266247224
+      ]
+    },
+    {
+      "threshold": 1,
+      "total": 500,
+      "accepted": 335,
+      "review": 165,
+      "failed": 0,
+      "review_fraction": 0.33,
+      "accepted_errors": 1,
+      "accepted_error_rate": 0.0029850746268656717,
+      "accepted_error_ids": [
+        "sms:2331"
+      ],
+      "input_jsonl_bytes": 53752,
+      "review_input_jsonl_bytes": 19185,
+      "input_bytes_kept_out_of_review_fraction": 0.6430830480726298,
+      "accepted_error_95ci": [
+        0.0005271334593754898,
+        0.0167123709419595
+      ]
+    }
+  ],
+  "quality": {
+    "accuracy": 0.98,
+    "macro_f1": 0.95744825708061,
+    "per_class": {
+      "ham": {
+        "support": 435,
+        "precision": 0.9953379953379954,
+        "recall": 0.9816091954022989,
+        "f1": 0.9884259259259259
+      },
+      "spam": {
+        "support": 65,
+        "precision": 0.8873239436619719,
+        "recall": 0.9692307692307692,
+        "f1": 0.9264705882352942
+      }
+    },
+    "confusion": {
+      "ham": {
+        "spam": 8,
+        "ham": 427
+      },
+      "spam": {
+        "spam": 63,
+        "ham": 2
+      }
+    }
+  },
+  "baselines": {
+    "majority_label": "ham",
+    "majority": {
+      "accuracy": 0.87,
+      "macro_f1": 0.4652406417112299,
+      "per_class": {
+        "ham": {
+          "support": 435,
+          "precision": 0.87,
+          "recall": 1.0,
+          "f1": 0.9304812834224598
+        },
+        "spam": {
+          "support": 65,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        }
+      },
+      "confusion": {
+        "ham": {
+          "ham": 435
+        },
+        "spam": {
+          "ham": 65
+        }
+      }
+    },
+    "naive_bayes": {
+      "accuracy": 0.984,
+      "macro_f1": 0.9626573060980619,
+      "per_class": {
+        "ham": {
+          "support": 435,
+          "precision": 0.981941309255079,
+          "recall": 1.0,
+          "f1": 0.9908883826879271
+        },
+        "spam": {
+          "support": 65,
+          "precision": 1.0,
+          "recall": 0.8769230769230769,
+          "f1": 0.9344262295081968
+        }
+      },
+      "confusion": {
+        "ham": {
+          "ham": 435
+        },
+        "spam": {
+          "ham": 8,
+          "spam": 57
+        }
+      }
+    },
+    "train_items": 4954,
+    "vocabulary_size": 8194,
+    "train_seconds": 0.01,
+    "predict_seconds": 0.003,
+    "definition": "Multinomial Naive Bayes; Laplace alpha=1; lowercase Unicode word tokens of length >=2; raw counts, no tuning. Training examples are never sent to Jev."
+  },
+  "observed_error_by_confidence_bin": [
+    {
+      "low": 0,
+      "high_exclusive": 0.5,
+      "exact_one": false,
+      "items": 20,
+      "errors": 6,
+      "error_rate": 0.3
+    },
+    {
+      "low": 0.5,
+      "high_exclusive": 0.8,
+      "exact_one": false,
+      "items": 19,
+      "errors": 2,
+      "error_rate": 0.10526315789473684
+    },
+    {
+      "low": 0.8,
+      "high_exclusive": 0.9,
+      "exact_one": false,
+      "items": 26,
+      "errors": 1,
+      "error_rate": 0.038461538461538464
+    },
+    {
+      "low": 0.9,
+      "high_exclusive": 0.95,
+      "exact_one": false,
+      "items": 14,
+      "errors": 0,
+      "error_rate": 0.0
+    },
+    {
+      "low": 0.95,
+      "high_exclusive": 0.99,
+      "exact_one": false,
+      "items": 43,
+      "errors": 0,
+      "error_rate": 0.0
+    },
+    {
+      "low": 0.99,
+      "high_exclusive": 1.0,
+      "exact_one": false,
+      "items": 43,
+      "errors": 0,
+      "error_rate": 0.0
+    },
+    {
+      "low": 1.0,
+      "high_exclusive": 1.0,
+      "exact_one": true,
+      "items": 335,
+      "errors": 1,
+      "error_rate": 0.0029850746268656717
+    }
+  ],
+  "estimated_jev_cost_usd": 0.008619072,
+  "cost_accounting_complete": true,
+  "pricing_source": "https://docs.typesafe.ai/models",
+  "pricing_note": "Jev 1.13.0: $0.042/M input tokens, free output. Estimate excludes agent review and reasoning. When cost_accounting_complete is false, known successful usage is only a lower bound.",
+  "dataset": {
+    "name": "sms-spam",
+    "seed": 20260920,
+    "sample_items": 500,
+    "test_pool_items": 500,
+    "baseline_train_items": 4954,
+    "class_counts": {
+      "spam": 65,
+      "ham": 435
+    },
+    "selection": "uniform sample of 500 rows",
+    "sources": {
+      "sms.zip": {
+        "url": "https://archive.ics.uci.edu/static/public/228/sms%2Bspam%2Bcollection.zip",
+        "sha256": "1587ea43e58e82b14ff1f5425c88e17f8496bfcdb67a583dbff9eefaf9963ce3",
+        "bytes": 203415
+      }
+    },
+    "files_sha256": {
+      "items.jsonl": "0e03169428b6dd154a70006e4e37584dc09a122986b3f6127e6abaacf66f5204",
+      "labels.jsonl": "60ecf906ebc7be46f1bac51e5567bb0eded24fb19e670978e75dc44be2a6572d",
+      "train.jsonl": "32de9a94ccae55892a8ed9842b701ac57922026945a45c93c78e8fcd8f604d69",
+      "rubric.json": "acb324f11edb6301f347cf86b4ccd6436dd4f5fc574a1fec84be7fa6e509d2dd"
+    },
+    "notes": "Seeded 500-row holdout because the source has no official split; exact duplicate test texts removed from baseline training."
+  },
+  "predictions_file": "predictions.jsonl",
+  "server_source_sha256": "3aef19f9fb6b33b429879d7023bea13e84706f39d95ec293560dcb92fc3c9eb6",
+  "quality_on_valid_responses": 0.98,
+  "compact_review_replay": {
+    "mode": "Recorded-response replay through MCP; no new Jev inference",
+    "paid_requests": 0,
+    "server_source_sha256": "de929514b15257050a9617ee5a96ea00e502a45fbdd0e5ca9faa9119bebef817",
+    "decisions_and_default_routing_identical": true,
+    "threshold": 0.8,
+    "accepted": 461,
+    "review": 39,
+    "accepted_errors": 2,
+    "accepted_error_rate": 0.004338394793926247,
+    "measured_summary": {
+      "total": 500,
+      "completed": 500,
+      "accepted": 461,
+      "accepted_by_label": {
+        "ham": 400,
+        "spam": 61
+      },
+      "review_count": 39,
+      "failed": 0,
+      "review_reasons": {
+        "low_confidence": 39
+      },
+      "review_fraction": 0.078,
+      "confidence_threshold": 0.8,
+      "model_requested": "jev-1.13.0",
+      "usage": {
+        "input_tokens": 205216,
+        "output_tokens": 15500,
+        "complete": true
+      },
+      "requests_made": 500,
+      "retries": 0,
+      "elapsed_seconds": 0.003,
+      "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yao7vurj/.decide/ac1a9af943754c59a475e87d7ef1e628/results.jsonl",
+      "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yao7vurj/.decide/ac1a9af943754c59a475e87d7ef1e628/review.jsonl",
+      "review": [],
+      "review_omitted": 39
+    },
+    "inline_input_bytes": 54080,
+    "source_call_and_result_bytes": 1064,
+    "all_review_records_bytes": 5186,
+    "context_bytes_reduction": 0.9803254437869823,
+    "context_bytes_reduction_with_all_reviews": 0.884430473372781,
+    "thresholds": [
+      {
+        "threshold": 0,
+        "accepted": 500,
+        "review": 0,
+        "accepted_errors": 10,
+        "accepted_error_rate": 0.02,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 500,
+          "accepted_by_label": {
+            "spam": 71,
+            "ham": 429
+          },
+          "review_count": 0,
+          "failed": 0,
+          "review_reasons": {},
+          "review_fraction": 0.0,
+          "confidence_threshold": 0.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-b3w9itvf/.decide/5448cd636b3d4d6ca2d16631b404eb4a/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-b3w9itvf/.decide/5448cd636b3d4d6ca2d16631b404eb4a/review.jsonl",
+          "review": [],
+          "review_omitted": 0
+        },
+        "inline_input_bytes": 54078,
+        "source_call_and_result_bytes": 1039,
+        "all_review_records_bytes": 0,
+        "context_bytes_reduction": 0.9807870113539702,
+        "context_bytes_reduction_with_all_reviews": 0.9807870113539702
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 480,
+        "review": 20,
+        "accepted_errors": 4,
+        "accepted_error_rate": 0.008333333333333333,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 480,
+          "accepted_by_label": {
+            "ham": 416,
+            "spam": 64
+          },
+          "review_count": 20,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 20
+          },
+          "review_fraction": 0.04,
+          "confidence_threshold": 0.5,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-khlyvb_p/.decide/c07ce15d45014c669ac941936279f074/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-khlyvb_p/.decide/c07ce15d45014c669ac941936279f074/review.jsonl",
+          "review": [],
+          "review_omitted": 20
+        },
+        "inline_input_bytes": 54080,
+        "source_call_and_result_bytes": 1063,
+        "all_review_records_bytes": 2922,
+        "context_bytes_reduction": 0.9803439349112426,
+        "context_bytes_reduction_with_all_reviews": 0.9263128698224852
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 461,
+        "review": 39,
+        "accepted_errors": 2,
+        "accepted_error_rate": 0.004338394793926247,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 461,
+          "accepted_by_label": {
+            "ham": 400,
+            "spam": 61
+          },
+          "review_count": 39,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 39
+          },
+          "review_fraction": 0.078,
+          "confidence_threshold": 0.8,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yao7vurj/.decide/ac1a9af943754c59a475e87d7ef1e628/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-yao7vurj/.decide/ac1a9af943754c59a475e87d7ef1e628/review.jsonl",
+          "review": [],
+          "review_omitted": 39
+        },
+        "inline_input_bytes": 54080,
+        "source_call_and_result_bytes": 1064,
+        "all_review_records_bytes": 5186,
+        "context_bytes_reduction": 0.9803254437869823,
+        "context_bytes_reduction_with_all_reviews": 0.884430473372781
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 435,
+        "review": 65,
+        "accepted_errors": 1,
+        "accepted_error_rate": 0.0022988505747126436,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 435,
+          "accepted_by_label": {
+            "ham": 376,
+            "spam": 59
+          },
+          "review_count": 65,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 65
+          },
+          "review_fraction": 0.13,
+          "confidence_threshold": 0.9,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-ob2w6k32/.decide/77d21bcf60b94bd09fc6297d1caa59db/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-ob2w6k32/.decide/77d21bcf60b94bd09fc6297d1caa59db/review.jsonl",
+          "review": [],
+          "review_omitted": 65
+        },
+        "inline_input_bytes": 54080,
+        "source_call_and_result_bytes": 1063,
+        "all_review_records_bytes": 8200,
+        "context_bytes_reduction": 0.9803439349112426,
+        "context_bytes_reduction_with_all_reviews": 0.8287167159763313
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 421,
+        "review": 79,
+        "accepted_errors": 1,
+        "accepted_error_rate": 0.0023752969121140144,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 421,
+          "accepted_by_label": {
+            "ham": 363,
+            "spam": 58
+          },
+          "review_count": 79,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 79
+          },
+          "review_fraction": 0.158,
+          "confidence_threshold": 0.95,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-su2fkbn3/.decide/74d4941bd7824f3495914f31a123e976/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-su2fkbn3/.decide/74d4941bd7824f3495914f31a123e976/review.jsonl",
+          "review": [],
+          "review_omitted": 79
+        },
+        "inline_input_bytes": 54081,
+        "source_call_and_result_bytes": 1066,
+        "all_review_records_bytes": 9973,
+        "context_bytes_reduction": 0.9802888260202289,
+        "context_bytes_reduction_with_all_reviews": 0.7958802536935338
+      },
+      {
+        "threshold": 0.99,
+        "accepted": 378,
+        "review": 122,
+        "accepted_errors": 1,
+        "accepted_error_rate": 0.0026455026455026454,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 378,
+          "accepted_by_label": {
+            "ham": 325,
+            "spam": 53
+          },
+          "review_count": 122,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 122
+          },
+          "review_fraction": 0.244,
+          "confidence_threshold": 0.99,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-wd85fdu4/.decide/1ab997dc2cb64562ab924380ffd4b6fb/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-wd85fdu4/.decide/1ab997dc2cb64562ab924380ffd4b6fb/review.jsonl",
+          "review": [],
+          "review_omitted": 122
+        },
+        "inline_input_bytes": 54081,
+        "source_call_and_result_bytes": 1069,
+        "all_review_records_bytes": 14906,
+        "context_bytes_reduction": 0.9802333536731939,
+        "context_bytes_reduction_with_all_reviews": 0.7046097520386088
+      },
+      {
+        "threshold": 1,
+        "accepted": 335,
+        "review": 165,
+        "accepted_errors": 1,
+        "accepted_error_rate": 0.0029850746268656717,
+        "measured_summary": {
+          "total": 500,
+          "completed": 500,
+          "accepted": 335,
+          "accepted_by_label": {
+            "ham": 284,
+            "spam": 51
+          },
+          "review_count": 165,
+          "failed": 0,
+          "review_reasons": {
+            "low_confidence": 165
+          },
+          "review_fraction": 0.33,
+          "confidence_threshold": 1.0,
+          "model_requested": "jev-1.13.0",
+          "usage": {
+            "input_tokens": 205216,
+            "output_tokens": 15500,
+            "complete": true
+          },
+          "requests_made": 500,
+          "retries": 0,
+          "elapsed_seconds": 0.003,
+          "results_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-rfvcafm5/.decide/5086fd9369984ea2b19c03b17c5131bc/results.jsonl",
+          "review_path": "/private/var/folders/g_/0vg793jx7s7fvd22ptlxbssh0000gn/T/decide-replay-rfvcafm5/.decide/5086fd9369984ea2b19c03b17c5131bc/review.jsonl",
+          "review": [],
+          "review_omitted": 165
+        },
+        "inline_input_bytes": 54078,
+        "source_call_and_result_bytes": 1064,
+        "all_review_records_bytes": 19185,
+        "context_bytes_reduction": 0.9803247161507452,
+        "context_bytes_reduction_with_all_reviews": 0.6255593771959023
+      }
+    ]
+  },
+  "live_response_file": "live-response.json",
+  "measurement_path_note": "Response paths identify the original local benchmark artifacts; archived response objects are retained for byte-accounting verification, not as portable live paths."
+}

@@ -1,0 +1,16 @@
+{
+  "question": "Read the explicitly recorded severity of this Apache log entry.",
+  "criteria": {
+    "error": "The explicitly recorded Apache log severity is error.",
+    "notice": "The explicitly recorded Apache log severity is notice."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

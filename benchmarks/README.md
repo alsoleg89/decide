@@ -1,10 +1,12 @@
 # Measure context savings and decision quality
 
-Start with the [500 real VS Code issues](vscode-500/README.md): estimated Jev
-inference cost $0.0203 and 49.3% less JSON even when reading every review record,
-with the classification disagreements reported alongside the savings. A fresh
-project sample of [400 AG News articles](ag-news-400/README.md) saved 74.8%
-including review, with 8.9% accepted-label errors.
+Start with the [10-task, 5,570-record evaluation](multitask/README.md): decision
+accuracy, errors among accepted results, trained local baselines, costs and 70
+threshold comparisons. It includes both useful and poor results, and quantifies
+how compact review records improve context savings.
+
+Earlier exploratory runs: [500 VS Code issues](vscode-500/README.md) and
+[400 AG News articles](ag-news-400/README.md).
 
 The log/file runs below are **synthetic integration benchmarks**, not representative accuracy
 evaluations. They test the actual batching, routing, error accounting and compact

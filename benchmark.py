@@ -119,8 +119,8 @@ async def run(kind, count, live, concurrency, threshold):
                 if call.is_error:
                     raise RuntimeError(str(call.content))
                 result = call.structured_content
-        records = [json.loads(line) for line in Path(result["results_path"]).read_text(encoding="utf-8").splitlines()]
-        reviews = [json.loads(line) for line in Path(result["review_path"]).read_text(encoding="utf-8").splitlines()]
+        records = [json.loads(line) for line in Path(result["results_path"]).read_text(encoding="utf-8").split("\n") if line.strip()]
+        reviews = [json.loads(line) for line in Path(result["review_path"]).read_text(encoding="utf-8").split("\n") if line.strip()]
         inline_arguments = {**arguments, "items": inputs}
         del inline_arguments["source"]
         return {"schema_version": 2, "mode": "live" if live else "mock",

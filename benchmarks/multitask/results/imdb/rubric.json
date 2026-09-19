@@ -1,0 +1,16 @@
+{
+  "question": "Is the overall opinion in this movie review positive or negative?",
+  "criteria": {
+    "positive": "An overall favorable review of the movie.",
+    "negative": "An overall unfavorable review of the movie."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

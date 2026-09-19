@@ -1,0 +1,16 @@
+{
+  "question": "Does this tweet express hate speech targeting women or immigrants?",
+  "criteria": {
+    "non_hate": "Does not express hatred, dehumanization, exclusion or violence targeting women or immigrants as a group.",
+    "hate": "Expresses hatred, dehumanization, exclusion or violence targeting women or immigrants as a group."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

@@ -1,4 +1,4 @@
-"""One MCP tool: classify local inputs with Jev, return only the review queue."""
+"""One MCP tool: classify local inputs with Jev, return a compact summary."""
 
 import asyncio
 from collections import Counter
@@ -27,7 +27,7 @@ IGNORED_DIRS = {"node_modules", "__pycache__", "vendor"}
 
 Text = Annotated[str, Field(min_length=1, max_length=10_000)]
 Label = Annotated[str, Field(min_length=1, max_length=100)]
-Probability = Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+Probability = Annotated[float, Field(strict=True, ge=0, le=1, allow_inf_nan=False)]
 
 
 class Item(BaseModel):
@@ -117,7 +117,7 @@ def load_items(items: list[Item] | None, source: Source | None, root: Path) -> l
                 if source.kind == "files":
                     rows.append(Item(id=str(relative), content=content))
                 else:
-                    for line_number, line in enumerate(content.splitlines(), 1):
+                    for line_number, line in enumerate(content.split("\n") if source.kind == "jsonl" else content.splitlines(), 1):
                         if not line.strip():
                             continue
                         if source.kind == "jsonl":
@@ -168,10 +168,10 @@ async def classify(client: httpx.AsyncClient, payload: dict) -> dict:
                         raise ValueError("Invalid provider answer")
                     return {**answer.model_dump(exclude={"type"}), "model": raw["model"],
                             "usage": usage.model_dump(), "attempts": attempt + 1}
-                except (ValueError, TypeError, KeyError):
+                except (ValueError, TypeError, KeyError, RecursionError):
                     return {"error": "invalid_provider_response", "attempts": attempt + 1}
             retryable = response.status_code in {408, 429} or response.status_code >= 500
-            if not retryable or attempt == 2:
+            if not retryable:
                 return {"error": f"provider_http_{response.status_code}", "attempts": attempt + 1}
         delay = 0.5 * 2**attempt
         # ponytail: bounded backoff; a shared rate limiter if cross-batch load grows.
@@ -191,6 +191,8 @@ async def classify(client: httpx.AsyncClient, payload: dict) -> dict:
                     delay = max(delay, retry_after)
             except (ValueError, TypeError, OverflowError):
                 pass
+        if attempt == 2:
+            return {"error": f"provider_http_{response.status_code}", "attempts": 3}
         await asyncio.sleep(delay)
     raise AssertionError("unreachable")
 
@@ -213,8 +215,8 @@ async def decide(
     confidence_threshold: Probability = 0.8,
     review_labels: list[Label] | None = None,
     context: Annotated[str, Field(max_length=10_000)] = "",
-    concurrency: Annotated[int, Field(ge=1, le=16)] = 4,
-    review_limit: Annotated[int, Field(ge=0, le=100)] = 20,
+    concurrency: Annotated[int, Field(strict=True, ge=1, le=16)] = 4,
+    review_limit: Annotated[int, Field(strict=True, ge=0, le=100)] = 0,
 ) -> dict[str, Any]:
     """Bulk decisions via Jev. Supply either inline {id,content} items or source.
 
@@ -223,9 +225,10 @@ async def decide(
     UTF-8 file per item, supports globs such as src/**/*.py. No shell commands.
     criteria maps labels to descriptions. confidence_threshold uses Jev's
     confidence, NOT selected-label probability. review_labels always escalate
-    chosen labels (e.g. other). Returns counts, bounded review previews and paths
-    to full JSONL results. Only review previews enter context. Does not execute
-    decisions. All selected content is sent to api.typesafe.ai.
+    chosen labels (e.g. other). Returns counts and paths to full JSONL results.
+    Content stays on disk by default; opt into bounded previews with review_limit.
+    Read review_path from the beginning: previews are not completed reviews.
+    Does not execute decisions. All selected content is sent to api.typesafe.ai.
     """
     try:
         root = Path(os.environ.get("DECIDE_ROOT", os.getcwd())).resolve()
@@ -247,7 +250,8 @@ async def decide(
     results_path, review_path = run_dir / "results.jsonl", run_dir / "review.jsonl"
     metadata = {"question": question, "criteria": criteria, "context": context,
                 "model": model, "confidence_threshold": confidence_threshold,
-                "review_labels": review_labels or [], "total": len(rows)}
+                "review_labels": review_labels or [], "review_limit": review_limit,
+                "concurrency": concurrency, "total": len(rows)}
     (run_dir / "request.json").write_text(encode(metadata), encoding="utf-8")
     counts, usage, reasons = Counter(), Counter(), Counter()
     preview, review_count, preview_bytes, failed, completed = [], 0, 0, 0, 0
@@ -300,14 +304,15 @@ async def decide(
                     completed += 1
                     if reason:
                         review_count += 1
-                        reviews.write(encode({**record, "content": item.content}) + "\n")
+                        reviews.write(encode(item.model_dump()) + "\n")
                         reviews.flush()
-                        snippet = {**record, "content_preview": content[:1000],
-                                   "content_truncated": len(content) > 1000}
-                        size = len(encode(snippet).encode())
-                        if len(preview) < review_limit and preview_bytes + size <= MAX_PREVIEW_BYTES:
-                            preview.append(snippet)
-                            preview_bytes += size
+                        if len(preview) < review_limit:
+                            snippet = {**record, "content_preview": content[:1000],
+                                       "content_truncated": len(content) > 1000}
+                            size = len(encode(snippet).encode())
+                            if preview_bytes + size <= MAX_PREVIEW_BYTES:
+                                preview.append(snippet)
+                                preview_bytes += size
             async with asyncio.TaskGroup() as group:
                 for _ in range(min(concurrency, len(rows))):
                     group.create_task(worker())

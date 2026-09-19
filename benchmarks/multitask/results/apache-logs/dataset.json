@@ -1,0 +1,26 @@
+{
+  "name": "apache-logs",
+  "seed": 20260920,
+  "sample_items": 300,
+  "test_pool_items": 300,
+  "baseline_train_items": 1495,
+  "class_counts": {
+    "error": 86,
+    "notice": 214
+  },
+  "selection": "uniform sample of 300 rows",
+  "sources": {
+    "apache.log": {
+      "url": "https://raw.githubusercontent.com/logpai/loghub/dd61d0952749ee7963bde24220d1be5ede023033/Apache/Apache_2k.log",
+      "sha256": "c7efa3eb686e3a96bd2f8f4457b2a7887e9cf2f3649327f1b4e87af841363ce8",
+      "bytes": 171239
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "17379cfecf60d696fc42f8f1f4fc299459e27d42036dd8d109a63fb353545d46",
+    "labels.jsonl": "858311a0e3f72b38a8ab3a102aa219c916caabf599a72635a71a6d00fb420d0b",
+    "train.jsonl": "17ae03a038f578eaa38cf453c0e57d51ec2ed4d265dc920c2149fad1c1ad4836",
+    "rubric.json": "348228b8fbc37194e9c263ce869fa70b7d30ddf0a73b4fc21f3723f01a971ced"
+  },
+  "notes": "Negative control: severity is literally present in brackets; a regular expression is the correct zero-inference baseline."
+}

@@ -29,6 +29,7 @@ async def run(root, rubric_path, labels_path):
         raise ValueError("Valid labels must exactly match input IDs before paid inference")
     if any(row["expected"] not in arguments["criteria"] for row in labels.values()):
         raise ValueError("Reference labels must be present in criteria")
+    server_hash = hashlib.sha256(Path(decide.__file__).read_bytes()).hexdigest()
     environment = {**os.environ, "DECIDE_ROOT": str(root)}
     if not environment.get("TYPESAFE_API_KEY"):
         environment["TYPESAFE_API_KEY"] = getpass.getpass("TypeSafe API key: ")
@@ -40,13 +41,13 @@ async def run(root, rubric_path, labels_path):
             raise RuntimeError(str(call.content))
         summary = call.structured_content
     records = unique_rows(Path(summary["results_path"]))
-    reviews = [json.loads(line) for line in Path(summary["review_path"]).read_text(encoding="utf-8").splitlines()]
+    reviews = [json.loads(line) for line in Path(summary["review_path"]).read_text(encoding="utf-8").split("\n") if line.strip()]
     inline = {**arguments, "items": list(inputs.values())}
     del inline["source"]
     measured = benchmark.metrics(summary, list(records.values()), {key: row["expected"] for key, row in labels.items()},
                                  len(decide.encode(inline).encode()), len(decide.encode(arguments).encode()), reviews)
     input_bytes = "".join(decide.encode(row) + "\n" for row in inputs.values()).encode()
-    report = {"schema_version": 2, "mode": "live", "transport": "MCP stdio subprocess",
+    report = {"schema_version": 2, "mode": "live", "transport": "MCP stdio subprocess", "server_source_sha256": server_hash,
               "created_at": datetime.now(timezone.utc).isoformat(),
               "input_jsonl_sha256": hashlib.sha256(input_bytes).hexdigest(),
               "rubric_sha256": hashlib.sha256(rubric_path.read_bytes()).hexdigest(),

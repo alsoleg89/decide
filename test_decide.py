@@ -72,7 +72,7 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
             return httpx.Response(200, json=response(0.4 if index % 20 == 0 else 0.95))
 
         self.mock_provider(handler)
-        result = await self.call(source={"kind": "lines", "paths": ["app.log"]})
+        result = await self.call(source={"kind": "lines", "paths": ["app.log"]}, review_limit=20)
         self.assertEqual((calls, peak), (2000, 4))
         self.assertEqual((result["total"], result["accepted"], result["review_count"]), (2000, 1900, 100))
         self.assertEqual(result["review_fraction"], 0.05)
@@ -100,7 +100,7 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
             return httpx.Response(200, json=response())
 
         self.mock_provider(handler)
-        result = await self.call(source={"kind": "files", "paths": ["src/*", "src/*.py"]})
+        result = await self.call(source={"kind": "files", "paths": ["src/*", "src/*.py"]}, review_limit=20)
         self.assertEqual((result["total"], result["accepted"], result["failed"]), (301, 300, 1))
         self.assertEqual(len(sent), 300)
         self.assertEqual(result["review"][0]["reason"], "item_too_large")
@@ -143,7 +143,7 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         result = await self.call(items=[{"id": str(i), "content": "data"} for i in range(100)])
         self.assertLessEqual(len(calls), 4)
         self.assertEqual(result["failed"], 100)
-        self.assertEqual(result["review_omitted"], 80)
+        self.assertEqual(result["review_omitted"], 100)
 
     async def test_long_provider_cooldown_stops_the_whole_batch(self):
         calls = []
@@ -158,7 +158,7 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         values = iter([0.8, 0.79])
         self.mock_provider(lambda request: httpx.Response(200, json=response(next(values))))
         result = await self.call(items=[{"id": "equal", "content": "a"}, {"id": "below", "content": "b"}],
-                                 concurrency=1)
+                                 concurrency=1, review_limit=20)
         self.assertEqual((result["accepted"], result["review_count"]), (1, 1))
         self.assertEqual(result["review"][0]["id"], "below")
 
@@ -187,15 +187,27 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
             self.assertIn("TYPESAFE_API_KEY", str(result.content))
         self.assertFalse((self.root / ".decide").exists())
 
-    async def test_review_limit_zero_retains_every_review_record(self):
+    async def test_default_keeps_source_content_out_of_context_and_retains_every_review(self):
         self.mock_provider(lambda request: httpx.Response(200, json=response(0.1)))
-        result = await self.call(items=[{"id": str(i), "content": {"message": "данные 😀"}} for i in range(50)],
-                                 review_limit=0)
+        result = await self.call(items=[{"id": str(i), "content": {"message": "данные 😀"}} for i in range(50)])
         self.assertEqual(result["review"], [])
         self.assertEqual(result["review_omitted"], 50)
+        self.assertNotIn("данные", app.encode(result))
+        metadata = json.loads((Path(result["results_path"]).parent / "request.json").read_text())
+        self.assertEqual(metadata["review_limit"], 0)
         records = [json.loads(line) for line in Path(result["review_path"]).read_text().splitlines()]
         self.assertEqual(len(records), 50)
         self.assertEqual(records[0]["content"], {"message": "данные 😀"})
+
+    async def test_review_queue_contains_inputs_and_audit_details_stay_in_results(self):
+        self.mock_provider(lambda request: httpx.Response(200, json=response(0.1)))
+        result = await self.call(items=[{"id": "item", "content": "review this"}])
+        review = json.loads(Path(result["review_path"]).read_text())
+        audit = json.loads(Path(result["results_path"]).read_text())
+        self.assertEqual(review, {"id": "item", "content": "review this"})
+        self.assertEqual(audit["reason"], "low_confidence")
+        self.assertIn("probabilities", audit)
+        self.assertIn("usage", audit)
 
     async def test_utf8_preview_byte_limit(self):
         self.mock_provider(lambda request: httpx.Response(200, json=response(0.1)))
@@ -231,7 +243,7 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
             return httpx.Response(200, json=response(0.1))
 
         self.mock_provider(handler)
-        result = await self.call(items=[{"id": key, "content": key} for key in ["first", "second"]])
+        result = await self.call(items=[{"id": key, "content": key} for key in ["first", "second"]], review_limit=20)
         rows = [json.loads(line) for line in Path(result["results_path"]).read_text().splitlines()]
         self.assertEqual([(row["id"], row["index"]) for row in rows], [("second", 1), ("first", 0)])
         self.assertEqual([row["id"] for row in result["review"]], ["first", "second"])
@@ -410,13 +422,24 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         async with Client(server) as client:
             tools = await client.list_tools()
             self.assertEqual([tool.name for tool in tools.tools], ["decide"])
+            self.assertEqual(tools.tools[0].input_schema["properties"]["review_limit"]["default"], 0)
             result = await client.call_tool("decide", {"question": "Keep?", "criteria": CRITERIA,
                 "items": [{"id": "a", "content": "sample"}]})
             self.assertFalse(result.is_error)
             self.assertEqual(result.structured_content["review_count"], 1)
+            self.assertEqual(result.structured_content["review"], [])
+            self.assertNotIn("sample", app.encode(result.structured_content))
 
 
 class SourceTests(unittest.TestCase):
+    def test_jsonl_unicode_separators_remain_inside_one_record(self):
+        from evaluate import unique_rows
+        content = "text\u0085with\u2028unicode\u2029separators"
+        path = self.root / "unicode.jsonl"
+        path.write_text(app.encode({"id": "a", "content": content}) + "\n", encoding="utf-8")
+        self.assertEqual([row.content for row in self.load("jsonl", [path.name])], [content])
+        self.assertEqual(unique_rows(path)["a"]["content"], content)
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)

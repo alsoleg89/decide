@@ -1,0 +1,16 @@
+{
+  "question": "Does this tweet contain offensive language?",
+  "criteria": {
+    "non_offensive": "Non-offensive language, with no insult, abusive language or profanity.",
+    "offensive": "An insult, threat, abusive language, vulgarity or profanity, whether targeted or untargeted."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}

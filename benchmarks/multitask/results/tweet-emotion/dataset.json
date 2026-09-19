@@ -1,0 +1,48 @@
+{
+  "name": "tweet-emotion",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 1421,
+  "baseline_train_items": 3257,
+  "class_counts": {
+    "joy": 133,
+    "sadness": 137,
+    "anger": 184,
+    "optimism": 46
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "tweet-emotion-train-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/train_text.txt",
+      "sha256": "2c62f67aeb3eac1aea0e5a9c3d0f4bc337992581f3f858061786a1fb4d79d95e",
+      "bytes": 306630
+    },
+    "tweet-emotion-train-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/train_labels.txt",
+      "sha256": "987e767d8679e18abdf7de37a6d2bcd0a40a296ddd704e8d515cf0e3033c8d9c",
+      "bytes": 6514
+    },
+    "tweet-emotion-test-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/test_text.txt",
+      "sha256": "7e1070f5d3e3fcece5bc73680bff9981e90d8f7b2f1009bfe7a01d059d1c6091",
+      "bytes": 132523
+    },
+    "tweet-emotion-test-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/test_labels.txt",
+      "sha256": "245072348c711961785be6d395997f97cf7fcda3effeae7805664171dc75f913",
+      "bytes": 2842
+    },
+    "tweet-emotion-mapping.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/emotion/mapping.txt",
+      "sha256": "656dea85d149716af96206ca19bec0d94e9dc6de3f5079f5c7c2a241ec76cadb",
+      "bytes": 34
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "b7cb18b4fe399a48fca93adbe8f9b4a484c12f4ba8b85055d16a3de23a0af04a",
+    "labels.jsonl": "d1c9848d36f215ee9dd1169e5367270c9e01eba94f362507287914ac35801040",
+    "train.jsonl": "0734a47efea5e1ec133de0f50d4a6768ef4797b030c239bf662d6f858a3e07e2",
+    "rubric.json": "608381b2e3805a8e70c0390d922455b0170038354503b1ac1cf836c2bddf3a14"
+  },
+  "notes": ""
+}

@@ -1,0 +1,47 @@
+{
+  "name": "tweet-sentiment",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 12284,
+  "baseline_train_items": 45615,
+  "class_counts": {
+    "neutral": 243,
+    "positive": 103,
+    "negative": 154
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "tweet-sentiment-train-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/sentiment/train_text.txt",
+      "sha256": "368f01052ea6fd8ffc408a2a2e6ac9669e31542581a0396ef16591ea26eb98a6",
+      "bytes": 4970029
+    },
+    "tweet-sentiment-train-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/sentiment/train_labels.txt",
+      "sha256": "122bfb1732fb6995b0e5c5f726c0ba457c469c3b6e60513007ce5037f23e65d4",
+      "bytes": 91230
+    },
+    "tweet-sentiment-test-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/sentiment/test_text.txt",
+      "sha256": "09a93a55c63fd93f97485ef7302889d7edb4091cd49733aa37da094f0bfa0675",
+      "bytes": 1156877
+    },
+    "tweet-sentiment-test-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/sentiment/test_labels.txt",
+      "sha256": "6afb4afe9374d1f983bcf9a7c79b108d0f37fdf020a83f30488309bed215db9d",
+      "bytes": 24568
+    },
+    "tweet-sentiment-mapping.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/sentiment/mapping.txt",
+      "sha256": "c0572796fbe261d8ea5fd16c5061076fbba49bc69fc865d6abccaf60daacee24",
+      "bytes": 32
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "c7b456381ff68f3135a811d210d0ea714c92e50801713e20c7d2633b55ab73a5",
+    "labels.jsonl": "0c9fd2bc0f1f267fea1eb93316d6dce16f2ac376388c51623589906c49a6217f",
+    "train.jsonl": "b3bd1a5f82a771ca1f02fcf94417f94d90867b71c53e61c25a6b827cf7ed221b",
+    "rubric.json": "7766a5281057ce08557ff439eb73cf51ae255fef309fa202b589720dc2f6d95c"
+  },
+  "notes": ""
+}

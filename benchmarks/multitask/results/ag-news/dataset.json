@@ -1,0 +1,33 @@
+{
+  "name": "ag-news",
+  "seed": 20260920,
+  "sample_items": 1000,
+  "test_pool_items": 7200,
+  "baseline_train_items": 120000,
+  "class_counts": {
+    "science_technology": 240,
+    "business": 260,
+    "sports": 251,
+    "world": 249
+  },
+  "selection": "uniform sample of 1000 rows",
+  "sources": {
+    "news-train.csv": {
+      "url": "https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/555590db4219b1243abb1918effd6a7425a2d75f/data/ag_news_csv/train.csv",
+      "sha256": "76a0a2d2f92b286371fe4d4044640910a04a803fdd2538e0f3f29a5c6f6b672e",
+      "bytes": 29470338
+    },
+    "news-test.csv": {
+      "url": "https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/555590db4219b1243abb1918effd6a7425a2d75f/data/ag_news_csv/test.csv",
+      "sha256": "521465c2428ed7f02f8d6db6ffdd4b5447c1c701962353eb2c40d548c3c85699",
+      "bytes": 1857427
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "98bc9f84c7317302889153dd1c3ec629047b85bd16df53fbcb0e05144bcbfb25",
+    "labels.jsonl": "2fc8d9aca44acab2fae74317639b4d8ea512ba7b0fc45c0ee9ab971565d13055",
+    "train.jsonl": "624d9bbc0642a70a795d7ee78a9fd33391e95e8d592ccbb90e36f0b88a618e08",
+    "rubric.json": "c6af4f15ec3311c02bcf84e76fbbd299663c58dff8498c558972bd66c8c02536"
+  },
+  "notes": "Excludes the 400 previously evaluated AG News IDs; public data may occur in model pretraining."
+}

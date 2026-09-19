@@ -1,0 +1,46 @@
+{
+  "name": "tweet-offensive",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 860,
+  "baseline_train_items": 11912,
+  "class_counts": {
+    "non_offensive": 367,
+    "offensive": 133
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "tweet-offensive-train-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/offensive/train_text.txt",
+      "sha256": "78a7a32e38b10af7d8970b008bf17f661c8d0a90dad145fa0fa6a944669650db",
+      "bytes": 1529074
+    },
+    "tweet-offensive-train-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/offensive/train_labels.txt",
+      "sha256": "c0b7d6ebdaa4ebcf6fc557ef1e775d92eda160218a0e3b1dd48eb8234dc892a6",
+      "bytes": 23832
+    },
+    "tweet-offensive-test-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/offensive/test_text.txt",
+      "sha256": "25b08c3333c26190f1023961c4508ec9aab24d4722b1a3ea7a6040724c120547",
+      "bytes": 126921
+    },
+    "tweet-offensive-test-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/offensive/test_labels.txt",
+      "sha256": "41d05a7aa0b01f5dafab21b95adb4f979cb4226c046ff315702774d10dac1605",
+      "bytes": 1720
+    },
+    "tweet-offensive-mapping.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/offensive/mapping.txt",
+      "sha256": "3e427f483dd5d5be21ae85dcf224c36b3d024af27999939fa0d438d695801c50",
+      "bytes": 28
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "f33485d7c63d6d32cc56e5e8a522cf06e58a006a569d3325eceb05be6f0a95a4",
+    "labels.jsonl": "444352f51ee0181858aab9db87ec89c88591a2062a83640f637fdb87402b102c",
+    "train.jsonl": "e6bc815fa51cf1e7a65cb8c75398277349fe4e2a9bf7916725601fa851c22722",
+    "rubric.json": "7064eb7df236d526c59fc45eef0ced3a1af73b474d330530971549454baea687"
+  },
+  "notes": ""
+}

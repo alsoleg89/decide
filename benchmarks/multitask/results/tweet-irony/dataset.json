@@ -1,0 +1,46 @@
+{
+  "name": "tweet-irony",
+  "seed": 20260920,
+  "sample_items": 500,
+  "test_pool_items": 784,
+  "baseline_train_items": 2862,
+  "class_counts": {
+    "non_irony": 298,
+    "irony": 202
+  },
+  "selection": "uniform sample of 500 rows",
+  "sources": {
+    "tweet-irony-train-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/irony/train_text.txt",
+      "sha256": "a888125a44f7dfaa25b026318748d0e62cc9a300d20f66eafd62011a19eaea23",
+      "bytes": 231594
+    },
+    "tweet-irony-train-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/irony/train_labels.txt",
+      "sha256": "fc69e6106c0f1f433a91536e08f83c71a391d7b219f7684d42f243a8089af77d",
+      "bytes": 5724
+    },
+    "tweet-irony-test-text.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/irony/test_text.txt",
+      "sha256": "53103da934a7308eee82f05f2a9781a8ea3e88604fdc1e02d3101108505c64be",
+      "bytes": 68057
+    },
+    "tweet-irony-test-labels.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/irony/test_labels.txt",
+      "sha256": "08e2095e1725e74907a380614c220204e356bb46e3e8c93deb74e83e5b15ab38",
+      "bytes": 1568
+    },
+    "tweet-irony-mapping.txt": {
+      "url": "https://raw.githubusercontent.com/cardiffnlp/tweeteval/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66/datasets/irony/mapping.txt",
+      "sha256": "70e09046e181179b9870a2f59a3263bbb28c787831779e4ce4a18373d054296b",
+      "bytes": 19
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "c45654c2671bd39482267465c208aa675b709dcc00abd1b064ea8f32834e2c89",
+    "labels.jsonl": "6448204b825d567f4397a40403ebf54746a5a52d83efaf56ffb57dac5e0c8242",
+    "train.jsonl": "40b6839437cd578bf2f9ec6d7ca813fd231a1759f303f541c528fb6cfcb09142",
+    "rubric.json": "6bb5aef4d35ef9c92d405bfba80caaaed35b66e3ce0ff1f4daef8ed9a6c63303"
+  },
+  "notes": ""
+}

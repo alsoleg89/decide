@@ -1,0 +1,16 @@
+{
+  "question": "Does the tweet communicate irony or sarcasm rather than a literal statement?",
+  "criteria": {
+    "non_irony": "The statement is intended literally, without irony or sarcasm.",
+    "irony": "The intended meaning contrasts with the literal wording, including sarcasm or ironic situations."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.8,
+  "review_limit": 0,
+  "concurrency": 4
+}
