@@ -15,3 +15,16 @@ decide-mcp = "decide:main"
 
 [tool.setuptools]
 py-modules = ["decide"]
+
+[tool.coverage.run]
+branch = true
+source = ["decide"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 95
+
+[dependency-groups]
+dev = [
+    "coverage>=7.16.1",
+]

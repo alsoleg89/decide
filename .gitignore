@@ -6,3 +6,6 @@ dist/
 .decide/
 .env
 .env.*
+.coverage*
+coverage.xml
+htmlcov/

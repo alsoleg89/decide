@@ -2,6 +2,7 @@
 
 import asyncio
 from collections import Counter
+from email.utils import parsedate_to_datetime
 import json
 import math
 import os
@@ -64,6 +65,10 @@ def within_root(path: Path, root: Path) -> Path:
     return resolved
 
 
+def ignored(path: Path) -> bool:
+    return any(part.startswith(".") or part in IGNORED_DIRS for part in path.parts)
+
+
 def load_items(items: list[Item] | None, source: Source | None, root: Path) -> list[Item]:
     if (items is None) == (source is None):
         raise ValueError("Provide exactly one of items or source")
@@ -81,11 +86,11 @@ def load_items(items: list[Item] | None, source: Source | None, root: Path) -> l
             matched = False
             for path in paths:
                 relative = path.relative_to(root)
-                if source.kind == "files" and any(
-                    part.startswith(".") or part in IGNORED_DIRS for part in relative.parts
-                ):
+                if source.kind == "files" and ignored(relative):
                     continue
                 path = within_root(path, root)
+                if source.kind == "files" and ignored(path.relative_to(root)):
+                    continue
                 mode = path.stat().st_mode
                 if stat.S_ISDIR(mode) and source.kind == "files":
                     continue
@@ -172,12 +177,19 @@ async def classify(client: httpx.AsyncClient, payload: dict) -> dict:
         # ponytail: bounded backoff; a shared rate limiter if cross-batch load grows.
         if response is not None:
             try:
-                retry_after = float(response.headers.get("Retry-After", delay))
+                if "retry-after-ms" in response.headers:
+                    retry_after = float(response.headers["retry-after-ms"]) / 1000
+                else:
+                    value = response.headers.get("Retry-After", str(delay))
+                    try:
+                        retry_after = float(value)
+                    except ValueError:
+                        retry_after = parsedate_to_datetime(value).timestamp() - time.time()
                 if math.isfinite(retry_after):
                     if retry_after > 30:
                         return {"error": "provider_retry_later", "attempts": attempt + 1}
                     delay = max(delay, retry_after)
-            except ValueError:
+            except (ValueError, TypeError, OverflowError):
                 pass
         await asyncio.sleep(delay)
     raise AssertionError("unreachable")
@@ -263,7 +275,7 @@ async def decide(
                     else:
                         decision = await classify(client, {"model": model, "questions": questions,
                             "state": {"context": context, "item": item.model_dump()}})
-                        if decision.get("error") in {"provider_http_401", "provider_http_403"}:
+                        if decision.get("error") in {"provider_http_401", "provider_http_403", "provider_retry_later"}:
                             halted = decision["error"]
                     requests_made += decision["attempts"]
                     retries += max(0, decision["attempts"] - 1)

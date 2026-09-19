@@ -7,6 +7,9 @@ Point it at 2,000 log lines or 300 source files, define the labels, and review
 only the uncertain cases. Raw inputs go directly from disk to Jev; confident
 decisions stay in a local JSONL file.
 
+**50 automated tests · 97% coverage including branches · live checks on 2,000
+log lines and 300 files.** [Reproduce the measurements](benchmarks/README.md).
+
 ```text
 Claude / Codex: question + criteria + source paths
                          ↓
@@ -184,23 +187,34 @@ you intend to send to TypeSafe. Logs and JSONL paths are explicit.
 
 HTTP 408, 429, 5xx and transport failures get up to three attempts with bounded
 backoff. Permanent failures, invalid probability distributions and malformed
-responses go to review. Authentication failure stops new requests for the rest
-of the batch. Error response bodies are not exposed. Provider requests use the
+responses go to review. Authentication failure or a requested cooldown over 30
+seconds stops new requests for the rest of the batch. Retry headers support
+seconds, HTTP dates and `retry-after-ms`. Error response bodies are not exposed. Provider requests use the
 [TypeSafe API contract](https://docs.typesafe.ai/api) and do not follow redirects.
 
 ## Development
 
 ```sh
 uv sync --locked
-uv run --locked python -m unittest -v
+uv run --locked python -m coverage run -m unittest -v
+uv run --locked python -m coverage report
 uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. They cover 2,000 log lines, 300 files, threshold routing, forced review,
-input validation, path boundaries, partial API failures, retries, authentication
-failure and full local artifacts. The synthetic 95%/5% test verifies routing,
-not Jev's real-world classification accuracy.
+endpoint. The 50 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+threshold routing, forced review, 100 seeded probability distributions and their
+incorrect winners, source validation, symlink boundaries, cancellation, disk
+failure, concurrent runs, HTTP/transport failures, retry headers, authentication,
+full local artifacts, legacy MCP and benchmark accounting. Instructions embedded
+in input are checked for separation from the rubric; this does not establish
+Jev's resistance to prompt injection. The synthetic 95%/5% test verifies routing,
+not real-world classification accuracy.
+
+Local checks passed on Python 3.11, 3.12, 3.13 and 3.14. CI is configured for Python
+3.11–3.14 on Linux, macOS and Windows, with a 95% minimum coverage gate on Linux.
+**GitHub Actions is currently blocked by the account's billing lock; the hosted
+matrix has not run.** No API key is required by CI.
 
 Live smoke check on 2026-09-19: the installed stdio command processed 12 synthetic
 log entries through Jev 1.13.0 in 2.386 seconds. Seven were accepted, two escalated
