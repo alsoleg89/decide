@@ -24,27 +24,28 @@ batches need more. The review rate is an outcome, never a fixed quota.
 
 ## Measured on real data
 
-**5,570 real records across 10 tasks**, with a fixed rubric per task and no
-labeled examples sent to Jev. [Full results and reproduction](benchmarks/multitask/README.md).
+**8,340 real records across 10 tasks**, with a fixed rubric per task and no
+labeled examples sent to Jev. The [initial 5,570-record study](benchmarks/multitask/README.md)
+is followed by [2,770 new records with thresholds frozen before inference](benchmarks/multitask/followup/RESULTS.md):
 
-| Task | Items | Accuracy | Errors among accepted | Full-review JSON saved |
-| --- | ---: | ---: | ---: | ---: |
-| Movie reviews | 500 | 96.2% | 10 / 479 (2.1%) | 95.0% |
-| SMS spam | 500 | 98.0% | 2 / 461 (0.4%) | 88.4% |
-| Banking support, 77 intents | 770 | 77.1% | 69 / 596 (11.6%) | 70.0% |
-| Tweet sentiment | 500 | 64.0% | 69 / 294 (23.5%) | 58.0% |
+| Follow-up task | New items | Threshold | Accuracy | Errors among accepted | Full-review JSON saved |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Movie reviews | 1,000 | 0.95 | 96.7% | 10 / 902 (1.1%) | 91.1% |
+| News topics | 1,000 | 0.99 | 86.5% | 53 / 728 (7.3%) | 72.7% |
+| Banking support, 77 intents | 770 | 0.99 | 79.5% | 14 / 401 (3.5%) | 45.5% |
 
-At threshold 0.8. Savings include reading every full review input, measured by
-replaying the recorded decisions through the compact MCP output format. These
-are JSON bytes, not billed agent tokens. Accuracy counts failed responses as
-incorrect; accepted-error rates exclude reviewed records. The full report
-includes six more tasks, macro-F1, confusion matrices, trained local baselines,
-costs and threshold sweeps.
+Live JSON measurements include reading every full review input; they are not
+billed agent tokens. Accuracy counts failed responses as incorrect. The frozen
+accepted-error budgets were 5% for reviews and 10% for news/banking. Each observed
+rate and its per-task 95% Wilson upper bound fell below that task's budget.
+These are results on new records from the same public corpora, not a production
+guarantee. The three follow-up tasks were selected after promising earlier results.
 
-The useful threshold depends on the task. On movie reviews, threshold 0.99
-accepted 430 of 500 decisions with 3 observed errors (0.7%), while still saving
-85.0% of JSON. On short ambiguous tweets, confident errors remained common.
-Use labeled samples to choose a tradeoff, then verify it on separate data.
+Review volume varies: 9.8% of the new movie reviews needed review, versus 47.9%
+of banking messages. On the initial sentiment-tweet task, 23.5% of accepted
+decisions were wrong at threshold 0.8. Use labeled samples to choose a tradeoff,
+then verify it on separate data. All reports include failures, macro-F1,
+confusion matrices, trained local baselines and costs.
 
 [Threshold selection on a separate split](benchmarks/multitask/threshold-validation/README.md)
 adds 60 retrospective policy checks. With a 5% accepted-error budget, simple
@@ -53,9 +54,11 @@ Selection using an upper error bound accepted records on only 3 tasks; all three
 stayed below 5% on holdout. No task had enough evidence for the bounded 1% target.
 These reuse the recorded decisions and do not establish a production guarantee.
 
-Known successful usage for the ten live runs cost **at least $0.1489** at
-[published Jev pricing](https://docs.typesafe.ai/models); 35 rejected responses
-had incomplete usage accounting. Agent review and reasoning costs are excluded.
+Known successful usage cost **at least $0.1489** for the initial study and
+**at least $0.10466** for the follow-up at
+[published Jev pricing](https://docs.typesafe.ai/models). Across both studies,
+63 rejected responses had incomplete usage accounting. Agent review and
+reasoning costs are excluded.
 The [earlier VS Code issue evaluation](benchmarks/vscode-500/README.md) and
 [synthetic log/file scale checks](benchmarks/README.md) remain available.
 

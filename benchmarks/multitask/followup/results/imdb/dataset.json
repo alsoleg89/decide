@@ -1,0 +1,28 @@
+{
+  "name": "imdb",
+  "seed": 20260921,
+  "sample_items": 1000,
+  "test_pool_items": 24301,
+  "baseline_train_items": 24992,
+  "class_counts": {
+    "negative": 471,
+    "positive": 529
+  },
+  "selection": "uniform 1000 from eligible unique texts",
+  "sources": {
+    "imdb.tar.gz": {
+      "url": "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+      "sha256": "c40f74a18d3b61f90feba1e17730e0d38e8b97c05fde7008942e91923d1658fe",
+      "bytes": 84125825
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "9a435fd028c44cd15172692156626536135f27e30a1e11e3de9d0a643d040102",
+    "labels.jsonl": "7b86491fbb0927e57523b459d3d313e5f1be48a43c96e116ea1edff8523f2a6a",
+    "train.jsonl": "43299cf89e7e196ead18af5827f02de87d301cd2e7a8400d7c4c0f3f353e435b",
+    "rubric.json": "66a39c0a41b5418642d09414d5cab00e11a517a89e2fc9144df89ec3d78b402b"
+  },
+  "notes": "Follow-up on previously unqueried IDs and exact contents from the same public test corpus. Not a distribution-shift test or evidence of absence from pretraining. Baseline uses previous source training data with new evaluation duplicates removed.",
+  "previously_evaluated_ids_excluded": 500,
+  "previous_content_overlap": 0
+}

@@ -4,6 +4,8 @@
 
 [Threshold-selection validation](threshold-validation/README.md) adds 60 retrospective checks using separate calibration and holdout partitions of these same decisions. It shows why selecting a threshold from observed errors alone can miss the chosen error budget.
 
+[New-record follow-up](followup/RESULTS.md): 2,770 additional records on three tasks, with inputs and thresholds committed before inference. All observed error rates and per-task Wilson upper bounds were below the frozen budgets; details and limits are in the report.
+
 ## Decision quality
 
 Accuracy counts failed provider responses as incorrect. Accepted errors are wrong labels among the decisions the tool would accept at confidence ≥0.8. The local Naive Bayes baseline uses the dataset training labels; Jev uses only the task description and label definitions.

@@ -1,5 +1,8 @@
 # New-record follow-up: frozen before inference
 
+[Completed results: 2,770 new decisions](RESULTS.md), including all failures,
+live context measurements and per-task sampling intervals.
+
 This protocol is committed before any follow-up Jev calls. It tests the thresholds
 selected in the [retrospective calibration experiment](../threshold-validation/README.md)
 on previously unqueried records from the same public test corpora.

@@ -5,6 +5,10 @@ accuracy, errors among accepted results, trained local baselines, costs and 70
 threshold comparisons. It includes both useful and poor results, and quantifies
 how compact review records improve context savings.
 
+The [2,770-record follow-up](multitask/followup/RESULTS.md) uses new records with
+thresholds and inputs committed before inference. It reports live quality and
+context results for three tasks, retaining every failed response.
+
 Then read the [threshold-selection validation](multitask/threshold-validation/README.md):
 60 retrospective checks separate threshold selection from scoring and show
 when an observed error rate fails to transfer to the held-out partition.

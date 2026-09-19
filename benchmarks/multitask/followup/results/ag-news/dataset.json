@@ -1,0 +1,35 @@
+{
+  "name": "ag-news",
+  "seed": 20260921,
+  "sample_items": 1000,
+  "test_pool_items": 6200,
+  "baseline_train_items": 120000,
+  "class_counts": {
+    "sports": 229,
+    "business": 259,
+    "science_technology": 261,
+    "world": 251
+  },
+  "selection": "uniform 1000 from eligible unique texts",
+  "sources": {
+    "news-train.csv": {
+      "url": "https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/555590db4219b1243abb1918effd6a7425a2d75f/data/ag_news_csv/train.csv",
+      "sha256": "76a0a2d2f92b286371fe4d4044640910a04a803fdd2538e0f3f29a5c6f6b672e",
+      "bytes": 29470338
+    },
+    "news-test.csv": {
+      "url": "https://raw.githubusercontent.com/mhjabreel/CharCnn_Keras/555590db4219b1243abb1918effd6a7425a2d75f/data/ag_news_csv/test.csv",
+      "sha256": "521465c2428ed7f02f8d6db6ffdd4b5447c1c701962353eb2c40d548c3c85699",
+      "bytes": 1857427
+    }
+  },
+  "files_sha256": {
+    "items.jsonl": "068fcacdafbcf8869990fe87be066993c6968c9a855e7a73b7be50e85970721b",
+    "labels.jsonl": "e64c3cf41c63c5f44e21ff7680d22961c23ec0f19b8ecdbe985f2b60e5ec88bb",
+    "train.jsonl": "624d9bbc0642a70a795d7ee78a9fd33391e95e8d592ccbb90e36f0b88a618e08",
+    "rubric.json": "25d7061dbffef74b479a731a91241fbf6e3a93feaef7dba41d12e9bc1c738fcf"
+  },
+  "notes": "Follow-up on previously unqueried IDs and exact contents from the same public test corpus. Not a distribution-shift test or evidence of absence from pretraining. Baseline uses previous source training data with new evaluation duplicates removed.",
+  "previously_evaluated_ids_excluded": 1400,
+  "previous_content_overlap": 0
+}

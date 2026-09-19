@@ -1,0 +1,478 @@
+{
+  "schema_version": 2,
+  "mode": "live",
+  "transport": "MCP stdio subprocess",
+  "server_source_sha256": "de929514b15257050a9617ee5a96ea00e502a45fbdd0e5ca9faa9119bebef817",
+  "created_at": "2026-09-19T20:54:01.636624+00:00",
+  "input_jsonl_sha256": "9a435fd028c44cd15172692156626536135f27e30a1e11e3de9d0a643d040102",
+  "rubric_sha256": "66a39c0a41b5418642d09414d5cab00e11a517a89e2fc9144df89ec3d78b402b",
+  "rubric": {
+    "question": "Is the overall opinion in this movie review positive or negative?",
+    "criteria": {
+      "positive": "An overall favorable review of the movie.",
+      "negative": "An overall unfavorable review of the movie."
+    },
+    "source": {
+      "kind": "jsonl",
+      "paths": [
+        "items.jsonl"
+      ]
+    },
+    "confidence_threshold": 0.95,
+    "review_limit": 0,
+    "concurrency": 4
+  },
+  "measurement": "UTF-8 JSON bytes, not billed tokens. Full-review metric includes every full review row, even already-previewed rows. Excludes MCP framing, host duplication and agent reasoning.",
+  "items": 1000,
+  "completed": 1000,
+  "accepted": 902,
+  "review_count": 98,
+  "review_fraction": 0.098,
+  "failed": 0,
+  "elapsed_seconds": 77.151,
+  "items_per_second": 12.96,
+  "requests_made": 1000,
+  "retries": 0,
+  "models": {
+    "jev-1.13.0": 1000
+  },
+  "provider_usage": {
+    "input_tokens": 681321,
+    "output_tokens": 31000,
+    "complete": true
+  },
+  "labeled_items": 1000,
+  "correct_labeled_items": 967,
+  "label_accuracy": 0.967,
+  "accepted_labeled_items": 902,
+  "accepted_label_accuracy": 0.9889135254988913,
+  "accepted_unlabeled_items": 0,
+  "inline_input_bytes": 1347706,
+  "source_call_and_result_bytes": 935,
+  "context_bytes_reduction": 0.9993062285097788,
+  "all_review_records_bytes": 118768,
+  "context_bytes_reduction_with_all_reviews": 0.9111801832150336,
+  "threshold_sweep": [
+    {
+      "threshold": 0,
+      "total": 1000,
+      "accepted": 1000,
+      "review": 0,
+      "failed": 0,
+      "review_fraction": 0.0,
+      "accepted_errors": 33,
+      "accepted_error_rate": 0.033,
+      "accepted_error_ids": [
+        "imdb:57d932e564a0249ec4d6",
+        "imdb:8bdbe20afb46fd057412",
+        "imdb:516301dc50ffc42aa387",
+        "imdb:c22b746255280a46b8ce",
+        "imdb:3f5f88e16dd1ddcf1c29",
+        "imdb:a54e1bd5a8e21a6abc4c",
+        "imdb:727ffdf2026c2472d52c",
+        "imdb:12fb9d2adb3bbd509a53",
+        "imdb:2bee4be59820059bc99e",
+        "imdb:e52aa0fbfbaf0c490f6f",
+        "imdb:d417468c8e88b82720e9",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:49bb25ac2fdbc5af6ac4",
+        "imdb:01f51858e799968660da",
+        "imdb:2ae3a9e9040e6bceffde",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:1121e5ebbb7f5e819a3d",
+        "imdb:a2d2833da0491a223333",
+        "imdb:d9232888f80cf97c8506",
+        "imdb:f473a73232e7594f7ff7",
+        "imdb:9622474ceb1e8c6ad4da",
+        "imdb:35f0a8931ac8e45bdac2",
+        "imdb:db4554d26c428bc81063",
+        "imdb:210592c49d898afcfb8a",
+        "imdb:745b363f702ab3ab71d0",
+        "imdb:f8348976390347c6262a",
+        "imdb:b3cab0dfbe1536442e0e",
+        "imdb:22ec8f5e91a65e262285",
+        "imdb:01eaac49aff1f849b7f2",
+        "imdb:bc901f73b4e802897d6c",
+        "imdb:7cbdebf059d335fe1cc1",
+        "imdb:45d25e57a8a96e7a4e17"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 0,
+      "input_bytes_kept_out_of_review_fraction": 1.0,
+      "accepted_error_95ci": [
+        0.023592927958426907,
+        0.04598126446708159
+      ]
+    },
+    {
+      "threshold": 0.5,
+      "total": 1000,
+      "accepted": 978,
+      "review": 22,
+      "failed": 0,
+      "review_fraction": 0.022,
+      "accepted_errors": 25,
+      "accepted_error_rate": 0.02556237218813906,
+      "accepted_error_ids": [
+        "imdb:8bdbe20afb46fd057412",
+        "imdb:516301dc50ffc42aa387",
+        "imdb:c22b746255280a46b8ce",
+        "imdb:a54e1bd5a8e21a6abc4c",
+        "imdb:727ffdf2026c2472d52c",
+        "imdb:12fb9d2adb3bbd509a53",
+        "imdb:2bee4be59820059bc99e",
+        "imdb:e52aa0fbfbaf0c490f6f",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:49bb25ac2fdbc5af6ac4",
+        "imdb:01f51858e799968660da",
+        "imdb:2ae3a9e9040e6bceffde",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:1121e5ebbb7f5e819a3d",
+        "imdb:a2d2833da0491a223333",
+        "imdb:f473a73232e7594f7ff7",
+        "imdb:9622474ceb1e8c6ad4da",
+        "imdb:db4554d26c428bc81063",
+        "imdb:210592c49d898afcfb8a",
+        "imdb:f8348976390347c6262a",
+        "imdb:b3cab0dfbe1536442e0e",
+        "imdb:01eaac49aff1f849b7f2",
+        "imdb:bc901f73b4e802897d6c",
+        "imdb:45d25e57a8a96e7a4e17"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 28403,
+      "input_bytes_kept_out_of_review_fraction": 0.9789206118314124,
+      "accepted_error_95ci": [
+        0.017373615347269472,
+        0.03746360744159502
+      ]
+    },
+    {
+      "threshold": 0.8,
+      "total": 1000,
+      "accepted": 959,
+      "review": 41,
+      "failed": 0,
+      "review_fraction": 0.041,
+      "accepted_errors": 18,
+      "accepted_error_rate": 0.018769551616266946,
+      "accepted_error_ids": [
+        "imdb:516301dc50ffc42aa387",
+        "imdb:c22b746255280a46b8ce",
+        "imdb:727ffdf2026c2472d52c",
+        "imdb:12fb9d2adb3bbd509a53",
+        "imdb:2bee4be59820059bc99e",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:49bb25ac2fdbc5af6ac4",
+        "imdb:01f51858e799968660da",
+        "imdb:2ae3a9e9040e6bceffde",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:1121e5ebbb7f5e819a3d",
+        "imdb:a2d2833da0491a223333",
+        "imdb:9622474ceb1e8c6ad4da",
+        "imdb:210592c49d898afcfb8a",
+        "imdb:b3cab0dfbe1536442e0e",
+        "imdb:01eaac49aff1f849b7f2",
+        "imdb:bc901f73b4e802897d6c"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 50294,
+      "input_bytes_kept_out_of_review_fraction": 0.9626741277840036,
+      "accepted_error_95ci": [
+        0.011905114862259597,
+        0.02947392885849239
+      ]
+    },
+    {
+      "threshold": 0.9,
+      "total": 1000,
+      "accepted": 937,
+      "review": 63,
+      "failed": 0,
+      "review_fraction": 0.063,
+      "accepted_errors": 12,
+      "accepted_error_rate": 0.012806830309498399,
+      "accepted_error_ids": [
+        "imdb:12fb9d2adb3bbd509a53",
+        "imdb:2bee4be59820059bc99e",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:49bb25ac2fdbc5af6ac4",
+        "imdb:2ae3a9e9040e6bceffde",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:a2d2833da0491a223333",
+        "imdb:9622474ceb1e8c6ad4da",
+        "imdb:210592c49d898afcfb8a",
+        "imdb:01eaac49aff1f849b7f2",
+        "imdb:bc901f73b4e802897d6c"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 81769,
+      "input_bytes_kept_out_of_review_fraction": 0.9393148438137788,
+      "accepted_error_95ci": [
+        0.007341001789529617,
+        0.022251081509597356
+      ]
+    },
+    {
+      "threshold": 0.95,
+      "total": 1000,
+      "accepted": 902,
+      "review": 98,
+      "failed": 0,
+      "review_fraction": 0.098,
+      "accepted_errors": 10,
+      "accepted_error_rate": 0.011086474501108648,
+      "accepted_error_ids": [
+        "imdb:2bee4be59820059bc99e",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:49bb25ac2fdbc5af6ac4",
+        "imdb:2ae3a9e9040e6bceffde",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:a2d2833da0491a223333",
+        "imdb:9622474ceb1e8c6ad4da",
+        "imdb:210592c49d898afcfb8a",
+        "imdb:01eaac49aff1f849b7f2"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 118768,
+      "input_bytes_kept_out_of_review_fraction": 0.9118559034606621,
+      "accepted_error_95ci": [
+        0.006032939290583165,
+        0.020286742358491587
+      ]
+    },
+    {
+      "threshold": 0.99,
+      "total": 1000,
+      "accepted": 857,
+      "review": 143,
+      "failed": 0,
+      "review_fraction": 0.143,
+      "accepted_errors": 5,
+      "accepted_error_rate": 0.005834305717619603,
+      "accepted_error_ids": [
+        "imdb:2bee4be59820059bc99e",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:a8037087959b138c4606",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:01eaac49aff1f849b7f2"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 171396,
+      "input_bytes_kept_out_of_review_fraction": 0.872797844786,
+      "accepted_error_95ci": [
+        0.002494565109424052,
+        0.013584422117394893
+      ]
+    },
+    {
+      "threshold": 1,
+      "total": 1000,
+      "accepted": 817,
+      "review": 183,
+      "failed": 0,
+      "review_fraction": 0.183,
+      "accepted_errors": 4,
+      "accepted_error_rate": 0.004895960832313341,
+      "accepted_error_ids": [
+        "imdb:2bee4be59820059bc99e",
+        "imdb:3136906fcd40cf1f42cb",
+        "imdb:16046f13dd37e5d39c1a",
+        "imdb:01eaac49aff1f849b7f2"
+      ],
+      "input_jsonl_bytes": 1347430,
+      "review_input_jsonl_bytes": 231093,
+      "input_bytes_kept_out_of_review_fraction": 0.8284935024453961,
+      "accepted_error_95ci": [
+        0.0019055415036716523,
+        0.012520458418051102
+      ]
+    }
+  ],
+  "quality": {
+    "accuracy": 0.967,
+    "macro_f1": 0.9668998721131421,
+    "per_class": {
+      "positive": {
+        "support": 529,
+        "precision": 0.9714828897338403,
+        "recall": 0.9659735349716446,
+        "f1": 0.9687203791469193
+      },
+      "negative": {
+        "support": 471,
+        "precision": 0.9620253164556962,
+        "recall": 0.9681528662420382,
+        "f1": 0.965079365079365
+      }
+    },
+    "confusion": {
+      "positive": {
+        "positive": 511,
+        "negative": 18
+      },
+      "negative": {
+        "negative": 456,
+        "positive": 15
+      }
+    }
+  },
+  "baselines": {
+    "majority_label": "positive",
+    "majority": {
+      "accuracy": 0.529,
+      "macro_f1": 0.34597776324395035,
+      "per_class": {
+        "positive": {
+          "support": 529,
+          "precision": 0.529,
+          "recall": 1.0,
+          "f1": 0.6919555264879007
+        },
+        "negative": {
+          "support": 471,
+          "precision": 0,
+          "recall": 0.0,
+          "f1": 0
+        }
+      },
+      "confusion": {
+        "positive": {
+          "positive": 529
+        },
+        "negative": {
+          "positive": 471
+        }
+      }
+    },
+    "naive_bayes": {
+      "accuracy": 0.815,
+      "macro_f1": 0.8149183790051413,
+      "per_class": {
+        "positive": {
+          "support": 529,
+          "precision": 0.8822222222222222,
+          "recall": 0.7504725897920604,
+          "f1": 0.8110316649642492
+        },
+        "negative": {
+          "support": 471,
+          "precision": 0.76,
+          "recall": 0.8874734607218684,
+          "f1": 0.8188050930460333
+        }
+      },
+      "confusion": {
+        "positive": {
+          "positive": 397,
+          "negative": 132
+        },
+        "negative": {
+          "negative": 418,
+          "positive": 53
+        }
+      }
+    },
+    "train_items": 24992,
+    "vocabulary_size": 74843,
+    "train_seconds": 0.552,
+    "predict_seconds": 0.052,
+    "definition": "Multinomial Naive Bayes; Laplace alpha=1; lowercase Unicode word tokens of length >=2; raw counts, no tuning. Training examples are never sent to Jev."
+  },
+  "observed_error_by_confidence_bin": [
+    {
+      "low": 0,
+      "high_exclusive": 0.5,
+      "exact_one": false,
+      "items": 22,
+      "errors": 8,
+      "error_rate": 0.36363636363636365
+    },
+    {
+      "low": 0.5,
+      "high_exclusive": 0.8,
+      "exact_one": false,
+      "items": 19,
+      "errors": 7,
+      "error_rate": 0.3684210526315789
+    },
+    {
+      "low": 0.8,
+      "high_exclusive": 0.9,
+      "exact_one": false,
+      "items": 22,
+      "errors": 6,
+      "error_rate": 0.2727272727272727
+    },
+    {
+      "low": 0.9,
+      "high_exclusive": 0.95,
+      "exact_one": false,
+      "items": 35,
+      "errors": 2,
+      "error_rate": 0.05714285714285714
+    },
+    {
+      "low": 0.95,
+      "high_exclusive": 0.99,
+      "exact_one": false,
+      "items": 45,
+      "errors": 5,
+      "error_rate": 0.1111111111111111
+    },
+    {
+      "low": 0.99,
+      "high_exclusive": 1.0,
+      "exact_one": false,
+      "items": 40,
+      "errors": 1,
+      "error_rate": 0.025
+    },
+    {
+      "low": 1.0,
+      "high_exclusive": 1.0,
+      "exact_one": true,
+      "items": 817,
+      "errors": 4,
+      "error_rate": 0.004895960832313341
+    }
+  ],
+  "estimated_jev_cost_usd": 0.028615482,
+  "cost_accounting_complete": true,
+  "pricing_source": "https://docs.typesafe.ai/models",
+  "pricing_note": "Jev 1.13.0: $0.042/M input tokens, free output. Estimate excludes agent review and reasoning. When cost_accounting_complete is false, known successful usage is only a lower bound.",
+  "dataset": {
+    "name": "imdb",
+    "seed": 20260921,
+    "sample_items": 1000,
+    "test_pool_items": 24301,
+    "baseline_train_items": 24992,
+    "class_counts": {
+      "negative": 471,
+      "positive": 529
+    },
+    "selection": "uniform 1000 from eligible unique texts",
+    "sources": {
+      "imdb.tar.gz": {
+        "url": "https://ai.stanford.edu/~amaas/data/sentiment/aclImdb_v1.tar.gz",
+        "sha256": "c40f74a18d3b61f90feba1e17730e0d38e8b97c05fde7008942e91923d1658fe",
+        "bytes": 84125825
+      }
+    },
+    "files_sha256": {
+      "items.jsonl": "9a435fd028c44cd15172692156626536135f27e30a1e11e3de9d0a643d040102",
+      "labels.jsonl": "7b86491fbb0927e57523b459d3d313e5f1be48a43c96e116ea1edff8523f2a6a",
+      "train.jsonl": "43299cf89e7e196ead18af5827f02de87d301cd2e7a8400d7c4c0f3f353e435b",
+      "rubric.json": "66a39c0a41b5418642d09414d5cab00e11a517a89e2fc9144df89ec3d78b402b"
+    },
+    "notes": "Follow-up on previously unqueried IDs and exact contents from the same public test corpus. Not a distribution-shift test or evidence of absence from pretraining. Baseline uses previous source training data with new evaluation duplicates removed.",
+    "previously_evaluated_ids_excluded": 500,
+    "previous_content_overlap": 0
+  },
+  "predictions_file": "predictions.jsonl"
+}
