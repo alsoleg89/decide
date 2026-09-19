@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import benchmark_real
 from analyze import enrich
+from evaluate import risk_coverage, unique_rows
 
 TASKS = ['tweet-sentiment', 'tweet-emotion', 'tweet-irony', 'tweet-offensive', 'tweet-hate',
          'banking77', 'ag-news', 'sms-spam', 'apache-logs', 'imdb']
@@ -43,7 +44,8 @@ async def run(root, output, selected):
         enriched.pop('results_path')
         enriched['predictions_file'] = 'predictions.jsonl'
         (target / 'report.json').write_text(json.dumps(enriched, indent=2) + '\n', encoding='utf-8')
-        actual = next(row for row in enriched['threshold_sweep'] if row['threshold'] == .8)
+        actual = risk_coverage(unique_rows(target/'predictions.jsonl'), unique_rows(target/'labels.jsonl'),
+                               enriched['rubric'].get('confidence_threshold', .8))
         print(json.dumps({'task': name, 'items': enriched['items'], 'accuracy': enriched['quality']['accuracy'],
                           'macro_f1': enriched['quality']['macro_f1'], 'nb_accuracy': enriched['baselines']['naive_bayes']['accuracy'],
                           'review_fraction': actual['review_fraction'], 'accepted_error_rate': actual['accepted_error_rate'],
