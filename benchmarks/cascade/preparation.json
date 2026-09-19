@@ -1,0 +1,48 @@
+{
+  "status": "prepared_not_run",
+  "paid_calls": 0,
+  "tasks": [
+    {
+      "task": "imdb",
+      "model": "gpt-6-astra",
+      "records": 1000,
+      "batch_size": 25,
+      "review_records": 98,
+      "calls_by_arm": {
+        "baseline": 40,
+        "review": 4
+      },
+      "plan_sha256": "d9083d5a6da4ec37176f98e3a3800708c6ca9031b35e8eff091f6d9a6a2d159c",
+      "irreducible_errors": 10,
+      "ideal_review_accuracy_ceiling": 0.99
+    },
+    {
+      "task": "ag-news",
+      "model": "gpt-6-astra",
+      "records": 1000,
+      "batch_size": 25,
+      "review_records": 272,
+      "calls_by_arm": {
+        "baseline": 40,
+        "review": 11
+      },
+      "plan_sha256": "bf986ff336991e4ac2c6cf9e34f3046768f48a30a01025d1c5e8a1a198b1d623",
+      "irreducible_errors": 53,
+      "ideal_review_accuracy_ceiling": 0.947
+    },
+    {
+      "task": "banking77",
+      "model": "gpt-6-astra",
+      "records": 770,
+      "batch_size": 25,
+      "review_records": 369,
+      "calls_by_arm": {
+        "baseline": 31,
+        "review": 15
+      },
+      "plan_sha256": "9560b8cc71f6cdaf90857e93632b10e33a1ccd39a41755a16e33c8a22ddc141a",
+      "irreducible_errors": 14,
+      "ideal_review_accuracy_ceiling": 0.9818181818181818
+    }
+  ]
+}

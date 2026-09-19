@@ -1,0 +1,10 @@
+{
+  "model": "gpt-6-astra",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "checked_date": "2026-09-20",
+  "service_tier": "default",
+  "unit": "USD per million tokens, standard processing, global endpoint",
+  "long_context_above_tokens": 272000,
+  "short": {"input": 10, "cached_input": 1, "cache_write": 12.5, "output": 50},
+  "long": {"input": 20, "cached_input": 2, "cache_write": 25, "output": 75}
+}

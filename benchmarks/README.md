@@ -13,6 +13,10 @@ The [provider-response investigation](multitask/rejection-diagnostics/README.md)
 explains 23 reproduced validation failures and measures the errors that relaxing
 validation would admit.
 
+The [controlled expensive-model comparison](cascade/README.md) is prepared but
+not executed. It will measure actual reviewer mistakes and token usage rather
+than assuming perfect review or treating JSON bytes as billed tokens.
+
 Then read the [threshold-selection validation](multitask/threshold-validation/README.md):
 60 retrospective checks separate threshold selection from scoring and show
 when an observed error rate fails to transfer to the held-out partition.

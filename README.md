@@ -63,6 +63,9 @@ The [rejection investigation](benchmarks/multitask/rejection-diagnostics/README.
 reproduced probability distributions summing to 0.99. Relaxing that validation
 would have admitted additional wrong decisions; the server retains the check
 and now records its exact failure reason.
+The [expensive-model comparison](benchmarks/cascade/README.md) is prepared but
+has not run: paid orchestrator API access is still needed. No total-dollar
+savings claim is inferred from the JSON measurements.
 The [earlier VS Code issue evaluation](benchmarks/vscode-500/README.md) and
 [synthetic log/file scale checks](benchmarks/README.md) remain available.
 
@@ -269,7 +272,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 243 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 245 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,
