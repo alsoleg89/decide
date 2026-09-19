@@ -24,7 +24,19 @@ class ProviderFaultTests(unittest.IsolatedAsyncioTestCase):
             target = target[key]
         target[path[-1]] = copy.deepcopy(value)
         result, sleep = await self.invoke(lambda request: httpx.Response(200, content=json.dumps(raw)))
-        self.assertEqual(result, {"error": "invalid_provider_response", "attempts": 1})
+        self.assertEqual(result["error"], "invalid_provider_response")
+        self.assertEqual(result["attempts"], 1)
+        self.assertNotIn("choice", result)
+        sleep.assert_not_awaited()
+
+    async def test_one_percent_missing_probability_is_diagnosed_and_still_rejected(self):
+        raw = shared.response()
+        raw["answers"]["decision"]["probabilities"] = {"keep": .93, "skip": .06}
+        result, sleep = await self.invoke(lambda request: httpx.Response(200, json=raw))
+        self.assertEqual(result["error"], "invalid_provider_response")
+        self.assertEqual(result["validation_error"], "probability_sum")
+        self.assertAlmostEqual(result["probability_sum"], .99)
+        self.assertNotIn("choice", result)
         sleep.assert_not_awaited()
 
     async def test_deep_json_fails_closed_instead_of_cancelling_the_batch(self):

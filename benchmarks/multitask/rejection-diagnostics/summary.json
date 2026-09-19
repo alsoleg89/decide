@@ -1,0 +1,187 @@
+{
+  "diagnostic_calls": 63,
+  "valid_repeats": 40,
+  "rejected_repeats": 23,
+  "all_rejections_have_probability_sum_099": true,
+  "rejected": [
+    {
+      "id": "banking77:test:1079",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.8,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:1300",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.68,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:1690",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000002,
+      "confidence": 0.55,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:2029",
+      "original_run": "results/banking77",
+      "sum": 0.99,
+      "confidence": 0.64,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:2080",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.55,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:2416",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.81,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:2804",
+      "original_run": "results/banking77",
+      "sum": 0.99,
+      "confidence": 0.8,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:2918",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.56,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:3055",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.56,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:314",
+      "original_run": "results/banking77",
+      "sum": 0.99,
+      "confidence": 0.53,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:426",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.67,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:708",
+      "original_run": "results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.92,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:1183",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.81,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:1250",
+      "original_run": "followup/results/banking77",
+      "sum": 0.99,
+      "confidence": 0.92,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:1735",
+      "original_run": "followup/results/banking77",
+      "sum": 0.99,
+      "confidence": 0.63,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:2003",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.93,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:2467",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.66,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:2490",
+      "original_run": "followup/results/banking77",
+      "sum": 0.99,
+      "confidence": 0.68,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:290",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.54,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:292",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.68,
+      "choice_wrong": false
+    },
+    {
+      "id": "banking77:test:436",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.66,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:600",
+      "original_run": "followup/results/banking77",
+      "sum": 0.99,
+      "confidence": 0.46,
+      "choice_wrong": true
+    },
+    {
+      "id": "banking77:test:909",
+      "original_run": "followup/results/banking77",
+      "sum": 0.9900000000000001,
+      "confidence": 0.79,
+      "choice_wrong": false
+    }
+  ],
+  "hypothetical_relaxation": {
+    "0.8": {
+      "additional_accepted": 7,
+      "additional_errors": 2
+    },
+    "0.95": {
+      "additional_accepted": 0,
+      "additional_errors": 0
+    },
+    "0.99": {
+      "additional_accepted": 0,
+      "additional_errors": 0
+    }
+  },
+  "provider_input_tokens": 106015,
+  "known_jev_usd": 0.00445263,
+  "current_parser_keeps_all_original_diagnostic_decisions": true,
+  "responses_sha256": "3f5a653bc9936742c3c7d35cc8a7e882d2dd5b653d0d32437b7ef379a5357ee2"
+}

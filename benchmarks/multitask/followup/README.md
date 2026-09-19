@@ -46,7 +46,10 @@ uv run --locked python benchmarks/multitask/followup/prepare.py \
 
 The preparation script refuses to overwrite an existing protocol or paid-run
 inputs. The committed protocol is the reference; a newly generated protocol must
-match it before new inference. The following command makes **paid** calls:
+match it before new inference. For byte-for-byte protocol reproduction, use
+commit `651006b`, including the server version hashed in that protocol. Later
+server versions need a new protocol for new inference; they can still verify
+the archived follow-up offline using `report.py`. The following command makes **paid** calls:
 
 ```sh
 uv run --locked python benchmarks/multitask/run.py \

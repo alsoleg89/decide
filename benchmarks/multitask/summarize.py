@@ -132,7 +132,10 @@ text+=['', '## What these results establish', '',
        '**Failures.** One response on sentiment, one on emotion, and 33 on Banking77 failed client response '
        'validation and remain failures in all headline metrics. Four separate diagnostic repeats returned '
        'valid responses; they did not replace failed predictions. The original raw rejected responses were '
-       'not saved, so their precise cause is unproven. [Diagnostic records](diagnostics.json).', '',
+       'not saved, so their precise cause is unproven. [Diagnostic records](diagnostics.json). '
+       'A [later paired-response investigation](rejection-diagnostics/README.md) repeated all 63 failures '
+       'across this study and its follow-up: 23 reproduced rejections had probability sums of 0.99. '
+       'Those new responses do not replace any original predictions.', '',
        '**Baseline.** Multinomial Naive Bayes implemented with Python standard-library counters, Laplace '
        'smoothing α=1, lowercase Unicode word tokens of length ≥2, raw counts, no hyperparameter search. '
        'Training sets and their hashes are recorded. This differs from Jev zero-shot inference and is not a '

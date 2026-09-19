@@ -59,6 +59,10 @@ Known successful usage cost **at least $0.1489** for the initial study and
 [published Jev pricing](https://docs.typesafe.ai/models). Across both studies,
 63 rejected responses had incomplete usage accounting. Agent review and
 reasoning costs are excluded.
+The [rejection investigation](benchmarks/multitask/rejection-diagnostics/README.md)
+reproduced probability distributions summing to 0.99. Relaxing that validation
+would have admitted additional wrong decisions; the server retains the check
+and now records its exact failure reason.
 The [earlier VS Code issue evaluation](benchmarks/vscode-500/README.md) and
 [synthetic log/file scale checks](benchmarks/README.md) remain available.
 
@@ -265,7 +269,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 242 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 243 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

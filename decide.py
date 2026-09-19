@@ -162,10 +162,13 @@ async def classify(client: httpx.AsyncClient, payload: dict) -> dict:
                     probabilities = answer.probabilities
                     if (set(probabilities) != set(payload["questions"]["decision"]["criteria"])
                         or answer.choice not in probabilities
-                        or not math.isclose(sum(probabilities.values()), 1, abs_tol=1e-5)
                         or probabilities[answer.choice] != max(probabilities.values())
                         or not isinstance(raw["model"], str) or not raw["model"]):
                         raise ValueError("Invalid provider answer")
+                    probability_sum = sum(probabilities.values())
+                    if not math.isclose(probability_sum, 1, abs_tol=1e-5):
+                        return {"error": "invalid_provider_response", "validation_error": "probability_sum",
+                                "probability_sum": probability_sum, "attempts": attempt + 1}
                     return {**answer.model_dump(exclude={"type"}), "model": raw["model"],
                             "usage": usage.model_dump(), "attempts": attempt + 1}
                 except (ValueError, TypeError, KeyError, RecursionError):
