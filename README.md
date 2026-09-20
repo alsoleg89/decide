@@ -34,7 +34,7 @@ uvx --python 3.11 --from https://github.com/alsoleg89/decide/releases/download/v
 Use it as your MCP client's launch command. Set `TYPESAFE_API_KEY` and
 **`DECIDE_ROOT` to an absolute data-directory path** in the server environment.
 Missing or relative roots are rejected before any files are read.
-[Codex setup](docs/usage.md#codex) · [Claude setup](docs/usage.md#claude-code--claude-desktop)
+[Codex setup](docs/usage.md#codex) · [Claude setup](docs/usage.md#claude-code--claude-desktop) · [Verify the wheel](docs/usage.md#verify-the-downloaded-wheel)
 
 Then ask your agent:
 
@@ -68,7 +68,7 @@ larger standalone-model batches have not been compared.
 | Task and reviewer | Total cost reduction | Accuracy: reviewer alone → decide + reviewer | Quality tradeoff |
 | --- | ---: | ---: | --- |
 | [1,000 new UX reviews / GPT-4.1 mini](benchmarks/agent/ux-recall/README.md) | **48.9%** | 84.2% → **90.2%** | Accuracy, macro-F1, feature precision and recall all improved |
-| [300 OpenCV issues / GPT-4.1 mini](benchmarks/agent/gpt-4.1-mini/required-completion/README.md) | **77.3%** | 68.0% → **74.7%** | Feature recall fell |
+| [300 OpenCV issues / GPT-4.1 mini](benchmarks/agent/gpt-4.1-mini/required-completion/README.md) | **77.3%** | 68.0% → **74.7%** | Observed feature recall −5 p.p.; 95% interval −11.01 to +0.89 |
 | [Same UX reviews / Luna](benchmarks/agent/gpt-5.6-luna/README.md) | **32.8%** | 87.8% → **90.1%** | Feature recall fell by one correct request |
 | [Same OpenCV issues / Luna](benchmarks/agent/gpt-5.6-luna/README.md) | **70.4%** | 74.7% → 74.7% | Bug and feature recall fell |
 

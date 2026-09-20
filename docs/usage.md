@@ -34,6 +34,34 @@ control. `DECIDE_ROOT` is required: set an absolute path to the directory contai
 the data to classify; it can
 be different from the directory where this package is installed.
 
+### Verify the downloaded wheel
+
+The URL command above does not explicitly pin a hash. In a local check with
+uv 0.12.2, adding a deliberately wrong `#sha256=…` fragment did **not** reject
+the wheel. Do not rely on that fragment for verification.
+
+For an explicitly verified installation, download the v0.1.1 wheel from the
+[release](https://github.com/alsoleg89/decide/releases/tag/v0.1.1), then run this
+from the download directory. The expected digest matches the release's
+[SHA256SUMS](https://github.com/alsoleg89/decide/releases/download/v0.1.1/SHA256SUMS):
+
+```sh
+python - <<'PYTHON'
+from hashlib import sha256
+from pathlib import Path
+wheel = Path("decide_mcp-0.1.1-py3-none-any.whl")
+expected = "b6166157a5e961aaee1ff94add18e78cc1a1b9dbd73fa7c4779799db3a9fc6c1"
+if sha256(wheel.read_bytes()).hexdigest() != expected:
+    raise SystemExit("SHA256 mismatch: do not install this file")
+print("Verified:", wheel.resolve())
+PYTHON
+```
+
+Only after successful verification, replace the URL in your MCP configuration's
+`--from` argument with that file's **absolute path**. Keep using the verified
+local file. This verifies the decide wheel, not the separately resolved dependencies.
+When upgrading, update both the version and its expected digest.
+
 ### Codex
 
 Add to your Codex `config.toml`, replacing the data directory:
@@ -277,6 +305,28 @@ rerun a whole paid batch blindly. After a cooldown, select only failed IDs from
 `results.jsonl` and their originals from `review.jsonl` for a new batch, retaining
 previous accepted decisions. Automatic resume is not implemented. The 30-second
 cooldown cutoff remains a bounded-stop policy, not a full scheduling budget.
+
+### Retry an existing review queue
+
+`review.jsonl` already has the `{id, content}` JSONL format accepted by `decide`.
+After resolving the provider error or waiting out its cooldown, start a new
+invocation with the original question, criteria and context, and this source:
+
+```json
+{"source":{"kind":"jsonl","paths":[".decide/<previous-run-id>/review.jsonl"]}}
+```
+
+Use the same `DECIDE_ROOT`; the path must identify the earlier run inside it.
+The new invocation creates a new run directory and leaves the previous run
+intact. Only queued records are sent again; retain the previous accepted
+results and merge new decisions by ID, checking coverage of the original input.
+
+The queue includes **uncertain decisions and forced-review labels as well as
+failures**. To retry failures only, select IDs whose original `results.jsonl`
+row has an `error`, copy those originals from `review.jsonl` into a new JSONL
+file, and pass that file instead. Repeated low confidence or oversized input
+needs agent review or input changes; resubmitting it does not guarantee progress.
+This is a new, potentially billable run, not automatic resume or deduplication.
 
 ## Development
 
