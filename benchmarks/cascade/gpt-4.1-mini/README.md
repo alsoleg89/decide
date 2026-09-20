@@ -8,6 +8,9 @@ observed accuracy, macro-F1 and cost checks on feature extraction and OpenCV.
 A retrospective no-review comparison found that **Jev alone was cheaper and
 better than that cascade on both tasks**. A reviewer is a cost that must earn its place.
 
+**Follow-up now available:** the [precommitted policy check on 1,300 new records](followup/README.md)
+retained higher quality and lower classification cost on both selected tasks.
+
 ## Frozen routing: Jev plus actual mini review
 
 Threshold 0.95, chosen before these GPT comparisons. Same rubric, model and batch
@@ -100,8 +103,8 @@ are included in each report. No missing prices are imputed.
 This is a **controlled stateless classifier comparison**, not an autonomous
 Codex/Claude session. It excludes planning, MCP tool schemas, file-reading tool
 calls and conversation history. The observed sample gate checks accuracy and
-macro-F1, not statistical noninferiority or globally minimum cost. No fresh
-holdout validates the retrospective no-review policy yet. Public corpora may
+macro-F1, not statistical noninferiority or globally minimum cost. The later fresh-record follow-up tests the selected no-confidence-review policy
+on two tasks; it is still not a full agent-loop experiment. Public corpora may
 have appeared in training; labels are not independently adjudicated.
 
 ## Reproduce without paying again

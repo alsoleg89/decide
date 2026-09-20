@@ -18,6 +18,9 @@ The [provider-response investigation](multitask/rejection-diagnostics/README.md)
 explains 23 reproduced validation failures and measures the errors that relaxing
 validation would admit.
 
+The [1,300-new-record follow-up](cascade/gpt-4.1-mini/followup/README.md) freezes
+the selected policy before inference and measures actual cost and quality against mini.
+
 The [GPT-4.1 mini comparison](cascade/gpt-4.1-mini/README.md) measures final
 quality and actual token-based costs for the full-model baseline versus Jev plus
 paid review. It includes losing scenarios and rejected output batches.

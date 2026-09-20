@@ -51,36 +51,37 @@ changes still need judgment. `decide` produces labels; it never executes them.
 
 ## Measured against GPT-4.1 mini
 
-**On two measured workloads, Jev alone was more accurate and 51–85% cheaper
-than GPT-4.1 mini.** Adding a reviewer did not improve those results.
+**51–77% lower classification cost, with higher accuracy on 1,300 new records.**
+The policy was fixed before the runs: let Jev classify, and use mini only for
+records Jev cannot process. These samples had no confidence-based review.
 
-| Job | GPT-4.1 mini alone | Jev + actual mini review | Jev alone | Jev-only cost reduction |
-| --- | --- | --- | --- | ---: |
-| Feature requests in 500 app reviews | 87.4% accuracy · $0.01846 | 90.4% · $0.01302 | **90.6% · $0.00905** | **51.0%** |
-| Triage 300 OpenCV issues | 70.7% accuracy · $0.10318 | 74.0% · $0.04599 | **78.7% · $0.01536** | **85.1%** |
+| Job | New records | GPT-4.1 mini alone | Jev with error fallback | Cost reduction |
+| --- | ---: | --- | --- | ---: |
+| Find feature requests in app reviews | 1,000 | 86.4% accuracy · $0.03745 | **90.9% · $0.01817** | **51.5%** |
+| Triage OpenCV issues | 300 | 67.0% accuracy · $0.14630 | **75.7% · $0.03351** | **77.1%** |
 
-The cascade was tested at threshold 0.95 with real GPT-4.1 mini responses;
-review was never assumed perfect. The Jev-only variant is a **retrospective
-comparison** using all recorded top labels, including low-confidence ones.
-It needs fresh validation before becoming a routing recommendation.
+Macro-F1 also increased on both tasks. The OpenCV price includes a real mini
+call for one oversized record; it was kept whole. Every other valid Jev decision
+was used directly. Costs include both providers at published rates, not just
+JSON-byte estimates.
 
-**Other jobs need a different choice.** On bug extraction, React and TensorFlow,
-mini alone preserved quality better than either tested Jev option. On usage
-experiences and general evaluations, adding mini review was both worse and
-more expensive. All nine tasks, including failures, are published.
+[Fresh-record protocol, paired mistakes, tokens and results →](benchmarks/cascade/gpt-4.1-mini/followup/README.md)
 
-[Compare every task, accuracy, macro-F1, tokens and costs →](benchmarks/cascade/gpt-4.1-mini/README.md)
+**A reviewer must earn its cost.** The earlier [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md)
+found jobs where Jev helped, jobs where mini alone preserved quality better,
+and jobs where adding review made results worse and more expensive. It motivated
+this follow-up; it did not justify a universal routing rule.
 
-Model: `gpt-4.1-mini-2025-04-14`. Costs use actual API usage and published rates,
-including the original Jev pass. These are classification cost estimates, not
-invoices or autonomous-agent bills: planning, MCP overhead and conversation
-history are excluded. The cheapest option among three tested variants is not
-proof of a global minimum or future quality.
+These are selected tasks from the same public corpora, with exact prior texts
+excluded. Results establish an observed cost-quality advantage on these samples,
+not a guarantee for your data. Classification prices exclude autonomous-agent
+planning, MCP overhead and conversation history. A global minimum cost remains
+unproven.
 
 The [workflow study](benchmarks/workflows/README.md) covers 3,500 Jev decisions
 on UX feedback and issues from five projects. The [earlier evaluations](benchmarks/multitask/README.md)
-cover another 8,340 records across ten tasks. Predictions, errors, local baselines
-and reproduction instructions are available throughout.
+cover another 8,340 records across ten tasks. Predictions, failures, baselines
+and reproduction instructions are published throughout.
 
 Choose the greatest savings your task's quality allows. Review rate is an
 outcome, not a quota: there is no universal “only review 5%” setting.
