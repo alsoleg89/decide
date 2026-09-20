@@ -1,0 +1,16 @@
+{
+  "question": "Does this French app review contain the following type of feedback: user experience? A review can contain several types; evaluate only this type, independently of the others.",
+  "criteria": {
+    "yes": "Describes experience with a specific app function, including how a function is helpful or used.",
+    "no": "Does not contain this type of feedback."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.95,
+  "review_limit": 0,
+  "concurrency": 4
+}

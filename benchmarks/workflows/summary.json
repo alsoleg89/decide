@@ -1,0 +1,1703 @@
+{
+  "status": "measured_live",
+  "threshold": 0.95,
+  "tasks": {
+    "ux-bug_report": {
+      "action": "Find reported product failures for the engineering backlog.",
+      "quality": {
+        "accuracy": 0.92,
+        "macro_f1": 0.9169380025250848,
+        "per_class": {
+          "yes": {
+            "support": 186,
+            "precision": 0.8348623853211009,
+            "recall": 0.978494623655914,
+            "f1": 0.900990099009901
+          },
+          "no": {
+            "support": 314,
+            "precision": 0.9858156028368794,
+            "recall": 0.8853503184713376,
+            "f1": 0.9328859060402686
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 182,
+            "no": 4
+          },
+          "no": {
+            "no": 278,
+            "yes": 36
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 399,
+      "review": 101,
+      "failed": 0,
+      "review_fraction": 0.202,
+      "accepted_errors": 10,
+      "accepted_error_rate": 0.02506265664160401,
+      "accepted_error_ids": [
+        "Huawei Health:1035",
+        "Samsung Health:1308",
+        "Samsung Health:196",
+        "Samsung Health:873",
+        "Samsung Health:820",
+        "Huawei Health:1510",
+        "Garmin Connect:1702",
+        "Huawei Health:766",
+        "Samsung Health:273",
+        "Samsung Health:1713"
+      ],
+      "accepted_error_95ci": [
+        0.013669404788679021,
+        0.045513825483818895
+      ],
+      "full_review_json_saved": 0.7339213208866426,
+      "known_jev_usd": 0.009175236000000002,
+      "cost_complete": true,
+      "elapsed_seconds": 39.767,
+      "nb_accuracy": 0.886,
+      "accepted_confusion": {
+        "yes": {
+          "yes": 158
+        },
+        "no": {
+          "no": 231,
+          "yes": 10
+        }
+      },
+      "groups": {
+        "Garmin Connect": {
+          "threshold": 0.95,
+          "total": 170,
+          "accepted": 146,
+          "review": 24,
+          "failed": 0,
+          "review_fraction": 0.1411764705882353,
+          "accepted_errors": 1,
+          "accepted_error_rate": 0.00684931506849315,
+          "accepted_error_ids": [
+            "Garmin Connect:1702"
+          ]
+        },
+        "Huawei Health": {
+          "threshold": 0.95,
+          "total": 178,
+          "accepted": 135,
+          "review": 43,
+          "failed": 0,
+          "review_fraction": 0.24157303370786518,
+          "accepted_errors": 3,
+          "accepted_error_rate": 0.022222222222222223,
+          "accepted_error_ids": [
+            "Huawei Health:1035",
+            "Huawei Health:1510",
+            "Huawei Health:766"
+          ]
+        },
+        "Samsung Health": {
+          "threshold": 0.95,
+          "total": 152,
+          "accepted": 118,
+          "review": 34,
+          "failed": 0,
+          "review_fraction": 0.2236842105263158,
+          "accepted_errors": 6,
+          "accepted_error_rate": 0.05084745762711865,
+          "accepted_error_ids": [
+            "Samsung Health:1308",
+            "Samsung Health:196",
+            "Samsung Health:873",
+            "Samsung Health:820",
+            "Samsung Health:273",
+            "Samsung Health:1713"
+          ]
+        }
+      },
+      "accepted_false_negatives": 0,
+      "accepted_false_positives": 10
+    },
+    "ux-feature_request": {
+      "action": "Find feature requests for product discovery.",
+      "quality": {
+        "accuracy": 0.906,
+        "macro_f1": 0.8400914540790289,
+        "per_class": {
+          "yes": {
+            "support": 102,
+            "precision": 0.8571428571428571,
+            "recall": 0.6470588235294118,
+            "f1": 0.7374301675977654
+          },
+          "no": {
+            "support": 398,
+            "precision": 0.9148936170212766,
+            "recall": 0.9723618090452262,
+            "f1": 0.9427527405602923
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 66,
+            "no": 36
+          },
+          "no": {
+            "no": 387,
+            "yes": 11
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 403,
+      "review": 97,
+      "failed": 0,
+      "review_fraction": 0.194,
+      "accepted_errors": 12,
+      "accepted_error_rate": 0.02977667493796526,
+      "accepted_error_ids": [
+        "Samsung Health:1972",
+        "Samsung Health:1087",
+        "Garmin Connect:1122",
+        "Samsung Health:66",
+        "Samsung Health:196",
+        "Samsung Health:820",
+        "Huawei Health:1041",
+        "Huawei Health:1510",
+        "Samsung Health:1741",
+        "Samsung Health:1901",
+        "Samsung Health:454",
+        "Samsung Health:1824"
+      ],
+      "accepted_error_95ci": [
+        0.017114054570259198,
+        0.0513191353543807
+      ],
+      "full_review_json_saved": 0.7421773382089478,
+      "known_jev_usd": 0.009049236,
+      "cost_complete": true,
+      "elapsed_seconds": 43.394,
+      "nb_accuracy": 0.896,
+      "accepted_confusion": {
+        "yes": {
+          "yes": 44,
+          "no": 11
+        },
+        "no": {
+          "no": 347,
+          "yes": 1
+        }
+      },
+      "groups": {
+        "Garmin Connect": {
+          "threshold": 0.95,
+          "total": 170,
+          "accepted": 148,
+          "review": 22,
+          "failed": 0,
+          "review_fraction": 0.12941176470588237,
+          "accepted_errors": 1,
+          "accepted_error_rate": 0.006756756756756757,
+          "accepted_error_ids": [
+            "Garmin Connect:1122"
+          ]
+        },
+        "Huawei Health": {
+          "threshold": 0.95,
+          "total": 178,
+          "accepted": 139,
+          "review": 39,
+          "failed": 0,
+          "review_fraction": 0.21910112359550563,
+          "accepted_errors": 2,
+          "accepted_error_rate": 0.014388489208633094,
+          "accepted_error_ids": [
+            "Huawei Health:1041",
+            "Huawei Health:1510"
+          ]
+        },
+        "Samsung Health": {
+          "threshold": 0.95,
+          "total": 152,
+          "accepted": 116,
+          "review": 36,
+          "failed": 0,
+          "review_fraction": 0.23684210526315788,
+          "accepted_errors": 9,
+          "accepted_error_rate": 0.07758620689655173,
+          "accepted_error_ids": [
+            "Samsung Health:1972",
+            "Samsung Health:1087",
+            "Samsung Health:66",
+            "Samsung Health:196",
+            "Samsung Health:820",
+            "Samsung Health:1741",
+            "Samsung Health:1901",
+            "Samsung Health:454",
+            "Samsung Health:1824"
+          ]
+        }
+      },
+      "accepted_false_negatives": 11,
+      "accepted_false_positives": 1
+    },
+    "ux-user_experience": {
+      "action": "Find concrete usage experiences for UX research synthesis.",
+      "quality": {
+        "accuracy": 0.406,
+        "macro_f1": 0.40426283041348565,
+        "per_class": {
+          "yes": {
+            "support": 97,
+            "precision": 0.23404255319148937,
+            "recall": 0.9072164948453608,
+            "f1": 0.37209302325581395
+          },
+          "no": {
+            "support": 403,
+            "precision": 0.9274193548387096,
+            "recall": 0.2853598014888337,
+            "f1": 0.4364326375711574
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 88,
+            "no": 9
+          },
+          "no": {
+            "yes": 288,
+            "no": 115
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 181,
+      "review": 319,
+      "failed": 0,
+      "review_fraction": 0.638,
+      "accepted_errors": 108,
+      "accepted_error_rate": 0.5966850828729282,
+      "accepted_error_ids": [
+        "Samsung Health:1697",
+        "Huawei Health:1819",
+        "Samsung Health:793",
+        "Garmin Connect:522",
+        "Huawei Health:1547",
+        "Garmin Connect:1520",
+        "Garmin Connect:1016",
+        "Garmin Connect:1833",
+        "Garmin Connect:151",
+        "Garmin Connect:1380",
+        "Garmin Connect:178",
+        "Garmin Connect:524",
+        "Garmin Connect:1200",
+        "Garmin Connect:1729",
+        "Garmin Connect:1820",
+        "Garmin Connect:195",
+        "Garmin Connect:865",
+        "Huawei Health:1199",
+        "Samsung Health:1308",
+        "Garmin Connect:81",
+        "Samsung Health:750",
+        "Samsung Health:1715",
+        "Garmin Connect:279",
+        "Garmin Connect:317",
+        "Garmin Connect:1163",
+        "Garmin Connect:304",
+        "Samsung Health:1059",
+        "Garmin Connect:292",
+        "Garmin Connect:481",
+        "Huawei Health:1972",
+        "Huawei Health:38",
+        "Samsung Health:1038",
+        "Samsung Health:1465",
+        "Garmin Connect:989",
+        "Samsung Health:84",
+        "Samsung Health:515",
+        "Garmin Connect:1444",
+        "Samsung Health:790",
+        "Garmin Connect:923",
+        "Samsung Health:873",
+        "Huawei Health:331",
+        "Huawei Health:813",
+        "Samsung Health:1174",
+        "Garmin Connect:1207",
+        "Samsung Health:820",
+        "Garmin Connect:87",
+        "Huawei Health:1634",
+        "Samsung Health:11",
+        "Samsung Health:309",
+        "Garmin Connect:236",
+        "Samsung Health:407",
+        "Garmin Connect:1592",
+        "Garmin Connect:385",
+        "Samsung Health:53",
+        "Huawei Health:738",
+        "Samsung Health:279",
+        "Huawei Health:686",
+        "Huawei Health:1345",
+        "Huawei Health:577",
+        "Huawei Health:1934",
+        "Samsung Health:1036",
+        "Samsung Health:1585",
+        "Samsung Health:1272",
+        "Samsung Health:878",
+        "Huawei Health:360",
+        "Samsung Health:615",
+        "Garmin Connect:1137",
+        "Garmin Connect:233",
+        "Samsung Health:636",
+        "Huawei Health:544",
+        "Huawei Health:1225",
+        "Huawei Health:766",
+        "Huawei Health:194",
+        "Samsung Health:1045",
+        "Garmin Connect:852",
+        "Huawei Health:769",
+        "Huawei Health:1815",
+        "Garmin Connect:1771",
+        "Samsung Health:1072",
+        "Garmin Connect:1092",
+        "Samsung Health:849",
+        "Garmin Connect:928",
+        "Garmin Connect:778",
+        "Huawei Health:933",
+        "Huawei Health:960",
+        "Huawei Health:621",
+        "Garmin Connect:934",
+        "Huawei Health:1558",
+        "Garmin Connect:1735",
+        "Samsung Health:1183",
+        "Garmin Connect:262",
+        "Samsung Health:1857",
+        "Garmin Connect:1801",
+        "Huawei Health:22",
+        "Huawei Health:833",
+        "Huawei Health:472",
+        "Samsung Health:230",
+        "Huawei Health:1834",
+        "Huawei Health:1416",
+        "Huawei Health:351",
+        "Samsung Health:1577",
+        "Garmin Connect:1955",
+        "Samsung Health:424",
+        "Samsung Health:1713",
+        "Garmin Connect:804",
+        "Garmin Connect:406",
+        "Garmin Connect:1741",
+        "Garmin Connect:225"
+      ],
+      "accepted_error_95ci": [
+        0.5239270468725353,
+        0.6654244126068655
+      ],
+      "full_review_json_saved": 0.47682436079894,
+      "known_jev_usd": 0.009091236,
+      "cost_complete": true,
+      "elapsed_seconds": 38.915,
+      "nb_accuracy": 0.828,
+      "accepted_confusion": {
+        "yes": {
+          "yes": 49,
+          "no": 1
+        },
+        "no": {
+          "no": 24,
+          "yes": 107
+        }
+      },
+      "groups": {
+        "Garmin Connect": {
+          "threshold": 0.95,
+          "total": 170,
+          "accepted": 75,
+          "review": 95,
+          "failed": 0,
+          "review_fraction": 0.5588235294117647,
+          "accepted_errors": 44,
+          "accepted_error_rate": 0.5866666666666667,
+          "accepted_error_ids": [
+            "Garmin Connect:522",
+            "Garmin Connect:1520",
+            "Garmin Connect:1016",
+            "Garmin Connect:1833",
+            "Garmin Connect:151",
+            "Garmin Connect:1380",
+            "Garmin Connect:178",
+            "Garmin Connect:524",
+            "Garmin Connect:1200",
+            "Garmin Connect:1729",
+            "Garmin Connect:1820",
+            "Garmin Connect:195",
+            "Garmin Connect:865",
+            "Garmin Connect:81",
+            "Garmin Connect:279",
+            "Garmin Connect:317",
+            "Garmin Connect:1163",
+            "Garmin Connect:304",
+            "Garmin Connect:292",
+            "Garmin Connect:481",
+            "Garmin Connect:989",
+            "Garmin Connect:1444",
+            "Garmin Connect:923",
+            "Garmin Connect:1207",
+            "Garmin Connect:87",
+            "Garmin Connect:236",
+            "Garmin Connect:1592",
+            "Garmin Connect:385",
+            "Garmin Connect:1137",
+            "Garmin Connect:233",
+            "Garmin Connect:852",
+            "Garmin Connect:1771",
+            "Garmin Connect:1092",
+            "Garmin Connect:928",
+            "Garmin Connect:778",
+            "Garmin Connect:934",
+            "Garmin Connect:1735",
+            "Garmin Connect:262",
+            "Garmin Connect:1801",
+            "Garmin Connect:1955",
+            "Garmin Connect:804",
+            "Garmin Connect:406",
+            "Garmin Connect:1741",
+            "Garmin Connect:225"
+          ]
+        },
+        "Huawei Health": {
+          "threshold": 0.95,
+          "total": 178,
+          "accepted": 56,
+          "review": 122,
+          "failed": 0,
+          "review_fraction": 0.6853932584269663,
+          "accepted_errors": 30,
+          "accepted_error_rate": 0.5357142857142857,
+          "accepted_error_ids": [
+            "Huawei Health:1819",
+            "Huawei Health:1547",
+            "Huawei Health:1199",
+            "Huawei Health:1972",
+            "Huawei Health:38",
+            "Huawei Health:331",
+            "Huawei Health:813",
+            "Huawei Health:1634",
+            "Huawei Health:738",
+            "Huawei Health:686",
+            "Huawei Health:1345",
+            "Huawei Health:577",
+            "Huawei Health:1934",
+            "Huawei Health:360",
+            "Huawei Health:544",
+            "Huawei Health:1225",
+            "Huawei Health:766",
+            "Huawei Health:194",
+            "Huawei Health:769",
+            "Huawei Health:1815",
+            "Huawei Health:933",
+            "Huawei Health:960",
+            "Huawei Health:621",
+            "Huawei Health:1558",
+            "Huawei Health:22",
+            "Huawei Health:833",
+            "Huawei Health:472",
+            "Huawei Health:1834",
+            "Huawei Health:1416",
+            "Huawei Health:351"
+          ]
+        },
+        "Samsung Health": {
+          "threshold": 0.95,
+          "total": 152,
+          "accepted": 50,
+          "review": 102,
+          "failed": 0,
+          "review_fraction": 0.6710526315789473,
+          "accepted_errors": 34,
+          "accepted_error_rate": 0.68,
+          "accepted_error_ids": [
+            "Samsung Health:1697",
+            "Samsung Health:793",
+            "Samsung Health:1308",
+            "Samsung Health:750",
+            "Samsung Health:1715",
+            "Samsung Health:1059",
+            "Samsung Health:1038",
+            "Samsung Health:1465",
+            "Samsung Health:84",
+            "Samsung Health:515",
+            "Samsung Health:790",
+            "Samsung Health:873",
+            "Samsung Health:1174",
+            "Samsung Health:820",
+            "Samsung Health:11",
+            "Samsung Health:309",
+            "Samsung Health:407",
+            "Samsung Health:53",
+            "Samsung Health:279",
+            "Samsung Health:1036",
+            "Samsung Health:1585",
+            "Samsung Health:1272",
+            "Samsung Health:878",
+            "Samsung Health:615",
+            "Samsung Health:636",
+            "Samsung Health:1045",
+            "Samsung Health:1072",
+            "Samsung Health:849",
+            "Samsung Health:1183",
+            "Samsung Health:1857",
+            "Samsung Health:230",
+            "Samsung Health:1577",
+            "Samsung Health:424",
+            "Samsung Health:1713"
+          ]
+        }
+      },
+      "accepted_false_negatives": 1,
+      "accepted_false_positives": 107
+    },
+    "ux-rating": {
+      "action": "Separate general praise and criticism from detailed product feedback.",
+      "quality": {
+        "accuracy": 0.794,
+        "macro_f1": 0.7892583120204604,
+        "per_class": {
+          "yes": {
+            "support": 269,
+            "precision": 0.7712418300653595,
+            "recall": 0.8773234200743495,
+            "f1": 0.8208695652173913
+          },
+          "no": {
+            "support": 231,
+            "precision": 0.8298969072164949,
+            "recall": 0.696969696969697,
+            "f1": 0.7576470588235295
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 236,
+            "no": 33
+          },
+          "no": {
+            "no": 161,
+            "yes": 70
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 500,
+      "accepted": 27,
+      "review": 473,
+      "failed": 0,
+      "review_fraction": 0.946,
+      "accepted_errors": 2,
+      "accepted_error_rate": 0.07407407407407407,
+      "accepted_error_ids": [
+        "Garmin Connect:905",
+        "Garmin Connect:334"
+      ],
+      "accepted_error_95ci": [
+        0.020554654060988622,
+        0.23369592683023144
+      ],
+      "full_review_json_saved": 0.058641672391795074,
+      "known_jev_usd": 0.009175236000000002,
+      "cost_complete": true,
+      "elapsed_seconds": 40.909,
+      "nb_accuracy": 0.802,
+      "accepted_confusion": {
+        "yes": {
+          "no": 2,
+          "yes": 10
+        },
+        "no": {
+          "no": 15
+        }
+      },
+      "groups": {
+        "Garmin Connect": {
+          "threshold": 0.95,
+          "total": 170,
+          "accepted": 8,
+          "review": 162,
+          "failed": 0,
+          "review_fraction": 0.9529411764705882,
+          "accepted_errors": 2,
+          "accepted_error_rate": 0.25,
+          "accepted_error_ids": [
+            "Garmin Connect:905",
+            "Garmin Connect:334"
+          ]
+        },
+        "Huawei Health": {
+          "threshold": 0.95,
+          "total": 178,
+          "accepted": 11,
+          "review": 167,
+          "failed": 0,
+          "review_fraction": 0.9382022471910112,
+          "accepted_errors": 0,
+          "accepted_error_rate": 0.0,
+          "accepted_error_ids": []
+        },
+        "Samsung Health": {
+          "threshold": 0.95,
+          "total": 152,
+          "accepted": 8,
+          "review": 144,
+          "failed": 0,
+          "review_fraction": 0.9473684210526315,
+          "accepted_errors": 0,
+          "accepted_error_rate": 0.0,
+          "accepted_error_ids": []
+        }
+      },
+      "accepted_false_negatives": 2,
+      "accepted_false_positives": 0
+    },
+    "dev-bitcoin": {
+      "action": "Triage the bitcoin/bitcoin issue backlog into bugs, feature requests, and questions.",
+      "quality": {
+        "accuracy": 0.7833333333333333,
+        "macro_f1": 0.7753284525122858,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.7058823529411765,
+            "recall": 0.96,
+            "f1": 0.8135593220338982
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.8842105263157894,
+            "recall": 0.84,
+            "f1": 0.8615384615384616
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.7971014492753623,
+            "recall": 0.55,
+            "f1": 0.650887573964497
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 96,
+            "feature": 1,
+            "question": 3
+          },
+          "feature": {
+            "question": 11,
+            "feature": 84,
+            "bug": 5
+          },
+          "question": {
+            "bug": 35,
+            "question": 55,
+            "feature": 10
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 300,
+      "accepted": 205,
+      "review": 95,
+      "failed": 0,
+      "review_fraction": 0.31666666666666665,
+      "accepted_errors": 36,
+      "accepted_error_rate": 0.17560975609756097,
+      "accepted_error_ids": [
+        "nlbse24:test:919",
+        "nlbse24:test:929",
+        "nlbse24:test:956",
+        "nlbse24:test:966",
+        "nlbse24:test:971",
+        "nlbse24:test:980",
+        "nlbse24:test:982",
+        "nlbse24:test:1001",
+        "nlbse24:test:1004",
+        "nlbse24:test:1007",
+        "nlbse24:test:1008",
+        "nlbse24:test:1012",
+        "nlbse24:test:1011",
+        "nlbse24:test:1009",
+        "nlbse24:test:1013",
+        "nlbse24:test:1016",
+        "nlbse24:test:1022",
+        "nlbse24:test:1030",
+        "nlbse24:test:1029",
+        "nlbse24:test:1033",
+        "nlbse24:test:1035",
+        "nlbse24:test:1041",
+        "nlbse24:test:1046",
+        "nlbse24:test:1047",
+        "nlbse24:test:1054",
+        "nlbse24:test:1056",
+        "nlbse24:test:1064",
+        "nlbse24:test:1065",
+        "nlbse24:test:1068",
+        "nlbse24:test:1070",
+        "nlbse24:test:1071",
+        "nlbse24:test:1076",
+        "nlbse24:test:1091",
+        "nlbse24:test:1093",
+        "nlbse24:test:1097",
+        "nlbse24:test:1099"
+      ],
+      "accepted_error_95ci": [
+        0.12962915237364162,
+        0.2335241182890079
+      ],
+      "full_review_json_saved": 0.6146935521521721,
+      "known_jev_usd": 0.015701616,
+      "cost_complete": true,
+      "elapsed_seconds": 23.84,
+      "nb_accuracy": 0.6266666666666667,
+      "accepted_confusion": {
+        "bug": {
+          "bug": 76
+        },
+        "feature": {
+          "feature": 67,
+          "question": 4,
+          "bug": 3
+        },
+        "question": {
+          "bug": 20,
+          "feature": 9,
+          "question": 26
+        }
+      },
+      "groups": {
+        "bitcoin/bitcoin": {
+          "threshold": 0.95,
+          "total": 300,
+          "accepted": 205,
+          "review": 95,
+          "failed": 0,
+          "review_fraction": 0.31666666666666665,
+          "accepted_errors": 36,
+          "accepted_error_rate": 0.17560975609756097,
+          "accepted_error_ids": [
+            "nlbse24:test:919",
+            "nlbse24:test:929",
+            "nlbse24:test:956",
+            "nlbse24:test:966",
+            "nlbse24:test:971",
+            "nlbse24:test:980",
+            "nlbse24:test:982",
+            "nlbse24:test:1001",
+            "nlbse24:test:1004",
+            "nlbse24:test:1007",
+            "nlbse24:test:1008",
+            "nlbse24:test:1012",
+            "nlbse24:test:1011",
+            "nlbse24:test:1009",
+            "nlbse24:test:1013",
+            "nlbse24:test:1016",
+            "nlbse24:test:1022",
+            "nlbse24:test:1030",
+            "nlbse24:test:1029",
+            "nlbse24:test:1033",
+            "nlbse24:test:1035",
+            "nlbse24:test:1041",
+            "nlbse24:test:1046",
+            "nlbse24:test:1047",
+            "nlbse24:test:1054",
+            "nlbse24:test:1056",
+            "nlbse24:test:1064",
+            "nlbse24:test:1065",
+            "nlbse24:test:1068",
+            "nlbse24:test:1070",
+            "nlbse24:test:1071",
+            "nlbse24:test:1076",
+            "nlbse24:test:1091",
+            "nlbse24:test:1093",
+            "nlbse24:test:1097",
+            "nlbse24:test:1099"
+          ]
+        }
+      }
+    },
+    "dev-react": {
+      "action": "Triage the facebook/react issue backlog into bugs, feature requests, and questions.",
+      "quality": {
+        "accuracy": 0.78,
+        "macro_f1": 0.7752134986656986,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.6666666666666666,
+            "recall": 0.96,
+            "f1": 0.7868852459016393
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.8617021276595744,
+            "recall": 0.81,
+            "f1": 0.8350515463917526
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.9193548387096774,
+            "recall": 0.57,
+            "f1": 0.7037037037037036
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 96,
+            "question": 2,
+            "feature": 2
+          },
+          "feature": {
+            "bug": 16,
+            "feature": 81,
+            "question": 3
+          },
+          "question": {
+            "bug": 32,
+            "question": 57,
+            "feature": 11
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 300,
+      "accepted": 231,
+      "review": 69,
+      "failed": 0,
+      "review_fraction": 0.23,
+      "accepted_errors": 35,
+      "accepted_error_rate": 0.15151515151515152,
+      "accepted_error_ids": [
+        "nlbse24:test:3",
+        "nlbse24:test:100",
+        "nlbse24:test:102",
+        "nlbse24:test:115",
+        "nlbse24:test:124",
+        "nlbse24:test:125",
+        "nlbse24:test:138",
+        "nlbse24:test:150",
+        "nlbse24:test:157",
+        "nlbse24:test:163",
+        "nlbse24:test:171",
+        "nlbse24:test:180",
+        "nlbse24:test:190",
+        "nlbse24:test:201",
+        "nlbse24:test:205",
+        "nlbse24:test:207",
+        "nlbse24:test:212",
+        "nlbse24:test:216",
+        "nlbse24:test:224",
+        "nlbse24:test:227",
+        "nlbse24:test:239",
+        "nlbse24:test:242",
+        "nlbse24:test:244",
+        "nlbse24:test:245",
+        "nlbse24:test:255",
+        "nlbse24:test:258",
+        "nlbse24:test:260",
+        "nlbse24:test:270",
+        "nlbse24:test:269",
+        "nlbse24:test:278",
+        "nlbse24:test:279",
+        "nlbse24:test:283",
+        "nlbse24:test:289",
+        "nlbse24:test:292",
+        "nlbse24:test:300"
+      ],
+      "accepted_error_95ci": [
+        0.11100506729817934,
+        0.20342603524863911
+      ],
+      "full_review_json_saved": 0.7858556210102835,
+      "known_jev_usd": 0.010701726,
+      "cost_complete": true,
+      "elapsed_seconds": 24.642,
+      "nb_accuracy": 0.7633333333333333,
+      "accepted_confusion": {
+        "bug": {
+          "bug": 85,
+          "question": 1,
+          "feature": 1
+        },
+        "feature": {
+          "bug": 11,
+          "feature": 72
+        },
+        "question": {
+          "bug": 17,
+          "question": 39,
+          "feature": 5
+        }
+      },
+      "groups": {
+        "facebook/react": {
+          "threshold": 0.95,
+          "total": 300,
+          "accepted": 231,
+          "review": 69,
+          "failed": 0,
+          "review_fraction": 0.23,
+          "accepted_errors": 35,
+          "accepted_error_rate": 0.15151515151515152,
+          "accepted_error_ids": [
+            "nlbse24:test:3",
+            "nlbse24:test:100",
+            "nlbse24:test:102",
+            "nlbse24:test:115",
+            "nlbse24:test:124",
+            "nlbse24:test:125",
+            "nlbse24:test:138",
+            "nlbse24:test:150",
+            "nlbse24:test:157",
+            "nlbse24:test:163",
+            "nlbse24:test:171",
+            "nlbse24:test:180",
+            "nlbse24:test:190",
+            "nlbse24:test:201",
+            "nlbse24:test:205",
+            "nlbse24:test:207",
+            "nlbse24:test:212",
+            "nlbse24:test:216",
+            "nlbse24:test:224",
+            "nlbse24:test:227",
+            "nlbse24:test:239",
+            "nlbse24:test:242",
+            "nlbse24:test:244",
+            "nlbse24:test:245",
+            "nlbse24:test:255",
+            "nlbse24:test:258",
+            "nlbse24:test:260",
+            "nlbse24:test:270",
+            "nlbse24:test:269",
+            "nlbse24:test:278",
+            "nlbse24:test:279",
+            "nlbse24:test:283",
+            "nlbse24:test:289",
+            "nlbse24:test:292",
+            "nlbse24:test:300"
+          ]
+        }
+      }
+    },
+    "dev-vscode": {
+      "action": "Triage the microsoft/vscode issue backlog into bugs, feature requests, and questions.",
+      "quality": {
+        "accuracy": 0.67,
+        "macro_f1": 0.6266034855249892,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.5740740740740741,
+            "recall": 0.93,
+            "f1": 0.7099236641221375
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.7589285714285714,
+            "recall": 0.85,
+            "f1": 0.8018867924528302
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.92,
+            "recall": 0.23,
+            "f1": 0.368
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 93,
+            "feature": 6,
+            "question": 1
+          },
+          "feature": {
+            "feature": 85,
+            "__failed__": 1,
+            "bug": 13,
+            "question": 1
+          },
+          "question": {
+            "bug": 56,
+            "feature": 21,
+            "question": 23
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 300,
+      "accepted": 209,
+      "review": 91,
+      "failed": 1,
+      "review_fraction": 0.30333333333333334,
+      "accepted_errors": 50,
+      "accepted_error_rate": 0.23923444976076555,
+      "accepted_error_ids": [
+        "nlbse24:test:676",
+        "nlbse24:test:682",
+        "nlbse24:test:717",
+        "nlbse24:test:720",
+        "nlbse24:test:727",
+        "nlbse24:test:752",
+        "nlbse24:test:759",
+        "nlbse24:test:785",
+        "nlbse24:test:801",
+        "nlbse24:test:802",
+        "nlbse24:test:803",
+        "nlbse24:test:804",
+        "nlbse24:test:812",
+        "nlbse24:test:813",
+        "nlbse24:test:814",
+        "nlbse24:test:818",
+        "nlbse24:test:817",
+        "nlbse24:test:819",
+        "nlbse24:test:820",
+        "nlbse24:test:821",
+        "nlbse24:test:822",
+        "nlbse24:test:829",
+        "nlbse24:test:832",
+        "nlbse24:test:835",
+        "nlbse24:test:839",
+        "nlbse24:test:840",
+        "nlbse24:test:842",
+        "nlbse24:test:845",
+        "nlbse24:test:846",
+        "nlbse24:test:855",
+        "nlbse24:test:856",
+        "nlbse24:test:857",
+        "nlbse24:test:860",
+        "nlbse24:test:863",
+        "nlbse24:test:868",
+        "nlbse24:test:869",
+        "nlbse24:test:870",
+        "nlbse24:test:867",
+        "nlbse24:test:877",
+        "nlbse24:test:878",
+        "nlbse24:test:884",
+        "nlbse24:test:883",
+        "nlbse24:test:885",
+        "nlbse24:test:888",
+        "nlbse24:test:891",
+        "nlbse24:test:893",
+        "nlbse24:test:896",
+        "nlbse24:test:898",
+        "nlbse24:test:899",
+        "nlbse24:test:900"
+      ],
+      "accepted_error_95ci": [
+        0.18643440774481668,
+        0.3014473207307159
+      ],
+      "full_review_json_saved": 0.6129860640127328,
+      "known_jev_usd": 0.012869178000000002,
+      "cost_complete": false,
+      "elapsed_seconds": 25.155,
+      "nb_accuracy": 0.64,
+      "accepted_confusion": {
+        "bug": {
+          "bug": 82,
+          "feature": 2
+        },
+        "feature": {
+          "feature": 71,
+          "bug": 6
+        },
+        "question": {
+          "bug": 29,
+          "feature": 13,
+          "question": 6
+        }
+      },
+      "groups": {
+        "microsoft/vscode": {
+          "threshold": 0.95,
+          "total": 300,
+          "accepted": 209,
+          "review": 91,
+          "failed": 1,
+          "review_fraction": 0.30333333333333334,
+          "accepted_errors": 50,
+          "accepted_error_rate": 0.23923444976076555,
+          "accepted_error_ids": [
+            "nlbse24:test:676",
+            "nlbse24:test:682",
+            "nlbse24:test:717",
+            "nlbse24:test:720",
+            "nlbse24:test:727",
+            "nlbse24:test:752",
+            "nlbse24:test:759",
+            "nlbse24:test:785",
+            "nlbse24:test:801",
+            "nlbse24:test:802",
+            "nlbse24:test:803",
+            "nlbse24:test:804",
+            "nlbse24:test:812",
+            "nlbse24:test:813",
+            "nlbse24:test:814",
+            "nlbse24:test:818",
+            "nlbse24:test:817",
+            "nlbse24:test:819",
+            "nlbse24:test:820",
+            "nlbse24:test:821",
+            "nlbse24:test:822",
+            "nlbse24:test:829",
+            "nlbse24:test:832",
+            "nlbse24:test:835",
+            "nlbse24:test:839",
+            "nlbse24:test:840",
+            "nlbse24:test:842",
+            "nlbse24:test:845",
+            "nlbse24:test:846",
+            "nlbse24:test:855",
+            "nlbse24:test:856",
+            "nlbse24:test:857",
+            "nlbse24:test:860",
+            "nlbse24:test:863",
+            "nlbse24:test:868",
+            "nlbse24:test:869",
+            "nlbse24:test:870",
+            "nlbse24:test:867",
+            "nlbse24:test:877",
+            "nlbse24:test:878",
+            "nlbse24:test:884",
+            "nlbse24:test:883",
+            "nlbse24:test:885",
+            "nlbse24:test:888",
+            "nlbse24:test:891",
+            "nlbse24:test:893",
+            "nlbse24:test:896",
+            "nlbse24:test:898",
+            "nlbse24:test:899",
+            "nlbse24:test:900"
+          ]
+        }
+      }
+    },
+    "dev-opencv": {
+      "action": "Triage the opencv/opencv issue backlog into bugs, feature requests, and questions.",
+      "quality": {
+        "accuracy": 0.7866666666666666,
+        "macro_f1": 0.7887526886567885,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.6567164179104478,
+            "recall": 0.88,
+            "f1": 0.7521367521367521
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.8617021276595744,
+            "recall": 0.81,
+            "f1": 0.8350515463917526
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.9305555555555556,
+            "recall": 0.67,
+            "f1": 0.7790697674418605
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 88,
+            "feature": 11,
+            "question": 1
+          },
+          "feature": {
+            "feature": 81,
+            "question": 4,
+            "bug": 15
+          },
+          "question": {
+            "feature": 2,
+            "bug": 31,
+            "question": 67
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 300,
+      "accepted": 181,
+      "review": 119,
+      "failed": 0,
+      "review_fraction": 0.39666666666666667,
+      "accepted_errors": 26,
+      "accepted_error_rate": 0.143646408839779,
+      "accepted_error_ids": [
+        "nlbse24:test:1231",
+        "nlbse24:test:1232",
+        "nlbse24:test:1271",
+        "nlbse24:test:1298",
+        "nlbse24:test:1301",
+        "nlbse24:test:1302",
+        "nlbse24:test:1303",
+        "nlbse24:test:1308",
+        "nlbse24:test:1312",
+        "nlbse24:test:1316",
+        "nlbse24:test:1325",
+        "nlbse24:test:1330",
+        "nlbse24:test:1334",
+        "nlbse24:test:1337",
+        "nlbse24:test:1339",
+        "nlbse24:test:1350",
+        "nlbse24:test:1359",
+        "nlbse24:test:1385",
+        "nlbse24:test:1400",
+        "nlbse24:test:1407",
+        "nlbse24:test:1447",
+        "nlbse24:test:1449",
+        "nlbse24:test:1469",
+        "nlbse24:test:1471",
+        "nlbse24:test:1476",
+        "nlbse24:test:1487"
+      ],
+      "accepted_error_95ci": [
+        0.09995102990596806,
+        0.2021535908699546
+      ],
+      "full_review_json_saved": 0.6896930210030038,
+      "known_jev_usd": 0.015360492,
+      "cost_complete": true,
+      "elapsed_seconds": 25.0,
+      "nb_accuracy": 0.5666666666666667,
+      "accepted_confusion": {
+        "bug": {
+          "bug": 69,
+          "feature": 4
+        },
+        "feature": {
+          "feature": 60,
+          "question": 1,
+          "bug": 6
+        },
+        "question": {
+          "feature": 1,
+          "bug": 14,
+          "question": 26
+        }
+      },
+      "groups": {
+        "opencv/opencv": {
+          "threshold": 0.95,
+          "total": 300,
+          "accepted": 181,
+          "review": 119,
+          "failed": 0,
+          "review_fraction": 0.39666666666666667,
+          "accepted_errors": 26,
+          "accepted_error_rate": 0.143646408839779,
+          "accepted_error_ids": [
+            "nlbse24:test:1231",
+            "nlbse24:test:1232",
+            "nlbse24:test:1271",
+            "nlbse24:test:1298",
+            "nlbse24:test:1301",
+            "nlbse24:test:1302",
+            "nlbse24:test:1303",
+            "nlbse24:test:1308",
+            "nlbse24:test:1312",
+            "nlbse24:test:1316",
+            "nlbse24:test:1325",
+            "nlbse24:test:1330",
+            "nlbse24:test:1334",
+            "nlbse24:test:1337",
+            "nlbse24:test:1339",
+            "nlbse24:test:1350",
+            "nlbse24:test:1359",
+            "nlbse24:test:1385",
+            "nlbse24:test:1400",
+            "nlbse24:test:1407",
+            "nlbse24:test:1447",
+            "nlbse24:test:1449",
+            "nlbse24:test:1469",
+            "nlbse24:test:1471",
+            "nlbse24:test:1476",
+            "nlbse24:test:1487"
+          ]
+        }
+      }
+    },
+    "dev-tensorflow": {
+      "action": "Triage the tensorflow/tensorflow issue backlog into bugs, feature requests, and questions.",
+      "quality": {
+        "accuracy": 0.8033333333333333,
+        "macro_f1": 0.802844320331367,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.7251908396946565,
+            "recall": 0.95,
+            "f1": 0.8225108225108225
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.9605263157894737,
+            "recall": 0.73,
+            "f1": 0.8295454545454545
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.7849462365591398,
+            "recall": 0.73,
+            "f1": 0.7564766839378239
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 95,
+            "question": 5
+          },
+          "feature": {
+            "question": 15,
+            "bug": 12,
+            "feature": 73
+          },
+          "question": {
+            "question": 73,
+            "bug": 24,
+            "feature": 3
+          }
+        }
+      },
+      "threshold": 0.95,
+      "total": 300,
+      "accepted": 180,
+      "review": 120,
+      "failed": 0,
+      "review_fraction": 0.4,
+      "accepted_errors": 22,
+      "accepted_error_rate": 0.12222222222222222,
+      "accepted_error_ids": [
+        "nlbse24:test:321",
+        "nlbse24:test:325",
+        "nlbse24:test:335",
+        "nlbse24:test:345",
+        "nlbse24:test:367",
+        "nlbse24:test:376",
+        "nlbse24:test:380",
+        "nlbse24:test:390",
+        "nlbse24:test:403",
+        "nlbse24:test:404",
+        "nlbse24:test:415",
+        "nlbse24:test:417",
+        "nlbse24:test:419",
+        "nlbse24:test:420",
+        "nlbse24:test:438",
+        "nlbse24:test:449",
+        "nlbse24:test:450",
+        "nlbse24:test:451",
+        "nlbse24:test:472",
+        "nlbse24:test:485",
+        "nlbse24:test:511",
+        "nlbse24:test:546"
+      ],
+      "accepted_error_95ci": [
+        0.08211540501521036,
+        0.17811674897000834
+      ],
+      "full_review_json_saved": 0.46854932429324403,
+      "known_jev_usd": 0.020289192,
+      "cost_complete": true,
+      "elapsed_seconds": 27.471,
+      "nb_accuracy": 0.6066666666666667,
+      "accepted_confusion": {
+        "bug": {
+          "bug": 75,
+          "question": 2
+        },
+        "feature": {
+          "question": 9,
+          "feature": 50,
+          "bug": 3
+        },
+        "question": {
+          "question": 33,
+          "bug": 8
+        }
+      },
+      "groups": {
+        "tensorflow/tensorflow": {
+          "threshold": 0.95,
+          "total": 300,
+          "accepted": 180,
+          "review": 120,
+          "failed": 0,
+          "review_fraction": 0.4,
+          "accepted_errors": 22,
+          "accepted_error_rate": 0.12222222222222222,
+          "accepted_error_ids": [
+            "nlbse24:test:321",
+            "nlbse24:test:325",
+            "nlbse24:test:335",
+            "nlbse24:test:345",
+            "nlbse24:test:367",
+            "nlbse24:test:376",
+            "nlbse24:test:380",
+            "nlbse24:test:390",
+            "nlbse24:test:403",
+            "nlbse24:test:404",
+            "nlbse24:test:415",
+            "nlbse24:test:417",
+            "nlbse24:test:419",
+            "nlbse24:test:420",
+            "nlbse24:test:438",
+            "nlbse24:test:449",
+            "nlbse24:test:450",
+            "nlbse24:test:451",
+            "nlbse24:test:472",
+            "nlbse24:test:485",
+            "nlbse24:test:511",
+            "nlbse24:test:546"
+          ]
+        }
+      }
+    }
+  },
+  "ux_multilabel": {
+    "unique_reviews": 500,
+    "binary_decisions": 2000,
+    "four_label_exact_match_accuracy": 0.292,
+    "all_four_accepted_reviews": 3,
+    "reviews_needing_at_least_one_check": 497,
+    "errors_among_all_four_accepted_reviews": 2,
+    "note": "Four independent binary calls per review; costs include all four. Per-axis byte savings are not combined workflow savings."
+  },
+  "developer": {
+    "threshold": 0.95,
+    "total": 1500,
+    "accepted": 1006,
+    "review": 494,
+    "failed": 1,
+    "review_fraction": 0.3293333333333333,
+    "accepted_errors": 169,
+    "accepted_error_rate": 0.1679920477137177,
+    "accepted_error_ids": [
+      "nlbse24:test:919",
+      "nlbse24:test:929",
+      "nlbse24:test:956",
+      "nlbse24:test:966",
+      "nlbse24:test:971",
+      "nlbse24:test:980",
+      "nlbse24:test:982",
+      "nlbse24:test:1001",
+      "nlbse24:test:1004",
+      "nlbse24:test:1007",
+      "nlbse24:test:1008",
+      "nlbse24:test:1012",
+      "nlbse24:test:1011",
+      "nlbse24:test:1009",
+      "nlbse24:test:1013",
+      "nlbse24:test:1016",
+      "nlbse24:test:1022",
+      "nlbse24:test:1030",
+      "nlbse24:test:1029",
+      "nlbse24:test:1033",
+      "nlbse24:test:1035",
+      "nlbse24:test:1041",
+      "nlbse24:test:1046",
+      "nlbse24:test:1047",
+      "nlbse24:test:1054",
+      "nlbse24:test:1056",
+      "nlbse24:test:1064",
+      "nlbse24:test:1065",
+      "nlbse24:test:1068",
+      "nlbse24:test:1070",
+      "nlbse24:test:1071",
+      "nlbse24:test:1076",
+      "nlbse24:test:1091",
+      "nlbse24:test:1093",
+      "nlbse24:test:1097",
+      "nlbse24:test:1099",
+      "nlbse24:test:3",
+      "nlbse24:test:100",
+      "nlbse24:test:102",
+      "nlbse24:test:115",
+      "nlbse24:test:124",
+      "nlbse24:test:125",
+      "nlbse24:test:138",
+      "nlbse24:test:150",
+      "nlbse24:test:157",
+      "nlbse24:test:163",
+      "nlbse24:test:171",
+      "nlbse24:test:180",
+      "nlbse24:test:190",
+      "nlbse24:test:201",
+      "nlbse24:test:205",
+      "nlbse24:test:207",
+      "nlbse24:test:212",
+      "nlbse24:test:216",
+      "nlbse24:test:224",
+      "nlbse24:test:227",
+      "nlbse24:test:239",
+      "nlbse24:test:242",
+      "nlbse24:test:244",
+      "nlbse24:test:245",
+      "nlbse24:test:255",
+      "nlbse24:test:258",
+      "nlbse24:test:260",
+      "nlbse24:test:270",
+      "nlbse24:test:269",
+      "nlbse24:test:278",
+      "nlbse24:test:279",
+      "nlbse24:test:283",
+      "nlbse24:test:289",
+      "nlbse24:test:292",
+      "nlbse24:test:300",
+      "nlbse24:test:676",
+      "nlbse24:test:682",
+      "nlbse24:test:717",
+      "nlbse24:test:720",
+      "nlbse24:test:727",
+      "nlbse24:test:752",
+      "nlbse24:test:759",
+      "nlbse24:test:785",
+      "nlbse24:test:801",
+      "nlbse24:test:802",
+      "nlbse24:test:803",
+      "nlbse24:test:804",
+      "nlbse24:test:812",
+      "nlbse24:test:813",
+      "nlbse24:test:814",
+      "nlbse24:test:818",
+      "nlbse24:test:817",
+      "nlbse24:test:819",
+      "nlbse24:test:820",
+      "nlbse24:test:821",
+      "nlbse24:test:822",
+      "nlbse24:test:829",
+      "nlbse24:test:832",
+      "nlbse24:test:835",
+      "nlbse24:test:839",
+      "nlbse24:test:840",
+      "nlbse24:test:842",
+      "nlbse24:test:845",
+      "nlbse24:test:846",
+      "nlbse24:test:855",
+      "nlbse24:test:856",
+      "nlbse24:test:857",
+      "nlbse24:test:860",
+      "nlbse24:test:863",
+      "nlbse24:test:868",
+      "nlbse24:test:869",
+      "nlbse24:test:870",
+      "nlbse24:test:867",
+      "nlbse24:test:877",
+      "nlbse24:test:878",
+      "nlbse24:test:884",
+      "nlbse24:test:883",
+      "nlbse24:test:885",
+      "nlbse24:test:888",
+      "nlbse24:test:891",
+      "nlbse24:test:893",
+      "nlbse24:test:896",
+      "nlbse24:test:898",
+      "nlbse24:test:899",
+      "nlbse24:test:900",
+      "nlbse24:test:1231",
+      "nlbse24:test:1232",
+      "nlbse24:test:1271",
+      "nlbse24:test:1298",
+      "nlbse24:test:1301",
+      "nlbse24:test:1302",
+      "nlbse24:test:1303",
+      "nlbse24:test:1308",
+      "nlbse24:test:1312",
+      "nlbse24:test:1316",
+      "nlbse24:test:1325",
+      "nlbse24:test:1330",
+      "nlbse24:test:1334",
+      "nlbse24:test:1337",
+      "nlbse24:test:1339",
+      "nlbse24:test:1350",
+      "nlbse24:test:1359",
+      "nlbse24:test:1385",
+      "nlbse24:test:1400",
+      "nlbse24:test:1407",
+      "nlbse24:test:1447",
+      "nlbse24:test:1449",
+      "nlbse24:test:1469",
+      "nlbse24:test:1471",
+      "nlbse24:test:1476",
+      "nlbse24:test:1487",
+      "nlbse24:test:321",
+      "nlbse24:test:325",
+      "nlbse24:test:335",
+      "nlbse24:test:345",
+      "nlbse24:test:367",
+      "nlbse24:test:376",
+      "nlbse24:test:380",
+      "nlbse24:test:390",
+      "nlbse24:test:403",
+      "nlbse24:test:404",
+      "nlbse24:test:415",
+      "nlbse24:test:417",
+      "nlbse24:test:419",
+      "nlbse24:test:420",
+      "nlbse24:test:438",
+      "nlbse24:test:449",
+      "nlbse24:test:450",
+      "nlbse24:test:451",
+      "nlbse24:test:472",
+      "nlbse24:test:485",
+      "nlbse24:test:511",
+      "nlbse24:test:546"
+    ],
+    "quality": {
+      "accuracy": 0.7646666666666667,
+      "macro_f1": 0.7591743162418201,
+      "per_class": {
+        "bug": {
+          "support": 500,
+          "precision": 0.6619519094766619,
+          "recall": 0.936,
+          "f1": 0.7754763877381938
+        },
+        "feature": {
+          "support": 500,
+          "precision": 0.8577494692144374,
+          "recall": 0.808,
+          "f1": 0.8321318228630278
+        },
+        "question": {
+          "support": 500,
+          "precision": 0.8566978193146417,
+          "recall": 0.55,
+          "f1": 0.6699147381242387
+        }
+      },
+      "confusion": {
+        "bug": {
+          "bug": 468,
+          "feature": 20,
+          "question": 12
+        },
+        "feature": {
+          "question": 34,
+          "feature": 404,
+          "bug": 61,
+          "__failed__": 1
+        },
+        "question": {
+          "bug": 178,
+          "question": 275,
+          "feature": 47
+        }
+      }
+    },
+    "mean_repository_macro_f1": 0.7537484891382259,
+    "full_review_json_saved": 0.6068925162573433,
+    "byte_definition": "Ratio of summed measured bytes across the five per-repository calls; not an average of percentages."
+  },
+  "known_jev_usd": 0.111413148,
+  "cost_complete": false
+}

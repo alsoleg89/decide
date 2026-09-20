@@ -1,0 +1,30 @@
+{
+  "total": 300,
+  "completed": 300,
+  "accepted": 180,
+  "accepted_by_label": {
+    "question": 44,
+    "bug": 86,
+    "feature": 50
+  },
+  "review_count": 120,
+  "failed": 0,
+  "review_reasons": {
+    "low_confidence": 120
+  },
+  "review_fraction": 0.4,
+  "confidence_threshold": 0.95,
+  "model_requested": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 483076,
+    "output_tokens": 11400,
+    "complete": true
+  },
+  "requests_made": 300,
+  "retries": 0,
+  "elapsed_seconds": 27.471,
+  "results_path": "/private/tmp/decide-workflows/dev-tensorflow/.decide/5a9f1f9b6c8a4b8db93316985805c773/results.jsonl",
+  "review_path": "/private/tmp/decide-workflows/dev-tensorflow/.decide/5a9f1f9b6c8a4b8db93316985805c773/review.jsonl",
+  "review": [],
+  "review_omitted": 120
+}

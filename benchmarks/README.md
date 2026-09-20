@@ -1,6 +1,11 @@
 # Measure context savings and decision quality
 
-Start with the [10-task, 5,570-record evaluation](multitask/README.md): decision
+Start with the [UX and developer workflows](workflows/README.md): four feedback
+extraction tasks on 500 app reviews, plus issue triage across five projects.
+The protocol freezes 3,500 decisions before inference; results include accepted
+mistakes, missed UX signals, review volume, local baselines and known costs.
+
+The [10-task, 5,570-record evaluation](multitask/README.md) measures decision
 accuracy, errors among accepted results, trained local baselines, costs and 70
 threshold comparisons. It includes both useful and poor results, and quantifies
 how compact review records improve context savings.

@@ -1,0 +1,16 @@
+{
+  "question": "Does this French app review contain the following type of feedback: bug report? A review can contain several types; evaluate only this type, independently of the others.",
+  "criteria": {
+    "yes": "Reports an app malfunction experienced by the user: data loss, crash, connection error, or a feature not working.",
+    "no": "Does not contain this type of feedback."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.95,
+  "review_limit": 0,
+  "concurrency": 4
+}

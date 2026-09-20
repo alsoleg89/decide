@@ -1,0 +1,29 @@
+{
+  "total": 500,
+  "completed": 500,
+  "accepted": 181,
+  "accepted_by_label": {
+    "yes": 156,
+    "no": 25
+  },
+  "review_count": 319,
+  "failed": 0,
+  "review_reasons": {
+    "low_confidence": 319
+  },
+  "review_fraction": 0.638,
+  "confidence_threshold": 0.95,
+  "model_requested": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 216458,
+    "output_tokens": 15500,
+    "complete": true
+  },
+  "requests_made": 500,
+  "retries": 0,
+  "elapsed_seconds": 38.915,
+  "results_path": "/private/tmp/decide-workflows/ux-user_experience/.decide/f8a0fc26f32e420e9c386a96c0be0d53/results.jsonl",
+  "review_path": "/private/tmp/decide-workflows/ux-user_experience/.decide/f8a0fc26f32e420e9c386a96c0be0d53/review.jsonl",
+  "review": [],
+  "review_omitted": 319
+}

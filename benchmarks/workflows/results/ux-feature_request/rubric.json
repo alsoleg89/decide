@@ -1,0 +1,16 @@
+{
+  "question": "Does this French app review contain the following type of feedback: feature request? A review can contain several types; evaluate only this type, independently of the others.",
+  "criteria": {
+    "yes": "Requests a new or changed function, content, interface, or capability in the app.",
+    "no": "Does not contain this type of feedback."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.95,
+  "review_limit": 0,
+  "concurrency": 4
+}

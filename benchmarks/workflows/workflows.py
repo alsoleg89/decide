@@ -15,7 +15,7 @@ import sys
 REPO = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO / 'benchmarks/multitask'))
 sys.path.insert(0, str(REPO))
-from analyze import classification, error_interval, read_rows
+from analyze import classification, error_interval
 from prepare import encode, write_rows
 from run import run
 from evaluate import risk_coverage, unique_rows
@@ -150,9 +150,11 @@ async def live(root, output, protocol_path):
         write_json(output / name / 'live-response.json', json.loads((Path(raw['results_path']).parent / 'summary.json').read_text()))
 
 
-def report(output, protocol_path):
+def report(output, protocol_path, root=None):
     protocol = json.loads(protocol_path.read_text())
     tasks, ux_predictions, ux_labels = {}, {}, {}
+    dev_records, dev_labels = {}, {}
+    dev_inline_bytes = dev_pipeline_bytes = 0
     for name, task in protocol['tasks'].items():
         folder = output / name
         stored = json.loads((folder / 'report.json').read_text())
@@ -162,6 +164,21 @@ def report(output, protocol_path):
         assert stored['server_source_sha256'] == protocol['server_sha256']
         assert stored['input_jsonl_sha256'] == task['files_sha256']['items.jsonl']
         assert stored['models'].keys() <= {protocol['model'], 'unavailable'}
+        if root is not None:
+            for file, sha in task['files_sha256'].items():
+                assert digest(root / name / file) == sha, (name, file)
+            inputs = list(unique_rows(root / name / 'items.jsonl').values())
+            assert {r['id'] for r in inputs} == records.keys()
+            inline = {**stored['rubric'], 'items': inputs}
+            del inline['source']
+            live_response = json.loads((folder / 'live-response.json').read_text())
+            inline_bytes = len(encode(inline).encode())
+            response_bytes = len(encode(stored['rubric']).encode()) + len(encode(live_response).encode())
+            review_bytes = sum(len(encode(r).encode()) + 1 for r in inputs if records[r['id']]['status'] == 'review')
+            assert inline_bytes == stored['inline_input_bytes']
+            assert response_bytes == stored['source_call_and_result_bytes']
+            assert review_bytes == stored['all_review_records_bytes']
+            assert 1 - (response_bytes + review_bytes) / inline_bytes == stored['context_bytes_reduction_with_all_reviews']
         risk = risk_coverage(records, labels, THRESHOLD)
         accepted = {k: r for k, r in records.items() if r['status'] == 'accepted'}
         assert len(accepted) == risk['accepted'] == stored['accepted']
@@ -183,6 +200,12 @@ def report(output, protocol_path):
             primary['accepted_false_negatives'] = sum(labels[k]['expected'] == 'yes' and r['choice'] == 'no' for k, r in accepted.items())
             primary['accepted_false_positives'] = sum(labels[k]['expected'] == 'no' and r['choice'] == 'yes' for k, r in accepted.items())
             ux_predictions[name], ux_labels[name] = records, labels
+        else:
+            assert not dev_records.keys() & records.keys()
+            dev_records.update(records)
+            dev_labels.update(labels)
+            dev_inline_bytes += stored['inline_input_bytes']
+            dev_pipeline_bytes += stored['source_call_and_result_bytes'] + stored['all_review_records_bytes']
         tasks[name] = primary
     keys = next(iter(ux_predictions.values())).keys()
     assert all(rows.keys() == keys for rows in ux_predictions.values())
@@ -193,7 +216,13 @@ def report(output, protocol_path):
           'all_four_accepted_reviews': len(all_accepted), 'reviews_needing_at_least_one_check': len(keys) - len(all_accepted),
           'errors_among_all_four_accepted_reviews': sum(not exact(k) for k in all_accepted),
           'note': 'Four independent binary calls per review; costs include all four. Per-axis byte savings are not combined workflow savings.'}
-    result = {'status': 'measured_live', 'threshold': THRESHOLD, 'tasks': tasks, 'ux_multilabel': ux,
+    developer = {**risk_coverage(dev_records, dev_labels, THRESHOLD),
+                 'quality': classification([dev_labels[k]['expected'] for k in dev_records],
+                                            [r.get('choice') for r in dev_records.values()], ['bug', 'feature', 'question']),
+                 'mean_repository_macro_f1': sum(t['quality']['macro_f1'] for n, t in tasks.items() if n.startswith('dev-')) / 5,
+                 'full_review_json_saved': 1 - dev_pipeline_bytes / dev_inline_bytes,
+                 'byte_definition': 'Ratio of summed measured bytes across the five per-repository calls; not an average of percentages.'}
+    result = {'status': 'measured_live', 'threshold': THRESHOLD, 'tasks': tasks, 'ux_multilabel': ux, 'developer': developer,
               'known_jev_usd': sum(t['known_jev_usd'] for t in tasks.values()),
               'cost_complete': all(t['cost_complete'] for t in tasks.values())}
     write_json(output.parent / 'summary.json', result)
@@ -208,10 +237,11 @@ if __name__ == '__main__':
     parser.add_argument('--dev-source', type=Path, default=Path('/private/tmp/decide-role-dev-source'))
     parser.add_argument('--output', type=Path, default=Path(__file__).parent / 'results')
     parser.add_argument('--protocol', type=Path, default=Path(__file__).parent / 'protocol.json')
+    parser.add_argument('--verify-inputs', action='store_true', help='Also verify source hashes and full JSON byte accounting using --root')
     args = parser.parse_args()
     if args.mode == 'prepare':
         prepare(args.ux_source, args.dev_source, args.root, args.protocol)
     elif args.mode == 'run':
         asyncio.run(live(args.root.resolve(), args.output, args.protocol))
     else:
-        report(args.output, args.protocol)
+        report(args.output, args.protocol, args.root if args.verify_inputs else None)

@@ -1,0 +1,30 @@
+{
+  "total": 300,
+  "completed": 300,
+  "accepted": 205,
+  "accepted_by_label": {
+    "feature": 76,
+    "question": 30,
+    "bug": 99
+  },
+  "review_count": 95,
+  "failed": 0,
+  "review_reasons": {
+    "low_confidence": 95
+  },
+  "review_fraction": 0.31666666666666665,
+  "confidence_threshold": 0.95,
+  "model_requested": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 373848,
+    "output_tokens": 11400,
+    "complete": true
+  },
+  "requests_made": 300,
+  "retries": 0,
+  "elapsed_seconds": 23.84,
+  "results_path": "/private/tmp/decide-workflows/dev-bitcoin/.decide/57673400f5084f9c91379a8774c26181/results.jsonl",
+  "review_path": "/private/tmp/decide-workflows/dev-bitcoin/.decide/57673400f5084f9c91379a8774c26181/review.jsonl",
+  "review": [],
+  "review_omitted": 95
+}

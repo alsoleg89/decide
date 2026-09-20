@@ -1,0 +1,31 @@
+{
+  "total": 300,
+  "completed": 300,
+  "accepted": 209,
+  "accepted_by_label": {
+    "bug": 117,
+    "feature": 86,
+    "question": 6
+  },
+  "review_count": 91,
+  "failed": 1,
+  "review_reasons": {
+    "low_confidence": 90,
+    "invalid_provider_response": 1
+  },
+  "review_fraction": 0.30333333333333334,
+  "confidence_threshold": 0.95,
+  "model_requested": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 306409,
+    "output_tokens": 11362,
+    "complete": false
+  },
+  "requests_made": 300,
+  "retries": 0,
+  "elapsed_seconds": 25.155,
+  "results_path": "/private/tmp/decide-workflows/dev-vscode/.decide/3f3fac82d4424f26855e6578e853e765/results.jsonl",
+  "review_path": "/private/tmp/decide-workflows/dev-vscode/.decide/3f3fac82d4424f26855e6578e853e765/review.jsonl",
+  "review": [],
+  "review_omitted": 91
+}

@@ -1,0 +1,16 @@
+{
+  "question": "Does this French app review contain the following type of feedback: rating? A review can contain several types; evaluate only this type, independently of the others.",
+  "criteria": {
+    "yes": "Expresses an overall evaluation of the app, including praise, criticism, or dissuading others from using it.",
+    "no": "Does not contain this type of feedback."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0.95,
+  "review_limit": 0,
+  "concurrency": 4
+}
