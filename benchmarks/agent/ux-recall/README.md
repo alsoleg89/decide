@@ -57,6 +57,10 @@ The protocol was committed in [`67ef0c3`](https://github.com/alsoleg89/decide/co
 
 Both arm folders include `trace.jsonl`, `final.json`, `state.json` and actual API responses under `turns/`. The decide folder also includes fresh Jev predictions and its summary. Source-bearing read outputs are replaced by IDs, hashes and byte counts; no source text, full request bodies or credentials are published. Reference labels are used only for scoring.
 
+The scorer verifies the numbered response count against run state and checks the
+saved final answer. Missing responses invalidate complete cost accounting;
+missing or inconsistent completion evidence prevents a complete-artifact verdict.
+
 Recompute the public reports without API calls:
 
 ```sh

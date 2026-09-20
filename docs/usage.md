@@ -285,7 +285,9 @@ not real-world classification accuracy.
 Local checks passed on Python 3.11, 3.12, 3.13 and 3.14. CI is configured for Python
 3.11–3.14 on Linux, macOS and Windows, with a 95% minimum coverage gate on Linux.
 **GitHub Actions is currently blocked by the account's billing lock; the hosted
-matrix has not run.** No API key is required by CI.
+matrix has not run.** A separate Linux arm64/Python 3.12 container passed the
+release-wheel installation, real stdio smoke check and local suite. See the
+[release check](release-check.md) for the precise scope. No API key is required by CI.
 
 Live smoke check on 2026-09-19: the installed stdio command processed 12 synthetic
 log entries through Jev 1.13.0 in 2.386 seconds. Seven were accepted, two escalated

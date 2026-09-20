@@ -198,8 +198,10 @@ def score(directory, arm):
     predictions = unique_rows(folder / 'decisions.jsonl') if (folder / 'decisions.jsonl').exists() else {}
     state = json.loads((folder / 'state.json').read_text())
     prices = json.loads((REPO / 'benchmarks/cascade/gpt-4.1-mini/prices.json').read_text())
-    records = [json.loads(path.read_text()) for path in sorted(folder.glob('turns/*/responses.jsonl'))]
-    tokens, known, complete = Counter(), 0, True
+    paths = sorted(folder.glob('turns/*/responses.jsonl'))
+    records = [json.loads(path.read_text()) for path in paths]
+    responses_complete = [p.parent.name for p in paths] == [f'{i:03d}' for i in range(state['model_calls'])]
+    tokens, known, complete = Counter(), 0, responses_complete
     for record in records:
         body = record.get('body', {})
         measured, amount = usage(body), price(body, prices)
@@ -214,7 +216,12 @@ def score(directory, arm):
     jev = state['jev']
     jev_cost = jev['usage']['input_tokens'] * .042 / 1_000_000 if jev else 0
     complete = complete and (bool(jev['usage']['complete']) if jev else arm == 'baseline')
-    valid = bool(state['finished'] and state.get('final_answer_received') and predictions.keys() == labels.keys())
+    final_path = folder / 'final.json'
+    final_matches = bool(records and final_path.exists() and
+                         records[-1].get('body', {}).get('output') == json.loads(final_path.read_text()))
+    valid = bool(state['finished'] and state.get('final_answer_received') and responses_complete and final_matches
+                 and predictions.keys() == labels.keys()
+                 and all(row.get('choice') in protocol['rubric']['criteria'] for row in predictions.values()))
     report = {'arm': arm, 'items': len(labels), 'artifact_complete': valid, 'model_calls': len(records),
               'tool_calls': state['tool_calls'], 'elapsed_seconds': state.get('elapsed_seconds'),
               'api_seconds': sum(r['elapsed_seconds'] for r in records), 'usage': dict(tokens), 'mini_known_usd': known,

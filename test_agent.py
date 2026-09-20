@@ -79,5 +79,20 @@ class AgentContractTests(unittest.TestCase):
             for body in seen:
                 if body['tools'] and body['tools'][0]['name'] in {'read_next', 'finish'}:
                     self.assertNotIn('untrusted text', json.dumps(body))
+            # Losing a billable response must not make the experiment look cheaper and complete.
+            missing = directory / 'baseline/turns/003/responses.jsonl'
+            original = missing.read_bytes()
+            missing.unlink()
+            incomplete = app.score(directory, 'baseline')
+            self.assertFalse(incomplete['cost_complete'])
+            self.assertFalse(incomplete['artifact_complete'])
+            missing.write_bytes(original)
+            final = directory / 'baseline/final.json'
+            original = final.read_bytes()
+            final.write_text('[]')
+            self.assertFalse(app.score(directory, 'baseline')['artifact_complete'])
+            self.assertTrue(app.score(directory, 'baseline')['cost_complete'])
+            final.write_bytes(original)
+            self.assertTrue(app.score(directory, 'baseline')['artifact_complete'])
             (directory / 'decide/turns/000/inflight.json').write_text('{}')
             self.assertFalse(app.score(directory, 'decide')['cost_complete'])
