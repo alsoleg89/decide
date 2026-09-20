@@ -54,6 +54,7 @@ async def run(root, rubric_path, labels_path):
               "rubric": arguments, "results_path": summary["results_path"],
               "measurement": "UTF-8 JSON bytes, not billed tokens. Full-review metric includes every full review row, even already-previewed rows. Excludes MCP framing, host duplication and agent reasoning.",
               **measured,
+              "threshold_sweep_scope": "Alternative global cutoffs, ignoring label threshold overrides; forced-review labels remain forced.",
               "threshold_sweep": [risk_coverage(records, labels, threshold, inputs)
                                   for threshold in [0, 0.5, 0.8, 0.9, 0.95, 0.99, 1]]}
     return report

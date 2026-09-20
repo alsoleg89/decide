@@ -154,6 +154,22 @@ this completion check before allowing a final answer.
 
 This tool classifies; it never runs commands, deletes files, or applies decisions.
 
+### Different cutoffs for different labels
+
+`confidence_thresholds` optionally overrides the global `confidence_threshold`
+for named labels. For example, `confidence_threshold: 0` with
+`confidence_thresholds: {"no": 0.9}` accepts valid positive answers and reviews
+negative answers below 0.9. Unspecified labels use the global cutoff; equality
+is accepted. `review_labels` and provider/input errors still force review.
+Overrides must use existing criteria labels and finite numeric values in 0..1.
+Both the request artifact and summary record the overrides.
+
+This is useful when false negatives and false positives have different costs.
+It is a routing control, not an accuracy guarantee. The standalone evaluator's
+threshold sweep tests alternative global cutoffs; it does not reproduce per-label
+overrides. Use the actual accepted/review records or a live workflow comparison
+when evaluating an asymmetric policy.
+
 ### Tune for bytes saved, not a review quota
 
 Run the offline evaluator on a labeled sample, adding the original inputs:
@@ -213,7 +229,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 248 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 257 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

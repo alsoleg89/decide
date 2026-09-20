@@ -53,7 +53,8 @@ def prepare(root, destination):
     rubric = json.loads((root / 'rubric.json').read_text())
     ids = sorted(rows, key=lambda key: digest('decide-agent-v1:' + key))
     protocol = {'model': MODEL, 'jev_model': 'jev-1.13.0', 'ids': ids, 'batch_size': 25,
-                'rubric': rubric, 'confidence_threshold': 0,
+                'rubric': rubric, 'confidence_threshold': rubric.get('confidence_threshold', 0),
+                'confidence_thresholds': rubric.get('confidence_thresholds', {}),
                 'runner_sha256': sha(Path(__file__)), 'server_sha256': sha(REPO / 'decide.py'),
                 'input_sha256': sha(root / 'items.jsonl'), 'labels_sha256': sha(root / 'labels.jsonl'),
                 'scope': 'Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.',
@@ -103,7 +104,7 @@ async def run(root, directory, arm):
                     available = []
                 elif arm == 'decide' and state['jev'] is None:
                     available = [tool('decide', 'Call the real decide MCP tool on items.jsonl with the supplied rubric, '
-                                      'threshold 0, concurrency 4 and no content previews. Returns its actual summary and file paths.')]
+                                      'the frozen confidence cutoffs, concurrency 4 and no content previews. Returns its actual summary and file paths.')]
                 elif not imported:
                     available = [tool('import_decide', 'Copy accepted results to decisions.jsonl; retain all other IDs for review.')]
                 elif pending:
@@ -145,7 +146,8 @@ async def run(root, directory, arm):
                 if name == 'decide':
                     result = await client.call_tool('decide', {'question': rubric['question'], 'criteria': rubric['criteria'],
                         'context': rubric.get('context', ''), 'source': {'kind': 'jsonl', 'paths': ['items.jsonl']},
-                        'confidence_threshold': 0, 'concurrency': 4, 'review_limit': 0})
+                        'confidence_threshold': protocol['confidence_threshold'],
+                        'confidence_thresholds': protocol.get('confidence_thresholds', {}), 'concurrency': 4, 'review_limit': 0})
                     if result.is_error:
                         raise ValueError('MCP failed; inspect local artifacts before retrying')
                     receipt = state['jev'] = result.structured_content

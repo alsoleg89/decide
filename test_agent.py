@@ -27,7 +27,7 @@ class AgentContractTests(unittest.TestCase):
             rows = [{'id': str(i), 'content': 'untrusted text'} for i in range(30)]
             (root / 'items.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in rows))
             (root / 'labels.jsonl').write_text(''.join(json.dumps({'id': r['id'], 'expected': 'yes'}) + '\n' for r in rows))
-            app.save(root / 'rubric.json', {'question': 'Relevant?', 'criteria': {'yes': 'yes', 'no': 'no'}})
+            app.save(root / 'rubric.json', {'question': 'Relevant?', 'criteria': {'yes': 'yes', 'no': 'no'}, 'confidence_thresholds': {'no': 0.9}})
             directory = root / 'experiment'
             app.prepare(root, directory)
 
@@ -37,6 +37,7 @@ class AgentContractTests(unittest.TestCase):
                 async def call_tool(self, name, arguments):
                     self_name = name
                     assert self_name == 'decide' and arguments['confidence_threshold'] == 0
+                    assert arguments['confidence_thresholds'] == {'no': 0.9}
                     path = root / 'mcp-results.jsonl'
                     path.write_text(''.join(json.dumps({'id': r['id'], 'status': 'review' if i == 0 else 'accepted',
                                                        'choice': 'yes'}) + '\n' for i, r in enumerate(rows)))

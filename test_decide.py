@@ -164,6 +164,29 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual((result["accepted"], result["review_count"]), (1, 1))
         self.assertEqual(result["review"][0]["id"], "below")
 
+    async def test_label_threshold_override_boundary_fallback_and_forced_review(self):
+        def handler(request):
+            key = json.loads(request.content)["state"]["item"]["id"]
+            if key == "error":
+                return httpx.Response(200, json={})
+            value = response(0.5 if key == "keep" else 0.89 if key == "below" else 0.9)
+            if key != "keep":
+                value["answers"]["decision"].update(choice="skip", probabilities={"keep": 0.02, "skip": 0.98})
+            return httpx.Response(200, json=value)
+        self.mock_provider(handler)
+        items = [{"id": key, "content": "data"} for key in ["keep", "below", "equal", "error"]]
+        result = await self.call(items=items, confidence_threshold=0,
+                                 confidence_thresholds={"skip": 0.9})
+        records = {r["id"]: r for r in map(json.loads, Path(result["results_path"]).read_text().splitlines())}
+        self.assertEqual(result["confidence_thresholds"], {"skip": 0.9})
+        self.assertEqual([records[k]["status"] for k in ["keep", "below", "equal", "error"]],
+                         ["accepted", "review", "accepted", "review"])
+        metadata = json.loads((Path(result["results_path"]).parent / "request.json").read_text())
+        self.assertEqual(metadata["confidence_thresholds"], {"skip": 0.9})
+        fallback = await self.call(items=items[:3], confidence_threshold=0.8,
+                                   confidence_thresholds={"skip": 0.9}, review_labels=["skip"])
+        self.assertEqual(fallback["review_reasons"], {"low_confidence": 1, "review_label": 2})
+
     async def test_jsonl_and_retry_accounting(self):
         (self.root / "tickets.jsonl").write_text(
             '\n{"id":"ticket-1","content":{"title":"Example"}}\n', encoding="utf-8")

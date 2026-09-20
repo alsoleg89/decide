@@ -217,6 +217,7 @@ async def decide(
     source: Source | None = None,
     confidence_threshold: Probability = 0.8,
     review_labels: list[Label] | None = None,
+    confidence_thresholds: Annotated[dict[Label, Probability], Field(max_length=255)] | None = None,
     context: Annotated[str, Field(max_length=10_000)] = "",
     concurrency: Annotated[int, Field(strict=True, ge=1, le=16)] = 4,
     review_limit: Annotated[int, Field(strict=True, ge=0, le=100)] = 0,
@@ -227,7 +228,8 @@ async def decide(
     lines = one log line per item; jsonl = {id,content} records; files = one
     UTF-8 file per item, supports globs such as src/**/*.py. No shell commands.
     criteria maps labels to descriptions. confidence_threshold uses Jev's
-    confidence, NOT selected-label probability. review_labels always escalate
+    confidence, NOT selected-label probability. confidence_thresholds overrides
+    the cutoff for specified labels; others use confidence_threshold. review_labels always escalate
     chosen labels (e.g. other). Returns counts and paths to full JSONL results.
     Content stays on disk by default; opt into bounded previews with review_limit.
     Read review_path from the beginning: previews are not completed reviews.
@@ -239,6 +241,8 @@ async def decide(
             raise ValueError("DECIDE_ROOT must be an existing directory")
         if set(review_labels or []) - criteria.keys():
             raise ValueError("review_labels must be present in criteria")
+        if set(confidence_thresholds or {}) - criteria.keys():
+            raise ValueError("confidence_thresholds keys must be present in criteria")
         rows = load_items(items, source, root)
     except (ValueError, OSError) as error:
         raise ToolError(str(error)) from None
@@ -253,7 +257,8 @@ async def decide(
     results_path, review_path = run_dir / "results.jsonl", run_dir / "review.jsonl"
     metadata = {"question": question, "criteria": criteria, "context": context,
                 "model": model, "confidence_threshold": confidence_threshold,
-                "review_labels": review_labels or [], "review_limit": review_limit,
+                "review_labels": review_labels or [], "confidence_thresholds": confidence_thresholds or {},
+                "review_limit": review_limit,
                 "concurrency": concurrency, "total": len(rows)}
     (run_dir / "request.json").write_text(encode(metadata), encoding="utf-8")
     counts, usage, reasons = Counter(), Counter(), Counter()
@@ -292,7 +297,7 @@ async def decide(
                         failed += 1
                     elif decision["choice"] in (review_labels or []):
                         reason = "review_label"
-                    elif decision["confidence"] < confidence_threshold:
+                    elif decision["confidence"] < (confidence_thresholds or {}).get(decision["choice"], confidence_threshold):
                         reason = "low_confidence"
                     record = {"index": index, "id": item.id, "status": "review" if reason else "accepted",
                               **decision}
@@ -324,7 +329,8 @@ async def decide(
         "total": len(rows), "completed": completed, "accepted": sum(counts.values()),
         "accepted_by_label": dict(counts), "review_count": review_count, "failed": failed,
         "review_reasons": dict(reasons), "review_fraction": review_count / len(rows),
-        "confidence_threshold": confidence_threshold, "model_requested": model,
+        "confidence_threshold": confidence_threshold, "confidence_thresholds": confidence_thresholds or {},
+        "model_requested": model,
         "usage": {"input_tokens": usage["input_tokens"], "output_tokens": usage["output_tokens"],
                   "complete": requests_made == completed - failed},
         "requests_made": requests_made, "retries": retries,
