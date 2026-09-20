@@ -1,0 +1,34 @@
+{
+  "status": "prepared_not_run",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "paid_calls": 0,
+  "source_protocol_sha256": "f6c321b66f80e78b1a455c085988cb0cf23fd4f52de1f84071112c6d9364f4c5",
+  "criterion": "Final accuracy AND macro-F1 at least the full mini baseline, and lower complete classification cost.",
+  "policy": "Threshold 0: accept every valid Jev decision. Only invalid/oversized/provider-error records go to mini. No confidence-based review. Same unchanged rubrics and required-ID output schema in both mini arms; batch size 25.",
+  "tasks": {
+    "ux-feature_request": {
+      "source_archive": "benchmarks/cascade/gpt-4.1-mini/followup/jev/ux-feature_request",
+      "items": 1000,
+      "review_items": 0,
+      "plan_sha256": "8c014eb40e3886c1848928fc1bd6358d69be49f6d8998a2a9561cfa76c5db925",
+      "source_sha256": {
+        "predictions.jsonl": "fb9de611828507673d92c1331773a2d6e0fca6db620fb054bacbef8515c6b4e1",
+        "labels.jsonl": "915df815ecf8171ca8c4ee16e393ed06e53e11541cb5f1eef725de6a0ab8fb0f",
+        "rubric.json": "86c538e436972ac0b04788c8e28ac00df7389c3c9a4b443a17bf05d1c3d02779",
+        "report.json": "547135667f6bbd82638a8103ade93d594626b2e7862abf07ae664d4b7bfaf78d"
+      }
+    },
+    "dev-opencv": {
+      "source_archive": "benchmarks/cascade/gpt-4.1-mini/followup/jev/dev-opencv",
+      "items": 300,
+      "review_items": 1,
+      "plan_sha256": "cfc8a58575d08f489174fcb991884464fa7e052c15b0c7eccf190fbe18426586",
+      "source_sha256": {
+        "predictions.jsonl": "18b66dde3f835c36bd0d49d2f8670e3512868b68fe0b30ec827b41a8bcf13230",
+        "labels.jsonl": "44aea49d87f2f523b64be77f989246e0bfffeb52d7e46a38a7651bde86a85d61",
+        "rubric.json": "23a52b7a14d86779f0bd557e0b1ae1c78cafd05b668dc8b500a036cb91e04240",
+        "report.json": "1aa4ff4c8051bbc2cedc9a9828a8ceef53d2185cbe4af3b720a4737cc3afcce3"
+      }
+    }
+  }
+}

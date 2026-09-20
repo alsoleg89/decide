@@ -1,0 +1,17 @@
+{
+  "question": "Which issue type best fits the title and body of this GitHub issue?",
+  "criteria": {
+    "bug": "Reports existing software behaving incorrectly or failing.",
+    "feature": "Requests a new capability or improvement to existing behavior.",
+    "question": "Asks for explanation, usage help, or troubleshooting assistance."
+  },
+  "source": {
+    "kind": "jsonl",
+    "paths": [
+      "items.jsonl"
+    ]
+  },
+  "confidence_threshold": 0,
+  "review_limit": 0,
+  "concurrency": 4
+}
