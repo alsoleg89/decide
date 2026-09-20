@@ -1,0 +1,61 @@
+{
+  "items": 1000,
+  "method": "Paired record bootstrap, percentile 95% intervals; exact two-sided McNemar for accuracy.",
+  "scope": "Post-hoc sample uncertainty conditional on these labels and runs. No multiple-testing adjustment, no model-run or dataset-shift uncertainty. A CI spanning zero proves neither equivalence nor noninferiority. Frozen point-estimate gates remain unchanged.",
+  "repetitions": 10000,
+  "seed": 20260920,
+  "input_sha256": {
+    "labels.jsonl": "5e95d848bf36574afd4e557d9b1ba472d3c59ba71f1c84fc663ef8ada088b79c",
+    "baseline/decisions.jsonl": "33c22daa464a35bfcbe1fb0af22bf519acf3c4cda030b389788da0ee5edc1134",
+    "decide/decisions.jsonl": "3a1715ad7c42729fafbf033306e70883aebe96037de106e263da2d004ab6f6c1"
+  },
+  "mcnemar": {
+    "baseline_only_correct": 21,
+    "candidate_only_correct": 44,
+    "exact_two_sided_p": 0.005918433252619309
+  },
+  "deltas": {
+    "accuracy": {
+      "estimate": 0.02300000000000002,
+      "ci95": [
+        0.007000000000000006,
+        0.039000000000000035
+      ]
+    },
+    "no_precision": {
+      "estimate": -0.00018390804597701038,
+      "ci95": [
+        -0.012057749464397204,
+        0.011538511560914224
+      ]
+    },
+    "no_recall": {
+      "estimate": 0.03011292346298622,
+      "ci95": [
+        0.013801756587201952,
+        0.046272493573264795
+      ]
+    },
+    "yes_precision": {
+      "estimate": 0.06072727272727274,
+      "ci95": [
+        0.02503628010283338,
+        0.09521077764242648
+      ]
+    },
+    "yes_recall": {
+      "estimate": -0.0049261083743842304,
+      "ci95": [
+        -0.04950495049504955,
+        0.039215686274509776
+      ]
+    },
+    "macro_f1": {
+      "estimate": 0.02642496885914969,
+      "ci95": [
+        0.00489721999889434,
+        0.04738009561052222
+      ]
+    }
+  }
+}

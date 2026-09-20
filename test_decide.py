@@ -139,6 +139,47 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         self.assertNotIn("private request", app.encode(result))
         self.assertFalse(result["usage"]["complete"])
 
+    async def test_corrupt_http_body_preserves_the_rest_of_the_batch(self):
+        async def handler(request):
+            key = json.loads(request.content)["state"]["item"]["id"]
+            await asyncio.sleep(0)
+            if key == "gzip":
+                return httpx.Response(200, headers={"Content-Encoding": "gzip"}, content=b"secret bad gzip")
+            if key == "redirect":
+                raise httpx.TooManyRedirects("secret redirect details", request=request)
+            return httpx.Response(200, json=response())
+
+        self.mock_provider(handler)
+        result = await self.call(items=[{"id": key, "content": "full original " + key}
+                                       for key in ["a", "gzip", "b", "redirect", "c"]])
+        self.assertEqual((result["completed"], result["accepted"], result["failed"]), (5, 3, 2))
+        self.assertEqual((result["requests_made"], result["retries"]), (5, 0))
+        self.assertFalse(result["usage"]["complete"])
+        records = [json.loads(line) for line in Path(result["results_path"]).read_text().splitlines()]
+        self.assertEqual({r["id"] for r in records}, {"a", "gzip", "b", "redirect", "c"})
+        self.assertTrue(all(r["error"] == "invalid_provider_response" for r in records if "error" in r))
+        review = [json.loads(line) for line in Path(result["review_path"]).read_text().splitlines()]
+        self.assertEqual({r["content"] for r in review}, {"full original gzip", "full original redirect"})
+        self.assertEqual(json.loads(Path(result["results_path"]).with_name("summary.json").read_text()), result)
+        self.assertNotIn("secret", app.encode(records))
+
+    async def test_explicit_absolute_root_is_required_before_reading_or_http(self):
+        for value in [None, "", "relative/path"]:
+            with self.subTest(root=value), patch.dict(os.environ), patch.object(app, "load_items") as load, \
+                    patch.object(app.httpx, "AsyncClient") as http:
+                if value is None:
+                    os.environ.pop("DECIDE_ROOT", None)
+                else:
+                    os.environ["DECIDE_ROOT"] = value
+                async with Client(app.mcp) as client:
+                    result = await client.call_tool("decide", {"question": "Keep?", "criteria": CRITERIA,
+                        "source": {"kind": "files", "paths": ["**/*.md"]}})
+                    self.assertTrue(result.is_error)
+                    self.assertIn("DECIDE_ROOT", str(result))
+                load.assert_not_called()
+                http.assert_not_called()
+                self.assertFalse((self.root / ".decide").exists())
+
     async def test_auth_failure_stops_following_requests(self):
         calls = []
         self.mock_provider(lambda request: calls.append(request) or httpx.Response(401))

@@ -1,0 +1,11 @@
+{
+  "model": "jev-1.13.0",
+  "checked_date": "2026-09-20",
+  "source": "https://docs.typesafe.ai/models",
+  "corroborating_source": "https://typesafe.ai/blog/introducing-system-one-models-and-jev",
+  "source_published_date": "2026-09-15",
+  "unit": "USD per million tokens",
+  "input": 0.042,
+  "output": 0,
+  "note": "Public list price; output explicitly free. Added during review after the published runs, confirming their existing assumption; not a pre-inference price freeze for those historical runs. New agent protocols embed this snapshot."
+}

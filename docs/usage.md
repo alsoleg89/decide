@@ -4,19 +4,20 @@
 
 ## Install
 
-The simplest setup uses [uv](https://docs.astral.sh/uv/) to run a versioned GitHub
-release without a local checkout. `uvx` manages the Python environment and
-caches the installation. Git is needed to fetch the source.
+The simplest setup uses [uv](https://docs.astral.sh/uv/) to install the versioned
+release wheel. `uvx` manages the Python environment and caches the installation.
+It downloads the runtime package directly; no Git or benchmark archive is needed.
 
 The MCP launch command is:
 
 ```sh
-uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@v0.1.0 decide-mcp
+uvx --python 3.11 --from https://github.com/alsoleg89/decide/releases/download/v0.1.1/decide_mcp-0.1.1-py3-none-any.whl decide-mcp
 ```
 
 This starts a stdio server for an MCP client; it is not an interactive CLI.
-Configure it in the client below. The release includes per-label confidence
-cutoffs and has been checked from a fresh cache. No PyPI publication is assumed.
+Configure it in the client below. Version 0.1.1 requires an explicit absolute
+`DECIDE_ROOT` and isolates corrupt HTTP responses per record. No PyPI publication
+is assumed.
 Update the pinned version deliberately when adopting a newer version.
 
 For benchmark reproduction or development, clone the repository instead:
@@ -29,7 +30,8 @@ uv sync --locked
 
 Get a key from the [TypeSafe console](https://console.typesafe.ai). Configure
 `TYPESAFE_API_KEY` in the server's environment, not in tool arguments or source
-control. `DECIDE_ROOT` is the directory containing the data to classify; it can
+control. `DECIDE_ROOT` is required: set an absolute path to the directory containing
+the data to classify; it can
 be different from the directory where this package is installed.
 
 ### Codex
@@ -39,7 +41,7 @@ Add to your Codex `config.toml`, replacing the data directory:
 ```toml
 [mcp_servers.decide]
 command = "uvx"
-args = ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@v0.1.0", "decide-mcp"]
+args = ["--python", "3.11", "--from", "https://github.com/alsoleg89/decide/releases/download/v0.1.1/decide_mcp-0.1.1-py3-none-any.whl", "decide-mcp"]
 env_vars = ["TYPESAFE_API_KEY"]
 startup_timeout_sec = 120
 tool_timeout_sec = 1800
@@ -63,7 +65,7 @@ Desktop configuration. Replace the data directory and key locally:
   "mcpServers": {
     "decide": {
       "command": "uvx",
-      "args": ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@v0.1.0", "decide-mcp"],
+      "args": ["--python", "3.11", "--from", "https://github.com/alsoleg89/decide/releases/download/v0.1.1/decide_mcp-0.1.1-py3-none-any.whl", "decide-mcp"],
       "env": {
         "TYPESAFE_API_KEY": "YOUR_KEY",
         "DECIDE_ROOT": "/absolute/path/to/your/project"
@@ -234,7 +236,7 @@ Neither a confidence score nor an in-sample sweep guarantees future accuracy.
 | Setting | Default | Meaning |
 | --- | --- | --- |
 | `TYPESAFE_API_KEY` (environment) | Required | TypeSafe authentication |
-| `DECIDE_ROOT` (environment) | Process working directory | Allowed input/output directory |
+| `DECIDE_ROOT` (environment) | Required absolute path | Existing allowed input/output directory |
 | `DECIDE_MODEL` (environment) | `jev-latest` | Use a pinned Jev model for repeatability |
 | `confidence_threshold` (tool) | `0.8` | Review when Jev confidence is **below** this value |
 | `confidence_thresholds` (tool) | `{}` | Per-label cutoff overrides; omitted labels use the global cutoff |
@@ -256,12 +258,25 @@ directories, `node_modules`, `vendor`, and `__pycache__`. These exclusions are
 not a secret scanner or a `.gitignore` implementation: scope your paths to data
 you intend to send to TypeSafe. Logs and JSONL paths are explicit.
 
+The server never infers its data root from the client's working directory.
+Missing, empty or relative `DECIDE_ROOT` values fail before reading source files
+or contacting TypeSafe. Generated file/line IDs use `/` on every platform.
+
 HTTP 408, 429, 5xx and transport failures get up to three attempts with bounded
 backoff. Permanent failures, invalid probability distributions and malformed
 responses go to review. Authentication failure or a requested cooldown over 30
 seconds stops new requests for the rest of the batch. Retry headers support
 seconds, HTTP dates and `retry-after-ms`. Error response bodies are not exposed. Provider requests use the
 [TypeSafe API contract](https://docs.typesafe.ai/api) and do not follow redirects.
+
+The HTTP timeout is 20 seconds per connect/read/write/pool phase, not a total
+batch deadline. A read timeout does not prove that the provider did no billable
+work. Retrying without provider idempotency can charge twice; `usage.complete`
+is false whenever attempted requests lack successful usage records. Do not
+rerun a whole paid batch blindly. After a cooldown, select only failed IDs from
+`results.jsonl` and their originals from `review.jsonl` for a new batch, retaining
+previous accepted decisions. Automatic resume is not implemented. The 30-second
+cooldown cutoff remains a bounded-stop policy, not a full scheduling budget.
 
 ## Development
 
@@ -273,7 +288,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 258 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The offline tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,
@@ -283,10 +298,11 @@ Jev's resistance to prompt injection. The synthetic 95%/5% test verifies routing
 not real-world classification accuracy.
 
 Development and release checks run locally; no GitHub Actions workflow is used.
-Earlier local checks passed on Python 3.11–3.14. The v0.1.0 release was checked
-on macOS arm64/Python 3.11 and Linux arm64/Python 3.12: wheel installation, real
-stdio smoke check, 257 tests and 97% server coverage (minimum: 95%). Windows
-remains unverified. See the [release check](release-check.md) for the precise
+Earlier local checks passed on Python 3.11–3.14. Version 0.1.1 was checked on
+macOS arm64/Python 3.11 and Linux arm64/Python 3.12: wheel installation, real
+stdio smoke check, 261 tests and 97% server coverage (minimum: 95%). Windows
+remains unverified. The earlier v0.1.0 release had 257 tests; these are distinct
+revision-specific results. See the [release check](release-check.md) for the precise
 scope. These offline checks do not require an API key.
 
 Live smoke check on 2026-09-19: the installed stdio command processed 12 synthetic

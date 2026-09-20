@@ -127,3 +127,32 @@ are never resumed or overwritten. UX order: baseline then decide. Developer
 order: decide then baseline. No GitHub Actions was used.
 
 Experiment total: **128 Luna calls**, **$0.18146223** for all four arms combined.
+
+## Price provenance and statistical uncertainty
+
+The [dated Jev price snapshot](../../jev-prices.json) confirms $0.042/M input
+and free output from TypeSafe's public documentation. It was added after these
+runs to document their existing assumption; historical protocols and costs
+remain unchanged. New agent protocols embed the snapshot before inference.
+
+Both arms used **25-record batches**. Larger standalone-model batches were not
+benchmarked, so the cost comparison is against this fixed harness, not an
+optimized lower bound. Review can raise recall while lowering accuracy versus
+Jev alone; the published review-effect diagnostics separate those effects.
+
+[UX paired uncertainty](ux-feature_request/statistics.json): accuracy gain
++2.3 points, 95% interval **+0.7 to +3.9**; McNemar p = 0.00592. Feature recall
+change −0.49 points has interval **−4.95 to +3.92**. Its point-estimate gate
+fails, but the interval does not establish a population-level regression.
+
+[Developer paired uncertainty](dev-opencv/statistics.json): accuracy change
+0 points, interval **−3.33 to +3.33**; McNemar p = 1. Feature recall change
+−4 points has interval **−8.33 to −0.93** in this sample.
+
+These are exploratory, unadjusted intervals conditional on the saved runs and
+reference labels. They exclude model-run variation and distribution shift.
+An interval spanning zero does not prove equivalence or noninferiority. Frozen
+point-estimate gates stay unchanged. Reproduce with
+`python benchmarks/paired_statistics.py PATH_TO_TASK_DIRECTORY`.
+The [calculator](../../paired_statistics.py) uses paired resampling and an exact
+binomial McNemar test; [method reference](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html).

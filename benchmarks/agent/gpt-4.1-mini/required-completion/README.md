@@ -70,3 +70,27 @@ For OpenCV the paid order was decide then baseline; UX used baseline then decide
 [All machine-readable results](summary.json) · [Original failed run](../summary.json)
 
 This repeat used 118 paid mini responses and cost $0.25242759 across both arms and both providers. Including the original experiment ($0.23945439), the two tool-loop experiments cost $0.49188198. These are experiment totals; per-deployment costs are the separate arm columns above.
+
+## Price provenance and statistical uncertainty
+
+The [dated Jev price snapshot](../../../jev-prices.json) confirms $0.042/M input
+and free output from TypeSafe's public documentation. It was added after these
+runs to document their existing assumption; historical protocols and costs
+remain unchanged. New agent protocols embed the snapshot before inference.
+
+Both arms used **25-record batches**. Larger standalone-model batches were not
+benchmarked, so the cost comparison is against this fixed harness, not an
+optimized lower bound. Review can raise recall while lowering accuracy versus
+Jev alone; the published review-effect diagnostics separate those effects.
+
+[Developer paired uncertainty](dev-opencv/statistics.json): accuracy gain
++6.67 points, 95% interval **+2.33 to +11.0**; McNemar p = 0.00366. Feature
+recall change −5 points has interval **−11.01 to +0.89**.
+
+These are exploratory, unadjusted intervals conditional on the saved runs and
+reference labels. They exclude model-run variation and distribution shift.
+An interval spanning zero does not prove equivalence or noninferiority. Frozen
+point-estimate gates stay unchanged. Reproduce with
+`python benchmarks/paired_statistics.py PATH_TO_TASK_DIRECTORY`.
+The [calculator](../../../paired_statistics.py) uses paired resampling and an exact
+binomial McNemar test; [method reference](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html).

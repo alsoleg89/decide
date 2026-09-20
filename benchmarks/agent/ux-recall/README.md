@@ -113,3 +113,30 @@ python benchmark_agent.py run --root /tmp/ux-recall/inputs --directory /tmp/ux-r
 Fresh runs require `OPENAI_API_KEY` and `TYPESAFE_API_KEY`. Existing output folders
 are never resumed or overwritten. Results, failures and all billable responses
 are retained regardless of whether the stronger gate passes.
+
+## Price provenance and statistical uncertainty
+
+The [dated Jev price snapshot](../../jev-prices.json) confirms $0.042/M input
+and free output from TypeSafe's public documentation. It was added after these
+runs to document their existing assumption; historical protocols and costs
+remain unchanged. New agent protocols embed the snapshot before inference.
+
+Both arms used **25-record batches**. Larger standalone-model batches were not
+benchmarked, so the cost comparison is against this fixed harness, not an
+optimized lower bound. Review can raise recall while lowering accuracy versus
+Jev alone; the published review-effect diagnostics separate those effects.
+
+The [post-hoc paired analysis](statistics.json), using 10,000 record-bootstrap
+samples, estimates an accuracy gain of 6.0 percentage points (95% percentile
+interval: **+4.0 to +8.0 points**). Exact two-sided McNemar on 24 baseline-only
+and 84 cascade-only correct records gives **p = 5.49e-9**. This tests accuracy,
+not all four quality metrics jointly. Intervals for macro-F1 and per-class
+precision/recall are in the same file.
+
+These are exploratory, unadjusted intervals conditional on the saved runs and
+reference labels. They exclude model-run variation and distribution shift.
+An interval spanning zero does not prove equivalence or noninferiority. Frozen
+point-estimate gates stay unchanged. Reproduce with
+`python benchmarks/paired_statistics.py PATH_TO_TASK_DIRECTORY`.
+The [calculator](../../paired_statistics.py) uses paired resampling and an exact
+binomial McNemar test; [method reference](https://www.statsmodels.org/stable/generated/statsmodels.stats.contingency_tables.mcnemar.html).

@@ -68,6 +68,7 @@ def prepare(root, destination, *, model=MODEL, reasoning_effort=None, prices=Non
         protocol['reasoning_effort'] = reasoning_effort
     if prices is not None:
         protocol['pricing'] = prices
+    protocol['jev_pricing'] = json.loads((REPO / 'benchmarks/jev-prices.json').read_text())
     save(destination / 'protocol.json', protocol)
     (destination / 'labels.jsonl').write_bytes((root / 'labels.jsonl').read_bytes())
     return protocol
@@ -222,7 +223,11 @@ def score(directory, arm):
     if list(folder.glob('turns/*/inflight.json')):
         complete = False
     jev = state['jev']
-    jev_cost = jev['usage']['input_tokens'] * .042 / 1_000_000 if jev else 0
+    jev_prices = protocol.get('jev_pricing') or json.loads((REPO / 'benchmarks/jev-prices.json').read_text())
+    if jev_prices['model'] != protocol['jev_model']:
+        raise ValueError('Jev price snapshot must match the requested model')
+    jev_cost = ((jev['usage']['input_tokens'] * jev_prices['input'] +
+                 jev['usage'].get('output_tokens', 0) * jev_prices['output']) / 1_000_000) if jev else 0
     complete = complete and (bool(jev['usage']['complete']) if jev else arm == 'baseline')
     final_path = folder / 'final.json'
     final_matches = bool(records and final_path.exists() and
@@ -235,10 +240,12 @@ def score(directory, arm):
               'api_seconds': sum(r['elapsed_seconds'] for r in records), 'usage': dict(tokens),
               ('mini_known_usd' if protocol['model'] == MODEL else 'model_known_usd'): known,
               'jev_known_usd': jev_cost, 'total_known_usd': known + jev_cost, 'cost_complete': complete,
-              'pricing': prices, 'jev_input_usd_per_million': .042,
+              'pricing': prices, 'jev_input_usd_per_million': jev_prices['input'],
               'classification': classification([labels[key]['expected'] for key in protocol['ids']],
                    [predictions.get(key, {}).get('choice') for key in protocol['ids']], list(protocol['rubric']['criteria'])),
               'scope': protocol['scope'], 'output_sha256': sha(folder / 'decisions.jsonl') if predictions else None}
+    if 'jev_pricing' in protocol:
+        report['jev_pricing'] = jev_prices
     save(folder / 'report.json', report)
     return report
 

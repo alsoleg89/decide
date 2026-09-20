@@ -1,0 +1,75 @@
+{
+  "items": 300,
+  "method": "Paired record bootstrap, percentile 95% intervals; exact two-sided McNemar for accuracy.",
+  "scope": "Post-hoc sample uncertainty conditional on these labels and runs. No multiple-testing adjustment, no model-run or dataset-shift uncertainty. A CI spanning zero proves neither equivalence nor noninferiority. Frozen point-estimate gates remain unchanged.",
+  "repetitions": 10000,
+  "seed": 20260920,
+  "input_sha256": {
+    "labels.jsonl": "44aea49d87f2f523b64be77f989246e0bfffeb52d7e46a38a7651bde86a85d61",
+    "baseline/decisions.jsonl": "1c7b74fc79e1c4fdbab1d725cb74b79cf940ffe6952c5fb8935cf25ec27ef72a",
+    "decide/decisions.jsonl": "d110406fcec5e83019fd2a7afcc412d56abb1a52980c01eb1d04676d22c7f9f7"
+  },
+  "mcnemar": {
+    "baseline_only_correct": 12,
+    "candidate_only_correct": 32,
+    "exact_two_sided_p": 0.003657766827927844
+  },
+  "deltas": {
+    "accuracy": {
+      "estimate": 0.06666666666666665,
+      "ci95": [
+        0.023333333333333317,
+        0.10999999999999999
+      ]
+    },
+    "bug_precision": {
+      "estimate": 0.044325353100270526,
+      "ci95": [
+        -0.0030416389406168944,
+        0.09251696902003138
+      ]
+    },
+    "bug_recall": {
+      "estimate": 0.15000000000000002,
+      "ci95": [
+        0.0714285714285714,
+        0.23078703703703685
+      ]
+    },
+    "feature_precision": {
+      "estimate": 0.12996031746031744,
+      "ci95": [
+        0.07126166511360213,
+        0.19378252909805657
+      ]
+    },
+    "feature_recall": {
+      "estimate": -0.04999999999999993,
+      "ci95": [
+        -0.11009174311926606,
+        0.008930582368082305
+      ]
+    },
+    "question_precision": {
+      "estimate": 0.07043108682452948,
+      "ci95": [
+        -0.009597945295093899,
+        0.1578968407587565
+      ]
+    },
+    "question_recall": {
+      "estimate": 0.10000000000000003,
+      "ci95": [
+        0.028037383177570097,
+        0.17708333333333331
+      ]
+    },
+    "macro_f1": {
+      "estimate": 0.07382109264402037,
+      "ci95": [
+        0.031257813754745546,
+        0.11869550446540267
+      ]
+    }
+  }
+}

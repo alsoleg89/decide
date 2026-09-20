@@ -115,7 +115,7 @@ def load_items(items: list[Item] | None, source: Source | None, root: Path) -> l
                 if "\x00" in content:
                     raise ValueError(f"Binary source is not supported: {relative}")
                 if source.kind == "files":
-                    rows.append(Item(id=str(relative), content=content))
+                    rows.append(Item(id=relative.as_posix(), content=content))
                 else:
                     for line_number, line in enumerate(content.split("\n") if source.kind == "jsonl" else content.splitlines(), 1):
                         if not line.strip():
@@ -126,7 +126,7 @@ def load_items(items: list[Item] | None, source: Source | None, root: Path) -> l
                             except ValueError:
                                 raise ValueError(f"Expected {{id, content}} at {relative}:{line_number}") from None
                         else:
-                            row = Item(id=f"{relative}:{line_number}", content=line)
+                            row = Item(id=f"{relative.as_posix()}:{line_number}", content=line)
                         rows.append(row)
                         if len(rows) > MAX_ITEMS:
                             raise ValueError("Batch exceeds 10000 items; split the input")
@@ -153,6 +153,8 @@ async def classify(client: httpx.AsyncClient, payload: dict) -> dict:
         except httpx.TransportError:
             if attempt == 2:
                 return {"error": "provider_unreachable", "attempts": attempt + 1}
+        except httpx.HTTPError:
+            return {"error": "invalid_provider_response", "attempts": attempt + 1}
         else:
             if response.is_success:
                 try:
@@ -236,7 +238,10 @@ async def decide(
     Does not execute decisions. All selected content is sent to api.typesafe.ai.
     """
     try:
-        root = Path(os.environ.get("DECIDE_ROOT", os.getcwd())).resolve()
+        configured_root = os.environ.get("DECIDE_ROOT")
+        if not configured_root or not Path(configured_root).is_absolute():
+            raise ValueError("Set DECIDE_ROOT to an absolute directory in the MCP server environment")
+        root = Path(configured_root).resolve()
         if not root.is_dir():
             raise ValueError("DECIDE_ROOT must be an existing directory")
         if set(review_labels or []) - criteria.keys():

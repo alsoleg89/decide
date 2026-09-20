@@ -1,0 +1,75 @@
+{
+  "items": 300,
+  "method": "Paired record bootstrap, percentile 95% intervals; exact two-sided McNemar for accuracy.",
+  "scope": "Post-hoc sample uncertainty conditional on these labels and runs. No multiple-testing adjustment, no model-run or dataset-shift uncertainty. A CI spanning zero proves neither equivalence nor noninferiority. Frozen point-estimate gates remain unchanged.",
+  "repetitions": 10000,
+  "seed": 20260920,
+  "input_sha256": {
+    "labels.jsonl": "44aea49d87f2f523b64be77f989246e0bfffeb52d7e46a38a7651bde86a85d61",
+    "baseline/decisions.jsonl": "dd16747b7e92cdc67a31f04b9e776530099d45cde508a11419e62817878e7db1",
+    "decide/decisions.jsonl": "fba66b95a93395f41c5b88a96e3f84552a20607c026dad06d740618d2b114c37"
+  },
+  "mcnemar": {
+    "baseline_only_correct": 14,
+    "candidate_only_correct": 14,
+    "exact_two_sided_p": 1.0
+  },
+  "deltas": {
+    "accuracy": {
+      "estimate": 0.0,
+      "ci95": [
+        -0.03333333333333344,
+        0.033333333333333326
+      ]
+    },
+    "bug_precision": {
+      "estimate": -0.009271523178807972,
+      "ci95": [
+        -0.04750442902126064,
+        0.028528955201649667
+      ]
+    },
+    "bug_recall": {
+      "estimate": -0.020000000000000018,
+      "ci95": [
+        -0.07692307692307687,
+        0.03419540229885046
+      ]
+    },
+    "feature_precision": {
+      "estimate": 0.014583333333333393,
+      "ci95": [
+        -0.038883833897931666,
+        0.06749578961005309
+      ]
+    },
+    "feature_recall": {
+      "estimate": -0.039999999999999925,
+      "ci95": [
+        -0.08333333333333326,
+        -0.00925925925925919
+      ]
+    },
+    "question_precision": {
+      "estimate": -0.0034591194968554007,
+      "ci95": [
+        -0.061170402844178455,
+        0.052282620614035026
+      ]
+    },
+    "question_recall": {
+      "estimate": 0.06000000000000005,
+      "ci95": [
+        -0.019047619047619035,
+        0.13861386138613863
+      ]
+    },
+    "macro_f1": {
+      "estimate": 0.006779275373624216,
+      "ci95": [
+        -0.030483426959378116,
+        0.04382095081241535
+      ]
+    }
+  }
+}
