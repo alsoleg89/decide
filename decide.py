@@ -326,7 +326,7 @@ async def decide(
         "review_reasons": dict(reasons), "review_fraction": review_count / len(rows),
         "confidence_threshold": confidence_threshold, "model_requested": model,
         "usage": {"input_tokens": usage["input_tokens"], "output_tokens": usage["output_tokens"],
-                  "complete": failed == 0 and retries == 0},
+                  "complete": requests_made == completed - failed},
         "requests_made": requests_made, "retries": retries,
         "elapsed_seconds": round(time.monotonic() - started, 3),
         "results_path": str(results_path), "review_path": str(review_path),

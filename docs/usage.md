@@ -120,7 +120,8 @@ The tool returns:
   by ID when you need the audit details.
 - `review_omitted`: cases in the review file that were not included in the preview.
 - `usage`: token counts from validated successful responses. `complete: false`
-  means failures or retries prevented complete accounting. `requests_made` and
+  means provider failures or retries prevented complete accounting. Oversized
+  items skipped before any request add no unknown provider cost. `requests_made` and
   `retries` show the request overhead. This is not an invoice or spending limit.
 
 Outputs live in `DECIDE_ROOT/.decide/<run-id>/`. Each run also stores

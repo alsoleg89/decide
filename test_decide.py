@@ -103,6 +103,8 @@ class DecideTests(unittest.IsolatedAsyncioTestCase):
         result = await self.call(source={"kind": "files", "paths": ["src/*", "src/*.py"]}, review_limit=20)
         self.assertEqual((result["total"], result["accepted"], result["failed"]), (301, 300, 1))
         self.assertEqual(len(sent), 300)
+        self.assertEqual(result["requests_made"], 300)
+        self.assertTrue(result["usage"]["complete"])
         self.assertEqual(result["review"][0]["reason"], "item_too_large")
         full_review = json.loads(Path(result["review_path"]).read_text())
         self.assertEqual(len(full_review["content"]), app.MAX_ITEM_BYTES + 1)
