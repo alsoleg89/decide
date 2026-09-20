@@ -48,6 +48,7 @@ class AgentContractTests(unittest.TestCase):
                 body = plan['calls'][0]['body']
                 seen.append(body)
                 tools = body['tools']
+                self.assertEqual(body['tool_choice'], 'required' if tools else 'none')
                 if tools:
                     name = tools[0]['name']
                     arguments = {'decisions': {key: 'yes' for key in tools[0]['parameters']['properties']['decisions']['required']}} if name == 'write_decisions' else {}

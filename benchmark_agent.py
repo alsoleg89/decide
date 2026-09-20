@@ -59,7 +59,7 @@ def prepare(root, destination):
                 'scope': 'Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.',
                 'history': 'After a successful write/import, discard completed batch content and retain only the last call and receipt. '
                            'Both arms use identical host compaction, with no paid summarizer.',
-                'arms': ['baseline', 'decide'], 'max_model_calls': 150,
+                'arms': ['baseline', 'decide'], 'max_model_calls': 150, 'require_tool_until_finished': True,
                 'criterion': 'Complete same-ID artifact; accuracy AND macro-F1 no worse; complete total inference cost lower.'}
     save(destination / 'protocol.json', protocol)
     (destination / 'labels.jsonl').write_bytes((root / 'labels.jsonl').read_bytes())
@@ -116,6 +116,8 @@ async def run(root, directory, arm):
                         'max_output_tokens': 8192, 'parallel_tool_calls': False, 'tools': available,
                         'instructions': prompt + f' Progress: {len(predictions)}/{len(ids)} records written.',
                         'input': [{'role': 'user', 'content': 'Complete the classification and save the result.'}] + history}
+                if protocol.get('require_tool_until_finished'):
+                    body['tool_choice'] = 'required' if available else 'none'
                 turn = output / 'turns' / f'{step:03d}'
                 turn.mkdir(parents=True)
                 call = {'arm': arm, 'ids': pending, 'body': body, 'request_sha256': digest(body)}

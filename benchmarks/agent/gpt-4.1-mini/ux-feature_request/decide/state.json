@@ -1,0 +1,35 @@
+{
+  "finished": true,
+  "arm": "decide",
+  "jev": {
+    "total": 1000,
+    "completed": 1000,
+    "accepted": 1000,
+    "accepted_by_label": {
+      "yes": 148,
+      "no": 852
+    },
+    "review_count": 0,
+    "failed": 0,
+    "review_reasons": {},
+    "review_fraction": 0.0,
+    "confidence_threshold": 0.0,
+    "model_requested": "jev-1.13.0",
+    "usage": {
+      "input_tokens": 432505,
+      "output_tokens": 31000,
+      "complete": true
+    },
+    "requests_made": 1000,
+    "retries": 0,
+    "elapsed_seconds": 77.371,
+    "results_path": "/private/tmp/decide-mini-followup/ux-feature_request/.decide/a9e6b14e877c4caf838d65d77590d74a/results.jsonl",
+    "review_path": "/private/tmp/decide-mini-followup/ux-feature_request/.decide/a9e6b14e877c4caf838d65d77590d74a/review.jsonl",
+    "review": [],
+    "review_omitted": 0
+  },
+  "model_calls": 4,
+  "tool_calls": 3,
+  "final_answer_received": true,
+  "elapsed_seconds": 81.63954904093407
+}

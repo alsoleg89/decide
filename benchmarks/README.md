@@ -18,6 +18,11 @@ The [provider-response investigation](multitask/rejection-diagnostics/README.md)
 explains 23 reproduced validation failures and measures the errors that relaxing
 validation would admit.
 
+The [guided GPT-4.1 mini tool loop](agent/gpt-4.1-mini/README.md) measures
+reading batches, real MCP calls, writing a complete decisions file and the final
+answer. Both arms compact completed batches; all API turns count. It reuses the
+1,300 follow-up records, so it is not another independent quality sample.
+
 The [1,300-new-record follow-up](cascade/gpt-4.1-mini/followup/README.md) freezes
 the selected policy before inference and measures actual cost and quality against mini.
 

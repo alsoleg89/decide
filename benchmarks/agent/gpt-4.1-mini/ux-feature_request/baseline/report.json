@@ -1,0 +1,72 @@
+{
+  "arm": "baseline",
+  "items": 1000,
+  "artifact_complete": true,
+  "model_calls": 82,
+  "tool_calls": 81,
+  "elapsed_seconds": 140.3176103340229,
+  "api_seconds": 139.82178879214916,
+  "usage": {
+    "input_tokens": 90176,
+    "output_tokens": 8969,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 0
+  },
+  "mini_known_usd": 0.05042080000000001,
+  "jev_known_usd": 0,
+  "total_known_usd": 0.05042080000000001,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 1047576,
+    "short": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.845,
+    "macro_f1": 0.7774264466204001,
+    "per_class": {
+      "yes": {
+        "support": 193,
+        "precision": 0.57421875,
+        "recall": 0.7616580310880829,
+        "f1": 0.6547884187082406
+      },
+      "no": {
+        "support": 807,
+        "precision": 0.9381720430107527,
+        "recall": 0.8649318463444857,
+        "f1": 0.9000644745325596
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 147,
+        "no": 46
+      },
+      "no": {
+        "no": 698,
+        "yes": 109
+      }
+    }
+  },
+  "scope": "Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.",
+  "output_sha256": "e1585da163cc7d4b653495b41c05b735cb5c35165ec191598a51abeccdbc3107"
+}

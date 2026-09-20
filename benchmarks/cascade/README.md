@@ -58,8 +58,9 @@ establish statistical noninferiority or a globally cheapest policy.
 
 The experiment is a stateless API classifier comparison. It excludes agent
 planning, MCP tool definitions, file-reading calls and conversation history.
-A full agent-loop experiment and fresh validation of the selected policy remain
-necessary for the broader goal.
+See the subsequent [fresh-record validation](gpt-4.1-mini/followup/README.md)
+and [guided tool-loop measurement](../agent/gpt-4.1-mini/README.md) for those
+separate questions. The latter uses real MCP, but is not a native Codex/Claude session.
 
 Earlier [IMDb/news/banking plans](preparation.json) and their saved price example
 were prepared before the user selected GPT-4.1 mini. **They were never run.**
