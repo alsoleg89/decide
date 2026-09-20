@@ -7,8 +7,15 @@ name = "decide-mcp"
 version = "0.1.0"
 description = "Bulk decisions with Jev. Keep your agent's context small."
 readme = "README.md"
+keywords = ["mcp", "classification", "ai-agents", "jev"]
 requires-python = ">=3.11"
 dependencies = ["mcp>=2.2,<3", "httpx2>=2.13,<3", "pydantic>=2.12,<3"]
+
+[project.urls]
+Homepage = "https://github.com/alsoleg89/decide"
+Documentation = "https://github.com/alsoleg89/decide/blob/main/docs/usage.md"
+Issues = "https://github.com/alsoleg89/decide/issues"
+Benchmarks = "https://github.com/alsoleg89/decide/tree/main/benchmarks"
 
 [project.scripts]
 decide-mcp = "decide:main"

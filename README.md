@@ -99,19 +99,21 @@ quality allows; there is no universal “only review 5%” setting.
 
 ## Get started
 
-Requires Python 3.11+, [uv](https://docs.astral.sh/uv/) and a
-[TypeSafe API key](https://console.typesafe.ai).
+You need [uv](https://docs.astral.sh/uv/), Git and a
+[TypeSafe API key](https://console.typesafe.ai). **No clone required.**
+
+Connect **[Codex](docs/usage.md#codex)** or
+**[Claude Code / Desktop](docs/usage.md#claude-code--claude-desktop)** with this
+MCP launch command:
 
 ```sh
-git clone https://github.com/alsoleg89/decide.git
-cd decide
-uv sync --locked
+uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e decide-mcp
 ```
 
-Connect it to **[Codex](docs/usage.md#codex)** or
-**[Claude Code / Desktop](docs/usage.md#claude-code--claude-desktop)**.
 Set `TYPESAFE_API_KEY` in the server environment and `DECIDE_ROOT` to the
-folder containing your data.
+folder containing your data. The client launches the stdio server; the first
+launch installs dependencies, then `uvx` reuses its cache.
+[Local checkout and installation check →](docs/usage.md#install)
 
 Then ask your agent:
 

@@ -4,7 +4,22 @@
 
 ## Install
 
-Python 3.11+ and [uv](https://docs.astral.sh/uv/) are required for these commands.
+The simplest setup uses [uv](https://docs.astral.sh/uv/) to run a pinned GitHub
+revision without a local checkout. `uvx` manages the Python environment and
+caches the installation. Git is needed to fetch the source.
+
+The MCP launch command is:
+
+```sh
+uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e decide-mcp
+```
+
+This starts a stdio server for an MCP client; it is not an interactive CLI.
+Configure it in the client below. The revision includes per-label confidence
+cutoffs and has been checked from a fresh cache. No PyPI publication is assumed.
+Update the pinned revision deliberately when adopting a newer version.
+
+For benchmark reproduction or development, clone the repository instead:
 
 ```sh
 git clone https://github.com/alsoleg89/decide.git
@@ -19,14 +34,14 @@ be different from the directory where this package is installed.
 
 ### Codex
 
-Add to your Codex `config.toml`, replacing both absolute paths:
+Add to your Codex `config.toml`, replacing the data directory:
 
 ```toml
 [mcp_servers.decide]
-command = "uv"
-args = ["run", "--locked", "--directory", "/absolute/path/to/decide", "decide-mcp"]
+command = "uvx"
+args = ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e", "decide-mcp"]
 env_vars = ["TYPESAFE_API_KEY"]
-startup_timeout_sec = 30
+startup_timeout_sec = 120
 tool_timeout_sec = 1800
 
 [mcp_servers.decide.env]
@@ -41,14 +56,14 @@ the host's timeout to suit your batch size and API latency.
 ### Claude Code / Claude Desktop
 
 Use this `mcpServers` entry in Claude Code's project `.mcp.json` or your Claude
-Desktop configuration. Replace the paths and key locally:
+Desktop configuration. Replace the data directory and key locally:
 
 ```json
 {
   "mcpServers": {
     "decide": {
-      "command": "uv",
-      "args": ["run", "--locked", "--directory", "/absolute/path/to/decide", "decide-mcp"],
+      "command": "uvx",
+      "args": ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e", "decide-mcp"],
       "env": {
         "TYPESAFE_API_KEY": "YOUR_KEY",
         "DECIDE_ROOT": "/absolute/path/to/your/project"
@@ -60,6 +75,32 @@ Desktop configuration. Replace the paths and key locally:
 
 Keep configurations containing a real key out of Git. Restart the client after
 configuration. See [Claude Code MCP](https://code.claude.com/docs/en/mcp).
+
+If a desktop client cannot find `uvx`, use its absolute executable path (`which
+uvx` on macOS/Linux, `where uvx` on Windows). The first launch downloads the
+runtime/dependencies; subsequent launches use the cache. For an existing local
+checkout, use `command = "uv"` and arguments
+`["run", "--locked", "--directory", "/absolute/path/to/decide", "decide-mcp"]`.
+
+### Check an installation without a key
+
+From a checkout with dependencies installed:
+
+```sh
+uv run --locked python smoke_install.py
+```
+
+Or test a separately installed command:
+
+```sh
+python smoke_install.py /absolute/path/to/decide-mcp
+```
+
+The check starts the command from an unrelated temporary directory, performs the
+MCP handshake, discovers `decide`, reads a deliberately oversized record and
+verifies its intact review artifact and per-label settings. It uses a dummy key
+and makes zero provider requests. This verifies installation/protocol wiring,
+not model quality. Live quality evidence is in the [benchmarks](../benchmarks/README.md).
 
 ## Use
 
