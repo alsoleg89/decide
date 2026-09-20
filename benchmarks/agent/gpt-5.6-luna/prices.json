@@ -1,0 +1,21 @@
+{
+  "model": "gpt-5.6-luna",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "checked_date": "2026-09-20",
+  "service_tier": "default",
+  "unit": "USD per million tokens, standard processing, global endpoint",
+  "long_context_above_tokens": 272000,
+  "short": {
+    "input": 0.2,
+    "cached_input": 0.02,
+    "cache_write": 0.25,
+    "output": 1.2
+  },
+  "long": {
+    "input": 0.4,
+    "cached_input": 0.04,
+    "cache_write": 0.5,
+    "output": 1.8
+  },
+  "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+}

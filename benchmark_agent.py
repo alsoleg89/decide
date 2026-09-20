@@ -1,4 +1,4 @@
-"""A bounded GPT-4.1 mini tool loop; same disk deliverable, compacted completed batches."""
+"""A bounded model tool loop; same disk deliverable, compacted completed batches."""
 import argparse
 import asyncio
 from collections import Counter
@@ -45,14 +45,16 @@ def validate_write(arguments, ids, criteria):
         {'type': 'output_text', 'text': arguments}]}]}, ids, criteria)
 
 
-def prepare(root, destination):
+def prepare(root, destination, *, model=MODEL, reasoning_effort=None, prices=None):
+    if prices is not None and prices.get("model") != model:
+        raise ValueError("Price snapshot must match the requested model")
     if destination.exists():
         raise ValueError('Use a new destination; never overwrite paid runs')
     destination.mkdir(parents=True)
     rows = unique_rows(root / 'items.jsonl')
     rubric = json.loads((root / 'rubric.json').read_text())
     ids = sorted(rows, key=lambda key: digest('decide-agent-v1:' + key))
-    protocol = {'model': MODEL, 'jev_model': 'jev-1.13.0', 'ids': ids, 'batch_size': 25,
+    protocol = {'model': model, 'jev_model': 'jev-1.13.0', 'ids': ids, 'batch_size': 25,
                 'rubric': rubric, 'confidence_threshold': rubric.get('confidence_threshold', 0),
                 'confidence_thresholds': rubric.get('confidence_thresholds', {}),
                 'runner_sha256': sha(Path(__file__)), 'server_sha256': sha(REPO / 'decide.py'),
@@ -62,6 +64,10 @@ def prepare(root, destination):
                            'Both arms use identical host compaction, with no paid summarizer.',
                 'arms': ['baseline', 'decide'], 'max_model_calls': 150, 'require_tool_until_finished': True,
                 'criterion': 'Complete same-ID artifact; accuracy AND macro-F1 no worse; complete total inference cost lower.'}
+    if reasoning_effort is not None:
+        protocol['reasoning_effort'] = reasoning_effort
+    if prices is not None:
+        protocol['pricing'] = prices
     save(destination / 'protocol.json', protocol)
     (destination / 'labels.jsonl').write_bytes((root / 'labels.jsonl').read_bytes())
     return protocol
@@ -113,10 +119,12 @@ async def run(root, directory, arm):
                     available = [tool('read_next', 'Read the next unprocessed batch of at most 25 records from disk.')]
                 else:
                     available = [tool('finish', 'Verify exact ID coverage, return decisions.jsonl path and label counts.')]
-                body = {'model': MODEL, 'store': False, 'service_tier': 'default', 'truncation': 'disabled',
+                body = {'model': protocol['model'], 'store': False, 'service_tier': 'default', 'truncation': 'disabled',
                         'max_output_tokens': 8192, 'parallel_tool_calls': False, 'tools': available,
                         'instructions': prompt + f' Progress: {len(predictions)}/{len(ids)} records written.',
                         'input': [{'role': 'user', 'content': 'Complete the classification and save the result.'}] + history}
+                if 'reasoning_effort' in protocol:
+                    body['reasoning'] = {'effort': protocol['reasoning_effort']}
                 if protocol.get('require_tool_until_finished'):
                     body['tool_choice'] = 'required' if available else 'none'
                 turn = output / 'turns' / f'{step:03d}'
@@ -197,7 +205,7 @@ def score(directory, arm):
     folder = directory / arm
     predictions = unique_rows(folder / 'decisions.jsonl') if (folder / 'decisions.jsonl').exists() else {}
     state = json.loads((folder / 'state.json').read_text())
-    prices = json.loads((REPO / 'benchmarks/cascade/gpt-4.1-mini/prices.json').read_text())
+    prices = protocol.get('pricing') or json.loads((REPO / 'benchmarks/cascade/gpt-4.1-mini/prices.json').read_text())
     paths = sorted(folder.glob('turns/*/responses.jsonl'))
     records = [json.loads(path.read_text()) for path in paths]
     responses_complete = [p.parent.name for p in paths] == [f'{i:03d}' for i in range(state['model_calls'])]
@@ -224,7 +232,8 @@ def score(directory, arm):
                  and all(row.get('choice') in protocol['rubric']['criteria'] for row in predictions.values()))
     report = {'arm': arm, 'items': len(labels), 'artifact_complete': valid, 'model_calls': len(records),
               'tool_calls': state['tool_calls'], 'elapsed_seconds': state.get('elapsed_seconds'),
-              'api_seconds': sum(r['elapsed_seconds'] for r in records), 'usage': dict(tokens), 'mini_known_usd': known,
+              'api_seconds': sum(r['elapsed_seconds'] for r in records), 'usage': dict(tokens),
+              ('mini_known_usd' if protocol['model'] == MODEL else 'model_known_usd'): known,
               'jev_known_usd': jev_cost, 'total_known_usd': known + jev_cost, 'cost_complete': complete,
               'pricing': prices, 'jev_input_usd_per_million': .042,
               'classification': classification([labels[key]['expected'] for key in protocol['ids']],
@@ -240,9 +249,13 @@ if __name__ == '__main__':
     parser.add_argument('--root', type=Path)
     parser.add_argument('--directory', type=Path, required=True)
     parser.add_argument('--arm', choices=['baseline', 'decide'])
+    parser.add_argument('--model', default=MODEL)
+    parser.add_argument('--reasoning-effort', choices=['none', 'low', 'medium', 'high', 'xhigh', 'max'])
+    parser.add_argument('--prices', type=Path, help='Frozen price JSON matching --model')
     args = parser.parse_args()
     if args.mode == 'prepare':
-        prepare(args.root, args.directory)
+        prepare(args.root, args.directory, model=args.model, reasoning_effort=args.reasoning_effort,
+                prices=json.loads(args.prices.read_text()) if args.prices else None)
     elif args.mode == 'run':
         print(json.dumps(asyncio.run(run(args.root, args.directory, args.arm)), indent=2))
     else:

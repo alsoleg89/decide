@@ -14,6 +14,12 @@ class AgentContractTests(unittest.TestCase):
                 validate_write(arguments, ids, labels)
 
     def test_two_arms_write_same_file_and_count_every_model_turn(self):
+        self.check_two_arms()
+
+    def test_luna_uses_frozen_model_reasoning_and_prices_in_both_arms(self):
+        self.check_two_arms(luna=True)
+
+    def check_two_arms(self, luna=False):
         import asyncio
         import json
         from pathlib import Path
@@ -29,7 +35,10 @@ class AgentContractTests(unittest.TestCase):
             (root / 'labels.jsonl').write_text(''.join(json.dumps({'id': r['id'], 'expected': 'yes'}) + '\n' for r in rows))
             app.save(root / 'rubric.json', {'question': 'Relevant?', 'criteria': {'yes': 'yes', 'no': 'no'}, 'confidence_thresholds': {'no': 0.9}})
             directory = root / 'experiment'
-            app.prepare(root, directory)
+            prices = json.loads((app.REPO / 'benchmarks/agent/gpt-5.6-luna/prices.json').read_text()) if luna else None
+            model = 'gpt-5.6-luna' if luna else app.MODEL
+            app.prepare(root, directory, model=model, reasoning_effort='none' if luna else None, prices=prices)
+
 
             class FakeMCP:
                 async def __aenter__(self): return self
@@ -48,6 +57,8 @@ class AgentContractTests(unittest.TestCase):
             def api(plan, turn):
                 body = plan['calls'][0]['body']
                 seen.append(body)
+                self.assertEqual(body['model'], model)
+                self.assertEqual(body.get('reasoning'), {'effort': 'none'} if luna else None)
                 tools = body['tools']
                 self.assertEqual(body['tool_choice'], 'required' if tools else 'none')
                 if tools:
@@ -57,7 +68,7 @@ class AgentContractTests(unittest.TestCase):
                                'arguments': json.dumps(arguments)}]
                 else:
                     output = [{'type': 'message', 'content': [{'type': 'output_text', 'text': 'Saved.'}]}]
-                record = {'elapsed_seconds': 1, 'body': {'status': 'completed', 'model': app.MODEL,
+                record = {'elapsed_seconds': 1, 'body': {'status': 'completed', 'model': model,
                     'service_tier': 'default', 'output': output, 'usage': {'input_tokens': 1000, 'output_tokens': 100,
                     'input_tokens_details': {'cached_tokens': 0}, 'output_tokens_details': {'reasoning_tokens': 0}}}}
                 (turn / 'responses.jsonl').write_text(json.dumps(record) + '\n')
@@ -70,7 +81,7 @@ class AgentContractTests(unittest.TestCase):
                     self.assertTrue(report['cost_complete'])
                     self.assertEqual(report['model_calls'], calls)
                     self.assertEqual(report['classification']['accuracy'], 1)
-                    self.assertAlmostEqual(report['mini_known_usd'], calls * .00056)
+                    self.assertAlmostEqual(report['model_known_usd' if luna else 'mini_known_usd'], calls * (.00032 if luna else .00056))
                 self.assertEqual((directory / 'baseline/decisions.jsonl').read_bytes(),
                                  (directory / 'decide/decisions.jsonl').read_bytes())
                 with self.assertRaises(FileExistsError):
