@@ -1,0 +1,168 @@
+{
+  "ux-feature_request": {
+    "baseline": {
+      "arm": "baseline",
+      "items": 1000,
+      "artifact_complete": true,
+      "model_calls": 82,
+      "tool_calls": 81,
+      "elapsed_seconds": 133.44714824995026,
+      "api_seconds": 132.9985390843358,
+      "usage": {
+        "input_tokens": 92167,
+        "output_tokens": 8163,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "mini_known_usd": 0.04992760000000001,
+      "jev_known_usd": 0,
+      "total_known_usd": 0.04992760000000001,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-4.1-mini-2025-04-14",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 1047576,
+        "short": {
+          "input": 0.4,
+          "cached_input": 0.1,
+          "cache_write": 0.4,
+          "output": 1.6
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.1,
+          "cache_write": 0.4,
+          "output": 1.6
+        },
+        "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.842,
+        "macro_f1": 0.7802809066889167,
+        "per_class": {
+          "yes": {
+            "support": 203,
+            "precision": 0.5842696629213483,
+            "recall": 0.7684729064039408,
+            "f1": 0.6638297872340425
+          },
+          "no": {
+            "support": 797,
+            "precision": 0.9358799454297408,
+            "recall": 0.8607277289836889,
+            "f1": 0.8967320261437909
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 156,
+            "no": 47
+          },
+          "no": {
+            "no": 686,
+            "yes": 111
+          }
+        }
+      },
+      "scope": "Guided real-MCP tool loop on 1000 exact-disjoint UX records; same public corpus, not native Codex/Claude.",
+      "output_sha256": "77cc17173928301357d2111c5ecef345f08ed7bca36142f0d9c1766cb93edc01"
+    },
+    "decide": {
+      "arm": "decide",
+      "items": 1000,
+      "artifact_complete": true,
+      "model_calls": 14,
+      "tool_calls": 13,
+      "elapsed_seconds": 97.95447983406484,
+      "api_seconds": 21.96537799818907,
+      "usage": {
+        "input_tokens": 14228,
+        "output_tokens": 1022,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 0
+      },
+      "mini_known_usd": 0.0073264,
+      "jev_known_usd": 0.018185454,
+      "total_known_usd": 0.025511854,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-4.1-mini-2025-04-14",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 1047576,
+        "short": {
+          "input": 0.4,
+          "cached_input": 0.1,
+          "cache_write": 0.4,
+          "output": 1.6
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.1,
+          "cache_write": 0.4,
+          "output": 1.6
+        },
+        "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.902,
+        "macro_f1": 0.8576896938295413,
+        "per_class": {
+          "yes": {
+            "support": 203,
+            "precision": 0.7196652719665272,
+            "recall": 0.8472906403940886,
+            "f1": 0.7782805429864252
+          },
+          "no": {
+            "support": 797,
+            "precision": 0.9592641261498029,
+            "recall": 0.9159347553324969,
+            "f1": 0.9370988446726574
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 172,
+            "no": 31
+          },
+          "no": {
+            "no": 730,
+            "yes": 67
+          }
+        }
+      },
+      "scope": "Guided real-MCP tool loop on 1000 exact-disjoint UX records; same public corpus, not native Codex/Claude.",
+      "output_sha256": "c05a90c6c8ffa8d092f2c415cbbeb53ca18608d258012c687ea5fc5320511a68"
+    },
+    "comparison": {
+      "quality_metrics": [
+        "accuracy",
+        "macro_f1",
+        "feature_precision",
+        "feature_recall"
+      ],
+      "valid_quality_comparison": true,
+      "quality_not_worse": true,
+      "complete_cost": true,
+      "savings_fraction": 0.4890230253406934,
+      "observed_tradeoff_met": true,
+      "mini_input_token_reduction": 0.8456280447448653
+    },
+    "paired_correctness": {
+      "both_correct": 818,
+      "baseline_only_correct": 24,
+      "decide_only_correct": 84,
+      "both_wrong": 74
+    }
+  }
+}

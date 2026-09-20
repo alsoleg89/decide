@@ -6,6 +6,66 @@ the quality gate stricter: **accuracy, macro-F1, feature precision AND feature
 recall must all be at least GPT-4.1 mini, with complete lower total inference
 cost and complete output files.** A gain on averages cannot conceal lower recall.
 
+## Measured result
+
+**Stronger gate: PASS.** Both files contain exactly 1,000 decisions. This verdict includes actual mini review answers, not the retrospective substitutions used for selection.
+
+| Metric | GPT-4.1 mini alone | decide + mini |
+| --- | ---: | ---: |
+| Accuracy | 84.2% | 90.2% |
+| Macro-F1 | 0.7803 | 0.8577 |
+| Feature-request precision | 58.4% | 72.0% |
+| Feature-request recall | 76.8% | 84.7% |
+| Total inference cost | $0.04992760 | $0.02551185 |
+| Mini input tokens, all turns | 92,167 | 14,228 |
+| Mini output tokens, all turns | 8,163 | 1,022 |
+| Mini API calls | 82 | 14 |
+| Wall time, one run | 133.4s | 98.0s |
+
+Cost fell **48.9%**; mini input tokens fell **84.6%**. Jev sent 123/1000 records to mini (12.3%); this fraction was an outcome, not a target. Jev made 1000 requests and 0 retries; its cost was $0.01818545. Mini orchestration/review cost $0.00732640. Both arms have complete cost accounting.
+
+The quality gate is the frozen four-metric comparison, not a universal quality claim. One new sample and one run per arm do not prove future noninferiority or the global cheapest policy. This is a guided, host-enforced workflow with a small adapter tool catalog; native Codex/Claude UI, tool-discovery overhead, host CPU and engineering time are excluded. All model calls and provider usage are included.
+
+### What changed in the mistakes
+
+- `yes` (support 203): precision 58.4% → 72.0%; recall 76.8% → 84.7%.
+- `no` (support 797): precision 93.6% → 95.9%; recall 86.1% → 91.6%.
+
+Both correct: 818; only mini correct: 24; only decide correct: 84; both wrong: 74. [Every disputed ID](paired-errors.jsonl) includes both decisions and the reference label. Per-class confusion matrices, including all misses and false alarms, remain in each report.
+
+### Why this combination helped
+
+On these same records, Jev before review was more conservative: 87.3% feature
+precision but 67.5% recall, versus mini's 58.4% precision and 76.8% recall.
+Review changed 82 negative decisions to positive: **35 recovered real requests
+and 47 introduced false positives**. It left 15 reviewed requests missed; another
+16 misses were already accepted by Jev and never reached mini.
+
+Consequently, review lowered Jev-only accuracy from 91.4% to 90.2%, while raising
+recall from 67.5% to 84.7% and macro-F1 from 0.8543 to 0.8577. It earned its extra
+cost against the frozen recall requirement, not by improving every Jev-only
+metric. The combined result still beats the full-mini baseline on all four
+required metrics. This [post-hoc review-effect diagnostic](review-effect.json)
+uses the actual stored outputs; it is not another paid arm or independent sample,
+and assigns no hypothetical agent cost to a no-review run.
+
+### Audit and reproduction
+
+The protocol was committed in [`67ef0c3`](https://github.com/alsoleg89/decide/commit/67ef0c3) before paid calls. The preparation script independently reconstructed byte-identical inputs, labels, rubric and protocol. A separate calculation verified the real tool traces, exact-ID artifact, label-specific routing, classification scores and every paid response.
+
+[Baseline output](baseline/decisions.jsonl) · [decide output](decide/decisions.jsonl) · [Baseline report](baseline/report.json) · [decide report](decide/report.json) · [Comparison JSON](summary.json)
+
+Both arm folders include `trace.jsonl`, `final.json`, `state.json` and actual API responses under `turns/`. The decide folder also includes fresh Jev predictions and its summary. Source-bearing read outputs are replaced by IDs, hashes and byte counts; no source text, full request bodies or credentials are published. Reference labels are used only for scoring.
+
+Recompute the public reports without API calls:
+
+```sh
+python benchmark_agent.py score --directory benchmarks/agent/ux-recall --arm baseline
+python benchmark_agent.py score --directory benchmarks/agent/ux-recall --arm decide
+```
+
+The whole experiment used 96 mini responses and 1000 Jev requests. Combined cost of both arms: $0.07543945, estimated from provider-reported tokens and the pinned price snapshot.
+
 ## Frozen policy
 
 Accept valid Jev `yes` decisions. Send Jev `no` decisions with confidence below
@@ -48,4 +108,4 @@ python benchmark_agent.py run --root /tmp/ux-recall/inputs --directory /tmp/ux-r
 
 Fresh runs require `OPENAI_API_KEY` and `TYPESAFE_API_KEY`. Existing output folders
 are never resumed or overwritten. Results, failures and all billable responses
-will be retained regardless of whether the stronger gate passes.
+are retained regardless of whether the stronger gate passes.

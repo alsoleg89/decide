@@ -18,6 +18,11 @@ The [provider-response investigation](multitask/rejection-diagnostics/README.md)
 explains 23 reproduced validation failures and measures the errors that relaxing
 validation would admit.
 
+The [new UX recall validation](agent/ux-recall/README.md) selects a per-label
+cutoff on earlier results, then tests 1,000 exact-disjoint reviews. Accuracy,
+macro-F1, feature precision AND recall improve while complete tool-loop cost
+falls 48.9%. Actual review decisions and every paid turn are archived.
+
 The [guided GPT-4.1 mini tool loop](agent/gpt-4.1-mini/README.md) measures
 reading batches, real MCP calls, writing a complete decisions file and the final
 answer. Both arms compact completed batches; all API turns count. It reuses the

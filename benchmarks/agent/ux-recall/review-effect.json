@@ -1,0 +1,38 @@
+{
+  "scope": "Post-hoc diagnostic on the actual fresh Jev outputs and mini review, not another paid arm or a new holdout. No hypothetical agent cost assigned.",
+  "jev_before_review": {
+    "accuracy": 0.914,
+    "macro_f1": 0.8543360433604337,
+    "per_class": {
+      "yes": {
+        "support": 203,
+        "precision": 0.8726114649681529,
+        "recall": 0.6748768472906403,
+        "f1": 0.7611111111111111
+      },
+      "no": {
+        "support": 797,
+        "precision": 0.9217081850533808,
+        "recall": 0.9749058971141782,
+        "f1": 0.9475609756097562
+      }
+    },
+    "confusion": {
+      "yes": {
+        "no": 66,
+        "yes": 137
+      },
+      "no": {
+        "no": 777,
+        "yes": 20
+      }
+    }
+  },
+  "review_effect": {
+    "reviewed": 123,
+    "changed_to_yes": 82,
+    "corrected_missed_features": 35,
+    "introduced_false_positives": 47,
+    "still_missed_features": 15
+  }
+}

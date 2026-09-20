@@ -164,6 +164,8 @@ is accepted. `review_labels` and provider/input errors still force review.
 Overrides must use existing criteria labels and finite numeric values in 0..1.
 Both the request artifact and summary record the overrides.
 
+The [new UX validation](../benchmarks/agent/ux-recall/README.md) measures this
+policy on 1,000 new reviews, including actual mini review and its cost.
 This is useful when false negatives and false positives have different costs.
 It is a routing control, not an accuracy guarantee. The standalone evaluator's
 threshold sweep tests alternative global cutoffs; it does not reproduce per-label
@@ -194,6 +196,7 @@ Neither a confidence score nor an in-sample sweep guarantees future accuracy.
 | `DECIDE_ROOT` (environment) | Process working directory | Allowed input/output directory |
 | `DECIDE_MODEL` (environment) | `jev-latest` | Use a pinned Jev model for repeatability |
 | `confidence_threshold` (tool) | `0.8` | Review when Jev confidence is **below** this value |
+| `confidence_thresholds` (tool) | `{}` | Per-label cutoff overrides; omitted labels use the global cutoff |
 | `review_labels` (tool) | `[]` | Always review these labels, regardless of confidence |
 | `concurrency` (tool) | `4` | Concurrent requests per invocation, 1–16 |
 | `review_limit` (tool) | `0` | Preview count, 0–100; never drops records from the review file |

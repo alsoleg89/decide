@@ -51,43 +51,51 @@ changes still need judgment. `decide` produces labels; it never executes them.
 
 ## Measured against GPT-4.1 mini
 
-**Pay less to finish the sorting job — including the tool loop.**
-We measured reading data, calling real MCP, writing a complete decisions file and
-giving the final answer. Both arms discard completed batches from history.
+**Cut the bill while protecting the quality your task needs.**
+On 1,000 new UX reviews, the selected policy improved all four frozen quality
+metrics and reduced total inference cost by **48.9%**.
 
-| Job | Records | mini alone: accuracy · total cost | decide + mini: accuracy · total cost | Cost reduction |
-| --- | ---: | --- | --- | ---: |
-| Find feature requests in app reviews | 1,000 | 84.5% · $0.04808 | **91.0% · $0.01876** | **61.0%** |
-| Triage OpenCV issues | 300 | 68.0% · $0.15129 | **74.7% · $0.03429** | **77.3%** |
+| UX feature-request extraction | mini alone | decide + mini |
+| --- | ---: | ---: |
+| Accuracy | 84.2% | **90.2%** |
+| Macro-F1 | 0.7803 | **0.8577** |
+| Precision | 58.4% | **72.0%** |
+| Recall | 76.8% | **84.7%** |
+| Complete tool-loop cost | $0.04993 | **$0.02551** |
+| Mini input tokens across all turns | 92,167 | **14,228** |
 
-Macro-F1 also improves on both tasks. Jev handles valid decisions; mini sees only
-errors, including one oversized issue kept whole. Prices include both providers.
-There is no confidence-based review in this measured policy.
+Jev handled the whole file. Mini checked 123 uncertain negative answers;
+valid positive answers stayed with Jev. The cutoff was selected on older data
+and committed before these 1,000 exact-disjoint reviews were sent to either model.
+Both agents wrote complete output files and verified every input ID.
 
-[Full workflow costs, tokens, errors and reproduction →](benchmarks/agent/gpt-4.1-mini/required-completion/README.md)
+[New UX records, frozen policy, all mistakes and reproduction →](benchmarks/agent/ux-recall/README.md)
 
-**Know the tradeoff.** On UX, decide produces fewer false positives, but feature-request
-recall falls from 75.1% to 64.8%. Higher accuracy and macro-F1 do not mean every
-metric improves. Choose the metric your job actually needs.
+The cost includes reading data, real MCP, retained history, writing results and
+the final answer, plus both providers. Both arms discard completed batches.
+This is a guided workflow with host-enforced completion, not a native Codex/Claude
+session. Results are observed sample comparisons, not a future quality guarantee
+or proof of the globally cheapest policy.
 
-This is a guided tool loop with completion enforced by the host, not a native
-Codex/Claude session. It reuses the 1,300 records from our
-[fresh-record validation](benchmarks/cascade/gpt-4.1-mini/followup/README.md); it is
-not another independent quality sample. An earlier agent run stopped too soon:
-[that failure remains published](benchmarks/agent/gpt-4.1-mini/README.md#first-run-a-real-completion-failure).
+**Developer workflow:** on 300 OpenCV issues, an error-only fallback policy cut
+tool-loop cost **77.3%** and raised accuracy from **68.0% to 74.7%**, with higher
+macro-F1. Feature-label recall fell, so that policy suits a different quality
+tradeoff. [Developer results and class metrics →](benchmarks/agent/gpt-4.1-mini/required-completion/README.md)
 
-**A reviewer must earn its cost.** The [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md)
-includes jobs where Jev helps, jobs where mini preserves quality better, and jobs
-where adding review makes the result worse and more expensive. These two successful
-workloads are selected public-data tasks, not a universal rule or a global cost minimum.
+**Less review is not the goal.** The earlier UX policy was cheaper but missed more
+feature requests. The new policy spends more on review and recovers that recall.
+The [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md) also includes
+jobs where mini preserves quality better and where review makes results worse.
+[An agent stopping before the job was done](benchmarks/agent/gpt-4.1-mini/README.md#first-run-a-real-completion-failure)
+remains published too.
 
 The [workflow study](benchmarks/workflows/README.md) covers 3,500 Jev decisions
 on UX feedback and issues from five projects. The [earlier evaluations](benchmarks/multitask/README.md)
-cover another 8,340 records across ten tasks. Predictions, failures and baselines
-are published throughout.
+cover another 8,340 records across ten tasks. Reference labels, predictions,
+failures and baselines are published throughout.
 
-Review rate is an outcome, not a quota: there is no universal “only review 5%” setting.
-[Choose a policy on your own labeled sample →](benchmarks/multitask/threshold-validation/README.md)
+Review rate is an outcome, not a quota. Choose the greatest savings your task's
+quality allows; there is no universal “only review 5%” setting.
 
 ## Get started
 
@@ -108,9 +116,10 @@ folder containing your data.
 Then ask your agent:
 
 > Use decide on feedback.jsonl to find feature requests. Pass the file path
-> directly without reading the whole file first. Use yes/no criteria, start
-> at confidence 0, read every error case in the review queue, and save one final
-> decision per input ID. Verify complete coverage before reporting success.
+> directly without reading the whole file first. Use yes/no criteria with a
+> global confidence threshold of 0 and a threshold of 0.9 for no. Read every
+> case in the review queue and save one final decision per input ID. Verify
+> complete coverage before reporting success.
 
 Each JSONL row needs an ID and content:
 
@@ -130,12 +139,14 @@ Each JSONL row needs an ID and content:
     "no": "Does not request a new or changed capability"
   },
   "source": {"kind": "jsonl", "paths": ["feedback.jsonl"]},
-  "confidence_threshold": 0
+  "confidence_threshold": 0,
+  "confidence_thresholds": {"no": 0.9}
 }
 ```
 
-This reproduces the measured policy: accept every valid answer and review errors.
-Evaluate it on your own labeled sample; confidence 0 does not guarantee quality.
+This reproduces the routing from the new UX validation: accept valid positive
+answers, review uncertain negatives and errors. Validate it on your own labeled
+sample; a confidence cutoff does not guarantee accuracy.
 
 </details>
 
@@ -147,7 +158,7 @@ in `results.jsonl`. Every case needing review keeps its **full original input**
 in `review.jsonl`. Both live under `DECIDE_ROOT/.decide/<run-id>/`.
 
 - **Read from disk:** files and globs, individual log lines, or JSONL records.
-- **Control escalation:** confidence threshold plus labels that always need review.
+- **Control escalation:** global and per-label confidence cutoffs, plus labels that always need review.
 - **Keep failures visible:** invalid responses and oversized items enter the review queue.
 - **Stay inspectable:** [`decide.py`](decide.py) is the entire production server.
 
