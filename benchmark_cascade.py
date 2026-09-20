@@ -194,10 +194,18 @@ def score(plan, records, labels, prices=None):
             failed[arm] += len(call['ids'])
     cascade = {**plan['jev_accepted'], **guesses['review']}
     expected = [labels[key]['expected'] for key in plan['ids']]
+    paired = Counter({'both_correct': 0, 'baseline_only_correct': 0,
+                      'cascade_only_correct': 0, 'both_wrong': 0})
+    for key in plan['ids']:
+        baseline_correct = guesses['baseline'].get(key) == labels[key]['expected']
+        cascade_correct = cascade.get(key) == labels[key]['expected']
+        paired[('both_correct' if cascade_correct else 'baseline_only_correct') if baseline_correct
+               else ('cascade_only_correct' if cascade_correct else 'both_wrong')] += 1
     frozen_errors = sum(choice != labels[key]['expected'] for key, choice in plan['jev_accepted'].items())
     result = {'mode': plan['mode'], 'model_requested': plan['model'], 'items': len(expected),
               'baseline': classification(expected, [guesses['baseline'].get(key) for key in plan['ids']], plan['criteria']),
               'cascade': classification(expected, [cascade.get(key) for key in plan['ids']], plan['criteria']),
+              'paired_correctness': dict(paired),
               'failed_items': dict(failed), 'usage': {arm: dict(value) for arm, value in tokens.items()},
               'usage_complete': {arm: missing[arm] == 0 for arm in guesses},
               'returned_models': {arm: dict(value) for arm, value in returned_models.items()},
@@ -216,6 +224,21 @@ def score(plan, records, labels, prices=None):
                                    'savings_fraction': 1-(costs['review']+plan['jev_known_usd'])/costs['baseline']
                                    if complete and costs['baseline'] else None,
                                    'note': 'List-price estimate, not an invoice. Savings withheld if either arm or Jev has unknown cost.'}
+    same_model = len(set(returned_models['baseline']) | set(returned_models['review'])) == 1 and 'unavailable' not in returned_models['baseline']
+    valid_quality = same_model and not any(failed.values())
+    quality_not_worse = (result['cascade']['accuracy'] >= result['baseline']['accuracy'] and
+                         result['cascade']['macro_f1'] >= result['baseline']['macro_f1'])
+    cost = result.get('cost_estimate', {})
+    cheaper = cost['cascade_known_usd'] < cost['baseline_known_usd'] if cost.get('complete') else None
+    result['controlled_sample_comparison'] = {
+        'same_returned_model': same_model, 'valid_quality_comparison': valid_quality,
+        'accuracy_delta': result['cascade']['accuracy'] - result['baseline']['accuracy'],
+        'macro_f1_delta': result['cascade']['macro_f1'] - result['baseline']['macro_f1'],
+        'quality_not_worse': quality_not_worse if valid_quality else None,
+        'lower_classification_cost': cheaper,
+        'observed_tradeoff_met': (quality_not_worse and cheaper) if valid_quality and cheaper is not None else None,
+        'scope': 'Observed accuracy and macro-F1 on this sample, including actual review mistakes. '
+                 'Not statistical proof of noninferiority, minimum cost across policies, or an end-to-end agent result.'}
     return result
 
 

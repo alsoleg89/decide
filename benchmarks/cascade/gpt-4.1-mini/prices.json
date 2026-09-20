@@ -1,0 +1,21 @@
+{
+  "model": "gpt-4.1-mini-2025-04-14",
+  "source": "https://developers.openai.com/api/docs/pricing",
+  "checked_date": "2026-09-20",
+  "service_tier": "default",
+  "unit": "USD per million tokens, standard processing, global endpoint",
+  "long_context_above_tokens": 1047576,
+  "short": {
+    "input": 0.4,
+    "cached_input": 0.1,
+    "cache_write": 0.4,
+    "output": 1.6
+  },
+  "long": {
+    "input": 0.4,
+    "cached_input": 0.1,
+    "cache_write": 0.4,
+    "output": 1.6
+  },
+  "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+}

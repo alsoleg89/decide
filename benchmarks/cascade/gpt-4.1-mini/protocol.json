@@ -1,0 +1,155 @@
+{
+  "status": "prepared_not_run",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "batch_size": 25,
+  "max_output_tokens": 8192,
+  "paid_calls": 0,
+  "criterion": "Observed final accuracy and macro-F1 at least the full-model baseline, and lower complete classification cost. This screening is not proof of noninferiority or globally minimum end-to-end agent cost.",
+  "design": "All nine previously published workflow tasks. Frozen Jev routing at 0.95; no selection using GPT results. Same model, rubric, schema and batch size in both arms. No gold labels or Jev guesses sent to the reviewer.",
+  "tasks": {
+    "dev-bitcoin": {
+      "source_archive": "benchmarks/workflows/results/dev-bitcoin",
+      "items": 300,
+      "review_items": 95,
+      "calls": {
+        "baseline": 12,
+        "review": 4
+      },
+      "plan_sha256": "d5d64fafb6befe7f02f426809ff5de0e9065311f201540e07ee814534012a7e2",
+      "source_sha256": {
+        "predictions.jsonl": "e9ec606e34a3deb1fbeaf142dd02b473bae31d1f0a739467146d26f0d3a3451a",
+        "labels.jsonl": "0ad9ad3fc3f3abd32fefc2dfbf0e769fdac960011ad9cf4efa90893a66f8f03a",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "74219b57f736a6aa5a7023f1490c0dd51b273cc790ab17fab3dd2e9fffa07362"
+      }
+    },
+    "dev-opencv": {
+      "source_archive": "benchmarks/workflows/results/dev-opencv",
+      "items": 300,
+      "review_items": 119,
+      "calls": {
+        "baseline": 12,
+        "review": 5
+      },
+      "plan_sha256": "27c15fc5aa27852f4857f5326dafb3b97cf02d6abd20f715dd87b6ba3f3b8d06",
+      "source_sha256": {
+        "predictions.jsonl": "550eea4349a85781da9da64f0daf6d4e0a75f6bf14a84142eb16872bb2f7bea3",
+        "labels.jsonl": "89711041db800e22d0e518e906bf384d0cc0916c0b27c85d66f167c88d4be30c",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "0f59d1b2954abfe19ad8d387bba5f6080639c10fcc23afcb1721a6329eca6f61"
+      }
+    },
+    "dev-react": {
+      "source_archive": "benchmarks/workflows/results/dev-react",
+      "items": 300,
+      "review_items": 69,
+      "calls": {
+        "baseline": 12,
+        "review": 3
+      },
+      "plan_sha256": "91ae63a7d513641c9e766cffcbf953a2d162fbccba199e795ccb217942bf7515",
+      "source_sha256": {
+        "predictions.jsonl": "5079180cf4c7627481005e62b7ae19c7809eeee7003a19d118d8d4b74141613f",
+        "labels.jsonl": "3aa058726150748305a09e5f0929dba0cacc15a70af149f0662aab3b813d27ac",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "b6e8bbf763016f7f7d1e886c4c5fb98c60229907df737566a32ec1a24ca93a39"
+      }
+    },
+    "dev-tensorflow": {
+      "source_archive": "benchmarks/workflows/results/dev-tensorflow",
+      "items": 300,
+      "review_items": 120,
+      "calls": {
+        "baseline": 12,
+        "review": 5
+      },
+      "plan_sha256": "af5e7be9c1c09988b07d60811bd13e0972f8658349ecf3d317bef7b1b26bb3b1",
+      "source_sha256": {
+        "predictions.jsonl": "b0e801fa67a89c52d600bf25ed08bf491abfe59c7da737e7a4e3f5295653c119",
+        "labels.jsonl": "c6c33d9213c9cf73657aec6f3ef78949fed8c0733677a7eaadea78d0db882696",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "13f101eb1b6333efd5d61ab4a848d2b47001485ec8201c65aa26c6ac0c86916f"
+      }
+    },
+    "dev-vscode": {
+      "source_archive": "benchmarks/workflows/results/dev-vscode",
+      "items": 300,
+      "review_items": 91,
+      "calls": {
+        "baseline": 12,
+        "review": 4
+      },
+      "plan_sha256": "9156a58b83a3098ae3539225fa2d97362ad3cfd7bc01bc3f9f314b385d04744f",
+      "source_sha256": {
+        "predictions.jsonl": "69fbe877f0aa421049f51c33a48335e3503c79b882af6b3f36c2f41f34a1aa0d",
+        "labels.jsonl": "72424ade41d5164a754051c1ed4abbeaef0eaa4130647f9037af8da6e5e55100",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "e333dd5378820ef5390935e91123d30c8f571abbfeb8d9ff830b3dc54ea05c56"
+      }
+    },
+    "ux-bug_report": {
+      "source_archive": "benchmarks/workflows/results/ux-bug_report",
+      "items": 500,
+      "review_items": 101,
+      "calls": {
+        "baseline": 20,
+        "review": 5
+      },
+      "plan_sha256": "01cef515dbef608f52d2f11f89716a6da66d6be70867726c7a477791a32eb48c",
+      "source_sha256": {
+        "predictions.jsonl": "e30d745c49e968d719eb0f29e1eeb3f05a2d543a0ea37efa2baf4c1f1ede4523",
+        "labels.jsonl": "435d9871b34ef7fd23e8cd09d236c0bdfbeefa1a991f458c02c4816187f8284a",
+        "rubric.json": "02396051475ebfccfdaa83edb90fcfb3301e4fce0118c67c69dadfa7d74afd84",
+        "report.json": "b802a83eb68b4313cae87b15785d788cc5880d1204f91a6358bfa69f162d0821"
+      }
+    },
+    "ux-feature_request": {
+      "source_archive": "benchmarks/workflows/results/ux-feature_request",
+      "items": 500,
+      "review_items": 97,
+      "calls": {
+        "baseline": 20,
+        "review": 4
+      },
+      "plan_sha256": "719ca6b9299ed41fba69df6ccdde02d14714f4a66d2c17fb598bdcf4d9b70a7d",
+      "source_sha256": {
+        "predictions.jsonl": "13bcd21a116295a08cba47128fdc85d665867b9e9f82d19bfabe3ac3671637f7",
+        "labels.jsonl": "570066d4ec90f551fa9e5840b46610703ca4d7b118c1aa4de00061fcf494d4bd",
+        "rubric.json": "b9a4b65825949efe1f831546ab18d40d7d36407fbcbb4e6e1246959a647529fc",
+        "report.json": "115fc6ae45a27ebb0c6d21f45be5406684c9f17fbf0a2f09d96852e5ec095760"
+      }
+    },
+    "ux-rating": {
+      "source_archive": "benchmarks/workflows/results/ux-rating",
+      "items": 500,
+      "review_items": 473,
+      "calls": {
+        "baseline": 20,
+        "review": 19
+      },
+      "plan_sha256": "4e24061fa919c8cf10e04f4435d744c2b5cd0f5e66cc5160635490c90018b67e",
+      "source_sha256": {
+        "predictions.jsonl": "6ab87702730955c3408eb053c34868b94c731ff0c08938b729ff17c3ba64c697",
+        "labels.jsonl": "a79a0cec28f2759eaa0f9ddd6413603e33ac89073bf92c746f6a34775517da16",
+        "rubric.json": "c797dd7b0e057f4057341f022b7c44bcc80c9da8a5ab18b009ebcaa4e64bd1c8",
+        "report.json": "3e101d777d195fe753d58c7938a85b8560279224f97626a8986aa8eb254b4ac7"
+      }
+    },
+    "ux-user_experience": {
+      "source_archive": "benchmarks/workflows/results/ux-user_experience",
+      "items": 500,
+      "review_items": 319,
+      "calls": {
+        "baseline": 20,
+        "review": 13
+      },
+      "plan_sha256": "d95ec2bbdf3582242a93e6e1139fb3cbb5ffcc5cb80b6f5ec9e01cd4886dd8a4",
+      "source_sha256": {
+        "predictions.jsonl": "722213ecb4807f198614cc1bba391977298bf45745f40784bb7052bc86ac654a",
+        "labels.jsonl": "2f7d62a7566f1e0a997b8d7e0b391d2f4b11e62dd002303e84602a1387764b12",
+        "rubric.json": "aea0867c6c6178ae6f5996b4e1366d1bc5e1ac932a351f379ebb55e99b139927",
+        "report.json": "20afcca29f9805c2e6f2e79bd1dbd40589ffab290e02a662bc1308db99b11bb2"
+      }
+    }
+  }
+}

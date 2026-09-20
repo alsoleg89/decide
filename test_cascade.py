@@ -40,15 +40,29 @@ class CascadeTests(unittest.TestCase):
         self.assertAlmostEqual(result['cost_estimate']['baseline_known_usd'], .01395)
         self.assertAlmostEqual(result['cost_estimate']['cascade_known_usd'], .01495)
         self.assertLess(result['cost_estimate']['savings_fraction'], 0)
+        self.assertEqual(result['paired_correctness'], {'both_correct': 2, 'baseline_only_correct': 2,
+                                                       'cascade_only_correct': 0, 'both_wrong': 0})
+        self.assertFalse(result['controlled_sample_comparison']['observed_tradeoff_met'])
         missing = copy.deepcopy(records)
         del missing[1]['body']['usage']
         self.assertIsNone(app.score(plan, missing, labels, prices)['cost_estimate']['savings_fraction'])
+        self.assertIsNone(app.score(plan, missing, labels, prices)['controlled_sample_comparison']['observed_tradeoff_met'])
+        equal = copy.deepcopy(records)
+        equal[0]['body'] = response(calls[0]['ids'], wrong=['a'])
+        equal[0]['body']['usage']['input_tokens'] = 4000
+        equal[1]['body'] = response(calls[1]['ids'])
+        comparison = app.score(plan, equal, labels, prices)['controlled_sample_comparison']
+        self.assertTrue(comparison['quality_not_worse'])
+        self.assertTrue(comparison['observed_tradeoff_met'])
+        equal[1]['body']['model'] = 'different-model'
+        self.assertIsNone(app.score(plan, equal, labels, prices)['controlled_sample_comparison']['observed_tradeoff_met'])
         with self.assertRaises(ValueError):
             app.score(plan, records[:-1], labels)
         records[1]['body'] = response(['c', 'c'])
         failed = app.score(plan, records, labels)
         self.assertEqual(failed['failed_items']['review'], 2)
         self.assertEqual(failed['cascade']['accuracy'], .25)
+        self.assertIsNone(failed['controlled_sample_comparison']['observed_tradeoff_met'])
 
     def test_paid_request_is_not_retried_or_silently_repeated(self):
         body = {'model': 'test-model'}
