@@ -18,9 +18,9 @@ The [provider-response investigation](multitask/rejection-diagnostics/README.md)
 explains 23 reproduced validation failures and measures the errors that relaxing
 validation would admit.
 
-The [controlled expensive-model comparison](cascade/README.md) is prepared but
-not executed. It will measure actual reviewer mistakes and token usage rather
-than assuming perfect review or treating JSON bytes as billed tokens.
+The [GPT-4.1 mini comparison](cascade/gpt-4.1-mini/README.md) measures final
+quality and actual token-based costs for the full-model baseline versus Jev plus
+paid review. It includes losing scenarios and rejected output batches.
 
 Then read the [threshold-selection validation](multitask/threshold-validation/README.md):
 60 retrospective checks separate threshold selection from scoring and show

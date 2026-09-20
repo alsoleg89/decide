@@ -1,0 +1,168 @@
+{
+  "mode": "controlled_classifier_cascade",
+  "model_requested": "gpt-4.1-mini-2025-04-14",
+  "items": 300,
+  "baseline": {
+    "accuracy": 0.82,
+    "macro_f1": 0.8202181518036075,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.7723577235772358,
+        "recall": 0.95,
+        "f1": 0.852017937219731
+      },
+      "feature": {
+        "support": 100,
+        "precision": 1.0,
+        "recall": 0.73,
+        "f1": 0.8439306358381503
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.75,
+        "recall": 0.78,
+        "f1": 0.7647058823529411
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 95,
+        "question": 5
+      },
+      "feature": {
+        "question": 21,
+        "feature": 73,
+        "bug": 6
+      },
+      "question": {
+        "question": 78,
+        "bug": 22
+      }
+    }
+  },
+  "cascade": {
+    "accuracy": 0.8,
+    "macro_f1": 0.8006885114656602,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.744,
+        "recall": 0.93,
+        "f1": 0.8266666666666667
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.9864864864864865,
+        "recall": 0.73,
+        "f1": 0.839080459770115
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.7326732673267327,
+        "recall": 0.74,
+        "f1": 0.7363184079601991
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 93,
+        "question": 7
+      },
+      "feature": {
+        "question": 20,
+        "bug": 7,
+        "feature": 73
+      },
+      "question": {
+        "question": 74,
+        "bug": 25,
+        "feature": 1
+      }
+    }
+  },
+  "paired_correctness": {
+    "both_correct": 232,
+    "baseline_only_correct": 14,
+    "cascade_only_correct": 8,
+    "both_wrong": 46
+  },
+  "failed_items": {},
+  "usage": {
+    "baseline": {
+      "input_tokens": 356012,
+      "output_tokens": 3060,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "review": {
+      "input_tokens": 180253,
+      "output_tokens": 1225,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    }
+  },
+  "usage_complete": {
+    "baseline": true,
+    "review": true
+  },
+  "returned_models": {
+    "baseline": {
+      "gpt-4.1-mini-2025-04-14": 12
+    },
+    "review": {
+      "gpt-4.1-mini-2025-04-14": 5
+    }
+  },
+  "api_seconds": {
+    "baseline": 43.608446666854434,
+    "review": 15.981349207810126
+  },
+  "jev_known_usd": 0.020289192,
+  "jev_cost_complete": true,
+  "review_items": 120,
+  "irreducible_errors_at_frozen_routing": 22,
+  "ideal_review_accuracy_ceiling": 0.9266666666666666,
+  "limitations": "Controlled stateless API classification with archived Jev routing, not an autonomous Codex/Claude or MCP agent loop. Excludes orchestration overhead. No dollar savings without verified model pricing. Jev costs include the original inference, even though replaying it costs nothing now.",
+  "cost_estimate": {
+    "pricing": {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checked_date": "2026-09-20",
+      "service_tier": "default",
+      "unit": "USD per million tokens, standard processing, global endpoint",
+      "long_context_above_tokens": 1047576,
+      "short": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "long": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+    },
+    "baseline_known_usd": 0.1473008,
+    "cascade_known_usd": 0.094350392,
+    "unpriced_requests": {},
+    "complete": true,
+    "savings_fraction": 0.3594712859672181,
+    "note": "List-price estimate, not an invoice. Savings withheld if either arm or Jev has unknown cost."
+  },
+  "controlled_sample_comparison": {
+    "same_returned_model": true,
+    "valid_quality_comparison": true,
+    "accuracy_delta": -0.019999999999999907,
+    "macro_f1_delta": -0.01952964033794724,
+    "quality_not_worse": false,
+    "lower_classification_cost": true,
+    "observed_tradeoff_met": false,
+    "scope": "Observed accuracy and macro-F1 on this sample, including actual review mistakes. Not statistical proof of noninferiority, minimum cost across policies, or an end-to-end agent result."
+  }
+}

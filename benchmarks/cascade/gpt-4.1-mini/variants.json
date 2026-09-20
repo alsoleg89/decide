@@ -1,0 +1,276 @@
+{
+  "design": "Retrospective no-review ablation using every recorded Jev top label, including below-threshold labels. No new inference. This policy was not preregistered; requires fresh validation before use as a learned routing recommendation.",
+  "criterion": "Accuracy and macro-F1 at least mini baseline; choose cheapest among compared variants with complete cost accounting. This is not a search over every possible policy.",
+  "tasks": {
+    "dev-bitcoin": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.7333333333333333,
+          "macro_f1": 0.7181435996542863,
+          "known_usd": 0.09780119999999999,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.7266666666666667,
+          "macro_f1": 0.7141717731133518,
+          "known_usd": 0.054236016000000005,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.445446313542165
+        },
+        "jev_only": {
+          "accuracy": 0.7833333333333333,
+          "macro_f1": 0.7753284525122858,
+          "known_usd": 0.015701616,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.8394537490337541
+        }
+      },
+      "cheapest_verified_variant": "jev_only",
+      "all_quality_eligible_costs_known": true
+    },
+    "dev-opencv": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.7066666666666667,
+          "macro_f1": 0.7011049032590043,
+          "known_usd": 0.10317559999999998,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.74,
+          "macro_f1": 0.7367874695696109,
+          "known_usd": 0.045986892,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.5542851992137675
+        },
+        "jev_only": {
+          "accuracy": 0.7866666666666666,
+          "macro_f1": 0.7887526886567885,
+          "known_usd": 0.015360492,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.8511228236133349
+        }
+      },
+      "cheapest_verified_variant": "jev_only",
+      "all_quality_eligible_costs_known": true
+    },
+    "dev-react": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.7866666666666666,
+          "macro_f1": 0.7830803182495667,
+          "known_usd": 0.0621636,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.7866666666666666,
+          "macro_f1": 0.7819883548964247,
+          "known_usd": 0.023933726,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.6149880959275202
+        },
+        "jev_only": {
+          "accuracy": 0.78,
+          "macro_f1": 0.7752134986656986,
+          "known_usd": 0.010701726,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.8278457811323668
+        }
+      },
+      "cheapest_verified_variant": "mini",
+      "all_quality_eligible_costs_known": true
+    },
+    "dev-tensorflow": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.82,
+          "macro_f1": 0.8202181518036075,
+          "known_usd": 0.1473008,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.8,
+          "macro_f1": 0.8006885114656602,
+          "known_usd": 0.094350392,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.3594712859672181
+        },
+        "jev_only": {
+          "accuracy": 0.8033333333333333,
+          "macro_f1": 0.802844320331367,
+          "known_usd": 0.020289192,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.862260137080043
+        }
+      },
+      "cheapest_verified_variant": "mini",
+      "all_quality_eligible_costs_known": true
+    },
+    "dev-vscode": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.65,
+          "macro_f1": 0.6174994135585269,
+          "known_usd": 0.0731484,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.6466666666666666,
+          "macro_f1": 0.5998338602550977,
+          "known_usd": 0.041957578,
+          "complete": false,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": null
+        },
+        "jev_only": {
+          "accuracy": 0.67,
+          "macro_f1": 0.6266034855249892,
+          "known_usd": 0.012869178000000002,
+          "complete": false,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": null
+        }
+      },
+      "cheapest_verified_variant": "mini",
+      "all_quality_eligible_costs_known": false
+    },
+    "ux-bug_report": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.93,
+          "macro_f1": 0.9256455032524782,
+          "known_usd": 0.0185112,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.928,
+          "macro_f1": 0.9247441300421433,
+          "known_usd": 0.013366036000000001,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.2779487013267642
+        },
+        "jev_only": {
+          "accuracy": 0.92,
+          "macro_f1": 0.9169380025250848,
+          "known_usd": 0.009175236000000002,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.5043413717100997
+        }
+      },
+      "cheapest_verified_variant": "mini",
+      "all_quality_eligible_costs_known": true
+    },
+    "ux-feature_request": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.874,
+          "macro_f1": 0.8038593017391142,
+          "known_usd": 0.0184632,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.904,
+          "macro_f1": 0.8543123543123543,
+          "known_usd": 0.013017236000000001,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.2949631699813682
+        },
+        "jev_only": {
+          "accuracy": 0.906,
+          "macro_f1": 0.8400914540790289,
+          "known_usd": 0.009049236,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.509877161055505
+        }
+      },
+      "cheapest_verified_variant": "jev_only",
+      "all_quality_eligible_costs_known": true
+    },
+    "ux-rating": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.662,
+          "macro_f1": 0.6218071798452319,
+          "known_usd": 0.0185032,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.624,
+          "macro_f1": 0.5636107036081038,
+          "known_usd": 0.026592036,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": -0.4371587617277011
+        },
+        "jev_only": {
+          "accuracy": 0.794,
+          "macro_f1": 0.7892583120204604,
+          "known_usd": 0.009175236000000002,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.5041270699122313
+        }
+      },
+      "cheapest_verified_variant": "jev_only",
+      "all_quality_eligible_costs_known": true
+    },
+    "ux-user_experience": {
+      "variants": {
+        "mini": {
+          "accuracy": 0.446,
+          "macro_f1": 0.4376296801594939,
+          "known_usd": 0.0184712,
+          "complete": true,
+          "quality_not_worse_than_mini": true,
+          "savings_vs_mini": 0.0
+        },
+        "jev_plus_mini": {
+          "accuracy": 0.434,
+          "macro_f1": 0.42804942623050213,
+          "known_usd": 0.020009636000000004,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": -0.08328836242366511
+        },
+        "jev_only": {
+          "accuracy": 0.406,
+          "macro_f1": 0.40426283041348565,
+          "known_usd": 0.009091236,
+          "complete": true,
+          "quality_not_worse_than_mini": false,
+          "savings_vs_mini": 0.5078156264888041
+        }
+      },
+      "cheapest_verified_variant": "mini",
+      "all_quality_eligible_costs_known": true
+    }
+  }
+}

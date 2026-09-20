@@ -153,5 +153,6 @@ unfinished runs require inspection, and failed decisions remain in the results.
 Raw source texts and credentials are kept outside Git. Archived labels,
 predictions and rubrics permit offline quality verification. Full byte
 reproduction additionally requires the original inputs and saved live response.
-JSON bytes are not billed agent tokens; total orchestrator dollars and final
-reviewer accuracy remain unmeasured.
+JSON bytes are not billed agent tokens. The subsequent
+[GPT-4.1 mini study](../cascade/gpt-4.1-mini/README.md) measures actual reviewer
+accuracy and classification costs; full autonomous-agent costs remain unmeasured.

@@ -49,43 +49,42 @@ Works with UTF-8 files, log lines, JSONL records, or inline items.
 These are sorting jobs. UX synthesis, prioritization, incident diagnosis and code
 changes still need judgment. `decide` produces labels; it never executes them.
 
-## Benchmarks that look like work
+## Measured against GPT-4.1 mini
 
-**500 app reviews → 403 automatic feature-request decisions, 97 to review, $0.0090 in Jev inference.**
-Twelve accepted decisions were wrong (3.0%).
+**On two measured workloads, Jev alone was more accurate and 51–85% cheaper
+than GPT-4.1 mini.** Adding a reviewer did not improve those results.
 
-New live benchmarks: **UX / product feedback and developer issue triage**.
-2,000 source records, 3,500 decisions, nine tasks. Inputs and thresholds were
-[committed before inference](benchmarks/workflows/protocol.json).
+| Job | GPT-4.1 mini alone | Jev + actual mini review | Jev alone | Jev-only cost reduction |
+| --- | --- | --- | --- | ---: |
+| Feature requests in 500 app reviews | 87.4% accuracy · $0.01846 | 90.4% · $0.01302 | **90.6% · $0.00905** | **51.0%** |
+| Triage 300 OpenCV issues | 70.7% accuracy · $0.10318 | 74.0% · $0.04599 | **78.7% · $0.01536** | **85.1%** |
 
-| Job | Items | Accepted / needs review | Wrong among accepted | Full-review JSON saved | Jev cost |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Find bug reports in app reviews | 500 | 399 / 101 | 10 (2.5%) | 73.4% | $0.0092 |
-| Find feature requests in app reviews | 500 | 403 / 97 | 12 (3.0%) | 74.2% | $0.0090 |
-| Triage issues across five projects | 1,500 | 1006 / 494 | 169 (16.8%) | 60.7% | ≥ $0.0749 |
+The cascade was tested at threshold 0.95 with real GPT-4.1 mini responses;
+review was never assumed perfect. The Jev-only variant is a **retrospective
+comparison** using all recorded top labels, including low-confidence ones.
+It needs fresh validation before becoming a routing recommendation.
 
-Fixed threshold: 0.95. JSON savings include reading **every full review input**;
-they are not billed agent tokens. Jev cost excludes the orchestrator. Final
-reviewer accuracy and total-dollar savings [have not been measured](benchmarks/cascade/README.md).
+**Other jobs need a different choice.** On bug extraction, React and TensorFlow,
+mini alone preserved quality better than either tested Jev option. On usage
+experiences and general evaluations, adding mini review was both worse and
+more expensive. All nine tasks, including failures, are published.
 
-**Some tasks fail.** The UX usage-experience label had 59.7% errors among accepted
-decisions. Asking all four UX questions left 497 of 500 reviews needing at least
-one check. Developer triage also retained too many wrong labels for unattended
-use. Focused bug and feature extraction performed substantially better, but
-feature extraction still wrongly dismissed 11 real requests.
+[Compare every task, accuracy, macro-F1, tokens and costs →](benchmarks/cascade/gpt-4.1-mini/README.md)
 
-[See every task, mistake rate and baseline →](benchmarks/workflows/README.md)
+Model: `gpt-4.1-mini-2025-04-14`. Costs use actual API usage and published rates,
+including the original Jev pass. These are classification cost estimates, not
+invoices or autonomous-agent bills: planning, MCP overhead and conversation
+history are excluded. The cheapest option among three tested variants is not
+proof of a global minimum or future quality.
 
-The earlier [10-task study and frozen-threshold follow-up](benchmarks/multitask/README.md)
-cover another 8,340 records. Banking support illustrates the tradeoff: 401 of
-770 messages accepted at threshold 0.99, with 14 wrong labels among those 401;
-45.5% less full-review JSON. An explicit Apache log-level parser matched Jev
-at 100% on 300 records—use the parser when a rule already solves the job.
+The [workflow study](benchmarks/workflows/README.md) covers 3,500 Jev decisions
+on UX feedback and issues from five projects. The [earlier evaluations](benchmarks/multitask/README.md)
+cover another 8,340 records across ten tasks. Predictions, errors, local baselines
+and reproduction instructions are available throughout.
 
-**Maximize useful savings, not a review percentage.** Choose a threshold on
-labeled examples, check it on separate data, and audit accepted decisions.
-Higher confidence can still be wrong. There is no universal “only review 5%”
-setting. [How we test threshold selection →](benchmarks/multitask/threshold-validation/README.md)
+Choose the greatest savings your task's quality allows. Review rate is an
+outcome, not a quota: there is no universal “only review 5%” setting.
+[Threshold-selection checks →](benchmarks/multitask/threshold-validation/README.md)
 
 ## Get started
 

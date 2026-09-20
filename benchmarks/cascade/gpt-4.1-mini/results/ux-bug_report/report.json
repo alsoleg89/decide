@@ -1,0 +1,145 @@
+{
+  "mode": "controlled_classifier_cascade",
+  "model_requested": "gpt-4.1-mini-2025-04-14",
+  "items": 500,
+  "baseline": {
+    "accuracy": 0.93,
+    "macro_f1": 0.9256455032524782,
+    "per_class": {
+      "yes": {
+        "support": 186,
+        "precision": 0.8911917098445595,
+        "recall": 0.9247311827956989,
+        "f1": 0.9076517150395778
+      },
+      "no": {
+        "support": 314,
+        "precision": 0.9543973941368078,
+        "recall": 0.9331210191082803,
+        "f1": 0.9436392914653785
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 172,
+        "no": 14
+      },
+      "no": {
+        "no": 293,
+        "yes": 21
+      }
+    }
+  },
+  "cascade": {
+    "accuracy": 0.928,
+    "macro_f1": 0.9247441300421433,
+    "per_class": {
+      "yes": {
+        "support": 186,
+        "precision": 0.8571428571428571,
+        "recall": 0.967741935483871,
+        "f1": 0.909090909090909
+      },
+      "no": {
+        "support": 314,
+        "precision": 0.9793103448275862,
+        "recall": 0.9044585987261147,
+        "f1": 0.9403973509933775
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 180,
+        "no": 6
+      },
+      "no": {
+        "no": 284,
+        "yes": 30
+      }
+    }
+  },
+  "paired_correctness": {
+    "both_correct": 450,
+    "baseline_only_correct": 15,
+    "cascade_only_correct": 14,
+    "both_wrong": 21
+  },
+  "failed_items": {},
+  "usage": {
+    "baseline": {
+      "input_tokens": 22062,
+      "output_tokens": 6054,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "review": {
+      "input_tokens": 5569,
+      "output_tokens": 1227,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    }
+  },
+  "usage_complete": {
+    "baseline": true,
+    "review": true
+  },
+  "returned_models": {
+    "baseline": {
+      "gpt-4.1-mini-2025-04-14": 20
+    },
+    "review": {
+      "gpt-4.1-mini-2025-04-14": 5
+    }
+  },
+  "api_seconds": {
+    "baseline": 54.40798749902751,
+    "review": 12.9662582911551
+  },
+  "jev_known_usd": 0.009175236000000002,
+  "jev_cost_complete": true,
+  "review_items": 101,
+  "irreducible_errors_at_frozen_routing": 10,
+  "ideal_review_accuracy_ceiling": 0.98,
+  "limitations": "Controlled stateless API classification with archived Jev routing, not an autonomous Codex/Claude or MCP agent loop. Excludes orchestration overhead. No dollar savings without verified model pricing. Jev costs include the original inference, even though replaying it costs nothing now.",
+  "cost_estimate": {
+    "pricing": {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checked_date": "2026-09-20",
+      "service_tier": "default",
+      "unit": "USD per million tokens, standard processing, global endpoint",
+      "long_context_above_tokens": 1047576,
+      "short": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "long": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+    },
+    "baseline_known_usd": 0.0185112,
+    "cascade_known_usd": 0.013366036000000001,
+    "unpriced_requests": {},
+    "complete": true,
+    "savings_fraction": 0.2779487013267642,
+    "note": "List-price estimate, not an invoice. Savings withheld if either arm or Jev has unknown cost."
+  },
+  "controlled_sample_comparison": {
+    "same_returned_model": true,
+    "valid_quality_comparison": true,
+    "accuracy_delta": -0.0020000000000000018,
+    "macro_f1_delta": -0.0009013732103348993,
+    "quality_not_worse": false,
+    "lower_classification_cost": true,
+    "observed_tradeoff_met": false,
+    "scope": "Observed accuracy and macro-F1 on this sample, including actual review mistakes. Not statistical proof of noninferiority, minimum cost across policies, or an end-to-end agent result."
+  }
+}

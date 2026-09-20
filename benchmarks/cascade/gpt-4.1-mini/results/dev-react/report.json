@@ -1,0 +1,180 @@
+{
+  "mode": "controlled_classifier_cascade",
+  "model_requested": "gpt-4.1-mini-2025-04-14",
+  "items": 300,
+  "baseline": {
+    "accuracy": 0.58,
+    "macro_f1": 0.6572353683244772,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.6568627450980392,
+        "recall": 0.67,
+        "f1": 0.6633663366336634
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.88,
+        "recall": 0.66,
+        "f1": 0.7542857142857142
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.8541666666666666,
+        "recall": 0.41,
+        "f1": 0.554054054054054
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 67,
+        "question": 2,
+        "__failed__": 30,
+        "feature": 1
+      },
+      "feature": {
+        "bug": 11,
+        "feature": 66,
+        "question": 5,
+        "__failed__": 18
+      },
+      "question": {
+        "question": 41,
+        "bug": 24,
+        "feature": 8,
+        "__failed__": 27
+      }
+    }
+  },
+  "cascade": {
+    "accuracy": 0.7366666666666667,
+    "macro_f1": 0.7604201586769473,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.703125,
+        "recall": 0.9,
+        "f1": 0.7894736842105263
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.8888888888888888,
+        "recall": 0.8,
+        "f1": 0.8421052631578948
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.8947368421052632,
+        "recall": 0.51,
+        "f1": 0.6496815286624205
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 90,
+        "question": 3,
+        "__failed__": 6,
+        "feature": 1
+      },
+      "feature": {
+        "bug": 14,
+        "feature": 80,
+        "question": 3,
+        "__failed__": 3
+      },
+      "question": {
+        "question": 51,
+        "bug": 24,
+        "feature": 9,
+        "__failed__": 16
+      }
+    }
+  },
+  "paired_correctness": {
+    "both_correct": 166,
+    "baseline_only_correct": 8,
+    "cascade_only_correct": 55,
+    "both_wrong": 71
+  },
+  "failed_items": {
+    "review": 25,
+    "baseline": 75
+  },
+  "usage": {
+    "baseline": {
+      "input_tokens": 137133,
+      "output_tokens": 4430,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    },
+    "review": {
+      "input_tokens": 28877,
+      "output_tokens": 1001,
+      "cached_input_tokens": 0,
+      "reasoning_tokens": 0,
+      "cache_write_tokens": 0
+    }
+  },
+  "usage_complete": {
+    "baseline": true,
+    "review": true
+  },
+  "returned_models": {
+    "baseline": {
+      "gpt-4.1-mini-2025-04-14": 12
+    },
+    "review": {
+      "gpt-4.1-mini-2025-04-14": 3
+    }
+  },
+  "api_seconds": {
+    "baseline": 44.55402674805373,
+    "review": 9.540492875967175
+  },
+  "jev_known_usd": 0.010701726,
+  "jev_cost_complete": true,
+  "review_items": 69,
+  "irreducible_errors_at_frozen_routing": 35,
+  "ideal_review_accuracy_ceiling": 0.8833333333333333,
+  "limitations": "Controlled stateless API classification with archived Jev routing, not an autonomous Codex/Claude or MCP agent loop. Excludes orchestration overhead. No dollar savings without verified model pricing. Jev costs include the original inference, even though replaying it costs nothing now.",
+  "cost_estimate": {
+    "pricing": {
+      "model": "gpt-4.1-mini-2025-04-14",
+      "source": "https://developers.openai.com/api/docs/pricing",
+      "checked_date": "2026-09-20",
+      "service_tier": "default",
+      "unit": "USD per million tokens, standard processing, global endpoint",
+      "long_context_above_tokens": 1047576,
+      "short": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "long": {
+        "input": 0.4,
+        "cached_input": 0.1,
+        "cache_write": 0.4,
+        "output": 1.6
+      },
+      "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+    },
+    "baseline_known_usd": 0.0619412,
+    "cascade_known_usd": 0.023854126000000003,
+    "unpriced_requests": {},
+    "complete": true,
+    "savings_fraction": 0.6148907996616145,
+    "note": "List-price estimate, not an invoice. Savings withheld if either arm or Jev has unknown cost."
+  },
+  "controlled_sample_comparison": {
+    "same_returned_model": true,
+    "valid_quality_comparison": false,
+    "accuracy_delta": 0.15666666666666673,
+    "macro_f1_delta": 0.10318479035247019,
+    "quality_not_worse": null,
+    "lower_classification_cost": true,
+    "observed_tradeoff_met": null,
+    "scope": "Observed accuracy and macro-F1 on this sample, including actual review mistakes. Not statistical proof of noninferiority, minimum cost across policies, or an end-to-end agent result."
+  }
+}
