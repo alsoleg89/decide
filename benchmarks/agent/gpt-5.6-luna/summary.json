@@ -1,0 +1,412 @@
+{
+  "ux-feature_request": {
+    "baseline": {
+      "arm": "baseline",
+      "items": 1000,
+      "artifact_complete": true,
+      "model_calls": 82,
+      "tool_calls": 81,
+      "elapsed_seconds": 172.0629525000695,
+      "api_seconds": 171.593309451011,
+      "usage": {
+        "input_tokens": 98967,
+        "output_tokens": 9184,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 70392
+      },
+      "model_known_usd": 0.034333800000000005,
+      "jev_known_usd": 0,
+      "total_known_usd": 0.034333800000000005,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-5.6-luna",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 272000,
+        "short": {
+          "input": 0.2,
+          "cached_input": 0.02,
+          "cache_write": 0.25,
+          "output": 1.2
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.04,
+          "cache_write": 0.5,
+          "output": 1.8
+        },
+        "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.878,
+        "macro_f1": 0.8323060936116868,
+        "per_class": {
+          "yes": {
+            "support": 203,
+            "precision": 0.6472727272727272,
+            "recall": 0.8768472906403941,
+            "f1": 0.7447698744769874
+          },
+          "no": {
+            "support": 797,
+            "precision": 0.9655172413793104,
+            "recall": 0.8782936010037641,
+            "f1": 0.9198423127463864
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 178,
+            "no": 25
+          },
+          "no": {
+            "no": 700,
+            "yes": 97
+          }
+        }
+      },
+      "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+      "output_sha256": "33c22daa464a35bfcbe1fb0af22bf519acf3c4cda030b389788da0ee5edc1134"
+    },
+    "decide": {
+      "arm": "decide",
+      "items": 1000,
+      "artifact_complete": true,
+      "model_calls": 14,
+      "tool_calls": 13,
+      "elapsed_seconds": 102.96723041601945,
+      "api_seconds": 23.604773418279365,
+      "usage": {
+        "input_tokens": 15087,
+        "output_tokens": 1144,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 9808
+      },
+      "model_known_usd": 0.0048806000000000006,
+      "jev_known_usd": 0.018185454,
+      "total_known_usd": 0.023066054000000002,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-5.6-luna",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 272000,
+        "short": {
+          "input": 0.2,
+          "cached_input": 0.02,
+          "cache_write": 0.25,
+          "output": 1.2
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.04,
+          "cache_write": 0.5,
+          "output": 1.8
+        },
+        "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.901,
+        "macro_f1": 0.8587310624708364,
+        "per_class": {
+          "yes": {
+            "support": 203,
+            "precision": 0.708,
+            "recall": 0.8719211822660099,
+            "f1": 0.781456953642384
+          },
+          "no": {
+            "support": 797,
+            "precision": 0.9653333333333334,
+            "recall": 0.9084065244667503,
+            "f1": 0.936005171299289
+          }
+        },
+        "confusion": {
+          "yes": {
+            "yes": 177,
+            "no": 26
+          },
+          "no": {
+            "no": 724,
+            "yes": 73
+          }
+        }
+      },
+      "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+      "output_sha256": "3a1715ad7c42729fafbf033306e70883aebe96037de106e263da2d004ab6f6c1"
+    },
+    "comparison": {
+      "quality_metrics": {
+        "accuracy": {
+          "baseline": 0.878,
+          "decide": 0.901,
+          "delta": 0.02300000000000002
+        },
+        "macro_f1": {
+          "baseline": 0.8323060936116868,
+          "decide": 0.8587310624708364,
+          "delta": 0.026424968859149578
+        },
+        "yes_precision": {
+          "baseline": 0.6472727272727272,
+          "decide": 0.708,
+          "delta": 0.06072727272727274
+        },
+        "yes_recall": {
+          "baseline": 0.8768472906403941,
+          "decide": 0.8719211822660099,
+          "delta": -0.0049261083743842304
+        }
+      },
+      "valid_quality_comparison": true,
+      "quality_not_worse": false,
+      "complete_cost": true,
+      "savings_fraction": 0.3281823159685209,
+      "observed_tradeoff_met": false,
+      "model_input_token_reduction": 0.8475552456879566
+    },
+    "paired_correctness": {
+      "both_correct": 857,
+      "baseline_only_correct": 21,
+      "decide_only_correct": 44,
+      "both_wrong": 78
+    }
+  },
+  "dev-opencv": {
+    "baseline": {
+      "arm": "baseline",
+      "items": 300,
+      "artifact_complete": true,
+      "model_calls": 26,
+      "tool_calls": 25,
+      "elapsed_seconds": 61.8787146670511,
+      "api_seconds": 61.730607498204336,
+      "usage": {
+        "input_tokens": 365490,
+        "output_tokens": 4032,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 355279
+      },
+      "model_known_usd": 0.09570034999999996,
+      "jev_known_usd": 0,
+      "total_known_usd": 0.09570034999999996,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-5.6-luna",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 272000,
+        "short": {
+          "input": 0.2,
+          "cached_input": 0.02,
+          "cache_write": 0.25,
+          "output": 1.2
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.04,
+          "cache_write": 0.5,
+          "output": 1.8
+        },
+        "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.7466666666666667,
+        "macro_f1": 0.7382645842754987,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.609271523178808,
+            "recall": 0.92,
+            "f1": 0.7330677290836655
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.8854166666666666,
+            "recall": 0.85,
+            "f1": 0.8673469387755102
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.8867924528301887,
+            "recall": 0.47,
+            "f1": 0.6143790849673203
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 92,
+            "feature": 5,
+            "question": 3
+          },
+          "feature": {
+            "bug": 12,
+            "feature": 85,
+            "question": 3
+          },
+          "question": {
+            "question": 47,
+            "feature": 6,
+            "bug": 47
+          }
+        }
+      },
+      "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+      "output_sha256": "dd16747b7e92cdc67a31f04b9e776530099d45cde508a11419e62817878e7db1"
+    },
+    "decide": {
+      "arm": "decide",
+      "items": 300,
+      "artifact_complete": true,
+      "model_calls": 6,
+      "tool_calls": 5,
+      "elapsed_seconds": 38.04673850000836,
+      "api_seconds": 12.974184748949483,
+      "usage": {
+        "input_tokens": 40373,
+        "output_tokens": 121,
+        "cached_input_tokens": 0,
+        "reasoning_tokens": 0,
+        "cache_write_tokens": 38277
+      },
+      "model_known_usd": 0.010133650000000001,
+      "jev_known_usd": 0.018228378,
+      "total_known_usd": 0.028362028,
+      "cost_complete": true,
+      "pricing": {
+        "model": "gpt-5.6-luna",
+        "source": "https://developers.openai.com/api/docs/pricing",
+        "checked_date": "2026-09-20",
+        "service_tier": "default",
+        "unit": "USD per million tokens, standard processing, global endpoint",
+        "long_context_above_tokens": 272000,
+        "short": {
+          "input": 0.2,
+          "cached_input": 0.02,
+          "cache_write": 0.25,
+          "output": 1.2
+        },
+        "long": {
+          "input": 0.4,
+          "cached_input": 0.04,
+          "cache_write": 0.5,
+          "output": 1.8
+        },
+        "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+      },
+      "jev_input_usd_per_million": 0.042,
+      "classification": {
+        "accuracy": 0.7466666666666667,
+        "macro_f1": 0.7450438596491229,
+        "per_class": {
+          "bug": {
+            "support": 100,
+            "precision": 0.6,
+            "recall": 0.9,
+            "f1": 0.7200000000000001
+          },
+          "feature": {
+            "support": 100,
+            "precision": 0.9,
+            "recall": 0.81,
+            "f1": 0.8526315789473685
+          },
+          "question": {
+            "support": 100,
+            "precision": 0.8833333333333333,
+            "recall": 0.53,
+            "f1": 0.6625
+          }
+        },
+        "confusion": {
+          "bug": {
+            "bug": 90,
+            "feature": 6,
+            "question": 4
+          },
+          "feature": {
+            "bug": 16,
+            "feature": 81,
+            "question": 3
+          },
+          "question": {
+            "question": 53,
+            "bug": 44,
+            "feature": 3
+          }
+        }
+      },
+      "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+      "output_sha256": "fba66b95a93395f41c5b88a96e3f84552a20607c026dad06d740618d2b114c37"
+    },
+    "comparison": {
+      "quality_metrics": {
+        "accuracy": {
+          "baseline": 0.7466666666666667,
+          "decide": 0.7466666666666667,
+          "delta": 0.0
+        },
+        "macro_f1": {
+          "baseline": 0.7382645842754987,
+          "decide": 0.7450438596491229,
+          "delta": 0.006779275373624216
+        },
+        "bug_precision": {
+          "baseline": 0.609271523178808,
+          "decide": 0.6,
+          "delta": -0.009271523178807972
+        },
+        "bug_recall": {
+          "baseline": 0.92,
+          "decide": 0.9,
+          "delta": -0.020000000000000018
+        },
+        "feature_precision": {
+          "baseline": 0.8854166666666666,
+          "decide": 0.9,
+          "delta": 0.014583333333333393
+        },
+        "feature_recall": {
+          "baseline": 0.85,
+          "decide": 0.81,
+          "delta": -0.039999999999999925
+        },
+        "question_precision": {
+          "baseline": 0.8867924528301887,
+          "decide": 0.8833333333333333,
+          "delta": -0.0034591194968554007
+        },
+        "question_recall": {
+          "baseline": 0.47,
+          "decide": 0.53,
+          "delta": 0.06000000000000005
+        }
+      },
+      "valid_quality_comparison": true,
+      "quality_not_worse": false,
+      "complete_cost": true,
+      "savings_fraction": 0.703637154932035,
+      "observed_tradeoff_met": false,
+      "model_input_token_reduction": 0.8895373334427754
+    },
+    "paired_correctness": {
+      "both_correct": 210,
+      "baseline_only_correct": 14,
+      "decide_only_correct": 14,
+      "both_wrong": 62
+    }
+  }
+}

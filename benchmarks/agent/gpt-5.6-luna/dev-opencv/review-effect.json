@@ -1,0 +1,50 @@
+{
+  "reviewed": 1,
+  "changed": 1,
+  "corrected": 0,
+  "introduced_errors": 0,
+  "remaining_review_errors": 1,
+  "accepted_errors": 75,
+  "jev_before_review": {
+    "accuracy": 0.7466666666666667,
+    "macro_f1": 0.7460077150708097,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.6040268456375839,
+        "recall": 0.9,
+        "f1": 0.7228915662650601
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.9,
+        "recall": 0.81,
+        "f1": 0.8526315789473685
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.8833333333333333,
+        "recall": 0.53,
+        "f1": 0.6625
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 90,
+        "question": 4,
+        "feature": 6
+      },
+      "feature": {
+        "feature": 81,
+        "bug": 16,
+        "question": 3
+      },
+      "question": {
+        "bug": 43,
+        "question": 53,
+        "feature": 3,
+        "__failed__": 1
+      }
+    }
+  }
+}

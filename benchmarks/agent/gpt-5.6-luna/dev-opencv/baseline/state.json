@@ -1,0 +1,9 @@
+{
+  "finished": true,
+  "arm": "baseline",
+  "jev": null,
+  "model_calls": 26,
+  "tool_calls": 25,
+  "final_answer_received": true,
+  "elapsed_seconds": 61.8787146670511
+}

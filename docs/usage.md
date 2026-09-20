@@ -273,7 +273,7 @@ uv build
 ```
 
 Tests use the real MCP SDK, including a stdio subprocess, with a mocked paid HTTP
-endpoint. The 257 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
+endpoint. The 258 tests cover 2,000 log lines, 300 files, Unicode and byte limits,
 threshold routing, forced review, 100 seeded probability distributions and their
 incorrect winners, source validation, symlink boundaries, cancellation, disk
 failure, concurrent runs, HTTP/transport failures, retry headers, authentication,

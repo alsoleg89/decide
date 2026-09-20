@@ -1,0 +1,72 @@
+{
+  "arm": "decide",
+  "items": 1000,
+  "artifact_complete": true,
+  "model_calls": 14,
+  "tool_calls": 13,
+  "elapsed_seconds": 102.96723041601945,
+  "api_seconds": 23.604773418279365,
+  "usage": {
+    "input_tokens": 15087,
+    "output_tokens": 1144,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 9808
+  },
+  "model_known_usd": 0.0048806000000000006,
+  "jev_known_usd": 0.018185454,
+  "total_known_usd": 0.023066054000000002,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-5.6-luna",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 272000,
+    "short": {
+      "input": 0.2,
+      "cached_input": 0.02,
+      "cache_write": 0.25,
+      "output": 1.2
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.04,
+      "cache_write": 0.5,
+      "output": 1.8
+    },
+    "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.901,
+    "macro_f1": 0.8587310624708364,
+    "per_class": {
+      "yes": {
+        "support": 203,
+        "precision": 0.708,
+        "recall": 0.8719211822660099,
+        "f1": 0.781456953642384
+      },
+      "no": {
+        "support": 797,
+        "precision": 0.9653333333333334,
+        "recall": 0.9084065244667503,
+        "f1": 0.936005171299289
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 177,
+        "no": 26
+      },
+      "no": {
+        "no": 724,
+        "yes": 73
+      }
+    }
+  },
+  "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+  "output_sha256": "3a1715ad7c42729fafbf033306e70883aebe96037de106e263da2d004ab6f6c1"
+}

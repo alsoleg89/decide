@@ -82,6 +82,14 @@ tool-loop cost **77.3%** and raised accuracy from **68.0% to 74.7%**, with highe
 macro-F1. Feature-label recall fell, so that policy suits a different quality
 tradeoff. [Developer results and class metrics →](benchmarks/agent/gpt-4.1-mini/required-completion/README.md)
 
+**Also measured against GPT-5.6 Luna:** on the same 1,000 UX reviews and
+300 OpenCV issues, decide reduced complete tool-loop cost **32.8%** and
+**70.4%** respectively. UX accuracy rose **87.8% → 90.1%**; developer accuracy
+stayed **74.7%**. Both tasks failed the frozen all-metrics quality gate:
+UX feature recall fell **87.68% → 87.19%** (one fewer true request), and developer
+bug/feature recall also fell. Luna used reasoning `none`; these are reused
+records, not a new holdout. [128 actual Luna responses, class metrics and costs →](benchmarks/agent/gpt-5.6-luna/README.md)
+
 **Less review is not the goal.** The earlier UX policy was cheaper but missed more
 feature requests. The new policy spends more on review and recovers that recall.
 The [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md) also includes

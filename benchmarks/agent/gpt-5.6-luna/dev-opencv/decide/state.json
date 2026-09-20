@@ -1,0 +1,39 @@
+{
+  "finished": true,
+  "arm": "decide",
+  "jev": {
+    "total": 300,
+    "completed": 300,
+    "accepted": 299,
+    "accepted_by_label": {
+      "question": 60,
+      "bug": 149,
+      "feature": 90
+    },
+    "review_count": 1,
+    "failed": 1,
+    "review_reasons": {
+      "item_too_large": 1
+    },
+    "review_fraction": 0.0033333333333333335,
+    "confidence_threshold": 0.0,
+    "confidence_thresholds": {},
+    "model_requested": "jev-1.13.0",
+    "usage": {
+      "input_tokens": 434009,
+      "output_tokens": 11362,
+      "complete": true
+    },
+    "requests_made": 299,
+    "retries": 0,
+    "elapsed_seconds": 24.507,
+    "results_path": "/private/tmp/decide-luna-v1/dev-opencv/inputs/.decide/fb7a08e873244470a615fbdfded5c94e/results.jsonl",
+    "review_path": "/private/tmp/decide-luna-v1/dev-opencv/inputs/.decide/fb7a08e873244470a615fbdfded5c94e/review.jsonl",
+    "review": [],
+    "review_omitted": 1
+  },
+  "model_calls": 6,
+  "tool_calls": 5,
+  "final_answer_received": true,
+  "elapsed_seconds": 38.04673850000836
+}

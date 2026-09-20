@@ -1,0 +1,85 @@
+{
+  "arm": "baseline",
+  "items": 300,
+  "artifact_complete": true,
+  "model_calls": 26,
+  "tool_calls": 25,
+  "elapsed_seconds": 61.8787146670511,
+  "api_seconds": 61.730607498204336,
+  "usage": {
+    "input_tokens": 365490,
+    "output_tokens": 4032,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 355279
+  },
+  "model_known_usd": 0.09570034999999996,
+  "jev_known_usd": 0,
+  "total_known_usd": 0.09570034999999996,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-5.6-luna",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 272000,
+    "short": {
+      "input": 0.2,
+      "cached_input": 0.02,
+      "cache_write": 0.25,
+      "output": 1.2
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.04,
+      "cache_write": 0.5,
+      "output": 1.8
+    },
+    "note": "Reasoning tokens are included in output usage; count once. Cache writes have a distinct reported bucket."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.7466666666666667,
+    "macro_f1": 0.7382645842754987,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.609271523178808,
+        "recall": 0.92,
+        "f1": 0.7330677290836655
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.8854166666666666,
+        "recall": 0.85,
+        "f1": 0.8673469387755102
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.8867924528301887,
+        "recall": 0.47,
+        "f1": 0.6143790849673203
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 92,
+        "feature": 5,
+        "question": 3
+      },
+      "feature": {
+        "bug": 12,
+        "feature": 85,
+        "question": 3
+      },
+      "question": {
+        "question": 47,
+        "feature": 6,
+        "bug": 47
+      }
+    }
+  },
+  "scope": "Guided API tool loop on reused published evaluation records; not a new holdout or a native Codex session.",
+  "output_sha256": "dd16747b7e92cdc67a31f04b9e776530099d45cde508a11419e62817878e7db1"
+}

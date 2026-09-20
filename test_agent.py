@@ -39,7 +39,6 @@ class AgentContractTests(unittest.TestCase):
             model = 'gpt-5.6-luna' if luna else app.MODEL
             app.prepare(root, directory, model=model, reasoning_effort='none' if luna else None, prices=prices)
 
-
             class FakeMCP:
                 async def __aenter__(self): return self
                 async def __aexit__(self, *args): pass

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "msg_0e766d15226e6a68016aafe9f2e59887d2adc99601f3f51b15",
+    "type": "message",
+    "status": "completed",
+    "content": [
+      {
+        "type": "output_text",
+        "annotations": [],
+        "logprobs": [],
+        "text": "Classification complete. Saved to `decisions.jsonl`.\n\nLabel counts:\n- bug: 151\n- feature: 96\n- question: 53"
+      }
+    ],
+    "phase": "final_answer",
+    "role": "assistant"
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "reviewed": 118,
+  "changed": 92,
+  "corrected": 40,
+  "introduced_errors": 52,
+  "remaining_review_errors": 56,
+  "accepted_errors": 43,
+  "jev_before_review": {
+    "accuracy": 0.913,
+    "macro_f1": 0.8529608115211119,
+    "per_class": {
+      "yes": {
+        "support": 203,
+        "precision": 0.8670886075949367,
+        "recall": 0.6748768472906403,
+        "f1": 0.7590027700831025
+      },
+      "no": {
+        "support": 797,
+        "precision": 0.9216152019002375,
+        "recall": 0.973651191969887,
+        "f1": 0.9469188529591214
+      }
+    },
+    "confusion": {
+      "yes": {
+        "no": 66,
+        "yes": 137
+      },
+      "no": {
+        "no": 776,
+        "yes": 21
+      }
+    }
+  }
+}

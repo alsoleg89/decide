@@ -23,6 +23,12 @@ cutoff on earlier results, then tests 1,000 exact-disjoint reviews. Accuracy,
 macro-F1, feature precision AND recall improve while complete tool-loop cost
 falls 48.9%. Actual review decisions and every paid turn are archived.
 
+The [GPT-5.6 Luna comparison](agent/gpt-5.6-luna/README.md) repeats UX and
+developer tool loops on 1,300 reused records. All four output files complete;
+cost falls 32.8% and 70.4%, but both frozen quality gates fail on class metrics.
+It publishes all 128 Luna responses and accounts for separately billed cache
+writes. Reasoning is fixed at `none`; no tuning after results.
+
 The [guided GPT-4.1 mini tool loop](agent/gpt-4.1-mini/README.md) measures
 reading batches, real MCP calls, writing a complete decisions file and the final
 answer. Both arms compact completed batches; all API turns count. It reuses the

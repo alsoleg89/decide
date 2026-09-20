@@ -1,0 +1,17 @@
+[
+  {
+    "id": "msg_0869d674e1d2ea57016aafe98f162887d2a50ae1927f843335",
+    "type": "message",
+    "status": "completed",
+    "content": [
+      {
+        "type": "output_text",
+        "annotations": [],
+        "logprobs": [],
+        "text": "Completed classification.\n\n- Output: `decisions.jsonl`\n- Labels: 250 yes, 750 no"
+      }
+    ],
+    "phase": "final_answer",
+    "role": "assistant"
+  }
+]
