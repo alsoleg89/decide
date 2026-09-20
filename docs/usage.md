@@ -145,6 +145,13 @@ jq -c 'select(.status == "accepted") | {id, choice}' /path/to/results.jsonl
 sed -n '1,20p' /path/to/review.jsonl
 ```
 
+`completed` counts processed records, including those sent to review. It does
+not mean the final task is done. Before reporting completion, combine accepted
+choices with resolved review choices and verify exactly one decision per input ID.
+A [live mini run](../benchmarks/agent/gpt-4.1-mini/README.md#first-run-a-real-completion-failure)
+otherwise stopped after MCP and left one issue unresolved. Applications can enforce
+this completion check before allowing a final answer.
+
 This tool classifies; it never runs commands, deletes files, or applies decisions.
 
 ### Tune for bytes saved, not a review quota

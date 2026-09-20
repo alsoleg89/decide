@@ -10,7 +10,7 @@ After a successful write/import, both arms drop processed source text and retain
 
 Order: UX baseline then decide; OpenCV decide then baseline. One run per arm; latency is descriptive, not a repeated timing experiment. Maximum 150 mini calls per arm, 8,192 output tokens per call. Model: `gpt-4.1-mini-2025-04-14`; Jev: `jev-1.13.0`. Both quality measures (accuracy and macro-F1), complete artifact, and lower complete cost must pass. Failures and regressions stay in the results.
 
-Run with the datasets prepared by the linked study, and `OPENAI_API_KEY` / `TYPESAFE_API_KEY` in the environment:
+To reproduce this original protocol, use commit `0af79d4`. Current `prepare` creates the required-completion protocol instead. Run with the datasets prepared by the linked study, and `OPENAI_API_KEY` / `TYPESAFE_API_KEY` in the environment:
 
 ```sh
 python benchmark_agent.py prepare --root /tmp/data/ux-feature_request --directory /tmp/agent/ux-feature_request

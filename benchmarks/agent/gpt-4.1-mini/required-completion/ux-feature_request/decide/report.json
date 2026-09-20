@@ -1,0 +1,72 @@
+{
+  "arm": "decide",
+  "items": 1000,
+  "artifact_complete": true,
+  "model_calls": 4,
+  "tool_calls": 3,
+  "elapsed_seconds": 79.43150416703429,
+  "api_seconds": 4.477462040958926,
+  "usage": {
+    "input_tokens": 1354,
+    "output_tokens": 34,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 0
+  },
+  "mini_known_usd": 0.000596,
+  "jev_known_usd": 0.01816521,
+  "total_known_usd": 0.01876121,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 1047576,
+    "short": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.91,
+    "macro_f1": 0.8405386250885896,
+    "per_class": {
+      "yes": {
+        "support": 193,
+        "precision": 0.8503401360544217,
+        "recall": 0.6476683937823834,
+        "f1": 0.7352941176470588
+      },
+      "no": {
+        "support": 807,
+        "precision": 0.9202813599062134,
+        "recall": 0.9727385377942999,
+        "f1": 0.9457831325301205
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 125,
+        "no": 68
+      },
+      "no": {
+        "no": 785,
+        "yes": 22
+      }
+    }
+  },
+  "scope": "Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.",
+  "output_sha256": "c276851fbbb864e38e2440041a920440c91fd32e181877d889b2836c91e6ad8f"
+}

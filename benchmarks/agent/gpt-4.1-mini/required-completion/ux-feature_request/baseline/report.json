@@ -1,0 +1,72 @@
+{
+  "arm": "baseline",
+  "items": 1000,
+  "artifact_complete": true,
+  "model_calls": 82,
+  "tool_calls": 81,
+  "elapsed_seconds": 122.65741775010247,
+  "api_seconds": 122.18027900462039,
+  "usage": {
+    "input_tokens": 90944,
+    "output_tokens": 8202,
+    "cached_input_tokens": 4736,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 0
+  },
+  "mini_known_usd": 0.048079999999999984,
+  "jev_known_usd": 0,
+  "total_known_usd": 0.048079999999999984,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 1047576,
+    "short": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.845,
+    "macro_f1": 0.7760034683333936,
+    "per_class": {
+      "yes": {
+        "support": 193,
+        "precision": 0.5753968253968254,
+        "recall": 0.7512953367875648,
+        "f1": 0.651685393258427
+      },
+      "no": {
+        "support": 807,
+        "precision": 0.9358288770053476,
+        "recall": 0.8674101610904585,
+        "f1": 0.9003215434083601
+      }
+    },
+    "confusion": {
+      "yes": {
+        "yes": 145,
+        "no": 48
+      },
+      "no": {
+        "no": 700,
+        "yes": 107
+      }
+    }
+  },
+  "scope": "Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.",
+  "output_sha256": "d5ba1f3dad22ea0835770270f2f259cd07bdf85fef5543f9a200ef57936ecbed"
+}

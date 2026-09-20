@@ -330,7 +330,7 @@
       "complete_cost": true,
       "savings_fraction": null,
       "observed_tradeoff_met": null,
-      "mini_input_token_reduction": 0.997954058564041
+      "mini_input_token_reduction": null
     },
     "paired_correctness": {
       "both_correct": 0,

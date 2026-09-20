@@ -1,0 +1,85 @@
+{
+  "arm": "baseline",
+  "items": 300,
+  "artifact_complete": true,
+  "model_calls": 26,
+  "tool_calls": 25,
+  "elapsed_seconds": 56.58211212500464,
+  "api_seconds": 56.41531403968111,
+  "usage": {
+    "input_tokens": 363394,
+    "output_tokens": 3710,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0,
+    "cache_write_tokens": 0
+  },
+  "mini_known_usd": 0.1512936,
+  "jev_known_usd": 0,
+  "total_known_usd": 0.1512936,
+  "cost_complete": true,
+  "pricing": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "source": "https://developers.openai.com/api/docs/pricing",
+    "checked_date": "2026-09-20",
+    "service_tier": "default",
+    "unit": "USD per million tokens, standard processing, global endpoint",
+    "long_context_above_tokens": 1047576,
+    "short": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "long": {
+      "input": 0.4,
+      "cached_input": 0.1,
+      "cache_write": 0.4,
+      "output": 1.6
+    },
+    "note": "GPT-4.1 mini has no separate cache-write surcharge; any reported cache-write bucket is charged at ordinary input price."
+  },
+  "jev_input_usd_per_million": 0.042,
+  "classification": {
+    "accuracy": 0.68,
+    "macro_f1": 0.6714470016356809,
+    "per_class": {
+      "bug": {
+        "support": 100,
+        "precision": 0.5597014925373134,
+        "recall": 0.75,
+        "f1": 0.641025641025641
+      },
+      "feature": {
+        "support": 100,
+        "precision": 0.7589285714285714,
+        "recall": 0.85,
+        "f1": 0.8018867924528302
+      },
+      "question": {
+        "support": 100,
+        "precision": 0.8148148148148148,
+        "recall": 0.44,
+        "f1": 0.5714285714285714
+      }
+    },
+    "confusion": {
+      "bug": {
+        "bug": 75,
+        "feature": 20,
+        "question": 5
+      },
+      "feature": {
+        "bug": 10,
+        "feature": 85,
+        "question": 5
+      },
+      "question": {
+        "question": 44,
+        "feature": 7,
+        "bug": 49
+      }
+    }
+  },
+  "scope": "Guided model-driven tool loop on reused followup records; not a native Codex/Claude session or new holdout.",
+  "output_sha256": "1c7b74fc79e1c4fdbab1d725cb74b79cf940ffe6952c5fb8935cf25ec27ef72a"
+}

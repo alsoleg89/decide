@@ -51,41 +51,43 @@ changes still need judgment. `decide` produces labels; it never executes them.
 
 ## Measured against GPT-4.1 mini
 
-**51–77% lower classification cost, with higher accuracy on 1,300 new records.**
-The policy was fixed before the runs: let Jev classify, and use mini only for
-records Jev cannot process. These samples had no confidence-based review.
+**Pay less to finish the sorting job — including the tool loop.**
+We measured reading data, calling real MCP, writing a complete decisions file and
+giving the final answer. Both arms discard completed batches from history.
 
-| Job | New records | GPT-4.1 mini alone | Jev with error fallback | Cost reduction |
+| Job | Records | mini alone: accuracy · total cost | decide + mini: accuracy · total cost | Cost reduction |
 | --- | ---: | --- | --- | ---: |
-| Find feature requests in app reviews | 1,000 | 86.4% accuracy · $0.03745 | **90.9% · $0.01817** | **51.5%** |
-| Triage OpenCV issues | 300 | 67.0% accuracy · $0.14630 | **75.7% · $0.03351** | **77.1%** |
+| Find feature requests in app reviews | 1,000 | 84.5% · $0.04808 | **91.0% · $0.01876** | **61.0%** |
+| Triage OpenCV issues | 300 | 68.0% · $0.15129 | **74.7% · $0.03429** | **77.3%** |
 
-Macro-F1 also increased on both tasks. The OpenCV price includes a real mini
-call for one oversized record; it was kept whole. Every other valid Jev decision
-was used directly. Costs include both providers at published rates, not just
-JSON-byte estimates.
+Macro-F1 also improves on both tasks. Jev handles valid decisions; mini sees only
+errors, including one oversized issue kept whole. Prices include both providers.
+There is no confidence-based review in this measured policy.
 
-[Fresh-record protocol, paired mistakes, tokens and results →](benchmarks/cascade/gpt-4.1-mini/followup/README.md)
+[Full workflow costs, tokens, errors and reproduction →](benchmarks/agent/gpt-4.1-mini/required-completion/README.md)
 
-**A reviewer must earn its cost.** The earlier [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md)
-found jobs where Jev helped, jobs where mini alone preserved quality better,
-and jobs where adding review made results worse and more expensive. It motivated
-this follow-up; it did not justify a universal routing rule.
+**Know the tradeoff.** On UX, decide produces fewer false positives, but feature-request
+recall falls from 75.1% to 64.8%. Higher accuracy and macro-F1 do not mean every
+metric improves. Choose the metric your job actually needs.
 
-These are selected tasks from the same public corpora, with exact prior texts
-excluded. Results establish an observed cost-quality advantage on these samples,
-not a guarantee for your data. Classification prices exclude autonomous-agent
-planning, MCP overhead and conversation history. A global minimum cost remains
-unproven.
+This is a guided tool loop with completion enforced by the host, not a native
+Codex/Claude session. It reuses the 1,300 records from our
+[fresh-record validation](benchmarks/cascade/gpt-4.1-mini/followup/README.md); it is
+not another independent quality sample. An earlier agent run stopped too soon:
+[that failure remains published](benchmarks/agent/gpt-4.1-mini/README.md#first-run-a-real-completion-failure).
+
+**A reviewer must earn its cost.** The [nine-task comparison](benchmarks/cascade/gpt-4.1-mini/README.md)
+includes jobs where Jev helps, jobs where mini preserves quality better, and jobs
+where adding review makes the result worse and more expensive. These two successful
+workloads are selected public-data tasks, not a universal rule or a global cost minimum.
 
 The [workflow study](benchmarks/workflows/README.md) covers 3,500 Jev decisions
 on UX feedback and issues from five projects. The [earlier evaluations](benchmarks/multitask/README.md)
-cover another 8,340 records across ten tasks. Predictions, failures, baselines
-and reproduction instructions are published throughout.
+cover another 8,340 records across ten tasks. Predictions, failures and baselines
+are published throughout.
 
-Choose the greatest savings your task's quality allows. Review rate is an
-outcome, not a quota: there is no universal “only review 5%” setting.
-[Threshold-selection checks →](benchmarks/multitask/threshold-validation/README.md)
+Review rate is an outcome, not a quota: there is no universal “only review 5%” setting.
+[Choose a policy on your own labeled sample →](benchmarks/multitask/threshold-validation/README.md)
 
 ## Get started
 
@@ -107,7 +109,8 @@ Then ask your agent:
 
 > Use decide on feedback.jsonl to find feature requests. Pass the file path
 > directly without reading the whole file first. Use yes/no criteria, start
-> at confidence 0.95, and read the review queue before making recommendations.
+> at confidence 0, read every error case in the review queue, and save one final
+> decision per input ID. Verify complete coverage before reporting success.
 
 Each JSONL row needs an ID and content:
 
@@ -127,11 +130,12 @@ Each JSONL row needs an ID and content:
     "no": "Does not request a new or changed capability"
   },
   "source": {"kind": "jsonl", "paths": ["feedback.jsonl"]},
-  "confidence_threshold": 0.95
+  "confidence_threshold": 0
 }
 ```
 
-The threshold is an example operating point, not a promised accuracy level.
+This reproduces the measured policy: accept every valid answer and review errors.
+Evaluate it on your own labeled sample; confidence 0 does not guarantee quality.
 
 </details>
 

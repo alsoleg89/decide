@@ -1,0 +1,27 @@
+{
+  "total": 1000,
+  "completed": 1000,
+  "accepted": 1000,
+  "accepted_by_label": {
+    "no": 853,
+    "yes": 147
+  },
+  "review_count": 0,
+  "failed": 0,
+  "review_reasons": {},
+  "review_fraction": 0.0,
+  "confidence_threshold": 0.0,
+  "model_requested": "jev-1.13.0",
+  "usage": {
+    "input_tokens": 432505,
+    "output_tokens": 31000,
+    "complete": true
+  },
+  "requests_made": 1000,
+  "retries": 0,
+  "elapsed_seconds": 74.484,
+  "results_path": "/private/tmp/decide-mini-followup/ux-feature_request/.decide/3b8d1574eb34411c929218cc1477a3e3/results.jsonl",
+  "review_path": "/private/tmp/decide-mini-followup/ux-feature_request/.decide/3b8d1574eb34411c929218cc1477a3e3/review.jsonl",
+  "review": [],
+  "review_omitted": 0
+}
