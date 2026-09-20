@@ -107,7 +107,7 @@ Connect **[Codex](docs/usage.md#codex)** or
 MCP launch command:
 
 ```sh
-uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e decide-mcp
+uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@v0.1.0 decide-mcp
 ```
 
 Set `TYPESAFE_API_KEY` in the server environment and `DECIDE_ROOT` to the
@@ -177,3 +177,5 @@ Found a task that works beautifully—or fails badly? Open an issue with the
 rubric and a small, shareable example. Both belong in the benchmark suite.
 
 [Setup & reference](docs/usage.md) · [Reproduce the benchmarks](benchmarks/workflows/README.md#sources-and-reproducibility) · [Development](docs/usage.md#development)
+
+[MIT license](LICENSE) · [Download v0.1.0](https://github.com/alsoleg89/decide/releases/tag/v0.1.0) · [Local release checks](docs/release-check.md)

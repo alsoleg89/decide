@@ -4,20 +4,20 @@
 
 ## Install
 
-The simplest setup uses [uv](https://docs.astral.sh/uv/) to run a pinned GitHub
-revision without a local checkout. `uvx` manages the Python environment and
+The simplest setup uses [uv](https://docs.astral.sh/uv/) to run a versioned GitHub
+release without a local checkout. `uvx` manages the Python environment and
 caches the installation. Git is needed to fetch the source.
 
 The MCP launch command is:
 
 ```sh
-uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e decide-mcp
+uvx --python 3.11 --from git+https://github.com/alsoleg89/decide@v0.1.0 decide-mcp
 ```
 
 This starts a stdio server for an MCP client; it is not an interactive CLI.
-Configure it in the client below. The revision includes per-label confidence
+Configure it in the client below. The release includes per-label confidence
 cutoffs and has been checked from a fresh cache. No PyPI publication is assumed.
-Update the pinned revision deliberately when adopting a newer version.
+Update the pinned version deliberately when adopting a newer version.
 
 For benchmark reproduction or development, clone the repository instead:
 
@@ -39,7 +39,7 @@ Add to your Codex `config.toml`, replacing the data directory:
 ```toml
 [mcp_servers.decide]
 command = "uvx"
-args = ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e", "decide-mcp"]
+args = ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@v0.1.0", "decide-mcp"]
 env_vars = ["TYPESAFE_API_KEY"]
 startup_timeout_sec = 120
 tool_timeout_sec = 1800
@@ -63,7 +63,7 @@ Desktop configuration. Replace the data directory and key locally:
   "mcpServers": {
     "decide": {
       "command": "uvx",
-      "args": ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@f6771e5beaf4ec58398f261b62ee59e316f4e61e", "decide-mcp"],
+      "args": ["--python", "3.11", "--from", "git+https://github.com/alsoleg89/decide@v0.1.0", "decide-mcp"],
       "env": {
         "TYPESAFE_API_KEY": "YOUR_KEY",
         "DECIDE_ROOT": "/absolute/path/to/your/project"
@@ -282,12 +282,12 @@ in input are checked for separation from the rubric; this does not establish
 Jev's resistance to prompt injection. The synthetic 95%/5% test verifies routing,
 not real-world classification accuracy.
 
-Local checks passed on Python 3.11, 3.12, 3.13 and 3.14. CI is configured for Python
-3.11–3.14 on Linux, macOS and Windows, with a 95% minimum coverage gate on Linux.
-**GitHub Actions is currently blocked by the account's billing lock; the hosted
-matrix has not run.** A separate Linux arm64/Python 3.12 container passed the
-release-wheel installation, real stdio smoke check and local suite. See the
-[release check](release-check.md) for the precise scope. No API key is required by CI.
+Development and release checks run locally; no GitHub Actions workflow is used.
+Earlier local checks passed on Python 3.11–3.14. The v0.1.0 release was checked
+on macOS arm64/Python 3.11 and Linux arm64/Python 3.12: wheel installation, real
+stdio smoke check, 257 tests and 97% server coverage (minimum: 95%). Windows
+remains unverified. See the [release check](release-check.md) for the precise
+scope. These offline checks do not require an API key.
 
 Live smoke check on 2026-09-19: the installed stdio command processed 12 synthetic
 log entries through Jev 1.13.0 in 2.386 seconds. Seven were accepted, two escalated

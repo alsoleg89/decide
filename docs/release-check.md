@@ -1,7 +1,8 @@
 # Installation and release check
 
-Checked on 2026-09-20: macOS arm64 / Python 3.11.15 and an isolated
-Linux arm64 Alpine container / Python 3.12.14.
+Checked on 2026-09-20: macOS arm64 / Python 3.11.15 (suite and Git installation),
+Python 3.13.14 (fresh wheel installation), and an isolated Linux arm64 Alpine
+container / Python 3.12.14 (wheel installation and suite).
 
 - Built both wheel and sdist; the wheel was built from the sdist.
 - Installed the wheel into a new virtual environment, outside the checkout.
@@ -9,9 +10,9 @@ Linux arm64 Alpine container / Python 3.12.14.
 - Passed `smoke_install.py`: stdio handshake, tool discovery, JSONL source paths,
   per-label cutoffs and an intact oversized review record, with zero provider requests.
 - Independently passed the same check through `uvx` with a fresh cache and the
-  pinned GitHub revision in the setup guide; no local clone was used by the server.
+  `v0.1.0` GitHub release in the setup guide; no local clone was used by the server.
 - Linux also passed installation of the exact release wheel, the installed-command
-  smoke check, and the 257-check suite at `7ebd33c`, with 97% server coverage.
+  smoke check, and the 257-check suite, with 97% server coverage.
   The container used read-only source/artifact mounts and was removed afterward.
 - Current macOS suite: 257 checks passed, 97% server coverage. Paid model-quality results
   are separate: [new UX validation](../benchmarks/agent/ux-recall/README.md).
@@ -21,16 +22,16 @@ The fresh installation resolved `mcp 2.2.0`, `httpx2 2.13.0` and
 The wheel contains the single server module and distribution metadata; benchmark
 archives and tests are not bundled into the runtime package.
 
-The CI workflow now also checks the installed command. **The hosted platform
-matrix remains unverified:** [the inspected run](https://github.com/alsoleg89/decide/actions/runs/35492885308)
-did not start because GitHub reported an account billing lock. The local Linux
-container check does not cover Windows or the full hosted OS/Python matrix.
-The tested image was `python:3.12-alpine`, digest
+Release checks run locally, without GitHub Actions. Windows and the full
+OS/Python matrix remain unverified. The tested Linux image was
+`python:3.12-alpine`, digest
 `sha256:b64631e04e4920160c50fbe8d8df828f7f35f06f425cb44aa09bca53e708a35a`.
 
-Release publication still needs a license decision from the repository owner.
-No license grant has been added by assumption. No package has been uploaded to PyPI.
-The release candidate uses GitHub source installation and downloadable artifacts.
+The project is released under [MIT](../LICENSE). Both wheel and sdist include
+`LICENSE`, and package metadata declares the MIT license. The
+[v0.1.0 GitHub release](https://github.com/alsoleg89/decide/releases/tag/v0.1.0)
+provides a wheel, sdist and `SHA256SUMS`. No package has been uploaded to PyPI;
+use the versioned GitHub installation command or the downloadable wheel.
 
 ## Public-result integrity
 

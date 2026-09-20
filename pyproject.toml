@@ -7,6 +7,8 @@ name = "decide-mcp"
 version = "0.1.0"
 description = "Bulk decisions with Jev. Keep your agent's context small."
 readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
 keywords = ["mcp", "classification", "ai-agents", "jev"]
 requires-python = ">=3.11"
 dependencies = ["mcp>=2.2,<3", "httpx2>=2.13,<3", "pydantic>=2.12,<3"]
