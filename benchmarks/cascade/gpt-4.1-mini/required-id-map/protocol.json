@@ -1,0 +1,91 @@
+{
+  "status": "prepared_not_run",
+  "model": "gpt-4.1-mini-2025-04-14",
+  "batch_size": 25,
+  "paid_calls": 0,
+  "output_contract": "required_id_map",
+  "reason": "The original array output allowed missing/duplicate IDs in developer batches. Repeat all five developer tasks with every ID required by JSON Schema in both arms; keep all original failures and costs separately.",
+  "criterion": "Observed final accuracy and macro-F1 at least the full-model baseline, and lower complete classification cost. This screening is not proof of noninferiority or globally minimum end-to-end agent cost.",
+  "tasks": {
+    "dev-bitcoin": {
+      "source_archive": "benchmarks/workflows/results/dev-bitcoin",
+      "items": 300,
+      "review_items": 95,
+      "calls": {
+        "baseline": 12,
+        "review": 4
+      },
+      "plan_sha256": "e4a9594c4056432f6e2d85ee10360905b3b01fb3a5b85918edc1197c664f25af",
+      "source_sha256": {
+        "predictions.jsonl": "e9ec606e34a3deb1fbeaf142dd02b473bae31d1f0a739467146d26f0d3a3451a",
+        "labels.jsonl": "0ad9ad3fc3f3abd32fefc2dfbf0e769fdac960011ad9cf4efa90893a66f8f03a",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "74219b57f736a6aa5a7023f1490c0dd51b273cc790ab17fab3dd2e9fffa07362"
+      }
+    },
+    "dev-opencv": {
+      "source_archive": "benchmarks/workflows/results/dev-opencv",
+      "items": 300,
+      "review_items": 119,
+      "calls": {
+        "baseline": 12,
+        "review": 5
+      },
+      "plan_sha256": "8ce36bc1d7c4dba0383301414518a521e837b3931baa900dcdde572c513292c5",
+      "source_sha256": {
+        "predictions.jsonl": "550eea4349a85781da9da64f0daf6d4e0a75f6bf14a84142eb16872bb2f7bea3",
+        "labels.jsonl": "89711041db800e22d0e518e906bf384d0cc0916c0b27c85d66f167c88d4be30c",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "0f59d1b2954abfe19ad8d387bba5f6080639c10fcc23afcb1721a6329eca6f61"
+      }
+    },
+    "dev-react": {
+      "source_archive": "benchmarks/workflows/results/dev-react",
+      "items": 300,
+      "review_items": 69,
+      "calls": {
+        "baseline": 12,
+        "review": 3
+      },
+      "plan_sha256": "e065327cd5c25f3d3519f1854e36f6b7384ad640fd88b5543745f7f9caf6595f",
+      "source_sha256": {
+        "predictions.jsonl": "5079180cf4c7627481005e62b7ae19c7809eeee7003a19d118d8d4b74141613f",
+        "labels.jsonl": "3aa058726150748305a09e5f0929dba0cacc15a70af149f0662aab3b813d27ac",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "b6e8bbf763016f7f7d1e886c4c5fb98c60229907df737566a32ec1a24ca93a39"
+      }
+    },
+    "dev-tensorflow": {
+      "source_archive": "benchmarks/workflows/results/dev-tensorflow",
+      "items": 300,
+      "review_items": 120,
+      "calls": {
+        "baseline": 12,
+        "review": 5
+      },
+      "plan_sha256": "6fe971b055abb8fb46523d6e2b3b3314c0b5f1c22c5b5b853b104fc126e9247a",
+      "source_sha256": {
+        "predictions.jsonl": "b0e801fa67a89c52d600bf25ed08bf491abfe59c7da737e7a4e3f5295653c119",
+        "labels.jsonl": "c6c33d9213c9cf73657aec6f3ef78949fed8c0733677a7eaadea78d0db882696",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "13f101eb1b6333efd5d61ab4a848d2b47001485ec8201c65aa26c6ac0c86916f"
+      }
+    },
+    "dev-vscode": {
+      "source_archive": "benchmarks/workflows/results/dev-vscode",
+      "items": 300,
+      "review_items": 91,
+      "calls": {
+        "baseline": 12,
+        "review": 4
+      },
+      "plan_sha256": "3910c4185eb5a5a992728d5de718748ca7a81167601eb2495c44e2bcf51e5678",
+      "source_sha256": {
+        "predictions.jsonl": "69fbe877f0aa421049f51c33a48335e3503c79b882af6b3f36c2f41f34a1aa0d",
+        "labels.jsonl": "72424ade41d5164a754051c1ed4abbeaef0eaa4130647f9037af8da6e5e55100",
+        "rubric.json": "afdddf3aa19eafb864577c7a707d0e33ceeca4310cb1af262b4b464759e279fc",
+        "report.json": "e333dd5378820ef5390935e91123d30c8f571abbfeb8d9ff830b3dc54ea05c56"
+      }
+    }
+  }
+}

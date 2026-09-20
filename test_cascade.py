@@ -20,6 +20,18 @@ def response(ids, wrong=()):
 
 
 class CascadeTests(unittest.TestCase):
+    def test_required_id_map_and_legacy_array_are_validated(self):
+        body = response(['a', 'b'])
+        self.assertEqual(app.parse(body, ['a', 'b'], ['keep']), {'a': 'keep', 'b': 'keep'})
+        content = body['output'][0]['content'][0]
+        content['text'] = '{"decisions":{"a":"keep","b":"keep"}}'
+        self.assertEqual(app.parse(body, ['a', 'b'], ['keep']), {'a': 'keep', 'b': 'keep'})
+        for bad in ['{"decisions":{"a":"keep"}}', '{"decisions":{"a":"keep","a":"keep","b":"keep"}}',
+                    '{"decisions":{"a":"keep","b":"unknown"}}']:
+            content['text'] = bad
+            with self.assertRaises(ValueError):
+                app.parse(body, ['a', 'b'], ['keep'])
+
     def test_review_errors_are_measured_and_accepted_errors_cannot_be_repaired(self):
         calls = [{'arm': 'baseline', 'ids': ['a', 'b', 'c', 'd'], 'request_sha256': 'one'},
                  {'arm': 'review', 'ids': ['c', 'd'], 'request_sha256': 'two'}]
